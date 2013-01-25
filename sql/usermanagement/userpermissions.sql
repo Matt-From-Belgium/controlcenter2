@@ -1,0 +1,4 @@
+CREATE TABLE userpermissions(
+user INT(6) UNSIGNED ZEROFILL NOT NULL,
+moduletask INT(5) UNSIGNED ZEROFILL NOT NULL,
+PRIMARY KEY(user,moduletask));

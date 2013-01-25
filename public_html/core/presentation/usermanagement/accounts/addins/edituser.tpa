@@ -1,0 +1,37 @@
+<H1><!CC LANG [LANG_EDIT_ACCOUNT]></H1>
+<!CC IFSET [errorlist]>
+<UL id="uservalidator" class="errorbox">
+<!CC LOOP [errorlist]>
+<li id='<!CC LVAR [fieldname]>'><!CC LVAR [message]></li>
+<!CC END LOOP [errorlist]>
+</UL>
+<!CC END IFSET [errorlist]>
+<FORM method="post" enctype="application/x-www-form-urlencoded" id="userform">
+	<input type="hidden" id="userid" name="userid" value='<!CC var [userid]>'>
+	<label for="text"><!CC LANG [LANG_USERNAME]></LABEL><INPUT TYPE="text" id="username" name="username" MAXLENGTH="15" value="<!CC VAR [username]>" DISABLED/><BR />
+    <label for="mail"><!CC LANG [LANG_MAIL]></label><input type="text" id="mail" name="mail" MAXLENGTH="50" VALUE="<!CC VAR [mail]>" /><BR />
+    <label for="password"><!CC LANG [LANG_PASSWORD]></LABEL><INPUT TYPE="password" id="password" name="password" MAXLENGTH="20" value="<!CC VAR [password]>"/><BR />
+    <label for="password2"><!CC LANG [LANG_PASSWORD_CONFIRM]></label><INPUT TYPE="password" id="password2" name="password2" MAXLENGTH="20" value="<!CC VAR [password2]>"/><BR />
+	<label for="passwordchangerequired"><!CC LANG [LANG_PASSWORD_CHANGE_REQUIRED]></label><INPUT type="checkbox" name="passwordchangerequired" <!CC VAR [passwordchangerequired]>><br />
+	<HR>
+	<label for="firstname"><!CC LANG [LANG_FIRSTNAME]></LABEL><INPUT TYPE="text" id="firstname" name="firstname" MAXLENGTH="30" value="<!CC VAR [firstname]>"/><BR />
+	<label for="lastname"><!CC LANG [LANG_LASTNAME]></label><input type="text" id="lastname" name="lastname" maxlength="30" value="<!CC VAR [lastname]>" /><BR />
+	<label for="website"><!CC LANG [LANG_WEBSITE]></label><input type="text" id="website" name="website" maxlength="50" value="<!CC VAR [website]>"/><BR />
+	<label for="country"><!CC LANG [LANG_COUNTRY]></label>
+	<select id="country" name="country">
+	<OPTION VALUE=''><!CC LANG [LANG_SELECT_COUNTRY]></OPTION>
+	<!CC LOOP [countrylist]>
+	<OPTION VALUE='<!CC LVAR [countrycode]>' <!CC LVAR [selectionflag]>><!CC LANG [LANG_COUNTRY_<!CC LVAR [countrycode]>]></OPTION>
+	<!CC END LOOP [countrylist]>
+	</select><BR />
+	<hr>
+	<h2><!CC LANG [LANG_USERGROUP_MEMBERSHIP]></h2>
+	<div id="usergrouplist">
+	<!CC LOOP [usergrouplist]>
+	<input type='checkbox' name='usergroups[]' VALUE='<!CC LVAR [id]>' <!CC LVAR [checkedflag]>><!CC LVAR [groupname]></input><br/>
+	<!CC END LOOP [usergrouplist]>
+	</div>
+	<INPUT TYPE="submit" VALUE="<!CC LANG [LANG_SEND]>" NAME="submit"><INPUT TYPE="reset" VALUE="<!CC LANG [LANG_RESET]>">
+</FORM>
+<SCRIPT LANGUAGE="javascript" SRC="/core/logic/common.js"></SCRIPT>
+<SCRIPT LANGUAGE="javascript" SRC="/core/logic/usermanagement/uservalidation.js"></SCRIPT>

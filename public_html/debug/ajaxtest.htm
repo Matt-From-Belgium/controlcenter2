@@ -1,0 +1,16 @@
+<html>
+<head></head>
+<body>
+	<script language="javascript" src="/core/presentation/ajax/ajaxtransaction.js"></script>
+	<script type="text/javascript" >
+var ajax = new ajaxTransaction();
+ajax.onComplete = function() {
+alert(ajax.result[0].testveld);
+};
+ajax.destination ="/debug/ajaxresult.php";
+ajax.phpfunction = "echoresult";
+ajax.addData('new','yup');
+ajax.ExecuteRequest();
+</script>
+</body>
+</html>

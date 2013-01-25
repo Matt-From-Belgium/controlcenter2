@@ -1,0 +1,27 @@
+<H1><!CC VAR [pagetitle]></H1>
+<!CC IFSET [errorlist]>
+<UL id="usergroupvalidator" class="errorbox">
+<!CC LOOP [errorlist]>
+<li id='<!CC LVAR [fieldname]>'><!CC LVAR [message]>
+<!CC END LOOP [errorlist]>
+</UL>
+<!CC END IFSET [errorlist]>
+<form method="post" enctype="application/x-www-form-urlencoded" id="addusergroupform">
+<input type="hidden" id="groupid" name="groupid" value="<!CC VAR [groupid]>">
+<label for="usergroupname"><!CC LANG [LANG_USERGROUP_NAME]></label><input type="text" name="usergroupname" id="usergroupname" maxlength="15" value="<!CC VAR [name]>"><br />
+<label for="usergrouppermissions">Permissions</label><br />
+<!CC VAR [test]>
+<UL class="permissionlist">
+<!CC LOOP [tasklist]>
+<LI>
+	<!CC LVAR [name]>
+	<UL>
+	<!CC LOOP [tasklist.tasks]>
+		<INPUT TYPE='checkbox' value='<!CC LVAR [id]>' name='tasks[]' id='tasks[]' <!CC LVAR [checkedflag]>><!CC LVAR [name]><BR>
+	<!CC END LOOP [tasklist.tasks]>
+	</UL>
+</LI>
+<!CC END LOOP [tasklist]>
+</UL>
+<input type="submit" value="<!CC LANG [LANG_SEND]>" name="submit" id="submit"><input type="reset" value="<!CC LANG [LANG_RESET]>">
+</form>

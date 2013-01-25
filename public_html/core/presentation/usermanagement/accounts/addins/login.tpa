@@ -1,0 +1,15 @@
+<h1><!CC LANG [LANG_LOGIN]></h1>
+<!CC IFSET [errorlist]>
+<UL id="uservalidator" class="errorbox">
+<!CC LOOP [errorlist]>
+<li id='<!CC LVAR [fieldname]>'><!CC LVAR [message]></li>
+<!CC END LOOP [errorlist]>
+</UL>
+<!CC END IFSET [errorlist]>
+
+<form method="post">
+<input type="hidden" name="d" value="<!CC VAR [d]>">
+<label for="u"><!CC LANG [LANG_USERNAME]></label><input type="text" name="u"><br />
+<label for="p"><!CC LANG [LANG_PASSWORD]></label><input type="password" name="p"><br />
+<input type="submit" name="submit" value="<!CC LANG [LANG_LOGIN]>">
+</form>

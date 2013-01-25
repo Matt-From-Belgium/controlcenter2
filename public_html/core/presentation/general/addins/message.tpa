@@ -1,0 +1,6 @@
+<H1><!CC VAR [messagetitle]></H1>
+<!CC VAR [message]>
+<p>
+<!CC IFSET [link]>
+<a href="<!CC VAR [link]>"><!CC VAR [linktext]></a>
+<!CC END IFSET [link]>
