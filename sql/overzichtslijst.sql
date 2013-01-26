@@ -1,0 +1,1 @@
+SELECT auditiekandidaten.voornaam,auditiekandidaten.naam,auditiekandidaten.geboortedatum,stemgroepen.stemgroep,auditiekandidaten.mailadres,auditiekandidaten.definitief, auditiekandidaten.motivatie FROM auditiekandidaten LEFT JOIN stemgroepen on auditiekandidaten.stemgroep=stemgroepen.id

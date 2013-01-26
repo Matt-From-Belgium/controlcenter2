@@ -1,0 +1,129 @@
+@charset "utf-8";
+
+body{
+	margin: 0px;
+	background: url(/templates/projectkoor/back.jpg) fixed;
+	background-repeat: no-repeat;
+	background-size: 100% auto;
+
+}
+
+img.ikgaervoor {
+	cursor: pointer;
+}
+
+#errors {
+	background-color: rgba(204,102,0,0.8);
+	border-radius: 10px;
+	width: 400px;
+	paddin-top: 15px;
+	padding-bottom: 15px;
+	padding-left: 20px;
+	padding-right: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 15px;
+}
+
+#bovenbalk {
+	position:relative;
+	background-color:  #555555;
+	width: 100%;
+	height: 40px;
+	text-align: right;
+	font-family:Arial, Helvetica, sans-serif;
+	color: #FFFFFF;
+	font-size: 10px;
+	vertical-align:middle;
+}
+
+#logo {
+	margin-top: 20px;
+	text-align:center;
+}
+
+#content {
+	margin-top: 30px;
+	font: #FFFFFF;
+	background-color:rgba(20,20,20,0.8);
+	min-height: 200px;
+	width: 700px;
+	margin-left:auto;
+	margin-right: auto;
+	border-radius: 10px;
+	font-family: Calibri, Arial, Helvetica, sans-serif;
+	color: #FFFFFF;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+h1 {
+	text-align:center;
+	font-size: 35px;
+	color: #ffcb15;
+}
+
+#nadruk {
+	color: #ff3333;
+	font-weight:500;
+}
+
+#inschrijvingsformulier {
+
+	width: 350px;
+	margin-left:auto;
+	margin-right: auto;
+}
+
+label {
+	display: inline-block;
+	width: 120px;
+	margin-bottom: 3px;
+	vertical-align:top;
+}
+
+input[type='text'],select {
+	border-style:solid;
+	border-color:#FFFFFF;
+	border-radius: 5px;
+}
+
+input[type='text']:hover, select:hover {
+	background-color:#FFFF99;
+}
+
+
+select {
+	width: 200px;
+}
+
+select.geboortedag
+{
+	width: 50px;
+}
+
+select.geboortemaand
+{
+	width: 100px;
+}
+
+#knoppen {
+	text-align:center;
+}
+
+a {
+	color:#CC9900;
+}
+
+h2 a {
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#vraagofprobleem {
+	text-align:center;
+	size: 2 px;
+	font-style:italic;
+	padding-top: 15px;
+}
