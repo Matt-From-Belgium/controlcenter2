@@ -58,9 +58,6 @@ Private $activequery;
 		
 		###Deze functie zal de attributen in de Query (aangeduid met @) vervangen door de werkelijke waarde
 		###De aangeleverde waarde wordt eerst ontdaan van mogelijk schadelijke items.
-
-		
-
 		$value = mysql_real_escape_string($value,$this->connectionid);
 
 		###bugfix: om de like acties in mysql ook te doen werken moet er naast de aanhalingstekens rekening gehouden 
