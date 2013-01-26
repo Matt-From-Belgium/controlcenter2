@@ -51,6 +51,11 @@ Private $activequery;
 		###Deze functie zorgt dat een query kan worden ingevoerd
 		$this->activequery = $query;
 	}
+        
+        Public function getQuery()
+        {
+            return $this->activequery;
+        }
 	
 	Public function setAttribute($attributename,$value)
 	{
@@ -58,8 +63,14 @@ Private $activequery;
 		
 		###Deze functie zal de attributen in de Query (aangeduid met @) vervangen door de werkelijke waarde
 		###De aangeleverde waarde wordt eerst ontdaan van mogelijk schadelijke items.
-		$value = mysql_real_escape_string($value,$this->connectionid);
-
+                ###DEZE LIJN IS GEDISABLED: zorgt voor meer problemen dan oplossingen
+		#$value = mysql_real_escape_string($value,$this->connectionid);
+            
+                ###Aanhalingstekens zijn een probleem => deze moeten ge-escaped worden
+                $value1=str_replace('"', '\"', $value);
+                $value2=  str_replace("'", "\'", $value1);
+                
+                $value = $value2;
 		###bugfix: om de like acties in mysql ook te doen werken moet er naast de aanhalingstekens rekening gehouden 
 		###met eventuele % tekens
 		$pattern= "/(?U)('|\")?(%)?@$attributename(%)?('|\")?(,|\s|\)|$)/";
