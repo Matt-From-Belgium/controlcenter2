@@ -59,8 +59,6 @@ Private $activequery;
 	
 	Public function setAttribute($attributename,$value)
 	{
-
-		
 		###Deze functie zal de attributen in de Query (aangeduid met @) vervangen door de werkelijke waarde
 		###De aangeleverde waarde wordt eerst ontdaan van mogelijk schadelijke items.
                 ###DEZE LIJN IS GEDISABLED: zorgt voor meer problemen dan oplossingen
