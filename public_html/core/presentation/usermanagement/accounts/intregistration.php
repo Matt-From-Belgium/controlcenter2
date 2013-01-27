@@ -34,7 +34,7 @@ try
 			#doorgegeven worden zodat de gebruiker het formulier kan aanvullen.
 			$html->setVariable("userid",-1);
 			
-			if($_POST['passwordchangerequired'])
+			if(isset($_POST['passwordchangerequired']))
 			{
 				$html->setVariable("passwordchangerequired","CHECKED");
 			}
@@ -43,6 +43,8 @@ try
 				$html->setVariable("passwordchangerequired","");
 			}
 			
+                   if(isset($_POST['submit']))
+                   {
 			$html->setVariable("username",$_POST['username']);
 			$html->setVariable("password",$_POST['password']);
 			$html->setVariable("password2",$_POST['password2']);
@@ -50,7 +52,7 @@ try
 			$html->setVariable("firstname",$_POST['firstname']);
 			$html->setVariable("lastname",$_POST['lastname']);
 			$html->setVariable("website",$_POST['website']);
-		
+                   }
 			$html->LoadAddin("/core/presentation/usermanagement/accounts/addins/intregform.tpa");
 	
 			#De Addin intregform bevat een loop met als parameter de array countrylist
@@ -64,11 +66,13 @@ try
 			
 				##Als het land het land is dat geselecteerd werd dan moet dit opnieuw als geselecteerd
 				##worden weergegeven, dit kan door de selectionflag loopvariable te gebruiken
-				if($value == $_POST['country'])
-				{
-					$newitem['selectionflag'] = "selected";
-				}
-			
+                                if(isset($_POST['country']))    
+                                {
+                                    if($value == $_POST['country'])
+                                    {
+                                		$newitem['selectionflag'] = "selected";
+                                    }
+                                }
 				$countrylist[]=$newitem;
 			}
 	
