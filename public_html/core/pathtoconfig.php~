@@ -1,5 +1,5 @@
 <?php
 #Pad naar de configuratiefile
 #Plaats deze op een niet publiek toegankelijke locatie;
-$pathtoconfig = "/wwwroot/detoverlantaarn/cc2config";
+$pathtoconfig = "/home/matthias/websites/controlcenter2/cc2config";
 ?>

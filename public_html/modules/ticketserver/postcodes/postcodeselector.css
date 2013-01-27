@@ -1,0 +1,35 @@
+@charset "utf-8";
+/* CSS Document */
+#postcodeselector {;
+	position:absolute;
+	display:none;
+	background-color:#666666;
+	width: 400px;
+
+	border: 1px #000000 solid;
+	overflow:auto;
+	
+	height:200px;
+
+	top: 100px;
+	
+	font-family: Calibri,Arial, Helvetica, sans-serif;
+	color: #FFFFFF;
+	font-size: 14px;
+	z-index:10;
+}
+
+.postcodeitem:hover {
+	background-color:#FF6600;
+	color:#000000;
+	cursor: pointer;
+}
+
+.postcodeheader {
+	background-color:#000000;
+
+}
+
+#gemeentenaam {
+	display:inline-table;
+}

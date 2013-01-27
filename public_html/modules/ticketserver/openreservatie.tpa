@@ -1,0 +1,18 @@
+<h1>Reservatie <!CC VAR [reservatienummer]></h1>
+<center><table WIDTH=400>
+<tr><th>Reservatienummer</th><td><!CC VAR [reservatienummer]></td></tr>
+<tr><th>Reservatiedatum</th><td><!CC VAR [reservatiedatum]></td></tr>
+<tr><th>Naam</th><td><!CC VAR [naam]>&nbsp;<!CC VAR [voornaam]></td></tr>
+<tr><th>Voorstelling</th><td><!CC VAR [voorstelling]></td></tr>
+<tr><th>Aantal tickets</th><td><!CC VAR [aantaltickets]></td></tr>
+<tr><th>Totaal te betalen</th><td><!CC VAR [totaal]></td></tr>
+<tr><th>Status</th><td><b><font color='#<!CC VAR [statuscolor]>'><!CC VAR [status]></font></b></td></tr>
+</table>
+<p><form method="post">
+<input type="hidden" name="reservatienummer" value="<!CC VAR [reservatienummer]>">
+<!CC LOOP [buttons]>
+<input type='submit' name='result' value='<!CC LVAR [tekst]>'><br />
+<!CC END LOOP [buttons]><br />
+</form>
+<input type="button" value="Terug" onClick="window.location='/modules/ticketserver/backend.php'">
+</center>

@@ -1,0 +1,10 @@
+<br />Volgende reservaties werden door het systeem geannuleerd. U kan deze opnieuw activeren mocht dit nodig zijn.
+<center>
+<p><table BORDER=1 CELLSPACING=0>
+<tr><th>Reservatienummer</th><th>Naam</th><th>Voornaam</th></tr>
+<!CC LOOP [herinneringen]>
+<TR><TD><!CC LVAR [id]></td><td><!CC LVAR [naam]></td><td><!CC LVAR [voornaam]></td></tr>
+<!CC END LOOP [herinneringen]>
+</table>
+</center>
+<br />

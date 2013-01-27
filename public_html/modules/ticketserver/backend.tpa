@@ -1,0 +1,15 @@
+<h1>Ticketadministratie</h1>
+<h2>Open reservatie</h2>
+<form method="get" ACTION='/modules/ticketserver/openreservatie.php'>
+<label from="reservatienummer">Reservatienummer:</label><input type="text" name="reservatienummer" id="reservatienummer" LENGTH=4 MAXLENGTH=4><input type="submit" value="Openen"></form>
+<h2>Beheren van voorstellingen</h2>
+<FORM METHOD='post' ACTION ='wijzigstatus.php'>
+<center><table>
+<!CC LOOP [voorstellingen]>
+<tr><td><!CC LVAR [voorstellingstekst]></td><td><input type='radio' name='voorstelling[<!CC LVAR [voorstellingsnummer]>]' VALUE='N' <!CC LVAR [beschikbaarflag]>>Tickets beschikbaar</td><td><input type='radio' name='voorstelling[<!CC LVAR [voorstellingsnummer]>]' VALUE='J' <!CC LVAR [volzetflag]>>Volzet</td></tr>
+<!CC END LOOP [voorstellingen]>
+<tr><td colspan=3>
+<center><input type="submit" VALUE="Wijzigingen bewaren"><input type="reset" VALUE="Annuleren"></center>
+</td></tr>
+</table></center>
+</FORM>
