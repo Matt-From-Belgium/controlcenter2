@@ -1,6 +1,8 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT']."/core/entity/user.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/core/entity/usergroup.php";
+
+
 session_start();
 
 function AddUserINT($inputarray)
@@ -15,7 +17,7 @@ function AddUserINT($inputarray)
 	#er moet een userobject gebouwd worden met deze gegevens en dat moet dan door de validator gehaald worden
 	$newuser = new user($inputarray['username']);
 	
-	if($inputarray['passwordchangerequired'])
+	if(isset($inputarray['passwordchangerequired']))
 	{
 		$newuser->setPasswordchangeRequired(1);
 	}
@@ -85,7 +87,7 @@ function AddUserEXT($inputarray)
 	$newuser->setWebsite($inputarray['website']);
 	$newuser->setCountry($inputarray['country']);
 	
-	###Het gaat om een extern gecreëerde gebruiker => nakijken of er activatie nodig is
+	###Het gaat om een extern gecreï¿½erde gebruiker => nakijken of er activatie nodig is
 	if(getUserActivationParameter())
 	{
 		###er is wel gebruikersactivatie nodig => confirmationstatus is 0
@@ -335,7 +337,7 @@ function Login($username,$password,$d)
 {
 	require_once $_SERVER['DOCUMENT_ROOT']."/core/dataaccess/usermanagement/userfunctions.php";
 	###Deze functie gaat na of de aangeleverde parameters kloppen
-	###Als dat het geval is wordt het userobject opgehaald en wordt er van dit object een sessievariabele gecreëerd.
+	###Als dat het geval is wordt het userobject opgehaald en wordt er van dit object een sessievariabele gecreï¿½erd.
 	
 	###Eerst laten we de DataAccess layer controleren of de gegevens kloppen
 	$id=dataaccess_checkUserPassword($username,$password);
