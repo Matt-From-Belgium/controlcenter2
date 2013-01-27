@@ -1,0 +1,63 @@
+<script type="text/javascript" src="/highslide/highslide-with-gallery.js"></script>
+<script type="text/javascript">
+hs.graphicsDir = '/highslide/graphics/';
+hs.align = 'center';
+hs.transitions = ['expand', 'crossfade'];
+hs.outlineType = 'rounded-white';
+hs.fadeInOut = true;
+//hs.dimmingOpacity = 0.75;
+
+// Add the controlbar
+hs.addSlideshow({
+	//slideshowGroup: 'group1',
+	interval: 5000,
+	repeat: false,
+	useControls: true,
+	fixedControls: 'fit',
+	overlayOptions: {
+		opacity: .75,
+		position: 'bottom center',
+		hideOnMouseOut: true
+	}
+});
+</script>
+
+<link rel="stylesheet" type="text/css" href="/highslide/highslide.css" />
+<link href="/extracss/sam.css" rel="stylesheet" type="text/css" />
+<div id="sam">
+<img src="/images/sam/sam-header.png">
+<p>
+
+<h1>Inhoud</h1>
+<h3>
+'Gepest? Op onze school wordt niet gepest, mijnheer.  Kijk maar naar 
+het schoolreglement, daar staat duidelijk dat pesten niet past op 
+onze school.  We zijn trouwens verstandig genoeg om onze problemen op een volwassen manier op te lossen.'
+Sam, een sympathieke derdejaarsleerling, komt bij het begin van het 
+schooljaar in een nieuwe school terecht.  Daar maakt hij al snel kennis 
+met de eerder bizarre manier waarop die gerund wordt... niet door 
+de directie of de leerkrachten, maar door enkele leerlingen.  Jonas en 
+Kasper voeren er, samen met enkele trouwe volgelingen, een waar 
+schrikbewind.  Alhoewel Sam zich hier in het begin zoveel mogelijk 
+afzijdig probeert te houden, wordt hij toch meegesleurd in een 
+meedogenloos spel waarvan de gevolgen niet te overzien zijn.
+'SAM' schetst een realistisch beeld van hoe pestproblemen het leven 
+van veel jongeren kan verzieken.  Een aanrader voor iedereen die zich 
+op wat voor manier dan ook met deze problematiek verbonden voelt.
+</h3>
+<h1>Opzet</h1>
+<h3>Vorig jaar werden voor het eerst sinds lang audities georganiseerd. Een aantal kandidaten werden uitverkoren en konden een theateropleiding volgen bij De Toverlantaarn. Onze nieuwe generatie is er helemaal klaar om u van uw sokken te blazen. Wij zijn er in ieder geval al van overtuigd: de toekomst is verzekerd!
+
+</h3>
+<h1>Wanneer?</h1>
+<h3>SAM wordt opgevoerd op volgende data:
+<ul>
+<li>25 januari 2013 om 20u</li>
+<li>26 januari 2013 om 20u</li>
+<li>27 januari 2013 om 20u</li>
+</ul>
+<h1>Waar?</h1>
+<h3>De voorstellingen gaan door in <b>CC De Zwaan in Vladslo (Vladsloplein 10 8600 Vladslo)</b></h3>
+<p><center><img src='/images/sam/dezwaan.jpg'></center></p>
+<h1><p>Aarzel niet en <a href='/modules/ticketserver/bestel.php'>bestel hier je tickets</a>!</h1>
+</div>

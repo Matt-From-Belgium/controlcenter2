@@ -1,0 +1,63 @@
+@charset "utf-8";
+/* CSS Document */
+#rechterdeel
+{
+	background-image:url(../images/indexpagina/indexbackground.png);
+}
+
+#inhoud
+{
+	float: left;
+	width: 500px;
+	padding-top: 10px;
+	height: 600px;
+}
+
+#nieuwsbalk
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	color: #333333;
+	text-decoration: none;
+	padding-left: 10px;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+	padding-top: 10px;
+	padding-right: 10px;
+	float: right;
+	width: 200px;
+	height: 500px;
+	padding-bottom: 5000px;
+	margin-bottom: -5000px;
+}
+
+
+#nieuwsbalk h1
+{
+	font-size:24px;
+	margin-bottom:5px;
+}
+
+#nieuwsbalk h2
+{
+	color:#666666;
+	font-size:14px;
+	border-bottom: none;
+	padding-top: 0px;
+	margin-top: 0px;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+}
+
+#nieuwsbalk h4
+{
+	font-size: 12px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	font-weight:normal;
+	padding-top:0px;
+	padding-bottom:10px;
+}

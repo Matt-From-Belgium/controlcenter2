@@ -1,0 +1,71 @@
+<script type="text/javascript" src="/highslide/highslide-with-gallery.js"></script>
+<script type="text/javascript">
+hs.graphicsDir = '/highslide/graphics/';
+hs.align = 'center';
+hs.transitions = ['expand', 'crossfade'];
+hs.outlineType = 'rounded-white';
+hs.fadeInOut = true;
+//hs.dimmingOpacity = 0.75;
+
+// Add the controlbar
+hs.addSlideshow({
+	//slideshowGroup: 'group1',
+	interval: 5000,
+	repeat: false,
+	useControls: true,
+	fixedControls: 'fit',
+	overlayOptions: {
+		opacity: .75,
+		position: 'bottom center',
+		hideOnMouseOut: true
+	}
+});
+</script>
+
+<link rel="stylesheet" type="text/css" href="/highslide/highslide.css" />
+<link href="/extracss/ongelikt.css" rel="stylesheet" type="text/css" />
+<div id="ongelikt">
+	<div id="ongelikt-inhoud">
+		<h2>Verhaal</h2>
+			<p>King Lear is misschien wel het aangrijpendste en ongrijpbaarste drama van Shakespeare. Met 'Ongelikt' maakte Bart Moeyaert een indrukwekkende bewerking voor jonge en voor rijpe volwassenen.
+			<p>Lear houdt zijn kroon op, maar verder vindt hij het de hoogste tijd voor een rustige oude dag. Hij besluit zijn rijk onder zijn drie dochters te verdelen, en vraagt hen langs zijn neus weg hoeveel zijn 'teerbeminden' van hem houden.</p>
+			<p>Het antwoord is zoet, zoeter, ongezoet. Nog diezelfde dag moet Lear aan den lijve ondervinden dat een hart snel vertrapt is. Macht en bezit maken mensen op z'n zachtst gezegd brutaal.</p>
+			<p>Zijn vaderliefde is groot, maar wordt door zijn dochters beantwoord met nietsontziende hebzucht.
+		<h2>Concept</h2>
+			<p>Met 'Ongelikt' ging Jeugdtheater De Toverlantaarn terug naar de basis. Voor deze opvoering ruilenden wij de gezelligheid van Het Kruispunt in voor de rauwe realiteit van de stedelijke technische dienst. In dit sobere kader bracht Jeugdtheater De Toverlantaarn een eigentijdse versie van dit koningsdrama. 
+			<p>Onder het toeziend oog van Tom Durie, die als coach fungeerde, gingen negen jongeren op zoek naar de ware aard van Lear en zijn dochters. Het resultaat werd een boeiende voorstelling vol rauwe emoties.
+		<h2>Foto's</h2>
+		<div class="highslide-gallery">
+			<a href="/images/ongelikt/album/1.jpg" class="highslide" onclick="return hs.expand(this)">
+			<img src="/images/ongelikt/album/1-small.jpg" alt="Highslide JS" title="Click to enlarge" />
+			</a>
+			<a href="/images/ongelikt/album/2.jpg" class="highslide" onclick="return hs.expand(this)">
+			<img src="/images/ongelikt/album/2-small.jpg" alt="Highslide JS" title="Click to enlarge" />
+			</a>
+			<a href="/images/ongelikt/album/3.jpg" class="highslide" onclick="return hs.expand(this)">
+			<img src="/images/ongelikt/album/3-small.jpg" alt="Highslide JS" title="Click to enlarge" />
+			</a>
+			<a href="/images/ongelikt/album/4.jpg" class="highslide" onclick="return hs.expand(this)">
+			<img src="/images/ongelikt/album/4-small.jpg" alt="Highslide JS" title="Click to enlarge" />
+			</a>
+			<a href="/images/ongelikt/album/5.jpg" class="highslide" onclick="return hs.expand(this)">
+			<img src="/images/ongelikt/album/5-small.jpg" alt="Highslide JS" title="Click to enlarge" />
+			</a>
+			<a href="/images/ongelikt/album/6.jpg" class="highslide" onclick="return hs.expand(this)">
+			<img src="/images/ongelikt/album/6-small.jpg" alt="Highslide JS" title="Click to enlarge" />
+			</a>
+			<a href="/images/ongelikt/album/7.jpg" class="highslide" onclick="return hs.expand(this)">
+			<img src="/images/ongelikt/album/7-small.jpg" alt="Highslide JS" title="Click to enlarge" />
+			</a>
+			<a href="/images/ongelikt/album/8.jpg" class="highslide" onclick="return hs.expand(this)">
+			<img src="/images/ongelikt/album/8-small.jpg" alt="Highslide JS" title="Click to enlarge" />
+			</a>
+			<a href="/images/ongelikt/album/9.jpg" class="highslide" onclick="return hs.expand(this)">
+			<img src="/images/ongelikt/album/9-small.jpg" alt="Highslide JS" title="Click to enlarge" />
+			</a>
+			<a href="/images/ongelikt/album/10.jpg" class="highslide" onclick="return hs.expand(this)">
+			<img src="/images/ongelikt/album/10-small.jpg" alt="Highslide JS" title="Click to enlarge" />
+			</a>
+		</div>
+	</div>
+</div>

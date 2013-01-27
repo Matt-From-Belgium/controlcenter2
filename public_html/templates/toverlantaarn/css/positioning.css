@@ -1,0 +1,129 @@
+@charset "utf-8";
+/* CSS Document */
+body{
+background:#666666;
+}
+
+#Bodyshell {
+	position:relative;
+	margin-left:auto;
+	margin-right:auto;
+	left:0px;
+	top:0px;
+	width:781px;
+	height:800px;
+}
+
+#Schaduw-Links_ {
+	position:absolute;
+	left:0px;
+	top:0px;
+	width:20px;
+	height:800px;
+}
+
+#Bovenbalk_ {
+	position:absolute;
+	left:20px;
+	top:0px;
+	width:757px;
+	height:29px;
+}
+
+#Schaduw-Rechts_ {
+	position:absolute;
+	left:777px;
+	top:0px;
+	width:4px;
+	height:800px;
+}
+
+#Slideshow_ {
+	background-color:#000000;
+	position:absolute;
+	left:20px;
+	top:29px;
+	width:757px;
+	height:200px;
+}
+
+#Navigatie-Linkerdeel_ {
+	position:absolute;
+	left:20px;
+	top:229px;
+	width:270px;
+	height:56px;
+}
+
+#Navigatie-Rechterdeel_ {
+	position:absolute;
+	left:290px;
+	top:229px;
+	width:487px;
+	height:56px;
+	
+	background:url(/templates/toverlantaarn/images/Navigatie_Rechterdeel.jpg);
+}
+
+#Navigatie-Rechterdeel_ UL{
+float: left;
+list-style:none;
+margin-left:100px;
+margin-right:0px;
+margin-top:0px;
+margin-bottom:0px;
+padding-top:22px;
+padding-bottom:0px;
+padding-left:0px;
+padding-right:0px;
+font-weight:bold;
+font-family:Arial, Helvetica, sans-serif;
+font-size:12px;
+}
+
+#Navigatie-Rechterdeel_ UL LI
+{
+float: left;
+}
+
+#Navigatie-Rechterdeel_ UL LI:hover {
+border-bottom-style:solid;
+border-bottom-color:#FF9900;
+border-bottom-size: 2px;
+text-align:center;
+}
+
+#Navigatie-Rechterdeel_ UL LI A {
+color:#333333;
+text-decoration:none;
+margin-left:5px;
+}
+
+#Navigatie-Rechterdeel_ UL LI A:hover {
+color:#FFFFFF;
+
+}
+
+#Inhoud_ {
+	position:absolute;
+	left:20px;
+	top:285px;
+	width:755px;
+	height:auto;
+	background-color:#EBEBEB;
+	
+	border-left-style:solid;
+	border-left-width: 1px;
+	border-left-color: #555555;
+	
+	border-right-style:solid;
+	border-right-width: 1px;
+	border-right-color: #555555;
+	
+	border-bottom-style:solid;
+	border-bottom-width: 1px;
+	border-bottom-color: #555555;
+	
+	margin-top: 0px;
+	padding-top: 0px;
+}

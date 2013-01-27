@@ -1,0 +1,47 @@
+<script type="text/javascript" src="/highslide/highslide-with-gallery.js"></script>
+<script type="text/javascript">
+hs.graphicsDir = '/highslide/graphics/';
+hs.align = 'center';
+hs.transitions = ['expand', 'crossfade'];
+hs.outlineType = 'rounded-white';
+hs.fadeInOut = true;
+//hs.dimmingOpacity = 0.75;
+
+// Add the controlbar
+hs.addSlideshow({
+	//slideshowGroup: 'group1',
+	interval: 5000,
+	repeat: false,
+	useControls: true,
+	fixedControls: 'fit',
+	overlayOptions: {
+		opacity: .75,
+		position: 'bottom center',
+		hideOnMouseOut: true
+	}
+});
+</script>
+
+<link rel="stylesheet" type="text/css" href="/highslide/highslide.css" />
+<link href="/extracss/ingebeelde.css" rel="stylesheet" type="text/css" />
+<!--<div id="inhoud">-->
+<img src="/images/ingebeelde/header.png">
+<p>
+<h1>Opzet</h1>
+<h3>Na het grote spektakel van '3 musketiers' vorig jaar gaat De Toverlantaarn dit jaar terug naar de basis: een kleine, eerlijke productie. De ervaring leert dat dergelijke projecten meestal pareltjes opleveren die u niet gemist mag hebben!</h3>
+<h3>
+Wij proberen onze acteurs ook te leren hoe je zelf theater maakt. 'De Ingebeelde zieke' is hier een perfect voorbeeld van. Deze groep jonge acteurs gaat de uitdaging aan om zonder regisseur zelf een theaterproductie in elkaar te zetten. Hiervoor kunnen zij natuurlijk rekeken op de begeleiding van een aantal van onze vaste waarden. De eindbeslissingen liggen echter bij hen. Het resultaat wordt ongetwijfeld een immens grappige en eigentijdse productie.
+</h3>
+<h1>Inhoud</h1>
+<h3>
+"Word geneesheer en je krijgt mijn dochter", vertelt de aanstellerige en zieke Monsieur Argan. Welke ziekte hem velt, is een groot vraagteken. Argan wil een dokter waar hij dag en nacht beroep op kan doen. Hij beveelt zijn dochter Angelique daarom te huwen met een bijna afgestudeerde dokter, de zoon van zijn arts. Niet naar de zin van Angelique zelf; zij zette haar zinnen op een andere kerel. En tot overmaat van ramp zit Béline, Argans vrouw, enkel achter zijn geld aan. Gelukkig is er Toinette, de dienstmeid, die haar heer op alle kritieke momenten tot redelijkheid probeert te bewegen.
+</h3>
+<h1>Wanneer?</h1>
+<h3>De ingebeelde zieke wordt opgevoerd op volgende data:
+<ul>
+<li>6 april 2012 om 20u</li>
+<li>12 april 2012 om 20u</li>
+<li>13 april 2012 om 20u</li>
+</ul>
+De voorstellingen gaan door in CC Het kruispunt Te Diksmuide (Maria Doolaeghestraat 2b 8600 Diksmuide).
+<!--</div>-->

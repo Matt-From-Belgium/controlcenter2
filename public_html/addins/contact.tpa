@@ -1,0 +1,29 @@
+<div id="inhoud">
+<H1>Contacteer ons</H1>
+<b>Adres:</b>
+<p>Eikhofstraat 11<br>
+8600 Diksmuide</p>
+<p><b>Telefoon:</b> 051 50 16 16<br>
+
+<P>U kan ons ook contacteren via onderstaand formulier 
+<!CC IFSET [errorlist]>
+<UL id="berichtvalidator" class="errorbox">
+<!CC LOOP [errorlist]>
+<li id='<!CC LVAR [fieldname]>'><!CC LVAR [message]></li>
+<!CC END LOOP [errorlist]>
+</UL>
+<!CC END IFSET [errorlist]>
+<form name="berichtform" id="berichtform" action="" method="post">
+<label for="naam">Naam</label><input type="text" size="50" id="naam" name="naam"><br />
+<label for="mail">Mailadres</label><input type="text" size="50" id="mail" name="mail"><br />
+<label for="bestemming">Bestemming</label><select name="bestemming">
+<option value="secretariaat">Algemeen secretariaat/Reservaties</option>
+<option value="regisseur">Tom Durie (Regisseur & Voorzitter)</option>
+<option value="webmaster">Webmaster</option>
+</select><br>
+<label for="bericht">Bericht</label><textarea name="bericht" id="bericht" cols="50" rows="10"></textarea><br />
+<input type="submit" name="submit" value="Verstuur">&nbsp;<input type="reset" value="Opnieuw beginnen">
+</form>
+<SCRIPT LANGUAGE="javascript" SRC="/core/logic/common.js"></SCRIPT>
+<SCRIPT LANGUAGE="javascript" SRC="/contact/contact.js"></SCRIPT>
+</div>
