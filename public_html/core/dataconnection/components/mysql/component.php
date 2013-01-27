@@ -52,10 +52,11 @@ Private $activequery;
 		$this->activequery = $query;
 	}
         
-        Public function getQuery()
-        {
-            return $this->activequery;
-        }
+        #De query wordt al weergegeven bij foutboodschappen. Kan handig zijn voor debug
+        #Public function getQuery()
+        #{
+        #    return $this->activequery;
+        #}
 	
 	Public function setAttribute($attributename,$value)
 	{
