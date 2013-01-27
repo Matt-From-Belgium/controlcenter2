@@ -1,5 +1,6 @@
 <?php
-session_start();
+#Sessie wordt  al gestart in userfunctions
+#session_start();
 
 require_once $_SERVER['DOCUMENT_ROOT']."/core/logic/usermanagement/userfunctions.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/core/templatesystem/templatesystem.php";
@@ -15,9 +16,13 @@ require_once $_SERVER['DOCUMENT_ROOT']."/core/templatesystem/templatesystem.php"
 
 
 ###De gebruikersgegevens kunnen nu getest worden.
-$u=$_POST['u'];
-$p=$_POST['p'];
-$d=$_POST['d'];
+if(isset($_POST['u']))
+{
+    #echo "POST heeft waarde";
+    $u=$_POST['u'];
+    $p=$_POST['p'];
+    $d=$_POST['d'];
+}
 
 ###Als de pagina rechtstreeks wordt geladen wordt het loginscherm onmiddellijk weergegeven. Dit scenario wordt ook uitgevoerd
 ###Wanneer een gebruiker een pagina probeert te openen die beveiligd is terwijl hij/zij niet ingelogd is.
