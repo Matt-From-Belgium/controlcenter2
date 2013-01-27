@@ -3,6 +3,9 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/core/templatesystem/templatesystem.php'
 require_once $_SERVER['DOCUMENT_ROOT'].'/modules/audities/auditielogic.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/modules/audities/auditiekandidaat.php';
 
+###Fix voor notice op de index
+$result = null;
+
 if(isset($_POST['send']))
 {
 	###Er is input, maar klopt die ook?
