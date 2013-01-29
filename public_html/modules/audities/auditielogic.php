@@ -137,6 +137,13 @@ function getAuditieInschrijvingStatus()
     return $auditiestatus->getValue();
 }
 
+function getAuditieMasterSwitchStatus()
+{
+    ###Deze functie haalt de parameter AUDITIES_MASTER_SWITCH op, wanneer deze op 0 staat kunnen zelfs ingeschreven kandidaten de pagina niet raadplegen
+    $masterswitch = dataaccess_GetParameter("AUDITIES_MASTER_SWITCH");
+    return $masterswitch->getValue();
+}
+
 /*
 ###DEBUG
 $auditiekandidaat = new auditieKandidaat("Bauw","Matthias","matthias.bauw@gmail.com",4);
