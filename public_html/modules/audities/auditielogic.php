@@ -120,6 +120,30 @@ function inschrijvingBevestigd(auditieKandidaat $kandidaat)
 	return dataBevestigd($kandidaat);
 }
 
+function getAuditiepakketStatus()
+{
+    ###Deze functie gaat via de parameters na of de auditiemodule geactiveerd is
+    $auditiestatus = dataaccess_GetParameter('AUDITIES_AANVRAAG_ACTIEF');
+    
+    return $auditiestatus->getValue();
+}
+
+
+function getAuditieInschrijvingStatus()
+{
+    ###Deze functie gaat via de parameters na of de auditiemodule geactiveerd is
+    $auditiestatus = dataaccess_GetParameter('AUDITIES_INSCHRIJVING_ACTIEF');
+    
+    return $auditiestatus->getValue();
+}
+
+function getAuditieMasterSwitchStatus()
+{
+    ###Deze functie haalt de parameter AUDITIES_MASTER_SWITCH op, wanneer deze op 0 staat kunnen zelfs ingeschreven kandidaten de pagina niet raadplegen
+    $masterswitch = dataaccess_GetParameter("AUDITIES_MASTER_SWITCH");
+    return $masterswitch->getValue();
+}
+
 /*
 ###DEBUG
 $auditiekandidaat = new auditieKandidaat("Bauw","Matthias","matthias.bauw@gmail.com",4);
