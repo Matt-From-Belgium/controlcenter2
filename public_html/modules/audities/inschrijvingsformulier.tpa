@@ -51,7 +51,7 @@ Helaas, niet alle velden werden correct ingevuld:
 <div id="inschrijvingsformulier">
 <input type='hidden' name="send" value="ok">
 <label>Voornaam:</label><input type="text" SIZE='30' name="voornaam" /><br/>
-<label>Naam:</label><input type="text" SIZE='30' name="naam" /><br/>
+<label>Naam:</label><input type="text" SIZE='50' name="naam" /><br/>
 <label>E-mailadres:</label><input type="text" SIZE='30' name="mail" /><br/>
 <label>Stemgroep:</label><select name="stemgroep"><option value="0" label="Selecteer je stemgroep"><option value="1"size='30'>Sopraan</option><option value="2">Mezzo</option><option value="3">Alt</option><option VALUE="4">Tenor</option><option value="5">Bariton</option><option value="6">Bas</option></select><br/>
 <br />
