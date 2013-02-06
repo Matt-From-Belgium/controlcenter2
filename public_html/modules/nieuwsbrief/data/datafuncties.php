@@ -29,10 +29,13 @@
 		
 		return $return;
 	 }
+         /*
 	 else
 	 {
 		 throw new Exception('No subscriptions defined');
-	 }
+          *Was te streng.
+          */
+	 
  }
  
  function data_createAbonnement(abonnement $abonnement)

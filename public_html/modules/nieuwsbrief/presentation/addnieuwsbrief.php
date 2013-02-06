@@ -30,13 +30,14 @@ if(isset($_POST['submit']))
 
 $abonnementen = array();
 
+if(is_array(abonnementenlijst))
+    foreach($abonnementenlijst as $key=>$abonnement)
+    {
+            $nieuwabonnement['id'] = $abonnement->getID();
+            $nieuwabonnement['naam'] = $abonnement->getNaam();
+            $abonnementen[] = $nieuwabonnement;
+    }
 
-foreach($abonnementenlijst as $key=>$abonnement)
-{
-	$nieuwabonnement['id'] = $abonnement->getID();
-	$nieuwabonnement['naam'] = $abonnement->getNaam();
-	$abonnementen[] = $nieuwabonnement;
-}
 
 $html = new htmlpage('frontend');
 $html->LoadAddin('/modules/nieuwsbrief/addins/addnieuwsbrief.tpa');
