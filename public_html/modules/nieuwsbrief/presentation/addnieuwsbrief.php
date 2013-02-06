@@ -30,7 +30,7 @@ if(isset($_POST['submit']))
 
 $abonnementen = array();
 
-if(is_array(abonnementenlijst))
+if(is_array($abonnementenlijst))
 {
     foreach($abonnementenlijst as $key=>$abonnement)
     {
