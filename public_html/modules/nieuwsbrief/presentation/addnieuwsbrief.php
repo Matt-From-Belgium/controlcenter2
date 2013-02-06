@@ -22,9 +22,7 @@ if(isset($_POST['submit']))
 	$pad ='/modules/nieuwsbrief/file/nieuwsbrieven/1.pdf';
 
 	$nieuwsbrief = new nieuwsbrief(-1,$maand,$jaar,$abonnementobjecten,$pad);
-	#print_r($nieuwsbrief);
-
-	echo $_FILES['nieuwsbriefbestand']['tmpname'];
+        
 	$errors = addNieuwsbrief($_FILES,$nieuwsbrief);
 }
 

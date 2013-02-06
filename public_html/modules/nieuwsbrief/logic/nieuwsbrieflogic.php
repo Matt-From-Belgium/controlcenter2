@@ -62,6 +62,8 @@ function confirmAbonnee(abonnee $abonnee)
 
 function addNieuwsbrief($bestand,nieuwsbrief $nieuwsbrief)
 {
+	#echo $bestand['nieuwsbriefbestand']['tmp_name'];
+    
 	###Het object moet gecontroleerd worden
 	$validator = new nieuwsbriefvalidator();
 	$errorlist = $validator->validateObject($nieuwsbrief);
@@ -70,14 +72,14 @@ function addNieuwsbrief($bestand,nieuwsbrief $nieuwsbrief)
 	{
 	###Alles in orde, mag toegevoegd worden
 	data_addNieuwsbrief($nieuwsbrief);
+        move_uploaded_file($bestand['nieuwsbriefbestand']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/modules/nieuwsbrief/file/nieuwsbrieven/1');
 	}
 	else
 	{
 	###fouten teruggeven aan de presentation layer
 	return $errorlist;
-	}
-	
-	echo $bestand['nieuwsbriefbestand']['tmpname']['error'];
+	}	
+
 }
 
 ?>
