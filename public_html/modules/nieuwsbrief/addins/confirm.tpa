@@ -1,0 +1,18 @@
+<h1>Je bent er bijna...</h1>
+Bevestig voor welke van onze nieuwsbrieven je jezelf wenst aan te melden:
+<p>
+<font color="red">
+<div id="errors">
+<!CC LOOP [errors]>
+	<!CC LVAR [message]>
+<!CC END LOOP [errors]>
+</font>
+<p>
+</div>
+<FORM method='post' action='confirm.php'>
+<INPUT TYPE='hidden' NAME='key' VALUE='<!CC VAR [key]>'>
+<!CC LOOP [abonnementen]>
+<BR><INPUT type='checkbox' NAME='abonnementen[]' VALUE='<!CC LVAR [id]>'><!CC LVAR [naam]>
+<!CC END LOOP [abonnementen]>
+<P><INPUT TYPE="submit" VALUE="Bevestigen">
+</form>
