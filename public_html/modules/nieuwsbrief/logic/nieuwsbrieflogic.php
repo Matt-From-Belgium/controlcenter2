@@ -71,15 +71,15 @@ function addNieuwsbrief($bestand,nieuwsbrief $nieuwsbrief)
 	if(count($errorlist)==0)
 	{
 	###Alles in orde, mag toegevoegd worden
-	data_addNieuwsbrief($nieuwsbrief);
-        move_uploaded_file($bestand['nieuwsbriefbestand']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/modules/nieuwsbrief/file/nieuwsbrieven/1');
+	$nieuwsbriefid=data_addNieuwsbrief($nieuwsbrief);
+        move_uploaded_file($bestand['nieuwsbriefbestand']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/modules/nieuwsbrief/file/nieuwsbrieven/'.$nieuwsbriefid.'.pdf');
+      
 	}
 	else
 	{
 	###fouten teruggeven aan de presentation layer
 	return $errorlist;
 	}	
-
 }
 
 ?>

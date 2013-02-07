@@ -218,6 +218,7 @@ function data_addNieuwsbrief(nieuwsbrief $nieuwsbrief)
 	$db->setAttribute('bestandspad',$nieuwsbrief->getBestandsPad());
 	
 	$db->executeQuery();
+        $nieuwsbriefid = $db->getLastId();
 	
 	###Nu creëren we een nieuw nieuwsbriefobject maar nu met het juiste id
 	$nieuwsbrief = new nieuwsbrief($db->getLastId(),intval($nieuwsbrief->getMaand()),intval($nieuwsbrief->getJaar()),$nieuwsbrief->getAbonnementen(),$nieuwsbrief->getBestandsinfo());
@@ -234,6 +235,8 @@ function data_addNieuwsbrief(nieuwsbrief $nieuwsbrief)
 		$db2->executeQuery();
 	}
 
+        return $nieuwsbriefid;
+        ###Op het einde van de rit retourneert de functie het id van de nieuwsbrief, dat kan dan gebruikt worden als uniekebestandsnaam
 	#print_r($nieuwsbrief);
 }
 ?>
