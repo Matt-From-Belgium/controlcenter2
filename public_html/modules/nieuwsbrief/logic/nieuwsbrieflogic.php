@@ -3,6 +3,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/modules/nieuwsbrief/entity/abonneevalid
 require_once $_SERVER['DOCUMENT_ROOT'].'/modules/nieuwsbrief/entity/nieuwsbriefvalidator.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/modules/nieuwsbrief/data/datafuncties.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/core/email/email.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/core/entity/filevalidator.php';
 
 function abonneeToevoegen(abonnee $abonnee)
 {
@@ -67,8 +68,18 @@ function addNieuwsbrief($bestand,nieuwsbrief $nieuwsbrief)
 	###Het object moet gecontroleerd worden
 	$validator = new nieuwsbriefvalidator();
 	$errorlist = $validator->validateObject($nieuwsbrief);
+        
+        $filevalidator = new fileValidator();
+        $filevalidator->setExtension('docx');
+        $filevalidator->setMaxSize(10);
+        
+        $fileerrors=$filevalidator->validateFile($bestand['nieuwsbriefbestand']);
+        
+        $errorlistmerged=array_merge($errorlist,$fileerrors);
+        
+        print_r($errorlistmerged);
 	
-	if(count($errorlist)==0)
+	if(count($errorlistmerged)==0)
 	{
 	###Alles in orde, mag toegevoegd worden
 	$nieuwsbriefid=data_addNieuwsbrief($nieuwsbrief);
@@ -78,7 +89,7 @@ function addNieuwsbrief($bestand,nieuwsbrief $nieuwsbrief)
 	else
 	{
 	###fouten teruggeven aan de presentation layer
-	return $errorlist;
+	return $errorlistmerged;
 	}	
 }
 
