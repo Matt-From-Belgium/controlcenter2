@@ -38,6 +38,32 @@
 	 
  }
  
+  function data_getAbonnementbyKey($id)
+ {
+      $lijst=data_getAbonnementenlijst();
+      if(isset($lijst[$id]))
+      {
+          return $lijst[$id];
+      }
+      else
+      {
+          return false;
+      }
+ }
+ 
+ /*
+ ###DEBUG
+ $tezoeken = 2;
+ $result=  data_getAbonnementbyKey(intval($tezoeken));
+ 
+ if($result)
+ {
+     print_r($result);
+ }
+ 
+  * 
+  */
+ 
  function data_createAbonnement(abonnement $abonnement)
  {
 	 ###Deze functie voegt een nieuw abonnement toe aan de database
@@ -239,4 +265,6 @@ function data_addNieuwsbrief(nieuwsbrief $nieuwsbrief)
         ###Op het einde van de rit retourneert de functie het id van de nieuwsbrief, dat kan dan gebruikt worden als uniekebestandsnaam
 	#print_r($nieuwsbrief);
 }
+
+
 ?>
