@@ -84,13 +84,31 @@ if(isset($_GET['key']) || is_array($errors))
 		$abonnementenarray = array();
 		
                 
+                
+                
 		foreach($abonnementen as $key=>$abonnement)
 		{
 			$nieuwitem['id'] = $abonnement->getId();
 			$nieuwitem['naam']= $abonnement->getNaam();
+                        ###UPDATE: we willen deze code ook gebruiken voor wijzigingen in het abonnement dus we gaan na of er al abonnementen zijn        
+                        ###Als het om het wijzigen van een bestaandegebruiker gaat dan moeten we de juiste waarden aanvinken
+                        ###het abonnementsobject moet daarvoor voorkomen in $abonnee->getSubscriptions()
+                        
+                        
+                        if(is_int(array_search($abonnement, $abonnee->getSubscriptions())))
+                        {
+                            $nieuwitem['checked']="CHECKED";
+                        }
+                        else
+                        {
+                            $nieuwitem['checked'] = '';
+                        }
+
 			
 			$abonnementenarray[] = $nieuwitem;
 		}
+                
+                
 		
 		$html = new htmlpage('frontend');
 		$html->LoadAddin('/modules/nieuwsbrief/addins/confirm.tpa');

@@ -12,7 +12,7 @@ Bevestig voor welke van onze nieuwsbrieven je jezelf wenst aan te melden:
 <FORM method='post' action='confirm.php'>
 <INPUT TYPE='hidden' NAME='key' VALUE='<!CC VAR [key]>'>
 <!CC LOOP [abonnementen]>
-<BR><INPUT type='checkbox' NAME='abonnementen[]' VALUE='<!CC LVAR [id]>'><!CC LVAR [naam]>
+<BR><INPUT type='checkbox' NAME='abonnementen[]' VALUE='<!CC LVAR [id]>' <!CC LVAR [checked]>><!CC LVAR [naam]>
 <!CC END LOOP [abonnementen]>
 <P><INPUT TYPE="submit" VALUE="Bevestigen">
 </form>
