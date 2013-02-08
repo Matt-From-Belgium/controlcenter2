@@ -91,4 +91,35 @@ function addNieuwsbrief($bestand,nieuwsbrief $nieuwsbrief)
 	}	
 }
 
+function getNieuwsbrieven($abonnement)
+{
+    $result= data_getnieuwsbrieven($abonnement);
+    return $result;
+}
+
+ function getAbonnementbyKey($id)
+ {
+      $lijst=data_getAbonnementenlijst();
+      if(isset($lijst[$id]))
+      {
+          return $lijst[$id];
+      }
+      else
+      {
+          return false;
+      }
+ }
+ 
+ /*
+ ###DEBUG
+ $tezoeken = 2;
+ $result=  data_getAbonnementbyKey(intval($tezoeken));
+ 
+ if($result)
+ {
+     print_r($result);
+ }
+ 
+  * 
+  */
 ?>

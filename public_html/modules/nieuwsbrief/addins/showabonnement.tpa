@@ -1,0 +1,5 @@
+<h1><!CC VAR [abonnementnaam]></h1>
+<!CC LOOP [nieuwsbrieven]>
+<!CC LVAR [id]>
+<!CC END LOOP [nieuwsbrieven]>
+

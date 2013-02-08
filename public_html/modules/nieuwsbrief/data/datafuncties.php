@@ -38,32 +38,6 @@
 	 
  }
  
- function data_getAbonnementbyKey($id)
- {
-      $lijst=data_getAbonnementenlijst();
-      if(isset($lijst[$id]))
-      {
-          return $lijst[$id];
-      }
-      else
-      {
-          return false;
-      }
- }
- 
- /*
- ###DEBUG
- $tezoeken = 2;
- $result=  data_getAbonnementbyKey(intval($tezoeken));
- 
- if($result)
- {
-     print_r($result);
- }
- 
-  * 
-  */
- 
  function data_createAbonnement(abonnement $abonnement)
  {
 	 ###Deze functie voegt een nieuw abonnement toe aan de database
@@ -269,7 +243,7 @@ function data_addNieuwsbrief(nieuwsbrief $nieuwsbrief)
 function data_getnieuwsbrieven(abonnement $abonnement)
 {
     ###Deze functie geeft de nieuwsbriefobjecten terug voor een bepaald abonnement
-    $query = "SELECT nieuwsbrieven.id,nieuwsbrieven.timestamp,nieuwsbrieven.maand,nieuwsbrieven.jaar,nieuwsbrieven.bestandsnaam,nieuwsbriefabonnementen.abonnement from nieuwsbrieven LEFT JOIN nieuwsbriefabonnementen ON nieuwsbrieven.id=nieuwsbriefabonnementen.nieuwsbrief WHERE nieuwsbriefabonnementen.abonnement = @id";
+    $query = "SELECT nieuwsbrieven.id,nieuwsbrieven.timestamp,nieuwsbrieven.maand,nieuwsbrieven.jaar,nieuwsbrieven.bestandsnaam from nieuwsbrieven LEFT JOIN nieuwsbriefabonnementen ON nieuwsbrieven.id=nieuwsbriefabonnementen.nieuwsbrief WHERE nieuwsbriefabonnementen.abonnement = @id";
     
     $id = $abonnement->getId();
     
@@ -280,7 +254,8 @@ function data_getnieuwsbrieven(abonnement $abonnement)
     $db->ExecuteQuery();
     
     $result = $db->GetResultArray();
-    print_r($result);
+    
+    return $result;
 }   
 
 /*
