@@ -83,6 +83,7 @@ if(isset($_GET['key']) || is_array($errors))
 		###bruikbaaris voor het templatesysteem
 		$abonnementenarray = array();
 		
+                
 		foreach($abonnementen as $key=>$abonnement)
 		{
 			$nieuwitem['id'] = $abonnement->getId();
