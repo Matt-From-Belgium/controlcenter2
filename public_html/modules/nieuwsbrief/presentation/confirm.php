@@ -91,7 +91,6 @@ if(isset($_GET['key']) || is_array($errors))
 			$abonnementenarray[] = $nieuwitem;
 		}
 		
-                
 		$html = new htmlpage('frontend');
 		$html->LoadAddin('/modules/nieuwsbrief/addins/confirm.tpa');
 		$html->setVariable("abonnementen",$abonnementenarray);
