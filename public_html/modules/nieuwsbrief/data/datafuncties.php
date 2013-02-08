@@ -266,5 +266,10 @@ function data_addNieuwsbrief(nieuwsbrief $nieuwsbrief)
 	#print_r($nieuwsbrief);
 }
 
+function data_getnieuwsbrieven(abonnement $abonnement)
+{
+    ###Deze functie geeft de nieuwsbriefobjecten terug voor een bepaald abonnement
+    
+}
 
 ?>

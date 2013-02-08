@@ -70,7 +70,7 @@ function addNieuwsbrief($bestand,nieuwsbrief $nieuwsbrief)
 	$errorlist = $validator->validateObject($nieuwsbrief);
         
         $filevalidator = new fileValidator();
-        $filevalidator->setExtension('docx');
+        $filevalidator->setExtension('pdf');
         $filevalidator->setMaxSize(10);
         
         $fileerrors=$filevalidator->validateFile($bestand['nieuwsbriefbestand']);
@@ -81,7 +81,7 @@ function addNieuwsbrief($bestand,nieuwsbrief $nieuwsbrief)
 	{
 	###Alles in orde, mag toegevoegd worden
 	$nieuwsbriefid=data_addNieuwsbrief($nieuwsbrief);
-        move_uploaded_file($bestand['nieuwsbriefbestand']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/modules/nieuwsbrief/file/nieuwsbrieven/'.$nieuwsbriefid.'.pdf');
+        move_uploaded_file($bestand['nieuwsbriefbestand']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/modules/nieuwsbrief/nieuwsbrieven/'.$nieuwsbriefid.'.pdf');
       
 	}
 	else
