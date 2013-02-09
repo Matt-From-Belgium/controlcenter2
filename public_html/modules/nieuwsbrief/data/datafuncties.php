@@ -209,21 +209,24 @@ function data_getAbonneeByKey($key)
 function data_addNieuwsbrief(nieuwsbrief $nieuwsbrief)
 {
 	###Eerst voegen we de lijn in de tabel nieuwsbrief toe
-	$query = "INSERT INTO nieuwsbrieven (maand,jaar) VALUES (@maand,@jaar)";
+	$query = "INSERT INTO nieuwsbrieven (maand,jaar,titel) VALUES (@maand,@jaar,'@titel')";
 	
 	$db = new dataconnection();
 	$db->setQuery($query);
 	$db->setAttribute('maand',$nieuwsbrief->getMaand());
 	$db->setAttribute('jaar',$nieuwsbrief->getJaar());
+        $db->setAttribute('titel',$nieuwsbrief->getTitel());
 	
+
 	$db->executeQuery();
+
         $nieuwsbriefid = $db->getLastId();
 	
 	###Nu creëren we een nieuw nieuwsbriefobject maar nu met het juiste id
-	$nieuwsbrief = new nieuwsbrief($db->getLastId(),intval($nieuwsbrief->getMaand()),intval($nieuwsbrief->getJaar()),$nieuwsbrief->getAbonnementen());
+	$nieuwsbrief = new nieuwsbrief($db->getLastId(),intval($nieuwsbrief->getMaand()),intval($nieuwsbrief->getJaar()),$nieuwsbrief->getAbonnementen(),$nieuwsbrief->getTitel());
 	
 	###Nu moeten we de koppeling met de abonnementen aan de databank toevoegen
-	foreach($nieuwsbrief->getAbonnementen() as $key=>$abonnement)
+	foreach($nieuwsbrief->getAbonnementen() as $abonnement)
 	{
 		$db2 = new dataconnection();
 		
@@ -242,7 +245,7 @@ function data_addNieuwsbrief(nieuwsbrief $nieuwsbrief)
 function data_getnieuwsbrieven(abonnement $abonnement)
 {
     ###Deze functie geeft de nieuwsbriefobjecten terug voor een bepaald abonnement
-    $query = "SELECT nieuwsbrieven.id,nieuwsbrieven.timestamp,nieuwsbrieven.maand,nieuwsbrieven.jaar,nieuwsbrieven.bestandsnaam from nieuwsbrieven LEFT JOIN nieuwsbriefabonnementen ON nieuwsbrieven.id=nieuwsbriefabonnementen.nieuwsbrief WHERE nieuwsbriefabonnementen.abonnement = @id";
+    $query = "SELECT nieuwsbrieven.id,nieuwsbrieven.timestamp,nieuwsbrieven.maand,nieuwsbrieven.jaar,nieuwsbrieven.titel from nieuwsbrieven LEFT JOIN nieuwsbriefabonnementen ON nieuwsbrieven.id=nieuwsbriefabonnementen.nieuwsbrief WHERE nieuwsbriefabonnementen.abonnement = @id";
     
     $id = $abonnement->getId();
     

@@ -7,16 +7,17 @@ class Nieuwsbrief
 	private $jaar;
 	private $timestamp;
 	private $abonnementen = array();
-	private $bestandspad;
+	private $titel;
 	
 	###Consctructor
-	public function __CONSTRUCT($id,$maand,$jaar,$abonnementenarray)
+	public function __CONSTRUCT($id,$maand,$jaar,$abonnementenarray,$titel)
 	{
 		###Eventueel bestandsinfo buiten het object houden en enkel bestandspad opnemen?
 		$this->setMaand($maand);
 		$this->setJaar($jaar);
 		$this->setAbonnementen($abonnementenarray);
 		$this->setId($id);
+                $this->setTitel($titel);
 	}
 	
 	###Private Methods
@@ -86,6 +87,16 @@ class Nieuwsbrief
 	{
 		return $this->id;
 	}
+        
+        public function setTitel($titel)
+        {
+            $this->titel=$titel;
+        }
+        
+        public function getTitel()
+        {
+            return $this->titel;
+        }
 }
 
 

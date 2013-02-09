@@ -8,7 +8,8 @@ class nieuwsbriefValidator
 		$errors[] = $this->validateMaand($nieuwsbrief->getMaand());
 		$errors[] = $this->validateJaar($nieuwsbrief->getJaar());
 		$errors[] = $this->ValidateAbonnementenLijst($nieuwsbrief->getAbonnementen());
-		
+		$errors[] = $this->validateTitel($nieuwsbrief->getTitel());
+                
 		$errors = array_filter($errors);
 		
 		return $errors;
@@ -43,5 +44,15 @@ class nieuwsbriefValidator
 			return $newerror;			
 		}
 	}
+        
+        function validateTitel($titel)
+        {
+            if(empty($titel))
+            {
+                        $newerror['field'] = "titel";
+			$newerror['message'] = "Je moet een titel opgeven voor de nieuwsbrief";
+			return $newerror;    
+            }
+        }
 }
 ?>
