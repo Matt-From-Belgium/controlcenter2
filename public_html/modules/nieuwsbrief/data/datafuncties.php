@@ -242,7 +242,7 @@ function data_addNieuwsbrief(nieuwsbrief $nieuwsbrief)
 	#print_r($nieuwsbrief);
 }
 
-function data_getnieuwsbrieven(abonnement $abonnement)
+function data_getnieuwsbrievenVoorAbonnement(abonnement $abonnement)
 {
     ###Deze functie geeft de nieuwsbriefobjecten terug voor een bepaald abonnement
     $query = "SELECT nieuwsbrieven.id,nieuwsbrieven.timestamp,nieuwsbrieven.maand,nieuwsbrieven.jaar,nieuwsbrieven.titel from nieuwsbrieven LEFT JOIN nieuwsbriefabonnementen ON nieuwsbrieven.id=nieuwsbriefabonnementen.nieuwsbrief WHERE nieuwsbriefabonnementen.abonnement = @id";

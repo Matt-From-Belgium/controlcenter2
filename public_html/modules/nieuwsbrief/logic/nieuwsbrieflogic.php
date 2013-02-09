@@ -98,7 +98,7 @@ function addNieuwsbrief($bestand,nieuwsbrief $nieuwsbrief)
 
 function getNieuwsbrieven($abonnement)
 {
-    $result= data_getnieuwsbrieven($abonnement);
+    $result= data_getnieuwsbrievenVoorAbonnement($abonnement);
     return $result;
 }
 
