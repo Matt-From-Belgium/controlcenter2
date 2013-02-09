@@ -1,0 +1,14 @@
+<UL>
+<!CC LOOP [errorlist]>
+<LI><!CC LVAR [message]></LI>
+<!CC END LOOP [errorlist]>
+</UL>
+<form method='post' enctype='multipart/form-data'>
+maand  <input type='text' name='maand'> jaar <input type='text' name='jaar'>
+<p>Nieuwsbrief: 
+<!CC LOOP [abonnementen]>
+<BR><INPUT TYPE='checkbox' NAME='abonnement[]' VALUE='<!CC LVAR [id]>'><!CC LVAR [naam]>
+<!CC END LOOP [abonnementen]>
+<BR><INPUT TYPE='file' NAME='nieuwsbriefbestand'>
+<p><input type='submit' name='submit' value='Versturen'>
+</form>
