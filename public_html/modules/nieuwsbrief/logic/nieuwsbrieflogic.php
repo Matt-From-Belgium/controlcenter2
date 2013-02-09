@@ -75,6 +75,11 @@ function addNieuwsbrief($bestand,nieuwsbrief $nieuwsbrief)
         
         $fileerrors=$filevalidator->validateFile($bestand['nieuwsbriefbestand']);
         
+        if(!is_array($fileerrors))
+        {
+            $fileerrors=array();
+        }
+        
         $errorlistmerged=array_merge($errorlist,$fileerrors);
 	
 	if(count($errorlistmerged)==0)
