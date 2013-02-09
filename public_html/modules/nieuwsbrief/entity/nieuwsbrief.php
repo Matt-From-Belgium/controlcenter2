@@ -10,13 +10,12 @@ class Nieuwsbrief
 	private $bestandspad;
 	
 	###Consctructor
-	public function __CONSTRUCT($id,$maand,$jaar,$abonnementenarray,$bestandspad)
+	public function __CONSTRUCT($id,$maand,$jaar,$abonnementenarray)
 	{
 		###Eventueel bestandsinfo buiten het object houden en enkel bestandspad opnemen?
 		$this->setMaand($maand);
 		$this->setJaar($jaar);
 		$this->setAbonnementen($abonnementenarray);
-		$this->setBestandspad($bestandsinfo);
 		$this->setId($id);
 	}
 	
@@ -51,11 +50,6 @@ class Nieuwsbrief
 		$this->abonnementen = $abonnementen;
 	}
 	
-	private function setBestandsPad($bestandspad)
-	{
-		$this->bestandspad = $bestandspad;
-	}
-	
 	private function setId($id)
 	{
 		if(is_int($id))
@@ -83,19 +77,9 @@ class Nieuwsbrief
 		return $this->abonnementen;
 	}
 	
-	public function getBestandsinfo()
-	{
-		return $this->bestandsinfo;
-	}
-	
 	public function getTimestamp()
 	{
 		return $this->timestamp;
-	}
-	
-	public function getBestandsPad()
-	{
-		return $this->bestandspad;
 	}
 	
 	public function getID()

@@ -209,19 +209,18 @@ function data_getAbonneeByKey($key)
 function data_addNieuwsbrief(nieuwsbrief $nieuwsbrief)
 {
 	###Eerst voegen we de lijn in de tabel nieuwsbrief toe
-	$query = "INSERT INTO nieuwsbrieven (maand,jaar,bestandsnaam) VALUES (@maand,@jaar,'@bestandspad')";
+	$query = "INSERT INTO nieuwsbrieven (maand,jaar) VALUES (@maand,@jaar)";
 	
 	$db = new dataconnection();
 	$db->setQuery($query);
 	$db->setAttribute('maand',$nieuwsbrief->getMaand());
 	$db->setAttribute('jaar',$nieuwsbrief->getJaar());
-	$db->setAttribute('bestandspad',$nieuwsbrief->getBestandsPad());
 	
 	$db->executeQuery();
         $nieuwsbriefid = $db->getLastId();
 	
 	###Nu creëren we een nieuw nieuwsbriefobject maar nu met het juiste id
-	$nieuwsbrief = new nieuwsbrief($db->getLastId(),intval($nieuwsbrief->getMaand()),intval($nieuwsbrief->getJaar()),$nieuwsbrief->getAbonnementen(),$nieuwsbrief->getBestandsinfo());
+	$nieuwsbrief = new nieuwsbrief($db->getLastId(),intval($nieuwsbrief->getMaand()),intval($nieuwsbrief->getJaar()),$nieuwsbrief->getAbonnementen());
 	
 	###Nu moeten we de koppeling met de abonnementen aan de databank toevoegen
 	foreach($nieuwsbrief->getAbonnementen() as $key=>$abonnement)
