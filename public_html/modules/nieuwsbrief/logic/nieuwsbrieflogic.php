@@ -70,10 +70,15 @@ function addNieuwsbrief($bestand,nieuwsbrief $nieuwsbrief)
 	$errorlist = $validator->validateObject($nieuwsbrief);
         
         $filevalidator = new fileValidator();
-        $filevalidator->setExtension('docx');
+        $filevalidator->setExtension('pdf');
         $filevalidator->setMaxSize(10);
         
         $fileerrors=$filevalidator->validateFile($bestand['nieuwsbriefbestand']);
+        
+        if(!is_array($fileerrors))
+        {
+            $fileerrors=array();
+        }
         
         $errorlistmerged=array_merge($errorlist,$fileerrors);
 	
@@ -81,7 +86,7 @@ function addNieuwsbrief($bestand,nieuwsbrief $nieuwsbrief)
 	{
 	###Alles in orde, mag toegevoegd worden
 	$nieuwsbriefid=data_addNieuwsbrief($nieuwsbrief);
-        move_uploaded_file($bestand['nieuwsbriefbestand']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/modules/nieuwsbrief/file/nieuwsbrieven/'.$nieuwsbriefid.'.pdf');
+        move_uploaded_file($bestand['nieuwsbriefbestand']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/modules/nieuwsbrief/nieuwsbrieven/'.$nieuwsbriefid.'.pdf');
       
 	}
 	else
@@ -91,4 +96,35 @@ function addNieuwsbrief($bestand,nieuwsbrief $nieuwsbrief)
 	}	
 }
 
+function getNieuwsbrieven($abonnement)
+{
+    $result= data_getnieuwsbrieven($abonnement);
+    return $result;
+}
+
+ function getAbonnementbyKey($id)
+ {
+      $lijst=data_getAbonnementenlijst();
+      if(isset($lijst[$id]))
+      {
+          return $lijst[$id];
+      }
+      else
+      {
+          return false;
+      }
+ }
+ 
+ /*
+ ###DEBUG
+ $tezoeken = 2;
+ $result=  data_getAbonnementbyKey(intval($tezoeken));
+ 
+ if($result)
+ {
+     print_r($result);
+ }
+ 
+  * 
+  */
 ?>

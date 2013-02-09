@@ -239,4 +239,29 @@ function data_addNieuwsbrief(nieuwsbrief $nieuwsbrief)
         ###Op het einde van de rit retourneert de functie het id van de nieuwsbrief, dat kan dan gebruikt worden als uniekebestandsnaam
 	#print_r($nieuwsbrief);
 }
+
+function data_getnieuwsbrieven(abonnement $abonnement)
+{
+    ###Deze functie geeft de nieuwsbriefobjecten terug voor een bepaald abonnement
+    $query = "SELECT nieuwsbrieven.id,nieuwsbrieven.timestamp,nieuwsbrieven.maand,nieuwsbrieven.jaar,nieuwsbrieven.bestandsnaam from nieuwsbrieven LEFT JOIN nieuwsbriefabonnementen ON nieuwsbrieven.id=nieuwsbriefabonnementen.nieuwsbrief WHERE nieuwsbriefabonnementen.abonnement = @id";
+    
+    $id = $abonnement->getId();
+    
+    $db=new DataConnection();
+    $db->setQuery($query);
+    $db->setAttribute("id", $id);
+    
+    $db->ExecuteQuery();
+    
+    $result = $db->GetResultArray();
+    
+    return $result;
+}   
+
+/*
+###Debug 
+$abonnement = data_getAbonnementbyKey(2);
+data_getnieuwsbrieven($abonnement);
+*/
+
 ?>
