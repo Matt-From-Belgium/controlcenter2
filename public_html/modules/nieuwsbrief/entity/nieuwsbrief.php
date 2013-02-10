@@ -6,18 +6,19 @@ class Nieuwsbrief
 	private $maand;
 	private $jaar;
 	private $timestamp;
-	private $abonnementen = array();
+	
 	private $titel;
+        private $verstuurd;
 	
 	###Consctructor
-	public function __CONSTRUCT($id,$maand,$jaar,$abonnementenarray,$titel)
+	public function __CONSTRUCT($id,$maand,$jaar,$titel,$verstuurd=FALSE)
 	{
 		###Eventueel bestandsinfo buiten het object houden en enkel bestandspad opnemen?
 		$this->setMaand($maand);
 		$this->setJaar($jaar);
-		$this->setAbonnementen($abonnementenarray);
 		$this->setId($id);
                 $this->setTitel($titel);
+                $this->setVerstuurd($verstuurd);
 	}
 	
 	###Private Methods
@@ -45,13 +46,8 @@ class Nieuwsbrief
 		}
 		
 	}
-	
-	private function setAbonnementen($abonnementen)
-	{
-		$this->abonnementen = $abonnementen;
-	}
-	
-	private function setId($id)
+        
+        private function setId($id)
 	{
 		if(is_int($id))
 		{
@@ -62,6 +58,7 @@ class Nieuwsbrief
 			throw new Exception('Id moet integer zijn');
 		}		
 	}
+
 	###Public Methods
 	public function getMaand()
 	{
@@ -72,11 +69,7 @@ class Nieuwsbrief
 	{
 		return $this->jaar;
 	}
-	
-	public function getAbonnementen()
-	{
-		return $this->abonnementen;
-	}
+
 	
 	public function getTimestamp()
 	{
@@ -96,6 +89,24 @@ class Nieuwsbrief
         public function getTitel()
         {
             return $this->titel;
+        }
+        
+        public function setVerstuurd($verstuurd)
+        {
+            if(is_bool($verstuurd))
+            {
+                $this->verstuurd=$verstuurd;    
+            }
+            else
+            {
+             throw new CC2Exception("Error in nieuwsbriefclass","setVerstuurd accepteert enkel boolean als argument");
+            }
+            
+        }
+        
+        public function getVerstuurd()
+        {
+            return $this->verstuurd;
         }
 }
 

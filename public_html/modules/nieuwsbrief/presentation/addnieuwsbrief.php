@@ -21,9 +21,9 @@ if(isset($_POST['submit']))
 	
 	$titel = $_POST['titel'];
 
-	$nieuwsbrief = new nieuwsbrief(-1,$maand,$jaar,$abonnementobjecten,$titel);
+	$nieuwsbrief = new nieuwsbrief(-1,$maand,$jaar,$titel);
         
-	$errors = addNieuwsbrief($_FILES,$nieuwsbrief);
+	$errors = addNieuwsbrief($_FILES,$nieuwsbrief,$abonnementobjecten);
 }
 
 $abonnementen = array();
