@@ -6,12 +6,12 @@ class Nieuwsbrief
 	private $maand;
 	private $jaar;
 	private $timestamp;
-	private $abonnementen = array();
+	
 	private $titel;
         private $verstuurd;
 	
 	###Consctructor
-	public function __CONSTRUCT($id,$maand,$jaar,$abonnementenarray,$titel,$verstuurd=FALSE)
+	public function __CONSTRUCT($id,$maand,$jaar,$titel,$verstuurd=FALSE)
 	{
 		###Eventueel bestandsinfo buiten het object houden en enkel bestandspad opnemen?
 		$this->setMaand($maand);
@@ -47,23 +47,7 @@ class Nieuwsbrief
 		}
 		
 	}
-	
-	private function setAbonnementen($abonnementen)
-	{
-		$this->abonnementen = $abonnementen;
-	}
-	
-	private function setId($id)
-	{
-		if(is_int($id))
-		{
-			$this->id = $id;
-		}
-		else
-		{
-			throw new Exception('Id moet integer zijn');
-		}		
-	}
+
 	###Public Methods
 	public function getMaand()
 	{
@@ -74,11 +58,7 @@ class Nieuwsbrief
 	{
 		return $this->jaar;
 	}
-	
-	public function getAbonnementen()
-	{
-		return $this->abonnementen;
-	}
+
 	
 	public function getTimestamp()
 	{
