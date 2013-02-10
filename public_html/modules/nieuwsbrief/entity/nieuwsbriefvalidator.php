@@ -7,7 +7,6 @@ class nieuwsbriefValidator
 	{
 		$errors[] = $this->validateMaand($nieuwsbrief->getMaand());
 		$errors[] = $this->validateJaar($nieuwsbrief->getJaar());
-		$errors[] = $this->ValidateAbonnementenLijst($nieuwsbrief->getAbonnementen());
 		$errors[] = $this->validateTitel($nieuwsbrief->getTitel());
                 
 		$errors = array_filter($errors);
@@ -32,16 +31,6 @@ class nieuwsbriefValidator
 			$newerror['field'] = "jaar";
 			$newerror['message'] = "Je moet een jaar opgeven";
 			return $newerror;
-		}
-	}
-	
-	function validateAbonnementenlijst($abonnementenlijst)
-	{
-		if(count($abonnementenlijst)<=0)
-		{
-			$newerror['field'] = "abonnementenlijst";
-			$newerror['message'] = "Je moet aangeven aan welke abonnementen je de nieuwsbrief wil koppelen";
-			return $newerror;			
 		}
 	}
         
