@@ -61,7 +61,7 @@ function confirmAbonnee(abonnee $abonnee)
 	$bevestigingsmail->Send();
 }
 
-function addNieuwsbrief($bestand,nieuwsbrief $nieuwsbrief)
+function addNieuwsbrief($bestand,nieuwsbrief $nieuwsbrief,array $abonnementen)
 {
 	#echo $bestand['nieuwsbriefbestand']['tmp_name'];
     
@@ -69,9 +69,17 @@ function addNieuwsbrief($bestand,nieuwsbrief $nieuwsbrief)
 	$validator = new nieuwsbriefvalidator();
 	$errorlist = $validator->validateObject($nieuwsbrief);
         
+        ###Het bestand moet gecontroleerd worden
         $filevalidator = new fileValidator();
         $filevalidator->setExtension('pdf');
         $filevalidator->setMaxSize(10);
+        
+        ###Er moet nagekeken worden of er wel abonnementen geselecteerd zijn
+        $abonnementerror = array();
+        if(count($abonnementen)==0)
+        {
+            $abonnementerror['message'] = "Er moet minstens één abonnement geselecteerd worden";
+        }
         
         $fileerrors=$filevalidator->validateFile($bestand['nieuwsbriefbestand']);
         
@@ -80,12 +88,12 @@ function addNieuwsbrief($bestand,nieuwsbrief $nieuwsbrief)
             $fileerrors=array();
         }
         
-        $errorlistmerged=array_merge($errorlist,$fileerrors);
+        $errorlistmerged=array_merge($errorlist,$fileerrors,$abonnementerror);
 	
 	if(count($errorlistmerged)==0)
 	{
 	###Alles in orde, mag toegevoegd worden
-	$nieuwsbriefid=data_addNieuwsbrief($nieuwsbrief);
+	$nieuwsbriefid=data_addNieuwsbrief($nieuwsbrief,$abonnementen);
         move_uploaded_file($bestand['nieuwsbriefbestand']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/modules/nieuwsbrief/nieuwsbrieven/'.$nieuwsbriefid.'.pdf');
       
 	}

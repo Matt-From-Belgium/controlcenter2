@@ -16,7 +16,6 @@ class Nieuwsbrief
 		###Eventueel bestandsinfo buiten het object houden en enkel bestandspad opnemen?
 		$this->setMaand($maand);
 		$this->setJaar($jaar);
-		$this->setAbonnementen($abonnementenarray);
 		$this->setId($id);
                 $this->setTitel($titel);
                 $this->setVerstuurd($verstuurd);
@@ -46,6 +45,18 @@ class Nieuwsbrief
 			throw new Exception('Jaar moet integer zijn');
 		}
 		
+	}
+        
+        private function setId($id)
+	{
+		if(is_int($id))
+		{
+			$this->id = $id;
+		}
+		else
+		{
+			throw new Exception('Id moet integer zijn');
+		}		
 	}
 
 	###Public Methods
