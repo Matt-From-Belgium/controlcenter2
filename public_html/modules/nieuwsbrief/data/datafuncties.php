@@ -245,7 +245,7 @@ function data_addNieuwsbrief(nieuwsbrief $nieuwsbrief,array $abonnementen)
 function data_getnieuwsbrievenVoorAbonnement(abonnement $abonnement)
 {
     ###Deze functie geeft de nieuwsbriefobjecten terug voor een bepaald abonnement
-    $query = "SELECT nieuwsbrieven.id,nieuwsbrieven.timestamp,nieuwsbrieven.maand,nieuwsbrieven.jaar,nieuwsbrieven.titel from nieuwsbrieven LEFT JOIN nieuwsbriefabonnementen ON nieuwsbrieven.id=nieuwsbriefabonnementen.nieuwsbrief WHERE nieuwsbriefabonnementen.abonnement = @id";
+    $query = "SELECT nieuwsbrieven.id,nieuwsbrieven.timestamp,nieuwsbrieven.maand,nieuwsbrieven.jaar,nieuwsbrieven.titel,nieuwsbrieven.verstuurd from nieuwsbrieven LEFT JOIN nieuwsbriefabonnementen ON nieuwsbrieven.id=nieuwsbriefabonnementen.nieuwsbrief WHERE nieuwsbriefabonnementen.abonnement = @id";
     
     $id = $abonnement->getId();
     
@@ -258,7 +258,73 @@ function data_getnieuwsbrievenVoorAbonnement(abonnement $abonnement)
     $result = $db->GetResultArray();
     
     return $result;
-}   
+}  
+
+function data_getNieuwsbrieven()
+{
+ ###Deze functie haalt alle nieuwsbrieven op en giet deze in nieuwsbriefobjecten
+ $query = "SELECT nieuwsbrieven.id,nieuwsbrieven.maand,nieuwsbrieven.jaar,nieuwsbrieven.titel,nieuwsbrieven.verstuurd FROM nieuwsbrieven";
+ 
+ $db= new DataConnection();
+ $db->setQuery($query);
+ $db->ExecuteQuery();
+ 
+ $result = $db->GetResultArray();
+ 
+ $nieuwsbrieven = Array();
+ 
+ foreach($result as $value)
+ {
+     list($id,$maand,$jaar,$titel,$verstuurd)=$value;
+     
+     if($verstuurd=='Y')
+     {
+         $verstuurd = true;
+     }
+     else
+     {
+         $verstuurd = false;
+     }
+     
+     $nieuwsbrief = new Nieuwsbrief(intval($id), intval($maand), intval($jaar), $titel, $verstuurd);
+     $nieuwsbrieven[] = $nieuwsbrief;
+ }
+ 
+ return $nieuwsbrieven;
+ 
+}
+
+function data_getNieuwsbriefAbonnees(nieuwsbrief $nieuwsbrief)
+{
+    ###Deze functie haalt de abonnees op die de nieuwsbrief moeten ontvangen
+    $query="SELECT DISTINCT abonnees.id,abonnees.voornaam,abonnees.familienaam,abonnees.mailadres,abonnees.secretkey from abonnees LEFT JOIN abonnementenlink ON abonnees.id=abonnementenlink.abonnee LEFT JOIN abonnementen on abonnementenlink.abonnement=abonnementen.id LEFT JOIN nieuwsbriefabonnementen ON abonnementen.id=nieuwsbriefabonnementen.abonnement LEFT JOIN nieuwsbrieven ON nieuwsbriefabonnementen.nieuwsbrief=nieuwsbrieven.id WHERE nieuwsbrieven.id=@id AND abonnees.confirmed='Y'";
+  
+    $db = new DataConnection();
+    $db->setQuery($query);
+    $db->setAttribute('id', $nieuwsbrief->getID());
+    $db->executeQuery();
+    
+    $result = $db->GetResultArray();
+    
+    if($db->GetNumRows()>0)
+    {
+        $abonneelijst = array();
+        ###We maken abonneeobjecten van ieder resultaat
+        foreach($result as $value)
+        {
+        list($id,$voornaam,$familienaam,$mailadres,$secretkey)=$value;
+        $abonnee = new abonnee(intval($id), $voornaam, $familienaam, $mailadres, $secretkey, true);
+        
+        $abonneelijst[]=$abonnee;
+        }
+        
+        return $abonneelijst;
+    }
+    else
+    {
+        return false;
+    }
+}
 
 /*
 ###Debug 
