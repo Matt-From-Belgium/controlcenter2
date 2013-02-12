@@ -326,6 +326,17 @@ function data_getNieuwsbriefAbonnees(nieuwsbrief $nieuwsbrief)
     }
 }
 
+function data_setNieuwsBriefStatusSent(nieuwsbrief $nieuwsbrief)
+{
+    ###Deze functie verandert het attribuut 'verstuurd' van de nieuwsbrieven die verzonden zijn
+    $query = "UPDATE nieuwsbrieven SET nieuwsbrieven.verstuurd='Y' WHERE nieuwsbrieven.id=@id";
+    
+    $db= new DataConnection();
+    $db->setQuery($query);
+    $db->setAttribute("id", $nieuwsbrief->getID());
+    $db->ExecuteQuery();
+}
+
 /*
 ###Debug 
 $abonnement = data_getAbonnementbyKey(2);

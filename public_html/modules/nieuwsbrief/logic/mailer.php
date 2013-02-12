@@ -25,8 +25,7 @@ foreach($nieuwsbrieven as $nieuwsbrief)
 foreach($teversturen as $nieuwsbrief)
 {
     ###Voor iedere nieuwsbrief moeten we nagaan wie deze moet ontvangen
-    /*SELECT * from nieuwsbrieven LEFT JOIN nieuwsbriefabonnementen ON nieuwsbrieven.id = nieuwsbriefabonnementen.nieuwsbrief LEFT JOIN abonnementenlink ON nieuwsbriefabonnementen.abonnement = abonnementenlink.abonnement LEFT JOIN abonnees ON abonnees.id=abonnementenlink.abonnee WHERE nieuwsbrieven.id=1*/
-    
+    /*SELECT * from nieuwsbrieven LEFT JOIN nieuwsbriefabonnementen ON nieuwsbrieven.id = nieuwsbriefabonnementen.nieuwsbrief LEFT JOIN abonnementenlink ON nieuwsbriefabonnementen.abonnement = abonnementenlink.abonnement LEFT JOIN abonnees ON abonnees.id=abonnementenlink.abonnee WHERE nieuwsbrieven.id=1*/    
     if($abonnees = data_getNieuwsbriefAbonnees($nieuwsbrief))
     {
             ###Nu moeten we de nieuwsbrief versturen naar iedere abonnee
@@ -35,12 +34,15 @@ foreach($teversturen as $nieuwsbrief)
                 $mail = new Email();
                 $mail->setSubject("jestaatnietalleen.be: Nieuwsbrief");
                 $mail->setTo($abonnee->getMailadres());
-                $mail->setMessageText("test");
+                $mail->setMessageAddin('/modules/nieuwsbrief/addins/nieuwsbriefmail.tpa');
+                $nieuwsbriefurl = 'http://www.jestaatnietalleen.be/modules/nieuwsbrief/nieuwsbrieven/'.$nieuwsbrief->getID().'.pdf';
+                $mail->setVariable('nieuwsbriefurl', $nieuwsbriefurl);
+                $mail->setVariable('key',$abonnee->getKey());
                 $mail->Send();
-
-                echo "mail verstuurd";
             }
     }
        
+    ###Nieuwsbrief is verstuurd, status aanpassen in de databank zodat deze niet nog eens verzonden wordt
+    data_setNieuwsBriefStatusSent($nieuwsbrief);
 }
 ?>
