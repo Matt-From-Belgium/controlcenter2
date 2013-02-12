@@ -5,6 +5,7 @@
 </UL>
 <form method='post' enctype='multipart/form-data'>
 maand  <input type='text' name='maand'> jaar <input type='text' name='jaar'>
+<p>Titel <input type='text' name='titel'>
 <p>Nieuwsbrief: 
 <!CC LOOP [abonnementen]>
 <BR><INPUT TYPE='checkbox' NAME='abonnement[]' VALUE='<!CC LVAR [id]>'><!CC LVAR [naam]>

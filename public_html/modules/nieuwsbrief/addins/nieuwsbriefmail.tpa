@@ -1,0 +1,5 @@
+<h1>Nieuwsbrieven beschikbaar</h1>
+U bent geabonneerd op de nieuwsbrieven van jestaatnietalleen.be. Via deze dienst verneemt u alles over de KMO-acties in uw regio.
+<p>Er is een nieuwe nieuwsbrief beschikbaar, <a href='<!CC VAR [nieuwsbriefurl]>'>Bekijk deze nu door op deze link te klikken</a>
+<p><p>Als u uw abonnement wil wijzigen kan dat <a href="http://www.jestaatnietalleen.be/modules/nieuwsbrief/presentation/confirm.php?key=<!CC VAR [key]>">hier</a>
+<p>Wenst u de nieuwsbrieven niet langer te ontvangen? Klik dan <a href="http://www.jestaatnietalleen.be/modules/nieuwsbrief/presentation/cancel.php?key=<!CC VAR [key]>">hier</a>
