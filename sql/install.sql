@@ -21,7 +21,8 @@ id int(5) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 maand int(2) NOT NULL,
 jaar int(4) NOT NULL,
-bestandsnaam varchar(50) NOT NULL);
+titel varchar(50) NOT NULL,
+verstuurd enum('Y','N') DEFAULT 'N');
 
 CREATE TABLE nieuwsbriefabonnementen(
 nieuwsbrief int(5) NOT NULL,

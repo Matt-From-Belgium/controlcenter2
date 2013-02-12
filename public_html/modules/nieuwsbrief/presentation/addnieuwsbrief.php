@@ -19,11 +19,11 @@ if(isset($_POST['submit']))
 		}
 	}
 	
-	$pad ='/modules/nieuwsbrief/file/nieuwsbrieven/1.pdf';
+	$titel = $_POST['titel'];
 
-	$nieuwsbrief = new nieuwsbrief(-1,$maand,$jaar,$abonnementobjecten,$pad);
+	$nieuwsbrief = new nieuwsbrief(-1,$maand,$jaar,$titel);
         
-	$errors = addNieuwsbrief($_FILES,$nieuwsbrief);
+	$errors = addNieuwsbrief($_FILES,$nieuwsbrief,$abonnementobjecten);
 }
 
 $abonnementen = array();
