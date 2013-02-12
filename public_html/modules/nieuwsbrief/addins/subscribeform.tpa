@@ -1,0 +1,11 @@
+<h1>Schrijf je in voor de nieuwsbrief</h1>
+<!CC LOOP [errors]>
+<!CC LVAR [message]><BR>
+<!CC END LOOP [errors]>
+
+<form method='post'>
+<br>Vooraam:<input type='text' name='voornaam' value='<!CC VAR [voornaam]>'>
+<br>Familienaam:<input type='text' name='familienaam' value='<!CC VAR [familienaam]>'>
+<br>Mailadres:<input type='text' name='mailadres' value='<!CC VAR [mailadres]>'>
+<br><input type='submit' value='Inschrijven' name='submit'>
+</form>

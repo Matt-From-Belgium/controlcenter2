@@ -1,0 +1,5 @@
+<h1>Nieuwsbrieven</h1>
+<p>Klik op één van onderstaande nieuwsbrieven voor een overzicht van de uitgegeven nieuwsbrieven</p>
+<!CC LOOP [nieuwsbrieven]>
+    <a href='/modules/nieuwsbrief/presentation/shownieuwsbrieven.php?id=<!CC LVAR [id]>'><!CC LVAR [naam]></a><p>
+<!CC END LOOP [nieuwsbrieven]>
