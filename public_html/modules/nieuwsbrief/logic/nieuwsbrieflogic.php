@@ -123,6 +123,12 @@ function getNieuwsbrieven($abonnement)
       }
  }
  
+ function deleteAbonnee(abonnee $abonnee)
+ {
+     ###Abonnee moet verwijderd worden
+     data_deleteAbonnee($abonnee);
+ }
+ 
  /*
  ###DEBUG
  $tezoeken = 2;
