@@ -104,10 +104,19 @@ function addNieuwsbrief($bestand,nieuwsbrief $nieuwsbrief,array $abonnementen)
 	}	
 }
 
-function getNieuwsbrieven($abonnement)
+function getNieuwsbrieven($abonnement=false)
 {
+    if($abonnement)
+    {
     $result= data_getnieuwsbrievenVoorAbonnement($abonnement);
-    return $result;
+    return $result;    
+    }
+    else 
+    {
+        $result=data_getNieuwsbrieven();
+        return $result;
+        
+    }
 }
 
  function getAbonnementbyKey($id)
