@@ -2,6 +2,9 @@
 require_once $_SERVER['DOCUMENT_ROOT'].'/modules/nieuwsbrief/entity/nieuwsbrief.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/modules/nieuwsbrief/logic/nieuwsbrieflogic.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/core/templatesystem/templatesystem.php';
+require_once $_SERVER['DOCUMENT_ROOT']."/core/logic/usermanagement/userfunctions.php";
+
+checkPermission('nieuwsbrief','nieuwsbrieven versturen');
 
 $abonnementenlijst = getAbonnementenLijst();
 
