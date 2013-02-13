@@ -343,4 +343,21 @@ $abonnement = data_getAbonnementbyKey(2);
 data_getnieuwsbrieven($abonnement);
 */
 
+function data_deleteAbonnee(abonnee $abonnee)
+{
+    ###We verwijderen de gebruiker uit de tabel abonnees
+    $query = "DELETE FROM abonnees WHERE abonnees.id=@id";
+    
+    $db= new DataConnection();
+    $db->setQuery($query);
+    $db->setAttribute("id", $abonnee->getID());
+    $db->ExecuteQuery();
+    
+    ###De verwijzingen naar de gebruiker in abonnementenlink moet ook verwijderd worden
+    $query = "DELETE FROM abonnementenlink WHERE abonnementenlink.abonnee = @id";
+    $db->setQuery($query);
+    $db->setAttribute("id", $abonnee->getID());
+    $db->ExecuteQuery();    
+}
+
 ?>
