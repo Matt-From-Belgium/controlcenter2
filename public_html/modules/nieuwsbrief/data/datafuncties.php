@@ -168,8 +168,23 @@ function data_getAbonneeByKey($key)
 		
 		$abonnee = new abonnee(intval($id),$voornaam,$familienaam,$mailadres,$secretkey,$confirmed);
 		
-		###Nu moeten we de abonnementen ophalen, als die er al zijn
-		$query = "SELECT abonnement from abonnementenlink WHERE abonnementenlink.abonnee='@id'";
+                
+		$abonnee->editSubscriptions(data_getAbonnementenByAbonnee($abonnee));
+
+		
+		return $abonnee;
+
+	}
+	else
+	{
+		###Niks gevonden
+		return false;
+	}
+}
+
+function data_getAbonnementenByAbonnee(abonnee $abonnee)
+{
+    		$query = "SELECT abonnement from abonnementenlink WHERE abonnementenlink.abonnee='@id'";
 		$db2 = new dataconnection();
 		$db2->setQuery($query);
 		$db2->setAttribute("id",$abonnee->getId());
@@ -192,18 +207,10 @@ function data_getAbonneeByKey($key)
 			
 			###Nu hebben we een lijst met de abonnementsobjecten waarvoor de abonnee ingeschreven is
 			###Deze moeten we nu toevoegen aan het abonnee-object
-			$abonnee->editSubscriptions($inschrijvingslijst);
+			#$abonnee->editSubscriptions($inschrijvingslijst);
+                        
+                        return $inschrijvingslijst;
 		}
-
-		
-		return $abonnee;
-
-	}
-	else
-	{
-		###Niks gevonden
-		return false;
-	}
 }
 
 function data_addNieuwsbrief(nieuwsbrief $nieuwsbrief,array $abonnementen)
@@ -273,8 +280,10 @@ function data_getNieuwsbrieven()
  
  $nieuwsbrieven = Array();
  
- foreach($result as $value)
+ if($db->GetNumRows()>0)
  {
+   foreach($result as $value)
+    {
      list($id,$maand,$jaar,$titel,$verstuurd)=$value;
      
      if($verstuurd=='Y')
@@ -288,7 +297,9 @@ function data_getNieuwsbrieven()
      
      $nieuwsbrief = new Nieuwsbrief(intval($id), intval($maand), intval($jaar), $titel, $verstuurd);
      $nieuwsbrieven[] = $nieuwsbrief;
+     }  
  }
+ 
  
  return $nieuwsbrieven;
  
@@ -324,6 +335,36 @@ function data_getNieuwsbriefAbonnees(nieuwsbrief $nieuwsbrief)
     {
         return false;
     }
+}
+
+function data_getabonnees(abonnement $abonnement)
+{
+    ###Deze functie haalt de abonnees van het opgegeven abonnement op uit de databank
+    $query = "SELECT abonnees.id,abonnees.voornaam,abonnees.familienaam,abonnees.mailadres,abonnees.confirmed,abonnees.secretkey FROM `abonnees` LEFT JOIN abonnementenlink ON abonnees.id=abonnementenlink.abonnee LEFT JOIN abonnementen ON abonnementen.id=abonnementenlink.abonnement WHERE abonnementen.id=@abonnement";
+    
+    $db= new DataConnection();
+    $db->setQuery($query);
+    $db->setAttribute("abonnement", $abonnement->getId());
+    $db->ExecuteQuery();
+
+    $abonneelijst = Array();
+    
+    if($db->GetNumRows()>0)
+    {
+        $result = $db->GetResultArray();
+        
+        foreach($result as $value)
+        {
+            
+            list($id,$voornaam,$familienaam,$mailadres,$confirmed,$secretkey) = $value;
+
+            $abonnee = new abonnee(intval($id),$voornaam,$familienaam,$mailadres,$secretkey,$confirmed);
+
+            $abonneelijst[] = $abonnee;
+        }
+    }
+    
+    return $abonneelijst;
 }
 
 function data_setNieuwsBriefStatusSent(nieuwsbrief $nieuwsbrief)

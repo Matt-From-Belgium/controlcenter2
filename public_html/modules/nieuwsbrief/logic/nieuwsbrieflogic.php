@@ -138,6 +138,12 @@ function getNieuwsbrieven($abonnement=false)
      data_deleteAbonnee($abonnee);
  }
  
+ function berekenAbonnees(nieuwsbrief $nieuwsbrief)
+ {
+     $abonnees=data_getNieuwsbriefAbonnees($nieuwsbrief);
+     
+     return count($abonnees);
+ }
  /*
  ###DEBUG
  $tezoeken = 2;
@@ -150,4 +156,18 @@ function getNieuwsbrieven($abonnement=false)
  
   * 
   */
+ 
+ function getAbonnees(abonnement $abonnement)
+ {
+     return data_getabonnees($abonnement);
+ }
+ 
+ function countAbonnees(abonnement $abonnement)
+ {
+     $abonnees = data_getabonnees($abonnement);
+     
+     $aantal = count($abonnees);
+     
+     return $aantal;
+ }
 ?>
