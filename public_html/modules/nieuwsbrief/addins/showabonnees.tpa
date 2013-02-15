@@ -1,0 +1,10 @@
+<link href="/modules/nieuwsbrief/css/nieuwsbrief.css" rel="stylesheet" type="text/css" />
+<h1><!CC VAR [abonnementnaam]></h1>
+<p>Aantal abonnees:<!CC VAR [aantalabonnees]>
+<p><table>
+<tr><th>Naam</th><th>Voornaam</th><th>Mailadres</th></tr>
+<!CC LOOP [abonneelijst]>
+<tr><td><!CC LVAR [naam]></td><td><!CC LVAR [voornaam]></td><td><!CC LVAR [mailadres]></td></tr>
+<!CC END LOOP [abonneelijst]>
+</table>
+<p><a href='/modules/nieuwsbrief/presentation/management.php'>Terug naar beheerscherm</a>

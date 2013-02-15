@@ -43,7 +43,7 @@ foreach($abonnementen as $abonnement)
     
    ###We halen het aantal abonnees op
    $newitem['aantalabonnees']=countAbonnees($abonnement)." abonnees";
-    
+   $newitem['id'] = $abonnement->getId();
    $newitem['naam'] = $abonnement->getNaam();
    $abonnementenarray[] = $newitem;
    

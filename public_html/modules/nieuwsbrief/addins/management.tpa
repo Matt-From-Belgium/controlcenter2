@@ -15,6 +15,6 @@
 <table>
 <tr><th>Abonnement</th><th>Aantal abonnees</th></tr>
 <!CC LOOP [abonnementenlijst]>
-<tr><td><!CC LVAR [naam]></td><td><!CC LVAR [aantalabonnees]></td></tr>
+<tr><td><!CC LVAR [naam]></td><td><a href='/modules/nieuwsbrief/presentation/showabonnees.php?id=<!CC LVAR [id]>'><!CC LVAR [aantalabonnees]></a></td></tr>
 <!CC END LOOP [abonnementenlijst]>
 </div>
