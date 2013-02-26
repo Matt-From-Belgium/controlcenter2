@@ -1,0 +1,64 @@
+<script type="text/javascript" src="/highslide/highslide-with-gallery.js"></script>
+<script type="text/javascript">
+hs.graphicsDir = '/highslide/graphics/';
+hs.align = 'center';
+hs.transitions = ['expand', 'crossfade'];
+hs.outlineType = 'rounded-white';
+hs.fadeInOut = true;
+//hs.dimmingOpacity = 0.75;
+
+// Add the controlbar
+hs.addSlideshow({
+	//slideshowGroup: 'group1',
+	interval: 5000,
+	repeat: false,
+	useControls: true,
+	fixedControls: 'fit',
+	overlayOptions: {
+		opacity: .75,
+		position: 'bottom center',
+		hideOnMouseOut: true
+	}
+});
+</script>
+
+<link rel="stylesheet" type="text/css" href="/highslide/highslide.css" />
+<link href="/extracss/muizenval.css" rel="stylesheet" type="text/css" />
+<div id="sam">
+<img src="/images/sam/sam-header.png">
+<p>
+<h1>Inhoud</h1>
+<h3>
+In ‘De muizenval’ is een aantal gasten door de
+sneeuw opgesloten in het hotel van een jong
+echtpaar. In de omgeving van het hotel heeft
+eerder die dag een moord plaatsgevonden.
+Een politieinspecteur bezoekt vervolgens het
+hotel omdat hij vermoedt dat de moordenaar
+(of moordenares) zich in het hotel schuilhoudt.
+De spanning loopt vervolgens nog verder op als
+er een tweede slachtoffer valt. Het blijkt al snel
+dat alle aanwezigen een motief hebben voor de
+moord en ook dat ze in de gelegenheid waren
+om deze te plegen. Door de vreselijke sneeuw-
+storm kan niemand het hotel verlaten, ook
+de onbekende moordenaar niet. De gasten
+verdiepen zich in elkaars geheimen, maar de
+moordenaar verraadt zich voorlopig niet...
+</h3>
+</h3>
+<h1>Wanneer?</h1>
+<h3>De Muizenval wordt opgevoerd op volgende data:
+<ul>
+<li>5 april 2013 om 20u</li>
+<li>6 april 2013 om 20u</li>
+<li>12 april 2013 om 20u</li>
+<li>13 april 2013 om 20u</li>
+</ul>
+<h1>Waar?</h1>
+<h3>De voorstellingen gaan door in <b>CC Het Kruispunt in Diksmuide (Maria Doolaeghestraat 2b 8600 Diksmuide)</b></h3>
+<center><iframe width="600" height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.be/maps?f=q&amp;source=s_q&amp;hl=nl&amp;geocode=&amp;q=Maria+Doolaeghestraat+2,+Diksmuide&amp;aq=&amp;sll=51.09623,4.227975&amp;sspn=1.414419,4.22699&amp;t=h&amp;ie=UTF8&amp;hq=&amp;hnear=Maria+Doolaeghestraat+2,+Diksmuide+8600+Diksmuide,+West-Vlaanderen,+Vlaams+Gewest&amp;z=14&amp;ll=51.031842,2.865745&amp;output=embed"></iframe><br /><small><a href="https://www.google.be/maps?f=q&amp;source=embed&amp;hl=nl&amp;geocode=&amp;q=Maria+Doolaeghestraat+2,+Diksmuide&amp;aq=&amp;sll=51.09623,4.227975&amp;sspn=1.414419,4.22699&amp;t=h&amp;ie=UTF8&amp;hq=&amp;hnear=Maria+Doolaeghestraat+2,+Diksmuide+8600+Diksmuide,+West-Vlaanderen,+Vlaams+Gewest&amp;z=14&amp;ll=51.031842,2.865745" style="color:#0000FF;text-align:left">Grotere kaart weergeven</a></small>
+</center></div>
+
+<h1><p>Aarzel niet en <a href='/modules/ticketserver/bestel.php'>bestel hier je tickets</a>!</h1>
+</div>
