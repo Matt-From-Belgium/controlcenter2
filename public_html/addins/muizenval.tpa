@@ -34,7 +34,7 @@ hs.addSlideshow({
   <param name="expressinstall" value="../Scripts/expressInstall.swf">
   <!-- Next object tag is for non-IE browsers. So hide it from IE using IECC. -->
   <!--[if !IE]>-->
-  <object type="application/x-shockwave-flash" data="/assets/muizenval.swf" width="757" height="285">
+  <object type="application/x-shockwave-flash" data="/assets/muizenval.swf" width="757" height="200">
     <!--<![endif]-->
     <param name="quality" value="high">
     <param name="wmode" value="opaque">
