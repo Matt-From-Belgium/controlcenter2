@@ -32,7 +32,7 @@ function data_getVoorstellingen()
 {
 	require_once $_SERVER['DOCUMENT_ROOT'].'/core/dataconnection/componentselector.php';
 	
-	$query = "SELECT voorstellingen.id,voorstellingen.datumtijd,voorstellingen.volzet FROM voorstellingen WHERE voorstellingen.datum > DATE_ADD(CURDATE(), INTERVAL 1 DAY)";
+	$query = "SELECT voorstellingen.id,voorstellingen.datumtijd,voorstellingen.volzet FROM voorstellingen WHERE voorstellingen.datum > DATE_ADD(CURDATE(), INTERVAL 1 DAY) ORDER BY voorstellingen.datum ASC";
 	$db = new dataconnection();
 	$db->setQuery($query);
 	$db->executeQuery();
