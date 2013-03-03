@@ -4,7 +4,7 @@
 <font face="Arial, Helvetica, sans-serif" color="#333333">
 <center><table border=0 cellspacing=0 cellpadding=0 width=450>
 <tr><td>Reservatienummer:</td><td><b><!CC VAR [reservatienummer]></b></td></tr>
-<tr><td>Voorstelling: </td><td><b>SAM</b></td></tr>
+<tr><td>Voorstelling: </td><td><b>De Muizenval</b></td></tr>
 <tr><td>Datum:</td><td><b><!CC VAR [datum]></b></td></tr>
 <tr><td>Aantal Tickets:</td><td><b><!CC VAR [aantal]></b></td></tr>
 </table></center>
