@@ -168,9 +168,12 @@ function data_getAbonneeByKey($key)
 		
 		$abonnee = new abonnee(intval($id),$voornaam,$familienaam,$mailadres,$secretkey,$confirmed);
 		
+                $abonnee_abonnementarray = data_getAbonnementenByAbonnee($abonnee);
                 
+                if(is_array($abonnee_abonnementarray))
+                {
 		$abonnee->editSubscriptions(data_getAbonnementenByAbonnee($abonnee));
-
+                }
 		
 		return $abonnee;
 
