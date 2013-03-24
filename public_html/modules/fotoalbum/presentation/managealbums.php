@@ -7,5 +7,4 @@ checkPermission('fotoalbum', 'manage albums');
 $html = new htmlpage('frontend');
 $html->LoadAddin('/modules/fotoalbum/addins/managealbums.tpa');
 $html->PrintHTML();
-
 ?>
