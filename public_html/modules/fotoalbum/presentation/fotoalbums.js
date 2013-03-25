@@ -43,4 +43,27 @@ function addAlbumResponse(transactie)
            
 }
 
+function getAlbums()
+{
+    var transactie = new ajaxTransaction();
+    
+    transactie.destination = '/modules/fotoalbum/logic/albumlogic.php';
+    transactie.phpfunction = 'getAlbums';
+    transactie.onComplete = function() { showAlbums(transactie)};
+    
+    transactie.ExecuteRequest();
+}
 
+function showAlbums(transactie)
+{
+    alert("antwoord");
+    if(transactie.successIndicator)
+        {
+            for(i=0;i<transactie.result.length;i++)
+                {
+                    alert(transactie.result[i].name);
+                }
+        }
+}
+
+getAlbums();

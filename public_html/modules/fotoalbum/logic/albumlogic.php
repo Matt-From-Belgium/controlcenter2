@@ -24,13 +24,34 @@ function addAlbum()
         }
         else
         {
+            ###Alles ok, album mag toegevoegd worden
+            $id=data_albumToevoegen($_POST['albumnaam']);
+            
             $response = new ajaxResponse('ok');
-            $response->addField('testveld');
-            $antwoord['testveld']="hallo daar ik ben testveld";
-
-            $response->addData($antwoord);
             echo $response->getXML();
         }
     }
+}
+
+function getAlbums()
+{
+    if(is_array($albumarray = data_getAlbums()))
+    {
+        $response = new ajaxResponse('ok');
+        $response->addField("id");
+        $response->addField("name");
+        
+        foreach($albumarray as $value)
+        {
+               $item = array();
+               $item['id'] = $value['id'];
+               $item['name']= $value['name'];
+               
+               $response->addData($item);
+        }    
+        
+        return $response->getXML();
+    }
+      
 }
 ?>

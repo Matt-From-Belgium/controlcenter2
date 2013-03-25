@@ -24,4 +24,39 @@ function data_albumExists($albumnaam)
         return false;
     }
 }
+
+function data_albumToevoegen($albumnaam)
+{
+    $query = "INSERT INTO albums (name) VALUES ('@albumnaam')";
+    
+    $db = new DataConnection();
+    $db->setQuery($query);
+    
+    $db->setAttribute('albumnaam', $albumnaam);
+    
+    $db->ExecuteQuery();
+    
+    $result = $db->getLastId();
+    
+    return $result;
+}
+
+function data_getAlbums()
+{
+    $query = "SELECT albums.id,albums.name from albums";
+    
+    $db = new DataConnection;
+    $db->setQuery($query);
+    
+    $db->ExecuteQuery();
+    
+    if($db->GetNumRows()>0)
+    {
+        return $db->GetResultArray();
+    }
+    else
+    {
+        return false;
+    }
+}
 ?>
