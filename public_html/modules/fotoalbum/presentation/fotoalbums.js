@@ -63,10 +63,17 @@ function showAlbums(transactie)
     
     if(transactie.successIndicator)
         {
-            for(i=0;i<transactie.result.length;i++)
-                {
-                    createAlbumRow(transactie.result[i].name,transactie.result[i].id);
-                }
+            if(transactie.result)
+            {
+                for(i=0;i<transactie.result.length;i++)
+                    {
+                        createAlbumRow(transactie.result[i].name,transactie.result[i].id);
+                    }
+            }
+            else
+            {
+                albums.innerHTML = "Er zijn momenteel geen albums aanwezig..."
+            }
         }
 }
 

@@ -38,23 +38,25 @@ function addAlbum()
 
 function getAlbums()
 {
-    if(is_array($albumarray = data_getAlbums()))
-    {
+
         $response = new ajaxResponse('ok');
         $response->addField("id");
         $response->addField("name");
-        
-        foreach($albumarray as $value)
-        {
-               $item = array();
-               $item['id'] = $value['id'];
-               $item['name']= $value['name'];
-               
-               $response->addData($item);
-        }    
+
+        if(is_array($albumarray = data_getAlbums()))
+        {        
+            foreach($albumarray as $value)
+            {
+                   $item = array();
+                   $item['id'] = $value['id'];
+                   $item['name']= $value['name'];
+
+                   $response->addData($item);
+            }    
+        }
         
         return $response->getXML();
-    }
+    
       
 }
 ?>
