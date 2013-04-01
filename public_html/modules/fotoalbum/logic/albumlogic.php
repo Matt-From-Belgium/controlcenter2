@@ -1,9 +1,12 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'].'/core/entity/ajaxresponse.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/modules/fotoalbum/data/albumdata.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/core/logic/usermanagement/userfunctions.php';
 
 function addAlbum()
 {
+    checkPermission('fotoalbum', 'manage albums');
+    
     if(empty($_POST['albumnaam']))
     {
         $response = new ajaxResponse('error');

@@ -1,5 +1,7 @@
 
 <h1>Beheer fotoalbums</h1>
+<table id="albums">
+</table>
 <h2>Voeg nieuw album toe</h2>
 <form method="post">
 <div id="errorlist"></div>

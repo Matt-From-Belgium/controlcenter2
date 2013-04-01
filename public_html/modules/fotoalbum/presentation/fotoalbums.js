@@ -23,7 +23,8 @@ function addAlbumResponse(transactie)
     if(transactie.successIndicator)
         {
             //De bewerking is geslaagd
-            alert('Album toegevoegd');
+            //Nu moeten we het nieuwe album weergeven door de albums opnieuw in te laden
+            getAlbums();
         }
     else
         {
@@ -56,14 +57,49 @@ function getAlbums()
 
 function showAlbums(transactie)
 {
-    alert("antwoord");
+    //Eerst verwijderen we de inhoud van de tabel albums
+    var albums = document.getElementById('albums');
+    albums.innerHTML = '';
+    
     if(transactie.successIndicator)
         {
             for(i=0;i<transactie.result.length;i++)
                 {
-                    alert(transactie.result[i].name);
+                    createAlbumRow(transactie.result[i].name,transactie.result[i].id);
                 }
         }
 }
+
+function createAlbumRow(name,id)
+{
+    //Deze functie voegt een lijn toe aan de tabel albums
+    var rij = document.createElement("tr");
+    
+    var naamveld = document.createElement("td");
+    var optiesWijzigen = document.createElement("td");
+    var optiesVerwijderen = document.createElement("td");
+   
+    var editLink = document.createElement('a');
+    editLink.href="/modules/fotoalbum/presentation/editalbum.php?id="+id;
+    editLink.innerHTML = "Wijzigen";
+    
+    var deleteLink = document.createElement('a');
+    deleteLink.href='#';
+    deleteLink.innerHTML="Verwijderen";
+    
+    
+    naamveld.innerHTML=name;
+    optiesWijzigen.appendChild(editLink);
+    optiesVerwijderen.appendChild(deleteLink);
+    
+    rij.appendChild(naamveld);
+    rij.appendChild(optiesWijzigen);
+    rij.appendChild(optiesVerwijderen);
+    
+    var albumtabel = document.getElementById("albums");
+    albumtabel.appendChild(rij);
+}
+   
+
 
 getAlbums();
