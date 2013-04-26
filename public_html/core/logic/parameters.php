@@ -122,10 +122,10 @@ function getDebugMode()
     }
 }
 
-function getDebugMailadres()
+function getDebugMailadress()
 {
     ###Geeft het mailadres weer waar het eventuele debug rapport naartoe gestuurd moet worden
     $debugmail = dataaccess_GetParameter('CORE_DEBUG_MAIL');
-    return $debugmail;
+    return $debugmail->getValue();
 }
 ?>

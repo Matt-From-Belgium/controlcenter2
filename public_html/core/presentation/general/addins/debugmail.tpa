@@ -1,0 +1,12 @@
+<h1>Foutrapport</h1>
+<h2>Exception details</h2>
+<table>
+    <tr><th>Bericht</th><td><!CC VAR [message]></td></tr>
+    <tr><th>bestand</th><td><!CC VAR [file]></td></tr>
+    <tr><th>Lijn</th><td><!CC VAR [line]></td></tr>
+</table>
+<h2>Omgevingsvariabelen</h2>
+<h3>POST</h3>
+<!CC VAR [post]>
+<h3>GET</h3>
+<!CC VAR [get]>
