@@ -34,7 +34,7 @@ if(isset($_POST['destination']) && isset($_POST['phpfunction']))
                     $errorreport = new Email();
                     $errorreport->setTo($debugmailadress);
                     $errorreport->setMessageAddin('/core/presentation/general/addins/debugmail.tpa');
-                    $errorreport->setSubject('Foutrapport');
+                    $errorreport->setSubject(LANG_ERROR_REPORT);
                     $errorreport->setVariable('message', $ex->getMessage());
                     $errorreport->setVariable('file', $ex->getFile());
                     $errorreport->setVariable('line', $ex->getLine());
