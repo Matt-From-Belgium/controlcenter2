@@ -103,4 +103,29 @@ function getNoAccessURL()
 	
 	return $url;
 }
+
+function getDebugMode()
+{
+    ###Deze functie moet aangeven of debug mode actief is.
+    ###TRUE = JA
+    ###FALSE = NEEN
+    
+    $debugindicator = dataaccess_getParameter('CORE_DEBUG_MODE');
+    
+    if($debugindicator->getValue()==1)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+function getDebugMailadres()
+{
+    ###Geeft het mailadres weer waar het eventuele debug rapport naartoe gestuurd moet worden
+    $debugmail = dataaccess_GetParameter('CORE_DEBUG_MAIL');
+    return $debugmail;
+}
 ?>
