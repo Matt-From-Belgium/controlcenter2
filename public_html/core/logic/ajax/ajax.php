@@ -25,10 +25,14 @@ if(isset($_POST['destination']) && isset($_POST['phpfunction']))
                 echo $exceptionResponse->getXML();
             }
             else
-            {
-                try
-                {
-                    ###Debug mode is niet actief, we sturen een mail naar CORE_DEBUG_MAIL met de errorgegevens.
+            {                
+                    ###Nu geven we nog antwoord aand het JavaScript dat de functie heeft aangeroepen, maar dat verraadt niets
+                    $exceptionResponse = new ajaxResponse('error');
+                    $exceptionResponse->addErrorMessage('test', 'Serverfout');
+                    echo $exceptionResponse->getXML();                    
+            }
+            
+                  ###We versturen het foutrapport
                     $debugmailadress = getDebugMailadress();
 
                     $errorreport = new Email();
@@ -41,18 +45,6 @@ if(isset($_POST['destination']) && isset($_POST['phpfunction']))
                     $errorreport->setVariable('post', print_r($_POST,true));
                     $errorreport->setVariable('get', print_r($_GET,true));
                     $errorreport->Send();
-
-                    ###Nu geven we nog antwoord aand het JavaScript dat de functie heeft aangeroepen
-                    $exceptionResponse = new ajaxResponse('error');
-                    $exceptionResponse->addErrorMessage('test', 'Serverfout');
-                    echo $exceptionResponse->getXML();
-                }
-                catch(CC2Exception $ex)
-                {
-                    echo $ex->getExtendedmessage();
-                }
-                    
-            }
         }
 }
 else 
