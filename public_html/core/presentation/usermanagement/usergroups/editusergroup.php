@@ -3,6 +3,8 @@
 	require_once $_SERVER['DOCUMENT_ROOT']."/core/logic/usermanagement/userfunctions.php";
 	require_once $_SERVER['DOCUMENT_ROOT']."/core/entity/exception.php";
 	
+        checkPermission("usermanagement", "manage usergroups");
+        
 	$html = new htmlpage("backend");
 try
 {	
