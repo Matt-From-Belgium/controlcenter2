@@ -1,0 +1,20 @@
+<link href="/modules/nieuwsbrief/css/nieuwsbrief.css" rel="stylesheet" type="text/css" />
+<h1>Nieuwsbrief module</h1>
+<h2>Overzicht nieuwsbrieven</h2>
+<div>
+<table>
+    <tr><th>Titel</th><th>Aantal abonnees</th><th>Status</th><th>Acties</th></tr>
+    <!CC LOOP [nieuwsbrieflijst]>
+        <tr class='<!CC LVAR [status]>'><td><!CC LVAR [titel]></td><td><!CC LVAR [ontvangers]><td><!CC LVAR [status]></td><td><!cc LVAR [actiecode]></td></tr>
+    <!CC END LOOP [nieuwsbrieflijst]>
+</table>  
+<p><a href='/modules/nieuwsbrief/presentation/addnieuwsbrief.php'>Nieuwsbrief toevoegen</a>
+</div>
+<div>
+<h2>Overzicht abonnementen</h2>
+<table>
+<tr><th>Abonnement</th><th>Aantal abonnees</th></tr>
+<!CC LOOP [abonnementenlijst]>
+<tr><td><!CC LVAR [naam]></td><td><a href='/modules/nieuwsbrief/presentation/showabonnees.php?id=<!CC LVAR [id]>'><!CC LVAR [aantalabonnees]></a></td></tr>
+<!CC END LOOP [abonnementenlijst]>
+</div>

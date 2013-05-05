@@ -1,0 +1,6 @@
+<h1><!CC VAR [abonnementnaam]></h1>
+<ul>
+<!CC LOOP [nieuwsbrieven]>
+<li><a href='/modules/nieuwsbrief/nieuwsbrieven/<!CC LVAR [id]>.pdf'><!CC LVAR [maand]>/<!CC LVAR [jaar]>:<!CC LVAR [titel]></a></li>
+<!CC END LOOP [nieuwsbrieven]>
+</ul>

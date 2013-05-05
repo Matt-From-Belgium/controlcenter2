@@ -1,0 +1,42 @@
+/* 
+    Document   : nieuwsbrief.css
+    Created on : 15-feb-2013, 14:00:36
+    Author     : matthiasba
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+table{
+    border: 1px #000000 solid;
+    min-width: 600px;
+    
+    border-spacing: 0px;
+}
+
+table th {
+    font-weight: bolder;
+    background-color: #000000;
+    color: #FFFFFF;
+
+    text-align: center;
+}
+
+table td {
+    text-align: right;
+
+}
+
+table tr:hover {
+    background-color: #CC6600;
+
+}
+
+tr.Verstuurd {
+    background-color: #cbf7bb;
+}
+
+tr.Wachtrij {
+    background-color: #feeaa8;
+}
+
+
