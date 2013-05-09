@@ -1,0 +1,135 @@
+@charset "utf-8";
+/* CSS Document */
+body{
+background:#666666;
+}
+
+#bodyshell
+{
+	margin-left:auto;
+	margin-right:auto;
+	width: 779px;
+	padding-bottom: 10px;
+}
+
+#linkerdeel
+{
+	float:left;
+	width: 20px;
+	height:285px;
+	background-image:url(../images/Schaduw_Links.png);
+	z-index:2;
+	position:relative;
+	left: 1px;
+}
+
+#rechterdeel
+{
+position:relative;
+margin-left:auto;
+margin-right:auto;
+width: 757px;
+border: 1px solid #000000;
+background-color:#FFFFFF;
+z-index: 1;
+float:left;
+}
+
+#bovenbalk
+{
+	background-image:url(../images/Bovenbalk.png);
+	height: 29px;
+	border-bottom: 1px solid #000000;
+}
+
+#slideshow
+{
+	background-image:url(../images/Slideshow.png);
+	height: 200px;
+}
+
+#navigatie
+{
+	height: 56px;
+	position: relative;
+}
+
+#navigatie-linkerdeel
+{	
+	float: left;
+	background-image:url(../images/Navigatie_Linkerdeel.png);
+	height:56px;
+	width: 238px;
+}
+
+#navigatie-rechterdeel
+{
+	float:left;
+	width: 519px;
+	height: 56px;
+	background-image:url(../images/Navigatie_Rechterdeel.png);
+}
+
+#navigatie-rechterdeel UL
+{
+	position: relative;
+	float: right;
+	list-style:none;
+	margin-left:0px;
+	margin-right:15px;
+	margin-top:0px;
+	margin-bottom:0px;
+	padding-top:22px;
+	padding-bottom:0px;
+	padding-left:0px;
+	padding-right:0px;
+	font-weight:bold;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:13px;
+}
+
+#navigatie-rechterdeel UL LI
+{
+float: left;
+}
+
+#navigatie-rechterdeel UL LI A:hover {
+display:inline-block;
+border-bottom-style:solid;
+border-bottom-color:#FF9900;
+border-bottom-size: 2px;
+text-align:center;
+}
+
+#navigatie-rechterdeel UL LI A {
+color:#333333;
+text-decoration:none;
+margin-left:5px;
+}
+
+#navigatie-rechterdeel UL LI A.aandacht {
+	color:#FFFFFF;
+}
+
+#navigatie-rechterdeel UL LI A:hover {
+color:#FFFFFF;
+
+}
+
+#content
+{
+clear:both;
+position:relative;
+top: -20px;
+z-index:-1;
+}
+
+#footer
+{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	text-align:center;
+	color:#FFFFFF;
+	clear:both;
+	background-color:#444444;
+}

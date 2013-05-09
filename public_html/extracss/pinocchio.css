@@ -1,0 +1,61 @@
+@charset "utf-8";
+/* CSS Document */
+#linkerkant
+{
+float: left;
+width: 500px;
+}
+#rechterkant
+{
+float: right;
+width: 200px;
+position:absolute;
+top: 65px;
+left: 520px;
+background-color:#CCCCCC;
+}
+#boxborder
+{
+height: 18px;
+}
+
+#boxinhoud UL
+{
+	margin-left: 0px;
+	padding:opx;
+}
+
+#boxinhoud {
+text-align: center;
+}
+
+#boxinhoud H1
+{
+	font-size:20px;
+	color:#000000;
+	text-align:center;
+}
+
+#boxinhoud H2
+{
+	text-align:center;
+	color: #FF6600;
+	size: 20px;
+}
+
+#meerdetails
+{
+float: left;
+position: relative;
+clear:left;
+width: 100%;
+}
+
+.telefoon
+{
+	font-size:30px;
+	font-weight:bolder;
+	color:#000000;
+	text-align:center;
+	color:#FF6600;
+}

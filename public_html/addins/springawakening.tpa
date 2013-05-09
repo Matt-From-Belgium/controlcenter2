@@ -1,0 +1,146 @@
+<script type="text/javascript" src="/highslide/highslide-with-gallery.js"></script>
+<script type="text/javascript">
+hs.graphicsDir = '/highslide/graphics/';
+hs.align = 'center';
+hs.transitions = ['expand', 'crossfade'];
+hs.outlineType = 'rounded-white';
+hs.fadeInOut = true;
+//hs.dimmingOpacity = 0.75;
+
+// Add the controlbar
+hs.addSlideshow({
+	//slideshowGroup: 'group1',
+	interval: 5000,
+	repeat: false,
+	useControls: true,
+	fixedControls: 'fit',
+	overlayOptions: {
+		opacity: .75,
+		position: 'bottom center',
+		hideOnMouseOut: true
+	}
+});
+</script>
+
+<link rel="stylesheet" type="text/css" href="/highslide/highslide.css" />
+<link href="/extracss/spring.css" rel="stylesheet" type="text/css" />
+<script src="../Scripts/swfobject_modified.js" type="text/javascript"></script>
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="757" height="285" id="FlashID" title="springheader">
+  <param name="movie" value="/assets/springheader.swf">
+  <param name="quality" value="high">
+  <param name="wmode" value="opaque">
+  <param name="swfversion" value="6.0.65.0">
+  <!-- This param tag prompts users with Flash Player 6.0 r65 and higher to download the latest version of Flash Player. Delete it if you don’t want users to see the prompt. -->
+  <param name="expressinstall" value="../Scripts/expressInstall.swf">
+  <!-- Next object tag is for non-IE browsers. So hide it from IE using IECC. -->
+  <!--[if !IE]>-->
+  <object type="application/x-shockwave-flash" data="/assets/springheader.swf" width="757" height="285">
+    <!--<![endif]-->
+    <param name="quality" value="high">
+    <param name="wmode" value="opaque">
+    <param name="swfversion" value="6.0.65.0">
+    <param name="expressinstall" value="../Scripts/expressInstall.swf">
+    <!-- The browser displays the following alternative content for users with Flash Player 6.0 and older. -->
+    <div>
+      <h4>Content on this page requires a newer version of Adobe Flash Player.</h4>
+      <p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" width="112" height="33" /></a></p>
+    </div>
+    <!--[if !IE]>-->
+  </object>
+  <!--<![endif]-->
+</object>
+<script type="text/javascript">
+<!--
+swfobject.registerObject("FlashID");
+//-->
+</script>
+<h1>Inhoud</h1>
+<h3>
+Duitsland, 1891. In een wereld waar stijfburgerlijke volwassenen alle spelregels
+bepalen, worstelen enkele pubers met hun ontluikende volwassenheid. Zo vraagt de
+jonge, knappe Wendla zich af waar de baby's vandaan komen en wringt haar
+moeder zich in allerlei bochten om toch maar geen antwoord te moeten geven.
+<br>Melchior, een briljant student, wijdt zijn na&#239;eve vriend Moritz in in de geheimen van het
+vrouwelijke lichaam. Als Wendla en Melchior elkaar per toeval in het bos ontmoeten,
+geven ze zich beiden over aan een allesoverheersend verlangen...
+<p>Voor de gelegenheid schreef huisregisseur Tom Durie een nieuwe bewerking van dit verhaal. Het resultaat was een jonge productie die niemand onberoerd liet. </b>
+</h3>
+<h1>Foto's</h1>
+<h3>
+		<div class="highslide-gallery">
+			<a href="/images/spring/2.jpg" class="highslide" onclick="return hs.expand(this)">
+			<img src="/images/spring/2-small.jpg" alt="Highslide JS" title="Click to enlarge" />
+			</a>		
+			<a href="/images/spring/1.jpg" class="highslide" onclick="return hs.expand(this)">
+			<img src="/images/spring/1-small.jpg" alt="Highslide JS" title="Click to enlarge" />
+			</a>
+			<a href="/images/spring/3.jpg" class="highslide" onclick="return hs.expand(this)">
+			<img src="/images/spring/3-small.jpg" alt="Highslide JS" title="Click to enlarge" />
+			</a>
+			<a href="/images/spring/4.jpg" class="highslide" onclick="return hs.expand(this)">
+			<img src="/images/spring/4-small.jpg" alt="Highslide JS" title="Click to enlarge" />
+			</a>
+			<a href="/images/spring/5.jpg" class="highslide" onclick="return hs.expand(this)">
+			<img src="/images/spring/5-small.jpg" alt="Highslide JS" title="Click to enlarge" />
+			</a>
+			<a href="/images/spring/6.jpg" class="highslide" onclick="return hs.expand(this)">
+			<img src="/images/spring/6-small.jpg" alt="Highslide JS" title="Click to enlarge" />
+			</a>
+			<a href="/images/spring/7.jpg" class="highslide" onclick="return hs.expand(this)">
+			<img src="/images/spring/7-small.jpg" alt="Highslide JS" title="Click to enlarge" />
+			</a>
+			<a href="/images/spring/8.jpg" class="highslide" onclick="return hs.expand(this)">
+			<img src="/images/spring/8-small.jpg" alt="Highslide JS" title="Click to enlarge" />
+			</a>
+			<a href="/images/spring/9.jpg" class="highslide" onclick="return hs.expand(this)">
+			<img src="/images/spring/9-small.jpg" alt="Highslide JS" title="Click to enlarge" />
+			</a>
+			<a href="/images/spring/10.jpg" class="highslide" onclick="return hs.expand(this)">
+			<img src="/images/spring/10-small.jpg" alt="Highslide JS" title="Click to enlarge" />
+			</a>
+			<a href="/images/spring/11.jpg" class="highslide" onclick="return hs.expand(this)">
+			<img src="/images/spring/11-small.jpg" alt="Highslide JS" title="Click to enlarge" />
+			</a>
+			<a href="/images/spring/12.jpg" class="highslide" onclick="return hs.expand(this)">
+			<img src="/images/spring/12-small.jpg" alt="Highslide JS" title="Click to enlarge" />
+			</a>
+			<a href="/images/spring/13.jpg" class="highslide" onclick="return hs.expand(this)">
+			<img src="/images/spring/13-small.jpg" alt="Highslide JS" title="Click to enlarge" />
+			</a>
+			<a href="/images/spring/14.jpg" class="highslide" onclick="return hs.expand(this)">
+			<img src="/images/spring/14-small.jpg" alt="Highslide JS" title="Click to enlarge" />
+			</a>
+		</div>
+</h3>
+<h1>Cast</h1>
+<h3>
+<table>
+<tr><th>Wendla Bergmann</th><td>Florence Vandermeeren</td></tr>
+<tr><th>Mevrouw Bergmann</th><td>Ella Schapman</td></tr>
+<tr><th>Melchior Gabor</th><td>Kasper Vervliet</td></tr>
+<tr><th>Mevrouw Gabor</th><td>Nathalie Clercx</td></tr>
+<tr><th>Meneer Gabor</th><td>Joost Vynckier</td></tr>
+<tr><th>Moritz Stiefel</th><td>Jeroen Logghe</td></tr>
+<tr><th>Meneer Stiefel</th><td>Tom Durie</td></tr>
+<tr><th>Martha</th><td>Sofie Neuville</td></tr>
+<tr><th>Thea</th><td>Ine Dekeyrel</td></tr>
+<tr><th>Ilse</th><td>Lise Lagrou</td></tr>
+<tr><th>Hans Rilow</th><td>Maxim Vermeersch</td></tr>
+<tr><th>Ernst L&#228;mmermeier</th><td>Matthias Butaye</td></tr>
+<tr><th>Georg</th><td>Jolan Vanbecelaere</td></tr>
+<tr><th>Otto</th><td>Rien Maertens</td></tr>
+<tr><th>Rector Sonnenstich</th><td>Sarah Finaut</td></tr>
+<tr><th>Zungenschlag</th><td>Nina Willems</td></tr>
+<tr><th>Knochenbr&#252;ch</th><td>Ella Schapman</td></tr>
+<tr><th>Kn&#252;ppeldick</th><td>Nathalie Clercx</td></tr>
+<tr><th>conci&#235;rge Habebald</th><td>Sofie Neuville</td></tr>
+<tr><th>Fliegentod</th><td>Ine Dekeyrel</td></tr>
+<tr><th>pianolerares Grossebustenhalter</th><td>Ella Schapman</td></tr>
+<tr><th>Pastoor Kahlbauch</th><td>Joost Vynckier</td></tr>
+<tr><th>Dr. Von Brausepulver</td><td>Tom Durie</td></tr>
+<tr><th>Dieter</th><td>Matthias Butaye</td></tr>
+<tr><th>Reinoud</th><td>Maxim Vermeersch</td></tr>
+<tr><th>Rupert</th><td>Jolan Vanbecelaere</td></tr>
+<tr><th>Helmuth</th><td>Rien Maertens</td></tr>
+</table>
+</h3>

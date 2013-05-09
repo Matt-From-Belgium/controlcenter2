@@ -1,0 +1,26 @@
+@charset "utf-8";
+/* CSS Document */
+#ongelikt
+{
+	background:url(/images/ongelikt/ongelikt-header.jpg) no-repeat top;
+	padding-top: 185px;
+}
+
+#ongelikt-inhoud
+{
+	margin-left: 20px;
+	font-family:Arial, Helvetica, sans-serif;
+	margin-right: 20px;
+	font-size: 15px;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+}
+
+#ongelikt-inhoud h2
+{
+	color:#1294a2;
+	border-bottom: none;	
+}
+
+

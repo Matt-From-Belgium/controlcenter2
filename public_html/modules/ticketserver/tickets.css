@@ -1,0 +1,44 @@
+@charset "utf-8";
+/* CSS Document */
+
+#bestelform LABEL{
+	display:block;
+	float:left;
+	width: 200px;
+	margin-left:20px;
+}
+
+#bestelform INPUT[type='text'], #bestelform SELECT, #bestelform TEXTAREA {
+	background-color:#CCCCCC;
+	border-width: 1px;
+	border-style:solid;
+	border-color: #000000;
+	margin-bottom: 10px;
+}
+
+#bestelform INPUT[type='text']:focus, #bestelform SELECT:focus, #bestelform TEXTAREA:focus {
+	background-color:#FFFFFF;
+	border-width: 1px;
+	border-style:solid;
+	border-color: #FF6600;
+	margin-bottom: 10px;
+}
+
+#voorstelling:hover
+{
+	background-color:#4b4b4b;
+}
+
+UL.errorbox {
+	background-color:#550000;
+}
+
+#kostprijs {
+	display:inline-table;
+	color: #FF6600;
+	font-size: 20px;
+}
+
+.uitverkocht {
+	color:#666666;
+}

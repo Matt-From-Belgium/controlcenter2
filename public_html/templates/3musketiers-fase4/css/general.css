@@ -1,0 +1,163 @@
+#joopcredits {
+font-family:Calibri, Arial, Helvetica, sans-serif;
+color:#9E9E9E;
+font-size: 13px;
+text-align:center;
+}
+
+#toverlantaarncredits {
+font-family:Calibri, Arial, Helvetica, sans-serif;
+color: #FFFFFF;
+text-align:center;
+font-size:12px;
+}
+
+#jooptekst {
+top: 7px;
+position: relative;
+
+}
+
+#tovertekst {
+position: relative;
+top: 3px;
+}
+
+#nieuwsbox h2{
+color:#999999;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 12px;
+margin-left: 30px;
+margin-top: 0px;
+margin-bottom: 0px;
+}
+
+#nieuwsbox h1{
+font-family:Arial, Helvetica, sans-serif;
+color: #ff6600;
+font-size: 15px;
+margin-left: 40px;
+margin-top: 0px;
+margin-bottom: 0px;
+}
+
+#nieuwsbox h3 {
+font-family:Arial, Helvetica, sans-serif;
+color: #FFFFFF;
+font-size: 12px;
+margin-left: 40px;
+margin-top: 0px;
+}
+
+#maintekst {
+float: left;
+margin-left: 10px;
+margin-right: 10px;
+font-family: Calibri,Arial, Helvetica, sans-serif;
+color: #FFFFFF;
+font-size: 14px;
+}
+
+#maintekst h1 {
+margin-top: 0px;
+margin-bottom: 10px;
+font-family: Calibri,Arial, Helvetica, sans-serif;
+color: #FFFFFF;
+font-size: 30px;
+}
+
+#h1 {
+margin-top: 0px;
+margin-bottom: 10px;
+font-family: Calibri,Arial, Helvetica, sans-serif;
+color: #FFFFFF;
+font-size: 30px;
+}
+
+#navigatie ul {
+position: relative;
+top: 9px;
+margin-top:0px;
+margin-left: 0px;
+margin-right:0px;
+margin-bottom:0px;
+padding-left: 0px;
+padding-right: 0px;
+padding-top: 0px;
+padding-bottom: 0px;
+
+
+list-style:none;
+}
+
+#navigatie ul li {
+float:left;
+margin-left: 12px;
+}
+
+#login {
+	position: relative;
+	top: 3px;
+	margin-left: 120px;
+	margin-top: 0px;
+	padding-top: 0px;
+	padding-left: 0;
+	padding-right: 0;
+	padding-bottom:0;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #333333;
+	font-size: 12px;
+	vertical-align: middle;
+	vertical-align:top;
+}
+
+#login input[type='text',type='password'] {
+border: 1px solid #999999;
+background-color:#FFFFFF;
+height: 20px;
+}
+
+#navigatie ul li img {
+border: none;
+}
+
+dl {
+background-repeat:repeat-x;
+background-color: #626261;
+margin-left: 10px;
+margin-right: 10px;
+margin-top: 0px;
+margin-bottom: 0px;
+float: right;
+width: 200px;
+border: 1px solid #666666;
+}
+
+dl dd {
+font-family:Arial, Helvetica, sans-serif;
+color: #FFFFFF;
+font-size: 10px;
+margin-left:10px;
+margin-rigt: 10px;
+
+}
+
+img {
+border: none;
+}
+
+a:link {
+color: #FF6600;
+}
+
+a:hover {
+color: #FF9900;
+}
+
+a:visited {
+color: #FF6600;
+}
+
+dl.alt {
+float: left;
+}

@@ -1,0 +1,119 @@
+	body {
+		background-color: #21275e;
+	}
+
+	#bodyshell {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-left:auto;
+	margin-right:auto;
+	width: 979px;
+	}
+
+	#tabel {
+		position: relative;
+		width: 979px;
+		border: 1px solid #000000;
+		margin-left: auto;
+		margin-right: auto;
+		float:left;
+	}
+	
+	#navigatie {
+		position: relative;
+		height: 35px;
+		background:url(/templates/3musketiers-fase4/images/Navigatie.png);
+	}
+	
+	#header {
+		position: relative;
+		height: 203px;
+	}
+	
+	#nieuwsboxheader {
+		position: relative;
+		background:url(/templates/3musketiers-fase4/images/Nieuwsboxheader.png);
+		height: 47px;
+		width: 249px;
+		float:left;
+	}
+	
+	#playerbalk {
+	position:relative;
+		background:url(/templates/3musketiers-fase4/images/Playerbalk.png);
+		height: 31px;
+		width: 730px;
+		float: left;
+		vertical-align: middle;
+	}
+	
+	#witruimteonderplayer {
+	background:url(/templates/3musketiers-fase4/images/WitruimteOnderPlayer.png);
+	height: 16px;
+	float:left;
+	width: 730px;
+	}
+	
+	#nieuwsbox {
+	width: 236px;
+	background:url(/templates/3musketiers-fase4/images/Nieuws.png);
+	float: left;
+	padding-bottom: 5000px;
+	margin-bottom: -5000px;
+	}
+	
+	#grensnieuwsmain {
+		background:url(/templates/3musketiers-fase4/images/GrensNieuwsMain.png);
+		width: 13px;
+		float:left;
+		padding-bottom: 5000px;
+		margin-bottom: -5000px;
+	}
+	
+	#mainregio {
+		overflow:hidden;
+		clear: both;
+	}
+	
+	#main {
+		float: left;
+		background:url(/templates/3musketiers-fase4/images/Main.png);
+		width: 730px;
+		padding-bottom: 5000px;
+		margin-bottom: -5000px;
+	}
+	
+	#nieuwsboxfooter {
+		background:url(/templates/3musketiers-fase4/images/NieuwsboxFooter.png);
+		width: 236px;
+		height: 72px;
+		float:left;
+	}
+	
+	#footergrens {
+		background:url(/templates/3musketiers-fase4/images/grensfooter.png);
+		width: 13px;
+		height: 72px;
+		float: left;
+	}
+	
+	#witruimteondermain {
+		background:url(/templates/3musketiers-fase4/images/WitruimteOnderMain.png);
+		width: 730px;
+		height: 6px;
+		float:left;
+	}
+	
+	#joopcredits {
+		background:url(/templates/3musketiers-fase4/images/JoopCredits.png);
+		width: 730px;
+		height: 46px;
+		float: left;
+	}
+	
+	#toverlantaarncredits {
+		background:url(/templates/3musketiers-fase4/images/ToverlantaarnCredits.png);
+		width: 730px;
+		height: 20px;
+		float: left;
+	}
