@@ -15,7 +15,7 @@ Function GetDatabaseType()
 	}
 	else
 	{
-		throw new CC2Exception("The Controlcenter2 Config File could not be found","The Controlcenter2 Config File could not be found, please edit /core/pathtoconfig.php with the right path");
+		throw new Exception("The Controlcenter2 Config File could not be found, please edit /core/pathtoconfig.php with the right path");
 	}
 
 	return $_DATABASE['type'];

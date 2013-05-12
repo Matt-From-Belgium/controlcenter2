@@ -75,7 +75,7 @@ class UsergroupValidator extends validator
 		}
 		else
 		{
-			throw new CC2Exception("The user management system caused an error","You tried to execute validateobject without a valid instance of usergroup");
+			throw new Exception("You tried to execute validateobject without a valid instance of usergroup");
 		}
 	}
 }
