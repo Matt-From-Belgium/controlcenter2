@@ -92,7 +92,7 @@ class User
 		}
 		else
 		{
-			throw new CC2Exception('The usersystem caused an error','You tried to use the SetUserConfirmationStatus with a parameter that is 0 or 1');			
+			throw new Exception('You tried to use the SetUserConfirmationStatus with a parameter that is 0 or 1');			
 		}
 	}
 	
@@ -104,7 +104,7 @@ class User
 		}
 		else
 		{
-			throw new CC2Exception('The usersystem caused an error','You tried to use the SetAdminConfirmationStatus with a parameter that is not 0 or 1');			
+			throw new Exception('You tried to use the SetAdminConfirmationStatus with a parameter that is not 0 or 1');			
 		}
 	}
 	
@@ -128,7 +128,7 @@ class User
 		else
 		{
 			###geen array => exception
-			throw new CC2Exception("The usermanagement system caused an error","You tried to execute setUsergroups() without an array");
+			throw new Exception("You tried to execute setUsergroups() without an array");
 		}
 	}
 	
@@ -157,7 +157,7 @@ class User
 		}
 		else
 		{
-			throw new CC2Exception("The usermanagement system caused an error","setPasswordchangeRequired only accepts 'true' or 'false' as argument");
+			throw new Exception("setPasswordchangeRequired only accepts 'true' or 'false' as argument");
 		}
 	}
 }

@@ -39,7 +39,7 @@ class usergroup
 		}
 		else
 		{
-			throw new CC2Exception("The usergroup system has caused an error","You tried to execute Usergroup::setPermissions with a parameter that is not an array");
+			throw new Exception("You tried to execute Usergroup::setPermissions with a parameter that is not an array");
 		}
 	}
 	
