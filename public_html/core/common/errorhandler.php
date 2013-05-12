@@ -16,6 +16,7 @@ function CC_Exception_Handler(Exception $ex)
     $errorreport->setVariable('message', $ex->getMessage());
     $errorreport->setVariable('file', $ex->getFile());
     $errorreport->setVariable('line', $ex->getLine());
+    $errorreport->setVariable('trace', $ex->getTraceAsString());
     $errorreport->setVariable('post', print_r($_POST,true));
     $errorreport->setVariable('get', print_r($_GET,true));
     $errorreport->Send();
