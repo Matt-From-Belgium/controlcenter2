@@ -3,9 +3,10 @@
 	require_once $_SERVER['DOCUMENT_ROOT']."/core/logic/usermanagement/userfunctions.php";
 	require_once $_SERVER['DOCUMENT_ROOT']."/core/entity/exception.php";
 	
+        checkPermission("usermanagement", "manage usergroups");
+        
 	$html = new htmlpage("backend");
-try
-{	
+	
 	if(isset($_POST['submit']))
 	{
 		$errormessages = editUsergroup($_POST);
@@ -73,9 +74,5 @@ try
 	$html->setVariable("message",LANG_USERGROUP_EDITED);
 	$html->printHTML();
 	}
-}
-catch(CC2Exception $ex)
-{
-	echo $ex->getExtendedMessage();
-}
+
 ?>

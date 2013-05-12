@@ -64,7 +64,7 @@ function getLanguageFilesManually($type,$itemname)
 	}
 	else
 	{
-		throw new CC2Exception("The languagesystem caused an error","you tried to use getLanguageFilesManually with an invalid type, only component and module is allowed");
+		throw new Exception("you tried to use getLanguageFilesManually with an invalid type, only component and module is allowed");
 	}
 }
 ?>

@@ -20,6 +20,6 @@ else
 {
 	#Het databasecomponent is niet gevonden => Exception
 	require_once $_SERVER['DOCUMENT_ROOT']."/core/entity/exception.php";
-	throw new CC2Exception("Could not connect to database","Datacomponent $databasetype does not exist");
+	throw new Exception("Datacomponent $databasetype does not exist");
 }
 ?>

@@ -30,7 +30,7 @@ Private $activequery;
 		
 		if(!$link)
 		{
-			throw new CC2Exception("Could not connect to database",mysql_error(),mysql_errno());
+			throw new Exception(mysql_error(),mysql_errno());
 		}
 		else
 		{
@@ -41,7 +41,7 @@ Private $activequery;
 		
 		if(!$success)
 		{
-		throw new CC2Exception("Could not connect to database","could not connect to database $this->parameters[database]",mysql_errno());
+		throw new Exception("could not connect to database $this->parameters[database]",mysql_errno());
 		}
 		}
 	}
@@ -95,7 +95,7 @@ Private $activequery;
 		}
 		else
 		{
-			throw new CC2Exception("A database error occured","The attribute '$attributename' was not found in the query '$this->activequery'");
+			throw new Exception("The attribute '$attributename' was not found in the query '$this->activequery'");
 		}
 	}
 	
@@ -111,7 +111,7 @@ Private $activequery;
 				#De query wordt gelogd
 				$extendedmessage = "MySQL reported an errormessage: \"".mysql_error($this->connectionid)."\" while executing query: \"".$this->activequery."\"";
 
-				throw new CC2Exception("A database error occured",$extendedmessage);
+				throw new Exception($extendedmessage);
 			}
 			else
 			{
@@ -120,7 +120,7 @@ Private $activequery;
 		}
 		else
 		{
-			throw new CC2Exception("A database error occured","You must set a query before you try to execute it...");
+			throw new Exception("You must set a query before you try to execute it...");
 		}
 	}
 	
@@ -149,7 +149,7 @@ Private $activequery;
 		else
 		{
 		#Er is nog geen query uitgevoerd, er kan dus ook onmogelijk een resultaat worden terugegeven.
-		throw new CC2Exception("A database error occured","You cannot get the result of a query when you haven't given me one...");
+		throw new Exception("You cannot get the result of a query when you haven't given me one...");
 		}
 	}
 	
@@ -167,12 +167,12 @@ Private $activequery;
 			}
 			else
 			{
-				throw new CC2Exception("A database error occured","You executed a getScalar while the result is not a scalar. Query: $this->activequery");
+				throw new Exception("You executed a getScalar while the result is not a scalar. Query: $this->activequery");
 			}
 		}
 		else
 		{
-		throw new CC2Exception("A database error occured","You cannot get the result of a query when you haven't given me one...");
+		throw new Exception("You cannot get the result of a query when you haven't given me one...");
 		}
 	}
 	
@@ -185,7 +185,7 @@ Private $activequery;
 		}
 		else
 		{
-		throw new CC2Exception("A database error occured","You cannot get the result of a query when you haven't given me one...");
+		throw new Exception("You cannot get the result of a query when you haven't given me one...");
 		}
 	}
 	
@@ -195,7 +195,7 @@ Private $activequery;
 		if($nummer==0)
 		{
 			#Het nummer is nul dus er werd geen insert uitgevoerd
-			throw new CC2Exception("A database error occured","You tried to get the last insert id, but MySQL returned 0");
+			throw new Exception("You tried to get the last insert id, but MySQL returned 0");
 		}
 		else
 		{

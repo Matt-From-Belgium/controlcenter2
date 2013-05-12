@@ -32,7 +32,7 @@ class htmlpage
 			}
 			else
 			{
-				throw new CC2Exception("The templatesystem caused an error","You tried to call an alias '$alias'. The request failed because the alias does not exist");
+				throw new Exception("You tried to call an alias '$alias'. The request failed because the alias does not exist");
 			}
 	}
 	
@@ -95,7 +95,7 @@ class htmlpage
 		}while($hits>0);
 		
 		
-		#THIRD PARSE: opsporen van de tags die slechts uit één deel bestaan.
+		#THIRD PARSE: opsporen van de tags die slechts uit ï¿½ï¿½n deel bestaan.
 		$pattern = "/(?ims)\<!CC\s*(\S+)\s*\[([^\[\]]*)\]\s*\>/";
 		
 		$hits = 0;
@@ -146,7 +146,7 @@ class htmlpage
 			break;
 			
 			default:
-			throw new CC2Exception("The template system caused an error","The custom tag $matches[1] does not exist (Second Parse)");
+			throw new Exception("The custom tag $matches[1] does not exist (Second Parse)");
 		}
 	}
 	
@@ -174,7 +174,7 @@ class htmlpage
 				return $matches[0];
 				
 				default:
-				throw new CC2Exception("The template system caused an error","The custom tag $matches[1] does not exist (Third parse)");
+				throw new Exception("The custom tag $matches[1] does not exist (Third parse)");
 			}
 	}
 	
@@ -202,7 +202,7 @@ class htmlpage
 		}
 		else
 		{
-			throw new CC2Exception("The templatesystem caused an error","Addins must have the extension .tpa");
+			throw new Exception("Addins must have the extension .tpa");
 		}
 	}
 	
@@ -228,7 +228,7 @@ class htmlpage
 		else
 		{
 			#De taalconstante is niet gedefinieerd => exception
-			throw new CC2Exception("The templatesystem caused an error","You tried to implement a language constant $constant wich is not defined. Check your languagefiles");
+			throw new Exception("You tried to implement a language constant $constant wich is not defined. Check your languagefiles");
 		}
 	}
 	
@@ -293,7 +293,7 @@ class htmlpage
 		
 		###Er wordt een tweedevariabele gedeclareerd met daarin letterlijk de naam van de arrayvariabele. 
 		###De reden hiervoor is dat de tags zullen vervangen worden door de letterlijke variabelenaam. Op het einde van de 
-		###uitvoering worden alle variabelen geëvalueerd.
+		###uitvoering worden alle variabelen geï¿½valueerd.
 		$looparraystring ="this->variables['$arrayname']";
 		}
 		
@@ -312,7 +312,7 @@ class htmlpage
 					$iteratieresultaat = $code;
 					###Geneste lussen zoeken. Deze moeten eerst verwerkt worden <= recursief
 					$pattern = "/(?imsU)\<!CC\s*LOOP\s*\[([^\[\]]*)\]\s*\>(.*)\<!CC\s*END\s*LOOP\s*\[\\1\]\s*\>/";
-					###De functie moet op dit punt zichzelf terug aanroepen zodat een oneindige recursiviteit kan worden gecreëerd.
+					###De functie moet op dit punt zichzelf terug aanroepen zodat een oneindige recursiviteit kan worden gecreï¿½erd.
 					###Om de bovenliggende array te kunnen doorgeven aan zichzelf moet looparraystring hier aangepast worden met de huidige index
 					###binnen de loop
 					$this->bovenliggendearraystring = $looparraystring."['".$key."']";
@@ -339,7 +339,7 @@ class htmlpage
 			else
 			{
 				###De aangeleverde waarde is geen array => Exception
-				throw new CC2Exception("The templatesystem has caused an error","You tried to execute a loop $arrayname but that variable is not an array");
+				throw new Exception("You tried to execute a loop $arrayname but that variable is not an array");
 			}
 		}
 		else
@@ -415,7 +415,7 @@ class htmlpage
 			else
 			{
 				#LOOPS eisen een array als parameter
-				throw new CC2Exception("The template system caused an error","You tried to execute a loop with variable $arrayname, but that is not an array");
+				throw new Exception("You tried to execute a loop with variable $arrayname, but that is not an array");
 			}
 		}
 		else

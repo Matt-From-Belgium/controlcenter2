@@ -329,7 +329,7 @@ function UserSelfActivation($user)
 	}
 	else
 	{
-		throw new CC2Exception("There was an error in the activation system","UserSelfActivation() only accepts an instance of user as argument");
+		throw new Exception("UserSelfActivation() only accepts an instance of user as argument");
 	}
 }
 
