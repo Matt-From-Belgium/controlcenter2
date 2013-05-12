@@ -17,6 +17,9 @@ if(isset($_POST['destination']) && isset($_POST['phpfunction']))
         }
         catch(Exception $ex)
         {
+            ###We versturen de errormail zoals gedefinieerd in /core/common/errorhandler.php
+            CC_Send_Error_report($ex);
+            
             if(getDebugMode())
             {
                 ###Als debug mode geactiveerd is wordt de error teruggestuurd als antwoord
@@ -31,20 +34,7 @@ if(isset($_POST['destination']) && isset($_POST['phpfunction']))
                     $exceptionResponse->addErrorMessage('test', 'Serverfout');
                     echo $exceptionResponse->getXML();                    
             }
-            
-                  ###We versturen het foutrapport
-                    $debugmailadress = getDebugMailadress();
 
-                    $errorreport = new Email();
-                    $errorreport->setTo($debugmailadress);
-                    $errorreport->setMessageAddin('/core/presentation/general/addins/debugmail.tpa');
-                    $errorreport->setSubject(LANG_ERROR_REPORT);
-                    $errorreport->setVariable('message', $ex->getMessage());
-                    $errorreport->setVariable('file', $ex->getFile());
-                    $errorreport->setVariable('line', $ex->getLine());
-                    $errorreport->setVariable('post', print_r($_POST,true));
-                    $errorreport->setVariable('get', print_r($_GET,true));
-                    $errorreport->Send();
         }
 }
 else 

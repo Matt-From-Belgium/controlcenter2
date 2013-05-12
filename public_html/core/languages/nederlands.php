@@ -15,4 +15,5 @@ define('LANG_ERROR_MESSAGE',"Foutboodschap");
 define('LANG_ERROR_FILE',"Bestand");
 define('LANG_ERROR_LINE',"Lijn");
 define('LANG_ERROR_ENV_VARS',"Omgevingsvariabelen");
+define('LANG_ERROR_TRACE',"Trace");
 ?>

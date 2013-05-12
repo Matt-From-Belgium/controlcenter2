@@ -18,12 +18,12 @@ function dataaccess_getlanguagestring($integer)
 			}
 			else
 			{
-				throw new CC2Exception("Error while getting language","dataaccess_getlanguagestring() was unable to find a language with id $integer");
+				throw new Exception("dataaccess_getlanguagestring() was unable to find a language with id $integer");
 			}
 	}
 	else
 	{
-	throw new CC2Exception("Error while getting language","The argument you supplied for dataaccess_getlanguagestring() is not an integer");
+	throw new Exception("The argument you supplied for dataaccess_getlanguagestring() is not an integer");
 	}
 }
 ?>
