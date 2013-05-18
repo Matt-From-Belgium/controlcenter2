@@ -7,8 +7,7 @@ require_once $_SERVER['DOCUMENT_ROOT']."/core/logic/usermanagement/userfunctions
 ###Om deze pagina te kunnen gebruiken moet de gebruiker het toegangsniveau usermanagement::add users
 checkPermission('usermanagement','add users');
 
-try
-{
+
 		##Is dit de eerst keer dat het formulier wordt weergegeven of werden er reeds gegevens verstuurd
 		#naar de server?
 
@@ -106,9 +105,5 @@ try
 			$html->setVariable("message",LANG_USER_ADDED);
 			$html->PrintHTML();
 		}
-}
-catch(CC2Exception $ex)
-{
-echo $ex->getExtendedMessage();
-}
+
 ?>
