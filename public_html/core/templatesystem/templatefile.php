@@ -36,7 +36,7 @@ function fileaccess_gettemplatehtml($directory)
 		}
 		else
 		{
-			throw new CC2Exception("There was an error in the templatesystem","Unable to find template.htm / template.html under $directory");
+			throw new Exception("Unable to find template.htm / template.html under $directory");
 		}
 	}
 	
@@ -76,7 +76,7 @@ function fileaccess_GetAddinHTML($path)
 	}
 	else
 	{
-		throw new CC2Exception("The template system caused an error","You tried to open an addin at $path, that file does not exist");
+		throw new Exception("You tried to open an addin at $path, that file does not exist");
 	}
 }
 ?>

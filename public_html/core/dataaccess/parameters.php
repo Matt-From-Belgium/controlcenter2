@@ -31,7 +31,7 @@ function dataaccess_GetParameter($searchstring)
 	}
 	else
 	{
-		throw new CC2exception("parameter error","You tried to get the value for parameter '$searchstring', but that parameter is not defined");
+		throw new Exception("You tried to get the value for parameter '$searchstring', but that parameter is not defined");
 	}
 	
 	#er wordt een parameter-object teruggegeven.
@@ -63,7 +63,7 @@ function AddParameter($parameterobject)
 	else
 	{
 		#$parameterobject is geen geldig parameter-object => exception
-		throw new CC2Exception("Wrong type supplied","AddParameter() only accepts objects of the class parameter");
+		throw new Exception("AddParameter() only accepts objects of the class parameter");
 	}
 
 }
@@ -91,7 +91,7 @@ function EditParameter($parameterobject)
 	}
 	else
 	{
-		throw new CC2Exception("Wrong type supplied","EditParameter() only accepts objects of the class parameter");
+		throw new Exception("EditParameter() only accepts objects of the class parameter");
 	}
 }
 

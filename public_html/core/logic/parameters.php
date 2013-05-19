@@ -1,4 +1,6 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'].'/core/dataaccess/parameters.php';
+
 function getLanguage()
 {
 	#Deze functie haalt de parameter CORE_LANGUAGE op maar koppelt deze ook onmiddelijk aan een taal in stringformaat
@@ -102,5 +104,30 @@ function getNoAccessURL()
 	$url = dataaccess_getParameter("CORE_NOACCESS_URL")->getValue();
 	
 	return $url;
+}
+
+function getDebugMode()
+{
+    ###Deze functie moet aangeven of debug mode actief is.
+    ###TRUE = JA
+    ###FALSE = NEEN
+    
+    $debugindicator = dataaccess_getParameter('CORE_DEBUG_MODE');
+    
+    if($debugindicator->getValue()==1)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+function getDebugMailadress()
+{
+    ###Geeft het mailadres weer waar het eventuele debug rapport naartoe gestuurd moet worden
+    $debugmail = dataaccess_GetParameter('CORE_DEBUG_MAIL');
+    return $debugmail->getValue();
 }
 ?>
