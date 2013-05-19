@@ -1,5 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'].'/core/dataconnection/componentselector.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/modules/fotoalbum/entity/fotoalbum.php';
 
 function data_albumExists($albumnaam)
 {
@@ -25,14 +26,14 @@ function data_albumExists($albumnaam)
     }
 }
 
-function data_albumToevoegen($albumnaam)
+function data_albumToevoegen(fotoalbum $album)
 {
     $query = "INSERT INTO albums (name) VALUES ('@albumnaam')";
     
     $db = new DataConnection();
     $db->setQuery($query);
     
-    $db->setAttribute('albumnaam', $albumnaam);
+    $db->setAttribute('albumnaam', $album->getName());
     
     $db->ExecuteQuery();
     
@@ -52,7 +53,16 @@ function data_getAlbums()
     
     if($db->GetNumRows()>0)
     {
-        return $db->GetResultArray();
+        #return $db->GetResultArray();
+        
+        $result = $db->GetResultArray();
+        foreach($result as $key=>$value)
+        {
+            $newFotoalbum = new fotoalbum($value['name'], $value['id']);
+            $albumarray[] = $newFotoalbum;
+        }
+        
+        return $albumarray;
     }
     else
     {

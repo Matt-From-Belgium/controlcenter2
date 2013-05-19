@@ -1,6 +1,7 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'].'/core/entity/ajaxresponse.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/modules/fotoalbum/data/albumdata.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/modules/fotoalbum/entity/fotoalbum.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/core/logic/usermanagement/userfunctions.php';
 
 function addAlbum()
@@ -28,7 +29,9 @@ function addAlbum()
         else
         {
             ###Alles ok, album mag toegevoegd worden
-            $id=data_albumToevoegen($_POST['albumnaam']);
+            $newalbum = new fotoalbum($_POST['albumnaam']);
+            
+            $id=data_albumToevoegen($newalbum);
             
             $response = new ajaxResponse('ok');
             echo $response->getXML();
@@ -45,11 +48,11 @@ function getAlbums()
 
         if(is_array($albumarray = data_getAlbums()))
         {        
-            foreach($albumarray as $value)
+            foreach($albumarray as  $fotoalbum)
             {
                    $item = array();
-                   $item['id'] = $value['id'];
-                   $item['name']= $value['name'];
+                   $item['id'] = $fotoalbum->getID();
+                   $item['name']= $fotoalbum->getName();
 
                    $response->addData($item);
             }    
