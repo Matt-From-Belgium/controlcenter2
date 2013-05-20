@@ -1,0 +1,6 @@
+<h1>Wijzig album '<!CC VAR [albumname]>'</h1>
+<h2>Huidige inhoud</h2>
+<h2>Foto's toevoegen</h2>
+<form>
+Selecteer een bestand <input type='file' name='photopath'>
+

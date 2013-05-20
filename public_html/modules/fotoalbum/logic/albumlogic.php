@@ -62,4 +62,17 @@ function getAlbums()
     
       
 }
+
+function getAlbum($id)
+{
+    if(is_int($id))
+    {
+        ###Functie kan enkel zoeken naar een id = integer
+        return data_getAlbum($id);
+    }
+    else
+    {
+        throw new Exception('getAlbum only accepts an integer as argument');
+    }
+}
 ?>

@@ -69,4 +69,39 @@ function data_getAlbums()
         return false;
     }
 }
+
+function data_getAlbum($id)
+{
+    if(is_int($id))
+    {
+            $query = "SELECT albums.id,albums.name from albums WHERE albums.id=@id";
+    
+            $db = new DataConnection;
+            $db->setQuery($query);
+            $db->setAttribute("id", $id);
+
+            $db->ExecuteQuery();
+
+            if($db->GetNumRows()>0)
+            {
+                #return $db->GetResultArray();
+
+                $resultarray = $db->GetResultArray();
+                $result = $resultarray[0];
+                
+                $fotoalbum = new fotoalbum($result['name'], $result['id']);
+                
+
+                return $fotoalbum;
+            }
+            else
+            {
+                return false;
+            }
+    }
+    else
+    {
+        throw new Exception("data_getAlbum only accepts an integer as argument");
+    }
+}
 ?>
