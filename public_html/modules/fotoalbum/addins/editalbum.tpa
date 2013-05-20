@@ -2,5 +2,10 @@
 <h2>Huidige inhoud</h2>
 <h2>Foto's toevoegen</h2>
 <form>
-Selecteer een bestand <input type='file' name='photopath'>
+Selecteer een bestand <input type='file' id='photopath' name='photopath'><input type="button" onClick="javascript:addUploadItem(document.getElementById('photopath').value)"></form>
+<h2>Uploads</h2>
+<div id="uploads">
+</div>
+<script type="text/javascript" SRC="/core/presentation/ajax/ajaxtransaction.js"></script>
+<script type="text/javascript" src="/modules/fotoalbum/presentation/editalbums.js"></script>
 
