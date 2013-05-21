@@ -6,6 +6,8 @@ function ajaxTransaction()
   var connectionpoint= '/core/logic/ajax/ajax.php';
   var that = this;
   var progressindicator;
+  //Revisie 1: waarden worden nu bijgehouden door een FormData object
+  var formData = new FormData();
  
  //publieke variabelen
   this.onComplete=null;
@@ -17,6 +19,7 @@ function ajaxTransaction()
   this.phpfunction = null;
  
  //private methods
+ /*Revisie 1: data wordt beheerd door FormData
  function buildPostString()
  {
  	//we bouwen de poststring. we sturen hier ook de bestemming en de phpfunction variabelen mee
@@ -44,6 +47,27 @@ function ajaxTransaction()
  	{
  		throw "both destination and phpfunction need a value";
  	}
+ }*/
+    
+ function completePoststring()
+ {
+     //Revisie 1: FormData zal toelaten om bestanden mee te sturen maar zal het geheel gebruiksvriendelijker maken
+     //Probleem is wel dat we nog steeds destination en phpfunction moeten meesturen. We zouden die ook met de appendfunctie kunnen toeveogen
+     //aan FormData maar fout gebruik van de klasse zou er kunnen toe leiden dat de waarden meerdere keren voorkomen
+     //Dus is er nog steeds behoefte aan een functie die deze variabelen éénmaal definieert in this.formData
+     if(that.destination!=null && that.phpfunction!=null)
+     {
+         formData.append('destination',that.destination);
+         formData.append('phpfunction',that.phpfunction);
+     }
+     else
+     {
+         //Als de waarden niet gedefinieerd zijn
+         throw "both destination and phpfunction need a value";
+     }
+     
+     return formData;
+     
  }
  
  function getHTTPObject() 
@@ -79,14 +103,21 @@ function ajaxTransaction()
  //public methods
  this.addData = function(name,value)
  {
-	names.push(name);
-	values.push(value);
+	/*names.push(name);
+	values.push(value);*/
+     
+        //Revisie 1: data wordt opgeslagen in formdata object
+        formData.append(name,value);
  };
  
  this.getData = function()
  {
-	 document.write(names);
+	 /*document.write(names);
 	 document.write(values);
+         */
+        
+        //Revisie 1: data wordt opgeslagen in formdata object
+        return formData;
  };
  
  this.setIndicator = function(elementid)
@@ -253,14 +284,15 @@ function ajaxTransaction()
 
 	 request.open("POST",connectionpoint,true);
 	 
-	 request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	//Lijn gedesactiveerd op aandraden van fora. Nu worden $_POST en $_FILE correct ingevuld. 
+        /*request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");*/
 	 
 	 if(progressindicator)
 	 {
 	 progressindicator.style.visibility="visible";
 	 }
 	 
-	 request.send(buildPostString());
+	 request.send(completePoststring());
  };
  
 }
