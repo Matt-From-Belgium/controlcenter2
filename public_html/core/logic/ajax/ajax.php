@@ -3,8 +3,6 @@ require_once $_SERVER['DOCUMENT_ROOT']."/core/entity/ajaxresponse.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/core/logic/parameters.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/core/email/email.php";
 
-
-
 if(isset($_POST['destination']) && isset($_POST['phpfunction']))
 {
 
