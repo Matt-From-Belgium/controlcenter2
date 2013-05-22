@@ -1,4 +1,4 @@
-function ajaxTransaction()
+function ajaxTransaction(formElement)
 {
  //private variabelen
   var names = new Array();
@@ -18,7 +18,33 @@ function ajaxTransaction()
   this.destination = null;
   this.phpfunction = null;
  
+ //constructor functionaliteit
+ if(formElement)
+    {
+    constructor(formElement);
+    }
+ 
  //private methods
+ function constructor(formElement)
+    {
+        //Doel van de constructor is om onmiddellijk een formulier in te laden
+        //zodat de inhoud gemakkelijker doorgestuurd kan worden
+
+               //Er werd een waarde test opgegeven (anders zou de functie niet geactiveerd worden, 
+               //maar is dit een geldig HTMLDOM element?
+               if(document.getElementById(formElement))
+                   {
+                       //De gegevens uit het formulier worden klaargezet
+                       formData = new FormData(document.getElementById(formElement));
+                   }
+              else
+                  {
+                      throw formElement+" is not a valid element";
+                  }
+
+
+    }
+ 
  /*Revisie 1: data wordt beheerd door FormData
  function buildPostString()
  {
