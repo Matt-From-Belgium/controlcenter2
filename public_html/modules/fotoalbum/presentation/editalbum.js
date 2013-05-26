@@ -14,7 +14,7 @@ function createUploadMonitor(formElement)
     var uploadsDiv = document.getElementById('uploads');
  
     //We creëren de basisDiv waar we alles aan zullen hangen
-    var imageUploadMonitor = document.createElement('img');
+    var imageUploadMonitor = document.createElement('div');
     
     var file = document.getElementById('photopath').files[0];
     
@@ -24,5 +24,6 @@ function createUploadMonitor(formElement)
     var title = document.createElement('div');
     title.innerHTML = filename;
     
-    
+    imageUploadMonitor.appendChild(title);
+    uploadsDiv.appendChild(imageUploadMonitor);
 }
