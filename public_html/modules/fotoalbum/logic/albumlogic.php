@@ -75,4 +75,16 @@ function getAlbum($id)
         throw new Exception('getAlbum only accepts an integer as argument');
     }
 }
+
+function addPhoto()
+{
+    checkPermission('fotoalbum', 'manage albums');
+    
+    move_uploaded_file($_FILES['photopath']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/modules/fotoalbum/photos/test.jpg');
+    
+    $result = new ajaxResponse('ok');
+
+    
+    return $result->getXML();
+}
 ?>
