@@ -18,6 +18,16 @@ function createUploadMonitor(formElement)
     
     var file = document.getElementById('photopath').files[0];
     
+    var previewImage = document.createElement('img');
+    
+    var imageReader = new FileReader();
+    imageReader.onLoad = function(e)
+        {
+            previewImage.src = e.target.result;
+
+        };
+    imageReader.readAsDataURL(file);
+    
     var filename = file.name;
     var filesize = file.size;
     
