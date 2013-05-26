@@ -20,13 +20,7 @@ function createUploadMonitor(formElement)
     
     var previewImage = document.createElement('img');
     
-    var imageReader = new FileReader();
-    imageReader.onLoad = function(e)
-        {
-            previewImage.src = e.target.result;
 
-        };
-    imageReader.readAsDataURL(file);
     
     var filename = file.name;
     var filesize = file.size;
@@ -35,5 +29,7 @@ function createUploadMonitor(formElement)
     title.innerHTML = filename;
     
     imageUploadMonitor.appendChild(title);
+    imageUploadMonitor.appendChild(previewImage);
+    
     uploadsDiv.appendChild(imageUploadMonitor);
 }
