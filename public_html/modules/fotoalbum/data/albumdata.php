@@ -104,4 +104,23 @@ function data_getAlbum($id)
         throw new Exception("data_getAlbum only accepts an integer as argument");
     }
 }
+
+function data_addPhoto(photo $photo)
+{
+    ###We voegen een rij toe in de tabel photo en vervangen de id in het object.
+    ###Bij het uploaden zelf wordt er geen beschrijving meegegeven
+    
+    $query = "INSERT INTO photos (album,description) VALUES (@album,'@description')";
+    
+    $db = new DataConnection();
+    $db->setQuery($query);
+    $db->setAttribute('album', $photo->getAlbumId());
+    $db->setAttribute('description', $photo->getDescription());
+    $db->ExecuteQuery();
+    
+    ###We vervangen het id in het object door een nieuw te creëren
+    $newphoto = new photo($photo->getAlbumId(), $db->getLastId());
+    
+    return $newphoto;
+}
 ?>

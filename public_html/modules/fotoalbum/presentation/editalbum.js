@@ -38,6 +38,11 @@ function createUploadMonitor(formElement)
     var ajax = new ajaxTransaction('uploadForm');
     ajax.destination='/modules/fotoalbum/logic/albumlogic.php';
     ajax.phpfunction='addPhoto';
-    ajax.onComplete = function(){alert('upload gelukt');};
+    ajax.onComplete = function(){processResponse(ajax);};
     ajax.ExecuteRequest();
+}
+
+function processResponse()
+{
+    alert('ok');
 }

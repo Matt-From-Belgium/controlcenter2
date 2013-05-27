@@ -2,7 +2,9 @@
 require_once $_SERVER['DOCUMENT_ROOT'].'/core/entity/ajaxresponse.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/modules/fotoalbum/data/albumdata.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/modules/fotoalbum/entity/fotoalbum.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/modules/fotoalbum/entity/photo.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/core/logic/usermanagement/userfunctions.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/core/entity/filevalidator.php';
 
 function addAlbum()
 {
@@ -80,11 +82,40 @@ function addPhoto()
 {
     checkPermission('fotoalbum', 'manage albums');
     
-    move_uploaded_file($_FILES['photopath']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/modules/fotoalbum/photos/test.jpg');
+    ###Eerst moeten we controleren of het bestand aan de vereisten voldoet
+    $filevalidator = new fileValidator();
+    $filevalidator->setExtension('jpg');
+    $filevalidator->setMaxSize(5);
+    $errors=$filevalidator->validateFile($_FILES['photopath']);
     
-    $result = new ajaxResponse('ok');
+    ###Nu kijken we na of er errors zijn
+    if(is_array($errors))
+    {
+        $AjaxResponse = new ajaxResponse('error');
+        
+        foreach($errors as $key=>$value)
+        {
+            $AjaxResponse->addErrorMessage('photopath', $value['message']);
+        }
+        
+        return $AjaxResponse->getXML();
+    }
+    else
+    {
+        ###Geen errors, dus we gaan verder
+        $photo = new photo($_POST['album']);
+        
+        #Eerst maken we een lijn aan in de databasetabel photos
+        $photo2=data_addPhoto($photo);
+        
+        #De databasefunctie geeft een gewijzigd object terug met de waarde id ingevuld
+        #Deze wordt gebruikt als bestandsnaam
+        move_uploaded_file($_FILES['photopath']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/modules/fotoalbum/photos/'.$photo2->getId().'.jpg');
+        
+        $result = new ajaxResponse('ok');
 
-    
-    return $result->getXML();
+
+        return $result->getXML();
+    }
 }
 ?>

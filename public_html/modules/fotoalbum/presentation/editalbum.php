@@ -16,6 +16,7 @@ if(isset($_GET['id']))
         $html = new htmlpage('backend');
         $html->LoadAddin('/modules/fotoalbum/addins/editalbum.tpa');
         $html->setVariable('albumname', $album->getName());
+        $html->setVariable('albumid', $album->getId());
         $html->PrintHTML();
     }   
     else
