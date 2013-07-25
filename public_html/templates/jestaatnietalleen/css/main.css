@@ -8,30 +8,143 @@
 
 @font-face
 {
-font-family: MyriadCondensed;
-src: url(/templates/jestaatnietalleen/fonts/MyriadPro-Cond.otf);
+font-family: 'MyriadRegular';
+src: url('/templates/jestaatnietalleen/fonts/MyriadPro.woff');
 }
 
-@font-face
-{
-font-family: MyriadRegular;
-src: url(/templates/jestaatnietalleen/fonts/MyriadPro-Regular.otf);
+body {
+    font-family: 'MyriadRegular';
+    color: #424242;
+    font-weight: 500;
+    font-size: 1.05em;
+    margin: 0em;
+    padding-left: 0em;
 }
 
-h1 {
-    font-family: MyriadCondensed;
-    color: #90CA77;
-    font-weight: normal;
+div {
+    margin-bottom: 0.5em;
+}
+
+.block {
+    margin-left: 2em;
 }
 
 *.nadruk {
-    color: #81C6DD;
+    color: #E09D38;
     font-weight: bold;
     margin-bottom: 15px;
 }
 
-body {
-    font-family: MyriadRegular;
-    color: #616061;
-    font-weight: normal;
+h1 {
+    font-family: 'MyriadRegular';
+    color: #90CA77;
+    font-weight: 300;
+    font-size: 3em;
+    margin-bottom: 0.25em;
+}
+
+h2 {
+    font-family: 'MyriadRegular';
+    color: #45A9BA;
+    font-weight: 500;
+    font-size: 1.5em;
+    margin-bottom: 0.25em;  
+}
+
+label
+{
+    display: inline-block;
+    font-weight: bold;
+    width: 8em;
+}
+
+input[type='text'], input[type='password']
+{
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 0.10em;
+    border-color: #615F61;
+    padding-left: 0.5em;
+    font-size: 1.1em;
+    margin-bottom: 0.2em;
+}
+
+input[type='text']:hover
+{
+    border-color: #E09D38;
+}
+
+input[type='text']:focus
+{
+    border-color: #9E3B33;
+    border-width: 0.10em;
+    
+}
+
+input[type='button'],input[type='submit']
+{
+    background-color:#90CA77;
+    border: solid;
+    border-color:#615F61;
+    border-width: 0.10em;
+    font-size: 1.05em;
+    margin-top: 0.5em;
+    
+    transition: background-color 0.2s;
+    -webkit-transition: background-color 0.2s; /* Safari */
+}
+
+input[type='button']:hover,input[type='submit']:hover
+{
+    background-color:#E09D38;
+}
+
+input[type='button']:active,input[type='submit']:active
+{
+    background-color: #9E3B33;
+    color: #FFFFFF;
+    
+}
+
+.green
+{
+ background-color: #90CA77; 
+ margin: 0px;
+ padding: 0px;
+ width: 100%;
+ margin-top: 1em;
+}
+
+.green h1 {
+    color:#FFFFFF;
+}
+
+.green h2 {
+    color:#9E3B33;
+}
+
+.green label {
+    color: #FFFFFF;
+}
+
+.green input[type='button'],.green input[type='submit']
+{
+    background-color: #FFFFFF;
+    border: solid;
+    border-color:#615F61;
+    border-width: 0.10em;
+    font-size: 1.05em;
+    margin-top: 0.5em;
+    color: #000000;
+    transition: background-color 0.2s;
+    -webkit-transition: background-color 0.2s; /* Safari */
+}
+
+.green input[type='button']:hover ,.green input[type='submit']:hover 
+{
+    background-color: #E09D38;
+}
+
+.green .nadruk {
+    color: #424242;
 }
