@@ -19,6 +19,7 @@ body {
     font-size: 1.05em;
     margin: 0em;
     padding-left: 0em;
+    padding-top: 5em;
 }
 
 div {
@@ -147,4 +148,29 @@ input[type='button']:active,input[type='submit']:active
 
 .green .nadruk {
     color: #424242;
+}
+
+.navBig {
+    position:fixed;
+    top: 0px;
+    left: 0px;
+    margin: 0px;
+    width: 100%;
+    background-color: rgba(66,66,66,0.9);
+    height: 5em;
+    transition: height 1s, background-color 1s;
+    -webkit-transition: height 1s, background-color 0.5s; /* Safari */    
+
+}
+
+.navSmall {
+    position:fixed;
+    top: 0px;
+    left: 0px;
+    margin: 0px;
+    width: 100%;
+    background-color: rgba(66,66,66,0.8);
+    height: 2em; 
+    transition: height 1s, background-color 1s;
+    -webkit-transition: height 1s, background-color 0.5s; /* Safari */
 }

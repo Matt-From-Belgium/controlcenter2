@@ -2,11 +2,41 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <script type="text/javascript">
+              window.onscroll = function(){detectScroll();};
+              
+              function detectScroll(e)
+              {
+                  setTimeout(function(){changeNav();},500);
+              }
+              
+              function changeNav(event)
+              {
+                  
+                    var doc = document.documentElement, body = document.body;
+                    var left = (doc && doc.scrollLeft || body && body.scrollLeft || 0);
+                    var top = (doc && doc.scrollTop  || body && body.scrollTop  || 0);
+                    var navElement = document.getElementById('navigation');
+                    
+                    if(top === 0)
+                    {
+                    navElement.className = 'navBig';
+                    }
+                    else
+                    {
+                    navElement.className = 'navSmall';
+                    }
+                  
+              }
+         </script>
         <link href="/templates/jestaatnietalleen/css/main.css" rel="stylesheet" type="text/css" />
         <title></title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
+        <div id="navigation" class='navBig'>
+            test
+        </div>
         <div class="block">
         <div><h1>Grote titel</h1></div>
         <div class="nadruk">DIKSMUIDE, 25/07/2013 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed adipiscing pellentesque consectetur. Nulla facilisi. Maecenas fringilla, nunc a molestie eleifend, velit urna tempus eros, vel dignissim magna felis non nunc. Nam quis cursus erat, quis condimentum nibh. Nullam non diam vel massa ullamcorper aliquet vitae ut nibh. Vestibulum sit amet pretium diam. Phasellus ultricies sodales sollicitudin.</div>
