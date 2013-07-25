@@ -1,0 +1,37 @@
+/* 
+    Document   : main
+    Created on : 25-jul-2013, 9:18:18
+    Author     : matthiasba
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+@font-face
+{
+font-family: MyriadCondensed;
+src: url(/templates/jestaatnietalleen/fonts/MyriadPro-Cond.otf);
+}
+
+@font-face
+{
+font-family: MyriadRegular;
+src: url(/templates/jestaatnietalleen/fonts/MyriadPro-Regular.otf);
+}
+
+h1 {
+    font-family: MyriadCondensed;
+    color: #90CA77;
+    font-weight: normal;
+}
+
+*.nadruk {
+    color: #81C6DD;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+body {
+    font-family: MyriadRegular;
+    color: #616061;
+    font-weight: normal;
+}
