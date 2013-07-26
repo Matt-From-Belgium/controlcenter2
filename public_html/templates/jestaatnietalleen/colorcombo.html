@@ -17,14 +17,18 @@
                     var left = (doc && doc.scrollLeft || body && body.scrollLeft || 0);
                     var top = (doc && doc.scrollTop  || body && body.scrollTop  || 0);
                     var navElement = document.getElementById('navigation');
+                    var siteShellElement = document.getElementById('siteShell');
                     
                     if(top === 0)
                     {
                     navElement.className = 'navBig';
+                    siteShellElement.className= 'shellNavBig';
                     }
                     else
                     {
                     navElement.className = 'navSmall';
+                    siteShellElement.className= 'shellNavSmall';
+                    
                     }
                   
               }
@@ -35,11 +39,18 @@
     </head>
     <body>
         <div id="navigation" class='navBig'>
-            <div id="logo"><img src="/templates/jestaatnietalleen/images/logo.png" width='400'></div>
+            <div id="logo"><img src="/templates/jestaatnietalleen/images/logo.png" width="400"></div>
             <div id="logoSmall"><img src="/templates/jestaatnietalleen/images/logo-klein.png"></div>            
-            <div id="navMain">test</div>
+            <div id="navMain">
+                <div id="navLinks">
+                    <a href='#'>Startpagina</a>
+                    <a href='#'>Nieuwsbrieven</a>
+                    <a href='#'>Contact</a>
+                </div>
+            </div>
             <div id="navSecondary">Test</div>
         </div>
+        <div id='siteShell' class='shellNavBig'>
         <div class="block">
         <div><h1>Grote titel</h1></div>
         <div class="nadruk">DIKSMUIDE, 25/07/2013 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed adipiscing pellentesque consectetur. Nulla facilisi. Maecenas fringilla, nunc a molestie eleifend, velit urna tempus eros, vel dignissim magna felis non nunc. Nam quis cursus erat, quis condimentum nibh. Nullam non diam vel massa ullamcorper aliquet vitae ut nibh. Vestibulum sit amet pretium diam. Phasellus ultricies sodales sollicitudin.</div>
@@ -79,6 +90,7 @@ Sed vehicula venenatis ipsum, ut tristique libero rutrum eget. Donec ut velit si
                 <br /><input type="submit" value="Verstuur">
             </div>
             </div>
+        </div>
         </div>
     </body>
 </html>

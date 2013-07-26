@@ -19,7 +19,21 @@ body {
     font-size: 1.05em;
     margin: 0em;
     padding-left: 0em;
-    padding-top: 31em;
+
+}
+
+#siteShell.shellNavBig {
+   padding-top: 31em;
+   
+   transition: padding-top 1s;
+   -webkit-transition: padding-top 1s; /* Safari */
+   
+}
+
+#siteShell.shellNavSmall {
+   padding-top: 14em;
+   transition: padding-top 1s;
+   -webkit-transition: padding-top 1s; /* Safari */
 }
 
 div {
@@ -150,7 +164,7 @@ input[type='button']:active,input[type='submit']:active
     color: #424242;
 }
 
-.navBig, .navSmall
+#navigation
 {
    position: fixed;
     top: 0px;
@@ -234,4 +248,44 @@ input[type='button']:active,input[type='submit']:active
     top: -10em;
     
 
+}
+
+.navBig #navLinks {
+    position: relative;
+    top: 6em;
+    left: 15em;
+    font-size: 1.7em;
+    margin: 0px;
+    
+    transition: top ease-out 1s;
+    -webkit-transition: top 1s;
+}
+
+.navSmall #navLinks {
+    position: relative;
+    top: 0.2em;
+    left: 15em;
+    font-size: 1.7em;
+    margin: 0px;
+    
+    transition: top ease-out 1s;
+    -webkit-transition: top 1s;
+}
+
+#navLinks a {
+    text-decoration: none;
+    color: #FFFFFF;
+    
+    transition: top ease-out 0.2s;
+    -webkit-transition: top 0.2s;
+    margin-right: 0.5em;
+}
+
+#navLinks a:hover {
+    position: relative;
+    color: #E09D38;
+    top: -0.2em;
+    
+    transition: top ease-in 0.2s, color 0.2s;
+    -webkit-transition: top 0.2s, color 0.2s;
 }
