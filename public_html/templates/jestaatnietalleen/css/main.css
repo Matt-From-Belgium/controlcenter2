@@ -23,7 +23,7 @@ body {
 }
 
 #siteShell.shellNavBig {
-   padding-top: 31em;
+   padding-top: 15em;
    
    transition: padding-top 1s;
    -webkit-transition: padding-top 1s; /* Safari */
@@ -31,7 +31,7 @@ body {
 }
 
 #siteShell.shellNavSmall {
-   padding-top: 14em;
+   padding-top: 0em;
    transition: padding-top 1s;
    -webkit-transition: padding-top 1s; /* Safari */
 }
@@ -181,8 +181,8 @@ input[type='button']:active,input[type='submit']:active
 .navBig #navMain {
     
     
-    background-color: rgba(66,66,66,0.9);
-    height: 13em;
+    background-color: rgba(66,66,66,1);
+    height: 15em;
     transition: height 1s, background-color 1s;
     -webkit-transition: height 1s, background-color 0.5s; /* Safari */    
 
@@ -252,7 +252,7 @@ input[type='button']:active,input[type='submit']:active
 
 .navBig #navLinks {
     position: relative;
-    top: 6em;
+    top: 7.2em;
     left: 15em;
     font-size: 1.7em;
     margin: 0px;
@@ -288,4 +288,26 @@ input[type='button']:active,input[type='submit']:active
     
     transition: top ease-in 0.2s, color 0.2s;
     -webkit-transition: top 0.2s, color 0.2s;
+}
+
+#siteNews {
+    height: 20em;
+    width: 100%;
+    background-color: #90CA77;
+    
+}
+
+.newsItem {
+    display: block;
+    width: 50%;
+    height: 100%;
+    padding-top: 2.5em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.newsItem h1{
+    color: #FFFFFF;
+    margin: 0px;
+    padding: 0px;
 }
