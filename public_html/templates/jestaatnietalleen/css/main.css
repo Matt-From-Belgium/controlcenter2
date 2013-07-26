@@ -19,7 +19,7 @@ body {
     font-size: 1.05em;
     margin: 0em;
     padding-left: 0em;
-    padding-top: 16em;
+    padding-top: 31em;
 }
 
 div {
@@ -168,7 +168,7 @@ input[type='button']:active,input[type='submit']:active
     
     
     background-color: rgba(66,66,66,0.9);
-    height: 6em;
+    height: 13em;
     transition: height 1s, background-color 1s;
     -webkit-transition: height 1s, background-color 0.5s; /* Safari */    
 
@@ -184,7 +184,7 @@ input[type='button']:active,input[type='submit']:active
 
 .navBig #navSecondary {
     display: block;
-    height: 10em;
+    height: 18em;
     background-color:#90CA77;
     
     transition: height 1s, background-color 1s;
@@ -198,4 +198,40 @@ input[type='button']:active,input[type='submit']:active
     
     transition: height 1s, background-color 1s;
     -webkit-transition: height 1s, background-color 1s;
+}
+
+.navBig #logo {
+    position: absolute;
+    top: 1em;
+    left: 0.4em;
+    
+    transition: top 0.5s, opacity 1s;
+    -webkit-transition: top 0.5s, opacity 1s;
+}
+
+.navSmall #logo {
+    position: absolute;
+    left: 0.4em;
+    top: -5em;
+    opacity: 0;
+    
+    transition: top 0.5s, opacity 0.2s;
+    -webkit-transition: top 0.5s, opacity 0.2s;
+}
+
+.navSmall #logoSmall {
+    position: absolute;
+    left: 0.4em;
+    top: 0.4em;
+    
+   transition: top ease-out 0.5s;
+    -webkit-transition: top 0.5s;
+}
+
+.navBig #logoSmall {
+    position: absolute;
+    left: 0.4em;
+    top: -10em;
+    
+
 }
