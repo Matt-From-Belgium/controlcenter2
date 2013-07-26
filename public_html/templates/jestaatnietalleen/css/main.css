@@ -239,7 +239,7 @@ input[type='button']:active,input[type='submit']:active
     top: 0.4em;
     
    transition: top ease-out 0.5s;
-    -webkit-transition: top 0.5s;
+    -webkit-transition: top ease-out 0.5s;
 }
 
 .navBig #logoSmall {
@@ -258,7 +258,7 @@ input[type='button']:active,input[type='submit']:active
     margin: 0px;
     
     transition: top ease-out 1s;
-    -webkit-transition: top 1s;
+    -webkit-transition: top ease-out 1s;
 }
 
 .navSmall #navLinks {
@@ -269,7 +269,7 @@ input[type='button']:active,input[type='submit']:active
     margin: 0px;
     
     transition: top ease-out 1s;
-    -webkit-transition: top 1s;
+    -webkit-transition: top ease-out 1s;
 }
 
 #navLinks a {
@@ -287,7 +287,7 @@ input[type='button']:active,input[type='submit']:active
     top: -0.2em;
     
     transition: top ease-in 0.2s, color 0.2s;
-    -webkit-transition: top 0.2s, color 0.2s;
+    -webkit-transition: top ease-in 0.2s, color 0.2s;
 }
 
 #siteNews {
