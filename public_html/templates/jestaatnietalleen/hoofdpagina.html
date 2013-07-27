@@ -22,36 +22,59 @@
                     if(top === 0)
                     {
                     navElement.className = 'navBig';
-                    siteShellElement.className= 'shellNavBig';
+                    siteShellElement.className= 'NavBig';
                     }
                     else
                     {
                     navElement.className = 'navSmall';
-                    siteShellElement.className= 'shellNavSmall';
+                    siteShellElement.className= 'NavSmall';
                     
                     }
                   
               }
+              
+              var menu = false;
+              
+              function toggleMobileMenuState()
+              {
+                  var menuElement = document.getElementById('navLinks');
+                  if(menu===false)
+                      {
+                          /*Menu is niet zichtbaar => tonen*/
+                         menuElement.style.display='block';
+                         menu = true;
+                      }
+                 else
+                     {
+                         menuElement.style.display='none';
+                         menu = false;
+                     }
+              }
          </script>
         <link href="/templates/jestaatnietalleen/css/main.css" rel="stylesheet" type="text/css" />
         <link href="/templates/jestaatnietalleen/css/main-tablet-landscape.css" rel="stylesheet" media="only screen and (max-height: 801px) and (orientation:landscape)" type="text/css" />
-        <title></title>
+        <!--<link href="/templates/jestaatnietalleen/css/smartphone.css" rel="stylesheet" type="text/css" />-->
+        <title>Je staat niet alleen! - informatiesite voor werknemers</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
         <div id="navigation" class='navBig'>
             <div id="logo"><img src="/templates/jestaatnietalleen/images/logo.png" width="400"></div>
             <div id="logoSmall"><img src="/templates/jestaatnietalleen/images/logo-klein.png"></div>            
+            <div id="mobileMenu">
+                    <a href='javascript:toggleMobileMenuState()'>Menu</a>
+            </div>
             <div id="navMain">
                 <div id="navLinks">
-                    <a href='#'>Startpagina</a>
-                    <a href='#'>Nieuwsbrieven</a>
-                    <a href='#'>Contact</a>
+                    <span class='navLink'><a href='#'>Startpagina</a></span>
+                    <span class='navLink'><a href='#'>Nieuwsbrieven</a></span>
+                    <span class='navLink'><a href='#'>Contact</a></span>
                 </div>
+
             </div>
             <!--<div id="navSecondary">Test</div>-->
         </div>
-        <div id='siteShell' class='shellNavBig'>
+        <div id='siteShell' class='NavBig'>
         <div id="siteNews">
             <div id="item1" class="newsItem">
                 <h1>Blijf op de hoogte</h1>

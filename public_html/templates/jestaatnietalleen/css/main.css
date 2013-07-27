@@ -22,7 +22,7 @@ body {
 
 }
 
-#siteShell.shellNavBig {
+#siteShell.NavBig {
    padding-top: 15em;
    
    transition: padding-top ease-out 0.5s;
@@ -30,7 +30,7 @@ body {
    
 }
 
-#siteShell.shellNavSmall {
+#siteShell.NavSmall {
    padding-top: 0em;
    transition: padding-top ease-out 0.5s;
    -webkit-transition: padding-top ease-out 0.5s; /* Safari */
@@ -310,4 +310,8 @@ input[type='button']:active,input[type='submit']:active
     color: #FFFFFF;
     margin: 0px;
     padding: 0px;
+}
+
+#mobileMenu {
+    display: none;
 }
