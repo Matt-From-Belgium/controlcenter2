@@ -25,15 +25,15 @@ body {
 #siteShell.shellNavBig {
    padding-top: 15em;
    
-   transition: padding-top 1s;
-   -webkit-transition: padding-top 1s; /* Safari */
+   transition: padding-top ease-out 0.5s;
+   -webkit-transition: padding-top ease-out 0.5s; /* Safari */
    
 }
 
 #siteShell.shellNavSmall {
    padding-top: 0em;
-   transition: padding-top 1s;
-   -webkit-transition: padding-top 1s; /* Safari */
+   transition: padding-top ease-out 0.5s;
+   -webkit-transition: padding-top ease-out 0.5s; /* Safari */
 }
 
 div {
@@ -183,16 +183,16 @@ input[type='button']:active,input[type='submit']:active
     
     background-color: rgba(66,66,66,1);
     height: 15em;
-    transition: height 1s, background-color 1s;
-    -webkit-transition: height 1s, background-color 0.5s; /* Safari */    
+    transition: height ease-out 0.5s, background-color 1s;
+    -webkit-transition: height ease-out 0.5s, background-color 0.5s; /* Safari */    
 
 }
 
 .navSmall #navMain {
     background-color: rgba(66,66,66,0.8);
     height: 3em; 
-    transition: height 1s, background-color 1s;
-    -webkit-transition: height 1s, background-color 0.5s; /* Safari */
+    transition: height ease-out 0.5s, background-color 1s;
+    -webkit-transition: height ease-out 0.5s, background-color 0.5s; /* Safari */
 }
 
 
@@ -201,8 +201,8 @@ input[type='button']:active,input[type='submit']:active
     height: 18em;
     background-color:#90CA77;
     
-    transition: height 1s, background-color 1s;
-    -webkit-transition: height 1s, background-color 1s;
+    transition: height 0.5s, background-color 1s;
+    -webkit-transition: height 0.5s, background-color 1s;
 }
 
 .navSmall #navSecondary {
@@ -210,8 +210,8 @@ input[type='button']:active,input[type='submit']:active
     overflow: hidden;
     background-color: #FFFFFF;
     
-    transition: height 1s, background-color 1s;
-    -webkit-transition: height 1s, background-color 1s;
+    transition: height 0.5s, background-color 1s;
+    -webkit-transition: height 0.5s, background-color 1s;
 }
 
 .navBig #logo {
@@ -257,8 +257,8 @@ input[type='button']:active,input[type='submit']:active
     font-size: 1.7em;
     margin: 0px;
     
-    transition: top ease-out 1s;
-    -webkit-transition: top ease-out 1s;
+    transition: top ease-out 0.5s;
+    -webkit-transition: top ease-out 0.5s;
 }
 
 .navSmall #navLinks {
@@ -268,8 +268,8 @@ input[type='button']:active,input[type='submit']:active
     font-size: 1.7em;
     margin: 0px;
     
-    transition: top ease-out 1s;
-    -webkit-transition: top ease-out 1s;
+    transition: top ease-out 0.5s;
+    -webkit-transition: top ease-out 0.5s;
 }
 
 #navLinks a {
