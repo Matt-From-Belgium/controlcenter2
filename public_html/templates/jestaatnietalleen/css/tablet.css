@@ -1,0 +1,52 @@
+/* 
+    Document   : tablet
+    Created on : 31-jul-2013, 19:51:08
+    Author     : matthiasba
+    Description:
+        Purpose of the stylesheet follows.
+*/
+.navBig #navMain {
+    
+    background-color: rgba(66,66,66,0.8);
+    height: 3em; 
+    transition: height 1s, background-color 1s;
+    -webkit-transition: height 1s, background-color 0.5s; /* Safari */
+
+}
+
+.navBig #navLinks {
+    position: relative;
+    top: 0.2em;
+    left: 15em;
+    font-size: 1.7em;
+    margin: 0px;
+    
+    transition: top ease-out 1s;
+    -webkit-transition: top 1s;
+}
+
+#siteShell.shellNavBig {
+   padding-top: 0em;
+   transition: padding-top 1s;
+   -webkit-transition: padding-top 1s; /* Safari */
+}
+
+.navBig #logo {
+    position: absolute;
+    left: 0.4em;
+    top: -5em;
+    opacity: 0;
+    
+    transition: top 0.5s, opacity 0.2s;
+    -webkit-transition: top 0.5s, opacity 0.2s;
+}
+
+.navBig #logoSmall {
+    position: absolute;
+    left: 0.4em;
+    top: 0.4em;
+    
+   transition: top ease-out 0.5s;
+    -webkit-transition: top 0.5s;
+}
+
