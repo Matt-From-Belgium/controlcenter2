@@ -288,12 +288,15 @@ CREATE TABLE `parameters` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 INSERT INTO `parameters` (`id`, `name`, `value`, `overridable`) VALUES
-(001, 'CORE_LANGUAGE', '2', '\0'),
-(002, 'CORE_USER_SELF_ACTIVATION', '1', '\0'),
-(003, 'CORE_USER_ADMIN_ACTIVATION', '1', '\0'),
-(004, 'CORE_USER_EXT_USERGROUP', '001', '\0'),
-(005, 'CORE_USER_EXT_REGISTRATION','1', '\0'),
-(006, 'CORE_NOACCESS_URL','','\0');
+(001, 'CORE_LANGUAGE', '1', '0'),
+(002, 'CORE_USER_SELF_ACTIVATION', '1', '0'),
+(003, 'CORE_USER_ADMIN_ACTIVATION', '1', '0'),
+(004, 'CORE_USER_EXT_USERGROUP', '001', '0'),
+(005, 'CORE_USER_EXT_REGISTRATION', '0', '0'),
+(006, 'CORE_NOACCESS_URL', '', '0'),
+(007, 'CORE_SERVER_MAILADRESS', 'noreply@dragoneyehosting.be', '0'),
+(008, 'CORE_DEBUG_MODE', '0', '0'),
+(009, 'CORE_DEBUG_MAIL', 'matthiasba@projectkoor.be', '0');
 
 CREATE TABLE `permissions` (
   `id` int(5) unsigned zerofill NOT NULL auto_increment,

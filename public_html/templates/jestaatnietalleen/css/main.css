@@ -1,0 +1,317 @@
+/* 
+    Document   : main
+    Created on : 25-jul-2013, 9:18:18
+    Author     : matthiasba
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+@font-face
+{
+font-family: 'MyriadRegular';
+src: url('/templates/jestaatnietalleen/fonts/MyriadPro.woff');
+}
+
+body {
+    font-family: 'MyriadRegular';
+    color: #424242;
+    font-weight: 500;
+    font-size: 1.05em;
+    margin: 0em;
+    padding-left: 0em;
+
+}
+
+#siteShell.navBig {
+   padding-top: 15em;
+   
+   transition: padding-top ease-out 0.5s;
+   -webkit-transition: padding-top ease-out 0.5s; /* Safari */
+   
+}
+
+#siteShell.navSmall {
+   padding-top: 0em;
+   transition: padding-top ease-out 0.5s;
+   -webkit-transition: padding-top ease-out 0.5s; /* Safari */
+}
+
+div {
+    margin-bottom: 0.5em;
+}
+
+.block {
+    margin-left: 2em;
+}
+
+*.nadruk {
+    color: #E09D38;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-family: 'MyriadRegular';
+    color: #90CA77;
+    font-weight: 300;
+    font-size: 3em;
+    margin-bottom: 0.25em;
+}
+
+h2 {
+    font-family: 'MyriadRegular';
+    color: #45A9BA;
+    font-weight: 500;
+    font-size: 1.5em;
+    margin-bottom: 0.25em;  
+}
+
+label
+{
+    display: inline-block;
+    font-weight: bold;
+    width: 8em;
+}
+
+input[type='text'], input[type='password']
+{
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 0.10em;
+    border-color: #615F61;
+    padding-left: 0.5em;
+    font-size: 1.1em;
+    margin-bottom: 0.2em;
+}
+
+input[type='text']:hover
+{
+    border-color: #E09D38;
+}
+
+input[type='text']:focus
+{
+    border-color: #9E3B33;
+    border-width: 0.10em;
+    
+}
+
+input[type='button'],input[type='submit']
+{
+    background-color:#90CA77;
+    border: solid;
+    border-color:#615F61;
+    border-width: 0.10em;
+    font-size: 1.05em;
+    margin-top: 0.5em;
+    
+    transition: background-color 0.2s;
+    -webkit-transition: background-color 0.2s; /* Safari */
+}
+
+input[type='button']:hover,input[type='submit']:hover
+{
+    background-color:#E09D38;
+}
+
+input[type='button']:active,input[type='submit']:active
+{
+    background-color: #9E3B33;
+    color: #FFFFFF;
+    
+}
+
+.green
+{
+ background-color: #90CA77; 
+ margin: 0px;
+ padding: 0px;
+ width: 100%;
+ margin-top: 1em;
+}
+
+.green h1 {
+    color:#FFFFFF;
+}
+
+.green h2 {
+    color:#9E3B33;
+}
+
+.green label {
+    color: #FFFFFF;
+}
+
+.green input[type='button'],.green input[type='submit']
+{
+    background-color: #FFFFFF;
+    border: solid;
+    border-color:#615F61;
+    border-width: 0.10em;
+    font-size: 1.05em;
+    margin-top: 0.5em;
+    color: #000000;
+    transition: background-color 0.2s;
+    -webkit-transition: background-color 0.2s; /* Safari */
+}
+
+.green input[type='button']:hover ,.green input[type='submit']:hover 
+{
+    background-color: #E09D38;
+}
+
+.green .nadruk {
+    color: #424242;
+}
+
+#navigation
+{
+   position: fixed;
+    top: 0px;
+    left: 0px;
+    margin: 0px;
+    width: 100%;
+}
+
+#navMain
+{
+    margin: 0px;
+}
+
+.navBig #navMain {
+    
+    
+    background-color: rgba(66,66,66,1);
+    height: 15em;
+    transition: height ease-out 0.5s, background-color 1s;
+    -webkit-transition: height ease-out 0.5s, background-color 0.5s; /* Safari */    
+
+}
+
+.navSmall #navMain {
+    background-color: rgba(66,66,66,0.8);
+    height: 3em; 
+    transition: height ease-out 0.5s, background-color 1s;
+    -webkit-transition: height ease-out 0.5s, background-color 0.5s; /* Safari */
+}
+
+
+.navBig #navSecondary {
+    display: block;
+    height: 18em;
+    background-color:#90CA77;
+    
+    transition: height 0.5s, background-color 1s;
+    -webkit-transition: height 0.5s, background-color 1s;
+}
+
+.navSmall #navSecondary {
+    height: 0em;
+    overflow: hidden;
+    background-color: #FFFFFF;
+    
+    transition: height 0.5s, background-color 1s;
+    -webkit-transition: height 0.5s, background-color 1s;
+}
+
+.navBig #logo {
+    position: absolute;
+    top: 1em;
+    left: 0.4em;
+    
+    transition: top 0.5s, opacity 1s;
+    -webkit-transition: top 0.5s, opacity 1s;
+}
+
+.navSmall #logo {
+    position: absolute;
+    left: 0.4em;
+    top: -5em;
+    opacity: 0;
+    
+    transition: top 0.5s, opacity 0.2s;
+    -webkit-transition: top 0.5s, opacity 0.2s;
+}
+
+.navSmall #logoSmall {
+    position: absolute;
+    left: 0.4em;
+    top: 0.4em;
+    
+   transition: top ease-out 0.5s;
+    -webkit-transition: top ease-out 0.5s;
+}
+
+.navBig #logoSmall {
+    position: absolute;
+    left: 0.4em;
+    top: -10em;
+    
+
+}
+
+.navBig #navLinks {
+    position: relative;
+    top: 7.2em;
+    left: 15em;
+    font-size: 1.7em;
+    margin: 0px;
+    
+    transition: top ease-out 0.5s;
+    -webkit-transition: top ease-out 0.5s;
+}
+
+.navSmall #navLinks {
+    position: relative;
+    top: 0.2em;
+    left: 15em;
+    font-size: 1.7em;
+    margin: 0px;
+    
+    transition: top ease-out 0.5s;
+    -webkit-transition: top ease-out 0.5s;
+}
+
+#navLinks a {
+    text-decoration: none;
+    color: #FFFFFF;
+    
+    transition: top ease-out 0.2s;
+    -webkit-transition: top 0.2s;
+    margin-right: 0.5em;
+}
+
+#navLinks a:hover {
+    position: relative;
+    color: #E09D38;
+    top: -0.2em;
+    
+    transition: top ease-in 0.2s, color 0.2s;
+    -webkit-transition: top ease-in 0.2s, color 0.2s;
+}
+
+#siteNews {
+    height: 20em;
+    width: 100%;
+    background-color: #90CA77;
+    
+}
+
+.newsItem {
+    display: block;
+    width: 50%;
+    height: 100%;
+    padding-top: 2.5em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.newsItem h1{
+    color: #FFFFFF;
+    margin: 0px;
+    padding: 0px;
+}
+
+#mobileMenu {
+    display: none;
+}
