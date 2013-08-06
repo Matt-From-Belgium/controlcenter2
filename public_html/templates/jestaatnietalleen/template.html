@@ -2,24 +2,37 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <script type="text/javascript" src='/templates/jestaatnietalleen/javascript/navigatie.js'></script>
         <link href="/templates/jestaatnietalleen/css/main.css" rel="stylesheet" type="text/css" />
-        <title></title>
+        <link href="/templates/jestaatnietalleen/css/smartphone-portrait.css" media="only screen and (min-device-width : 320px) and (max-device-width : 480px)" rel="stylesheet" type="text/css" />
+        <link href="/templates/jestaatnietalleen/css/tablet.css" media="only screen and (max-device-height: 801px) and (orientation:landscape)" rel="stylesheet" type="text/css" />
+        
+        <title>Je staat niet alleen! - informatiesite voor werknemers</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <div><h1>Eerste Test</h1></div>
-        <div class="nadruk">DIKSMUIDE, 25/07/2013 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed adipiscing pellentesque consectetur. Nulla facilisi. Maecenas fringilla, nunc a molestie eleifend, velit urna tempus eros, vel dignissim magna felis non nunc. Nam quis cursus erat, quis condimentum nibh. Nullam non diam vel massa ullamcorper aliquet vitae ut nibh. Vestibulum sit amet pretium diam. Phasellus ultricies sodales sollicitudin.</div>
-        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed adipiscing pellentesque consectetur. Nulla facilisi. Maecenas fringilla, nunc a molestie eleifend, velit urna tempus eros, vel dignissim magna felis non nunc. Nam quis cursus erat, quis condimentum nibh. Nullam non diam vel massa ullamcorper aliquet vitae ut nibh. Vestibulum sit amet pretium diam. Phasellus ultricies sodales sollicitudin.</div>
+        <div id="navigation" class='navBig'>
+            <div id="logo"><img src="/templates/jestaatnietalleen/images/logo.png" width="400"></div>
+            <div id="logoSmall"><img src="/templates/jestaatnietalleen/images/logo-klein.png"></div>            
+            <div id="mobileMenu">
+                    <a href='javascript:toggleMobileMenuState()'>Menu</a>
+            </div>
+            <div id="navMain">
+                <div id="navLinks">
+                    <span class='navLink'><a href='#'>Startpagina</a></span>
+                    <span class='navLink'><a href='#'>Nieuwsbrieven</a></span>
+                    <span class='navLink'><a href='#'>Contact</a></span>
+                </div>
 
-        <div>In dignissim risus a magna blandit, vitae adipiscing felis interdum. Nunc nisi ligula, vestibulum sit amet vehicula et, fermentum pulvinar sapien. Phasellus nisl justo, facilisis eu ligula vitae, congue sollicitudin arcu. Praesent eget mollis eros. Ut mi elit, sagittis in varius vel, vulputate ullamcorper tortor. Vivamus ultricies lacus orci, rutrum eleifend sapien elementum vitae. Donec nunc nisi, accumsan quis fringilla vel, tincidunt vel turpis. Vestibulum ornare sem a turpis scelerisque, sed blandit tortor sollicitudin. Sed lacinia pellentesque risus, eget euismod metus malesuada ut. Ut vitae ultricies neque. Integer vestibulum eros fermentum tortor molestie, ut laoreet odio elementum. Quisque dapibus iaculis leo ut mattis. Nulla quis vestibulum mauris. Aliquam odio diam, eleifend et varius sed, rutrum sed mauris.</div>
-
-        <div>Donec quis congue mi. Duis consequat quam at felis pharetra varius. Praesent viverra mauris a faucibus vehicula. Quisque eget libero ut magna consectetur tempor facilisis vitae risus. In vel condimentum enim, sit amet posuere nunc. Vivamus volutpat ac nisl in varius. Proin eu odio malesuada, venenatis velit vel, dignissim ipsum. Nam nisi nisi, rutrum eget odio vitae, pulvinar gravida massa.</div>
-
-        <div>Mauris ac congue lectus. Sed faucibus mauris non felis faucibus, mattis venenatis metus fringilla. Aliquam auctor purus turpis, vel interdum neque tincidunt at. Sed sagittis dolor ut magna blandit interdum. Quisque sollicitudin sodales sapien placerat placerat. Vestibulum iaculis libero ac mauris dignissim facilisis. Cras aliquam malesuada augue, vel sodales mi tincidunt in. Pellentesque commodo fermentum eleifend. Morbi rutrum, ligula ac mollis venenatis, lectus risus elementum eros, nec imperdiet libero ligula ac enim. Cras quis iaculis ligula.</div>
-
-        <div>Sed vehicula venenatis ipsum, ut tristique libero rutrum eget. Donec ut velit sit amet orci laoreet posuere at ut ante. Suspendisse semper quam scelerisque arcu molestie, sit amet gravida nunc hendrerit. In hac habitasse platea dictumst. Pellentesque aliquet molestie risus eget hendrerit. Cras id nulla mi. Fusce tellus ligula, fermentum in mollis eget, ornare nec tellus. Cras at egestas dolor, vel varius enim. Nulla lacinia ornare tincidunt. Mauris sit amet lorem eget massa fringilla vulputate eu sed justo. Nunc blandit risus nunc, eu vestibulum sem placerat quis. Quisque ut ante a erat iaculis tristique nec et est.</div>
-        
-        <div><h1>Formulier</h1></div>
-        
+            </div>
+            <!--<div id="navSecondary">Test</div>-->
+        </div>
+        <div id='siteShell' class='navBig'>
+            <PageContent>
+                <div class='block'>
+                <h1>Nieuwsbrief</h1>
+                Schrijf je nu in voor de nieuwsbrief, je zal het je niet beklagen!.
+                </div>
+        </div>
     </body>
 </html>

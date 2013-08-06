@@ -2,55 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script type="text/javascript">
-              window.onscroll = function(){detectScroll();};
-              
-              function detectScroll(e)
-              {
-                  setTimeout(function(){changeNav();},200);
-              }
-              
-              function changeNav(event)
-              {
-                  
-                    var doc = document.documentElement, body = document.body;
-                    var left = (doc && doc.scrollLeft || body && body.scrollLeft || 0);
-                    var top = (doc && doc.scrollTop  || body && body.scrollTop  || 0);
-                    var navElement = document.getElementById('navigation');
-                    var siteShellElement = document.getElementById('siteShell');
-                    
-                    if(top === 0)
-                    {
-                    navElement.className = 'navBig';
-                    siteShellElement.className= 'navBig';
-                    }
-                    else
-                    {
-                    navElement.className = 'navSmall';
-                    siteShellElement.className= 'navSmall';
-                    
-                    }
-                  
-              }
-              
-              var menu = false;
-              
-              function toggleMobileMenuState()
-              {
-                  var menuElement = document.getElementById('navLinks');
-                  if(menu===false)
-                      {
-                          /*Menu is niet zichtbaar => tonen*/
-                         menuElement.style.display='block';
-                         menu = true;
-                      }
-                 else
-                     {
-                         menuElement.style.display='none';
-                         menu = false;
-                     }
-              }
-         </script>
+        <script type="text/javascript" src='/templates/jestaatnietalleen/javascript/navigatie.js'></script>
         <link href="/templates/jestaatnietalleen/css/main.css" rel="stylesheet" type="text/css" />
         <link href="/templates/jestaatnietalleen/css/smartphone-portrait.css" media="only screen and (min-device-width : 320px) and (max-device-width : 480px)" rel="stylesheet" type="text/css" />
         <link href="/templates/jestaatnietalleen/css/tablet.css" media="only screen and (max-device-height: 801px) and (orientation:landscape)" rel="stylesheet" type="text/css" />
