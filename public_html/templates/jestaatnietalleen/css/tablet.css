@@ -25,10 +25,14 @@
     -webkit-transition: top 1s;
 }
 
-#siteShell.shellNavBig {
-   padding-top: 0em;
+#siteShell.navBig {
+   padding-top: 3em;
    transition: padding-top 1s;
    -webkit-transition: padding-top 1s; /* Safari */
+}
+
+#siteShell.navSmall {
+    
 }
 
 .navBig #logo {

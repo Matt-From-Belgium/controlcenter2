@@ -22,7 +22,7 @@ body {
 
 }
 
-#siteShell.NavBig {
+#siteShell.navBig {
    padding-top: 15em;
    
    transition: padding-top ease-out 0.5s;
@@ -30,7 +30,7 @@ body {
    
 }
 
-#siteShell.NavSmall {
+#siteShell.navSmall {
    padding-top: 0em;
    transition: padding-top ease-out 0.5s;
    -webkit-transition: padding-top ease-out 0.5s; /* Safari */
