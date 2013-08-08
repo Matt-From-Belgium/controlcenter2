@@ -32,6 +32,28 @@ class nieuwsbriefValidator
 			$newerror['message'] = "Je moet een jaar opgeven";
 			return $newerror;
 		}
+                else
+                {
+                    $huidigjaar = date('Y');
+                    $vorigjaar = $huidigjaar -1;
+                    if($jaar<$vorigjaar)
+                    {
+                        $newerror['field'] = "jaar";
+			$newerror['message'] = "Het jaar is te klein";
+			return $newerror;
+                    }
+                    else
+                    {
+                        
+                        
+                        if($jaar>$huidigjaar)
+                        {
+                        $newerror['field'] = "jaar";
+			$newerror['message'] = "Het jaar mag niet groter zijn dan het huidige jaar";
+			return $newerror;                           
+                        }
+                    }
+                }
 	}
         
         function validateTitel($titel)

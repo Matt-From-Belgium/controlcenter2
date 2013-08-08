@@ -3,6 +3,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/modules/nieuwsbrief/entity/nieuwsbrief.
 require_once $_SERVER['DOCUMENT_ROOT'].'/modules/nieuwsbrief/logic/nieuwsbrieflogic.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/core/templatesystem/templatesystem.php';
 require_once $_SERVER['DOCUMENT_ROOT']."/core/logic/usermanagement/userfunctions.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/core/presentation/general/commonfunctions.php";
 
 checkPermission('nieuwsbrief','nieuwsbrieven versturen');
 
@@ -45,7 +46,8 @@ if(is_array($abonnementenlijst))
 
 if(isset($_POST['submit']) and (!is_array($errors)))
 {
-    echo 'ok';
+    showMessage('Nieuwsbrief toegevoegd', 'De nieuwsbrief werd toegevoegd aan de wachtrij. De nieuwsbrieven worden op vastgestelde tijdstippen verstuurd door de server.','/modules/nieuwsbrief/presentation/management.php','Terug naar overzicht');
+    
 }
 else
 {
