@@ -4,8 +4,8 @@
 <!CC END LOOP [errors]>
 
 <form method='post'>
-<br>Vooraam:<input type='text' name='voornaam' value='<!CC VAR [voornaam]>'>
-<br>Familienaam:<input type='text' name='familienaam' value='<!CC VAR [familienaam]>'>
-<br>Mailadres:<input type='text' name='mailadres' value='<!CC VAR [mailadres]>'>
+<br><label for='voornaam'>Voornaam:</label><input type='text' name='voornaam' value='<!CC VAR [voornaam]>'>
+<br><label for='familienaam'>Familienaam:</label><input type='text' name='familienaam' value='<!CC VAR [familienaam]>'>
+<br><label for='mailadres'>Mailadres:</label><input type='text' name='mailadres' value='<!CC VAR [mailadres]>'>
 <br><input type='submit' value='Inschrijven' name='submit'>
 </form>
