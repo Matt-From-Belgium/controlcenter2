@@ -14,6 +14,8 @@ if(isset($_POST['submit']))
 	$jaar = intval($_POST['jaar']);
 	$geselecteerdeabonnementen = $_POST['abonnement'];
 	
+        $abonnementobjecten = array();
+        
 	if(count($geselecteerdeabonnementen)>0)
 	{
 		foreach($geselecteerdeabonnementen as $key=>$value)
@@ -41,9 +43,16 @@ if(is_array($abonnementenlijst))
     }
 }
 
+if(isset($_POST['submit']) and (!is_array($errors)))
+{
+    echo 'ok';
+}
+else
+{
 $html = new htmlpage('frontend');
 $html->LoadAddin('/modules/nieuwsbrief/addins/addnieuwsbrief.tpa');
 $html->setVariable('abonnementen',$abonnementen);
 $html->setVariable('errorlist',$errors);
 $html->printHTML();
+}
 ?>

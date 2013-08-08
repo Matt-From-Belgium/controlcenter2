@@ -78,7 +78,7 @@ function addNieuwsbrief($bestand,nieuwsbrief $nieuwsbrief,array $abonnementen)
         $abonnementerror = array();
         if(count($abonnementen)==0)
         {
-            $abonnementerror['message'] = "Er moet minstens één abonnement geselecteerd worden";
+            $abonnementerror[]['message'] = "Er moet minstens één abonnement geselecteerd worden";
         }
         
         $fileerrors=$filevalidator->validateFile($bestand['nieuwsbriefbestand']);

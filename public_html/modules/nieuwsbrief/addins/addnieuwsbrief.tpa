@@ -1,15 +1,18 @@
+<h1>Nieuwsbrief toevoegen aan wachtrij</h1>
 <UL>
 <!CC LOOP [errorlist]>
 <LI><!CC LVAR [message]></LI>
 <!CC END LOOP [errorlist]>
 </UL>
 <form method='post' enctype='multipart/form-data'>
-maand  <input type='text' name='maand'> jaar <input type='text' name='jaar'>
-<p>Titel <input type='text' name='titel'>
-<p>Nieuwsbrief: 
+<h2>Nieuwsbriefgegevens</h2>
+<label for='maand'>Maand</label><input type='text' name='maand'> 
+<br><label for='jaar'>Jaar</label><input type='text' name='jaar'>
+<br><label for='titel'>Titel</label><input type='text' name='titel'>
+<h2>Nieuwsbrief: </h2>
 <!CC LOOP [abonnementen]>
 <BR><INPUT TYPE='checkbox' NAME='abonnement[]' VALUE='<!CC LVAR [id]>'><!CC LVAR [naam]>
 <!CC END LOOP [abonnementen]>
-<BR><INPUT TYPE='file' NAME='nieuwsbriefbestand'>
+<p><INPUT TYPE='file' NAME='nieuwsbriefbestand'>
 <p><input type='submit' name='submit' value='Versturen'>
 </form>
