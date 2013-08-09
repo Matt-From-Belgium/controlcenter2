@@ -1,7 +1,18 @@
+<link href="/modules/nieuwsbrief/css/nieuwsbrief.css" rel="stylesheet" type="text/css" />
 <h1>Schrijf je in voor de nieuwsbrief</h1>
+<div>
+    <!CC VAR [promotext]>
+</div>
+<!CC IFSET [errors]>
+<div class="error">
+<h1>Er er werden fouten vastgesteld:</h1>
+<ul>
 <!CC LOOP [errors]>
-<!CC LVAR [message]><BR>
+<li><!CC LVAR [message]></li>
 <!CC END LOOP [errors]>
+</ul>
+</div>
+<!CC END IFSET [errors]>
 
 <form method='post'>
 <br><label for='voornaam'>Voornaam:</label><input type='text' name='voornaam' value='<!CC VAR [voornaam]>'>

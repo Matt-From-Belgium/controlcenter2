@@ -4,6 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/modules/nieuwsbrief/entity/nieuwsbriefv
 require_once $_SERVER['DOCUMENT_ROOT'].'/modules/nieuwsbrief/data/datafuncties.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/core/email/email.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/core/entity/filevalidator.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/core/dataaccess/parameters.php';
 
 function abonneeToevoegen(abonnee $abonnee)
 {
@@ -169,5 +170,11 @@ function getNieuwsbrieven($abonnement=false)
      $aantal = count($abonnees);
      
      return $aantal;
+ }
+ 
+ function getNewsPromoText()
+ {
+     $value = dataaccess_GetParameter('NIEUWSBRIEF_PROMOTEXT');
+     return $value->getValue();
  }
 ?>

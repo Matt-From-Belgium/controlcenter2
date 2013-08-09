@@ -30,12 +30,16 @@
 	
 	if((!isset($_POST['submit'])) or is_array($errors))
 	{
+            
+        $promotext = getNewsPromoText();
+            
 	$html = new htmlpage('frontend');
 	$html->LoadAddin('/modules/nieuwsbrief/addins/subscribeform.tpa');
 	$html->setVariable("errors",$errors);
 	$html->setVariable("voornaam",$_POST['voornaam']);
 	$html->setVariable("familienaam",$_POST['familienaam']);
 	$html->setVariable("mailadres",$_POST['mailadres']);
+        $html->setVariable('promotext', $promotext);
 	$html->printHTML();
 	}
 ?>

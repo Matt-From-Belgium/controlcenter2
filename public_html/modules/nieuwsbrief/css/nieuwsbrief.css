@@ -39,4 +39,18 @@ tr.Wachtrij {
     background-color: #feeaa8;
 }
 
+.error
+{
+    width: 50em;
+    background: #CC6600;
+    color: #FFFFFF;
+    margin-left: 1em;
+    padding: 0.50em;
+}
 
+.error h1 {
+    color: #FFFFFF;
+    font-size: 1.45em;
+    padding: 0em;
+    margin: 0em;
+}
