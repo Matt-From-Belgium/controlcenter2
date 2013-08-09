@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Machine: localhost
--- Genereertijd: 12 mei 2013 om 17:19
--- Serverversie: 5.5.31-0ubuntu0.13.04.1
--- PHP-versie: 5.4.9-4ubuntu2
+-- Genereertijd: 09 aug 2013 om 21:16
+-- Serverversie: 5.5.32-0ubuntu0.13.04.1
+-- PHP-versie: 5.4.9-4ubuntu2.2
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -313,7 +313,7 @@ CREATE TABLE IF NOT EXISTS `modules` (
   `id` int(2) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `name` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Gegevens worden uitgevoerd voor tabel `modules`
@@ -350,7 +350,7 @@ INSERT INTO `parameters` (`id`, `name`, `value`, `overridable`) VALUES
 (006, 'CORE_NOACCESS_URL', '', b'1'),
 (007, 'CORE_SERVER_MAILADRESS', 'noreply@dragoneyehosting.be', b'1'),
 (008, 'CORE_DEBUG_MODE', '0', b'0'),
-(009, 'CORE_DEBUG_MAIL', 'matthias.bauw@gmail.com', b'1');
+(009, 'CORE_DEBUG_MAIL', 'matthiasba@Linux.be', b'1');
 
 -- --------------------------------------------------------
 
@@ -363,7 +363,7 @@ CREATE TABLE IF NOT EXISTS `permissions` (
   `module` int(2) unsigned zerofill DEFAULT NULL,
   `name` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- Gegevens worden uitgevoerd voor tabel `permissions`
