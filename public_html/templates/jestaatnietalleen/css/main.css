@@ -292,9 +292,12 @@ input[type='button']:active,input[type='submit']:active, select:active
 
 #siteNews {
     height: 20em;
-    width: 100%;
-    background-color: #90CA77;
     
+    background-color: #90CA77;
+    margin-left: -2em;
+    padding-left: 2em;
+    
+    width: 100%;
 }
 
 .newsItem {

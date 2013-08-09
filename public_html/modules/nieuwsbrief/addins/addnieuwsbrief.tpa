@@ -1,3 +1,4 @@
+<div class='block'>
 <h1>Nieuwsbrief toevoegen aan wachtrij</h1>
 <UL>
 <!CC LOOP [errorlist]>
@@ -31,3 +32,4 @@
 <p><INPUT TYPE='file' NAME='nieuwsbriefbestand'>
 <p><input type='submit' name='submit' value='Versturen'>
 </form>
+</div>

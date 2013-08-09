@@ -1,4 +1,6 @@
+
 <h1>Inschrijving annuleren</h1>
 Hiermee annuleer je al je inschrijvingen! Je zal geen nieuwsbrieven meer ontvangen van jestaatnietalleen.be
 <p>Ben je zeker dat je de inschrijving wenst te annuleren?
 <form method='post'><input type='submit' value="Annuleer mijn inschrijving" name="confirm"></form>
+
