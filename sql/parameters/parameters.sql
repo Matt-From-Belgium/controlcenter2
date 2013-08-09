@@ -1,6 +1,6 @@
 CREATE TABLE parameters(
 id INT(3) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT PRIMARY KEY,
 name VARCHAR(50) NOT NULL,
-value BLOB NOT NULL,
+value VARCHAR(500) NOT NULL,
 overridable BIT NOT NULL);
 CREATE UNIQUE INDEX search_by_name on parameters(name(20));

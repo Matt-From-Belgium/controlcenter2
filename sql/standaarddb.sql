@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Machine: localhost
--- Genereertijd: 09 aug 2013 om 21:16
+-- Genereertijd: 09 aug 2013 om 21:27
 -- Serverversie: 5.5.32-0ubuntu0.13.04.1
 -- PHP-versie: 5.4.9-4ubuntu2.2
 
@@ -331,7 +331,7 @@ INSERT INTO `modules` (`id`, `name`) VALUES
 CREATE TABLE IF NOT EXISTS `parameters` (
   `id` int(3) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
-  `value` varchar(50) NOT NULL,
+  `value` varchar(500) NOT NULL,
   `overridable` bit(1) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `search_by_name` (`name`(20))
