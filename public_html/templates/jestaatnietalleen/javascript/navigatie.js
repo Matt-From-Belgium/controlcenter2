@@ -1,6 +1,10 @@
 /* 
 Alle javascript functionaliteit van de navigatie
  */
+
+                     
+                 
+
               window.onscroll = function(){detectScroll();};
               
               function detectScroll(e)
@@ -16,19 +20,37 @@ Alle javascript functionaliteit van de navigatie
                     var top = (doc && doc.scrollTop  || body && body.scrollTop  || 0);
                     var navElement = document.getElementById('navigation');
                     var siteShellElement = document.getElementById('siteShell');
+                   
+                    /*Bugfix: enkel scrollen als totale gerenderde hoogte groot genoeg is*/
+                    var viewPortHeight = window.innerHeight;
+                    var shellHeight = document.getElementById('siteShell').clientHeight;
+                    var navHeight = document.getElementById('navLinks').clientHeight;
+                    var navMainHeight = document.getElementById('navMain').clientHeight;
                     
+                    
+
+                    var heightafterNavChange = shellHeight + navHeight - navMainHeight;
+                    
+
                     if(top === 0)
                     {
-                    navElement.className = 'navBig';
-                    siteShellElement.className= 'navBig';
+                        navElement.className = 'navBig';
+                        siteShellElement.className= 'navBig';
                     }
                     else
                     {
-                    navElement.className = 'navSmall';
-                    siteShellElement.className= 'navSmall';
-                    
+                        /*Enkel wanneer de hoogte na scrollen nog groter is dan de viewport hoogte moet de 
+                        * navigatie inklappen
+                        */
+                        if(heightafterNavChange>viewPortHeight)
+                        {
+                            navElement.className = 'navSmall';
+                            siteShellElement.className= 'navSmall';
+                        }
                     }
-                  
+                    
+                    
+                
               }
               
               var menu = false;

@@ -71,6 +71,15 @@ h3 {
     color: #615F61;
 }
 
+#siteShell a, #siteShell a:visited {
+    color: #E09D38;
+    font-weight:  bold;
+}
+
+#siteShell a:hover {
+    color: #FC3333;
+}
+
 label
 {
     display: inline-block;
