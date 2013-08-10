@@ -60,7 +60,7 @@ function dataaccess_AddUser($userobject,$password)
 	}
 	else
 	{
-		throw new CC2Exception("There was an error while trying to add a user","dataaccess_AddUser only accepts a userobject as argument");
+		throw new Exception("dataaccess_AddUser only accepts a userobject as argument");
 	}
 }
 
@@ -75,7 +75,7 @@ function dataaccess_UserExists($user,$id)
 	elseif(!is_string($user))
 	{	
 		#geen string en geen instance van user => exception
-		throw new CC2Exception("User validation caused an error", 'you must supply a string  for the function dataaccess_userExists()');
+		throw new Exception('you must supply a string  for the function dataaccess_userExists()');
 	}
 
 	$user = strtolower($user);
@@ -125,7 +125,7 @@ function dataaccess_MailadressExists($mailadress,$id)
 
 function dataaccess_AddUsergroup($usergroupobject)
 {
-	###Deze functie creëert een nieuwe usergroup aan de hand van aangeleverd object (instantie van klasse usergroup)
+	###Deze functie creï¿½ert een nieuwe usergroup aan de hand van aangeleverd object (instantie van klasse usergroup)
 	if($usergroupobject instanceof usergroup)
 	{
 		if(!dataaccess_UsergroupExists($usergroupobject->getName(),$usergroupobject->getId()))
@@ -161,18 +161,18 @@ function dataaccess_AddUsergroup($usergroupobject)
 		else
 		{
 			$groupname = $usergroupobject->getName();
-			throw new CC2Exception("The user management system caused an error","You tried to add a usergroup $groupname, but 	that one already exists...");
+			throw new Exception("You tried to add a usergroup $groupname, but 	that one already exists...");
 		}
 	}
 	else
 	{
-	throw new CC2Exception("The user management system caused an error","You tried to execute dataaccess_addusergroup with a parameter that is not an instance of usergroup");
+	throw new Exception("You tried to execute dataaccess_addusergroup with a parameter that is not an instance of usergroup");
 	}
 }
 
 function dataaccess_EditUsergroup($usergroupobject)
 {
-	###Deze functie creëert een nieuwe usergroup aan de hand van aangeleverd object (instantie van klasse usergroup)
+	###Deze functie creï¿½ert een nieuwe usergroup aan de hand van aangeleverd object (instantie van klasse usergroup)
 	if($usergroupobject instanceof usergroup)
 	{
 		###Eerst wordt de nieuwe groepsnaam naar de database geschreven
@@ -216,7 +216,7 @@ function dataaccess_EditUsergroup($usergroupobject)
 	}
 	else
 	{
-	throw new CC2Exception("The user management system caused an error","You tried to execute dataaccess_addusergroup with a parameter that is not an instance of usergroup");
+	throw new Exception("You tried to execute dataaccess_addusergroup with a parameter that is not an instance of usergroup");
 	}
 }
 
@@ -375,7 +375,7 @@ function dataaccess_getUser($userid)
 		}
 		else
 		{
-			throw new CC2Exception("Error while requesting user activation data","User does not exist");
+			throw new Exception("User does not exist");
 		}
 
 
@@ -492,7 +492,7 @@ function dataaccess_checkUserPassword($username,$password)
 	}
 	else
 	{
-		throw new CC2Exception("Error during user/password validation",'You need to give both a username and password in dataaccess_checkUserPassword()');
+		throw new Exception('You need to give both a username and password in dataaccess_checkUserPassword()');
 	}
 }
 
@@ -557,7 +557,7 @@ function dataaccess_searchPermission($module,$permission)
 	else
 	{
 		###er zijn geen permissions die aan de voorwaarden voldoen => Exception
-		throw new CC2Exception("There was an error in the usermanagement system","There is no permission $module::$permission");
+		throw new Exception("There is no permission $module::$permission");
 	}
 }
 
@@ -573,7 +573,7 @@ function dataaccess_getPermissions()
 	$resultarray = $db->getResultArray();
 
 	###Core is geen module maar om ervoor te zorgen dat we na het doorlopen van deze functie alle
-	###gegevens kunnen teruggeven in één array wordt er hier wel gebruik gemaakt van $moduledetail die verderop
+	###gegevens kunnen teruggeven in ï¿½ï¿½n array wordt er hier wel gebruik gemaakt van $moduledetail die verderop
 	###ook wordt gebruikt voor modules
 	$moduledetail['id']=-1;
 	$moduledetail['name']="CORE";

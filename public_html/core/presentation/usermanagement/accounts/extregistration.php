@@ -17,14 +17,9 @@ if(getSelfRegisterStatus())
 			#de gegevens correct zijn. 
 			#Wanneer errors een array is betekent het dat er fouten zijn opgetreden
 			#Wanneer errors de waarde true heeft dan is de gebruiker toegevoegd.
-			try
-			{
+
 			$errors = AddUserEXT($_POST);		
-			}
-			catch(CC2Exception $ex)
-			{
-				echo $ex->getExtendedmessage();
-			}
+
 		}
 		
 		#Het formulier moet enkel worden weergegeven wanneer er nog geen input werd gedetecteerd of

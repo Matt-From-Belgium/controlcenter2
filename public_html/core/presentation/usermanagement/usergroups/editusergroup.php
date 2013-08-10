@@ -6,8 +6,7 @@
         checkPermission("usermanagement", "manage usergroups");
         
 	$html = new htmlpage("backend");
-try
-{	
+	
 	if(isset($_POST['submit']))
 	{
 		$errormessages = editUsergroup($_POST);
@@ -75,9 +74,5 @@ try
 	$html->setVariable("message",LANG_USERGROUP_EDITED);
 	$html->printHTML();
 	}
-}
-catch(CC2Exception $ex)
-{
-	echo $ex->getExtendedMessage();
-}
+
 ?>

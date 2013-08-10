@@ -9,7 +9,7 @@ function fileaccess_getCoreLanguageFile($languagestring)
 	}
 	else
 	{
-		throw new CC2Exception("The template system caused an error","The CORE languagefile for language $languagestring could not be found at $path");
+		throw new Exception("The CORE languagefile for language $languagestring could not be found at $path");
 	}
 
 }
@@ -24,7 +24,7 @@ function fileaccess_getComponentLanguageFile($componentname,$languagestring)
 	}
 	else
 	{
-		throw new CC2Exception("The template system caused an error","The CORE component languagefile for language $languagestring could not be found at $path");
+		throw new Exception("The CORE component languagefile for language $languagestring could not be found at $path");
 	}
 
 }
@@ -42,7 +42,7 @@ function fileaccess_getModuleLanguageFile($modulename,$languagestring)
 	#gewoon in 1 taal ontwikkeld.
 	#else
 	#{
-	#	throw new CC2Exception("The template system caused an error","The module languagefile for language $languagestring could not be found at $path");
+	#	throw new Exception("The module languagefile for language $languagestring could not be found at $path");
 	#}
 
 }

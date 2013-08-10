@@ -1,4 +1,6 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'].'/core/dataaccess/parameters.php';
+
 function getLanguage()
 {
 	#Deze functie haalt de parameter CORE_LANGUAGE op maar koppelt deze ook onmiddelijk aan een taal in stringformaat
