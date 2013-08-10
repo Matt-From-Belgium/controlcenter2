@@ -12,7 +12,7 @@ function showMessage($title,$body,$link="",$linktext="",$alias='frontend')
 	
 	if(empty($title) || empty($body))
 	{
-		throw new CC2Exception('An error has occured in the templatesystem','when using showMessage you must supply both a $title and a $body');		
+		throw new Exception('when using showMessage you must supply both a $title and a $body');		
 	}
 	else
 	{
@@ -28,7 +28,7 @@ function showMessage($title,$body,$link="",$linktext="",$alias='frontend')
 			else
 			{
 				###EXCEPTION: 1 van beide waarden is ingevuld
-				throw new CC2Exception('An error has occured in the templatesystem','when using showMessage() you must leave $link and $linktext blank or supply both values');
+				throw new Exception('when using showMessage() you must leave $link and $linktext blank or supply both values');
 			}
 		}
 		

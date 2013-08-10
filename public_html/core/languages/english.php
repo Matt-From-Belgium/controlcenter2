@@ -15,4 +15,5 @@ define('LANG_ERROR_MESSAGE',"Error message");
 define('LANG_ERROR_FILE',"File");
 define('LANG_ERROR_LINE',"Line");
 define('LANG_ERROR_ENV_VARS',"Environment variables");
+define('LANG_ERROR_TRACE',"Trace");
 ?>

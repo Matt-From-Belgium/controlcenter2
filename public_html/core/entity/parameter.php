@@ -18,7 +18,7 @@ function __construct($id=-1)
 	}
 	else
 	{
-	throw new CC2Exception("Wrong type supplied","The id that was given is not numeric");
+	throw new Exception("The id that was given is not numeric");
 	}
 }
 
@@ -75,7 +75,7 @@ public function setOverridable($value)
 	}
 	else
 	{
-		throw new CC2Exception("Wrong type supplied","the overridable argument must be a boolean");
+		throw new Exception("the overridable argument must be a boolean");
 	}
 }
 }

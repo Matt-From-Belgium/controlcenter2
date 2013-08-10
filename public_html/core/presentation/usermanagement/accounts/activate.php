@@ -10,8 +10,7 @@ if(!isset($_POST['submit']))
 	if(isset($_GET['id']))
 	{
 	###Eerst worden de gegevens van de gebruiker opgehaald
-		try
-		{
+
 			$user = getUser($_GET['id']);
 			$html = new htmlpage("frontend");
 			$html->LoadAddin("/core/presentation/usermanagement/accounts/addins/activate.tpa");
@@ -26,11 +25,6 @@ if(!isset($_POST['submit']))
 			$html->setVariable("sitename",getSiteName());
 		
 			$html->PrintHTML();
-		}
-		catch(CC2Exception $ex)
-		{
-			echo "An error occured";
-		}
 
 	
 	}
