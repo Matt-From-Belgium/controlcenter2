@@ -4,6 +4,7 @@
     <tr><th><!CC LANG [LANG_ERROR_MESSAGE]></th><td><!CC VAR [message]></td></tr>
     <tr><th><!CC LANG [LANG_ERROR_FILE]></th><td><!CC VAR [file]></td></tr>
     <tr><th><!CC LANG [LANG_ERROR_LINE]></th><td><!CC VAR [line]></td></tr>
+    <tr><th><!CC LANG [LANG_ERROR_TRACE]></th><td><!CC VAR [trace]></td></tr>
 </table>
 <h2><!CC LANG [LANG_ERROR_ENV_VARS]></h2>
 <h3>POST</h3>

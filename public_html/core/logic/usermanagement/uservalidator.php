@@ -143,7 +143,7 @@ class UserValidator extends Validator
 		}	
 		else
 		{
-			throw new CC2Exception("The user validation system caused an error","You tried to execute function ValidateObject without a valid userobject as argument");
+			throw new Exception("You tried to execute function ValidateObject without a valid userobject as argument");
 		}
 	}
 	
