@@ -29,8 +29,14 @@ function createUploadMonitor(formElement)
     var title = document.createElement('div');
     title.innerHTML = filename;
     
+    //De laadbalk die moet aangeven of de upload nog bezig is
+    var loadindicator = document.createElement('div');
+    loadindicator.id = 'loadindicator';
+    loadindicator.innerHTML = "<img src='/modules/fotoalbum/presentation/assets/opladen.gif'>";
+    
     imageUploadMonitor.appendChild(title);
     imageUploadMonitor.appendChild(previewImage);
+    imageUploadMonitor.appendChild(loadindicator);
     
     uploadsDiv.appendChild(imageUploadMonitor);
     
@@ -38,11 +44,12 @@ function createUploadMonitor(formElement)
     var ajax = new ajaxTransaction('uploadForm');
     ajax.destination='/modules/fotoalbum/logic/albumlogic.php';
     ajax.phpfunction='addPhoto';
-    ajax.onComplete = function(){processResponse(ajax);};
+    ajax.onComplete = function(){processResponse(ajax,imageUploadMonitor);};
     ajax.ExecuteRequest();
 }
 
-function processResponse()
+function processResponse(ajax,uploadMonitor)
 {
     alert('ok');
+    
 }
