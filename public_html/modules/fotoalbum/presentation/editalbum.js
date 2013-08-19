@@ -50,6 +50,17 @@ function createUploadMonitor(formElement)
 
 function processResponse(ajax,uploadMonitor)
 {
-    alert('ok');
     
+    var loadindicator = null;
+    
+    //We moeten op zoek naar de loadIndicator
+    for(i=0;i<uploadMonitor.childNodes.length;i++)
+        {
+            if(uploadMonitor.childNodes[i].id==='loadindicator')
+                {
+                    loadindicator = uploadMonitor.childNodes[i];
+                }
+        }
+        
+    loadindicator.innerHTML = '<img src="/modules/fotoalbum/presentation/assets/green-check-icon.png">Afbeelding opgeladen';
 }
