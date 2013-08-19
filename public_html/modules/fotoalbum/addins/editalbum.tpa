@@ -1,3 +1,4 @@
+<link href="/modules/fotoalbum/presentation/css/fotoalbum.css" rel="stylesheet" type="text/css" />
 <h1>Wijzig album '<!CC VAR [albumname]>'</h1>
 <h2>Huidige inhoud</h2>
 <h2>Foto's toevoegen</h2>

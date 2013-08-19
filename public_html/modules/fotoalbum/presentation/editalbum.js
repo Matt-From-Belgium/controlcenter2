@@ -25,6 +25,11 @@ function createUploadMonitor(formElement)
     
     //We halen de afbeelding binnen om deze te kunnen weergeven
     var previewImage = document.createElement('img');
+    previewImage.classList.add('thumb');
+    
+    var reader = new FileReader();
+    reader.onload = function(e) {previewImage.src = e.target.result;};
+    reader.readAsDataURL(file);
     
     var title = document.createElement('div');
     title.innerHTML = filename;
