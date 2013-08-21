@@ -11,3 +11,43 @@
     
 }
 
+.uploadMonitor{
+    border-style: solid;
+    border-width: 1px;
+    border-color: #CCCCCC;
+    height: 14em;
+    background-color: #dedede;
+}
+
+.uploadMonitor img{
+    height: 12em;
+    margin-right: 1em;
+    margin-left: 0.4em;
+    margin-top: 0.4em;
+}
+.uploadMonitor div {
+    float: left;   
+}
+
+.uploadMonitor h2 {
+    font-size: 1.2em;
+    margin-top: 0.2em;
+    margin-bottom: 0.2em;
+}
+
+.status div {
+    clear: both;
+}
+
+.status img {
+    height: auto;
+}
+
+.status label {
+    width: 10em;
+}
+
+.description {
+    clear: both;
+    display: block;
+}

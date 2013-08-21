@@ -69,3 +69,89 @@ function processResponse(ajax,uploadMonitor)
         
     loadindicator.innerHTML = '<img src="/modules/fotoalbum/presentation/assets/green-check-icon.png">Afbeelding opgeladen';
 }
+
+function uploadMonitor(fileName,dataUrl)
+{
+    //private vars
+    
+    //private methods
+    
+    //CONSTRUCTOR
+        //Eerst halen we de div voor de uploads op
+        var uploadList = document.getElementById('uploads');
+        
+        //We creëren de verschillende items
+            //De div met de preview
+            var previewDiv = document.createElement('div');
+            previewDiv.classList.add('preview');
+            previewDiv.innerHTML = "<img src='/modules/fotoalbum/photos/13.jpg'>";
+            
+            //Het rechterdeel met de statusgegevens
+            var statusDiv = document.createElement('div');
+            statusDiv.classList.add('status');
+            
+                //De bestandsnaam
+                var filename = document.createElement('h2');
+                filename.innerHTML = fileName;
+                
+                //progressindicator
+                var progressIndicator = document.createElement('div');
+                progressIndicator.innerHTML = "<img src='"+"/modules/fotoalbum/presentation/assets/opladen.gif"+"'> Bezig met kopiëren naar de server...";
+                
+                statusDiv.appendChild(filename);
+                statusDiv.appendChild(progressIndicator);
+                
+        
+        //We hangen alles samen op één div met de class uploadMonitor
+        var mainDiv = document.createElement('div');
+        mainDiv.classList.add('uploadMonitor');
+        
+        mainDiv.appendChild(previewDiv);
+        mainDiv.appendChild(statusDiv);
+        
+        uploadList.appendChild(mainDiv);
+        
+    
+    
+    //public methods
+    this.changeStatus= function(status,errorlist)
+    {
+        if(status==='ok')
+            {
+                progressIndicator.innerHTML = '<img src="/modules/fotoalbum/presentation/assets/tick.png">Afbeelding opgeladen';
+                
+                //We moeten nu een formulier voorzien om een beschrijving in te voeren
+                var descriptionForm = document.createElement('div');
+                descriptionForm.classList.add('description');
+                descriptionForm.innerHTML = "<form method='post'><label for='description'>Beschrijving</label><textarea cols=50 rows=5></textarea><br/><label for='verzend'>&nbsp;</label><input type='submit' id='verzend' value='verzend'></form>";
+                statusDiv.appendChild(descriptionForm);
+            }
+       else if(status==='error')
+           {
+               progressIndicator.innerHTML = '<img src="/modules/fotoalbum/presentation/assets/cross.png">Afbeelding niet opgeladen';
+               
+               var errors = document.createElement('ul');
+              
+               if(errorlist !== undefined)
+               {
+                    for(i=0;i<errorlist.length;i++)
+                    {
+                        var error = document.createElement('li');
+                        error.innerHTML = errorlist[i];
+                        errors.appendChild(error);
+                    }
+               }
+               
+               progressIndicator.appendChild(errors);
+           }
+    };
+}
+
+function addUpload()
+{
+    var test = new uploadMonitor('test.jpg');
+    
+    var errorlist = new Array("een","twee");
+    
+    test.changeStatus('ok');
+}
