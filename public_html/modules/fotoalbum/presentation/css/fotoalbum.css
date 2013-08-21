@@ -51,3 +51,9 @@
     clear: both;
     display: block;
 }
+
+.preview {
+    width: 20em;
+    margin-right: 2em;
+    overflow: hidden;
+}

@@ -6,27 +6,9 @@
 <input type='hidden' id='album' name='album' value='<!CC VAR [albumid]>'>
 Selecteer een bestand <input type='file' id='photopath' name='photopath'><input type="button" onClick="javascript:uploadPicture('uploadForm')"></form>
 <h2>Uploads</h2>
-<div id="uploads">
-    <div class='uploadMonitor'>
-        <div class='preview'>
-        <img src='/modules/fotoalbum/photos/13.jpg'>
-        </div>
-        <div class='status'>
-            <h2>Ditisdetitel.jpg</h2>
-            <div>
-            <img src='/modules/fotoalbum/presentation/assets/opladen.gif'> Bezig met kopiëren naar de server...
-            </div>
-            <div class='description'>
-                <form method='post'>
-                    <label for='description'>Beschrijving</label><textarea cols=50 rows=5></textarea>
-                    <br/><label for='verzend'>&nbsp;</label><input type='submit' id='verzend' value='verzend'>
-                </form>
-            </div>
-        </div>
-        
-    </div>
+<div id="uploads">      
 </div>
-<input type='button' onClick='javascript:addUpload()'>
+</div>
 <script type="text/javascript" SRC="/core/presentation/ajax/ajaxtransaction.js"></script>
 <script type="text/javascript" src="/modules/fotoalbum/presentation/editalbum.js"></script>
 

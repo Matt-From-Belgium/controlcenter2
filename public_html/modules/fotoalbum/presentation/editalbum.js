@@ -6,10 +6,10 @@ function uploadPicture(formElement)
     var uploadTransaction = new ajaxTransaction(formElement);
     
     //Nu moeten we de voortgang tonen
-    createUploadMonitor(formElement);
+    createUpload(formElement);
 }
 
-function createUploadMonitor(formElement)
+function createUpload(formElement)
 {
     //We halen de referentie naar de div uploads op
     var uploadsDiv = document.getElementById('uploads');
@@ -21,60 +21,49 @@ function createUploadMonitor(formElement)
     var file = document.getElementById('photopath').files[0];
     
     var filename = file.name;
-    var filesize = file.size;
     
-    //We halen de afbeelding binnen om deze te kunnen weergeven
-    var previewImage = document.createElement('img');
-    previewImage.classList.add('thumb');
-    
-    var reader = new FileReader();
-    reader.onload = function(e) {previewImage.src = e.target.result;};
-    reader.readAsDataURL(file);
-    
-    var title = document.createElement('div');
-    title.innerHTML = filename;
-    
-    //De laadbalk die moet aangeven of de upload nog bezig is
-    var loadindicator = document.createElement('div');
-    loadindicator.id = 'loadindicator';
-    loadindicator.innerHTML = "<img src='/modules/fotoalbum/presentation/assets/opladen.gif'>";
-    
-    imageUploadMonitor.appendChild(title);
-    imageUploadMonitor.appendChild(previewImage);
-    imageUploadMonitor.appendChild(loadindicator);
-    
-    uploadsDiv.appendChild(imageUploadMonitor);
+    //We maken de loadmonitor aan
+    var upload = new uploadMonitor(file);
     
     //Nu kunnen we het bestand beginnen uploaden
     var ajax = new ajaxTransaction('uploadForm');
     ajax.destination='/modules/fotoalbum/logic/albumlogic.php';
     ajax.phpfunction='addPhoto';
-    ajax.onComplete = function(){processResponse(ajax,imageUploadMonitor);};
+    ajax.onComplete = function(){processResponse(ajax,upload);};
     ajax.ExecuteRequest();
 }
 
-function processResponse(ajax,uploadMonitor)
+function processResponse(ajax,upload)
 {
-    
-    var loadindicator = null;
-    
-    //We moeten op zoek naar de loadIndicator
-    for(i=0;i<uploadMonitor.childNodes.length;i++)
+    //Eerst kijken we of de upload succesvol was
+    if(ajax.successIndicator)
         {
-            if(uploadMonitor.childNodes[i].id==='loadindicator')
-                {
-                    loadindicator = uploadMonitor.childNodes[i];
-                }
+            //We passen de uploadMonitor aan
+            upload.changeStatus('ok');
         }
-        
-    loadindicator.innerHTML = '<img src="/modules/fotoalbum/presentation/assets/green-check-icon.png">Afbeelding opgeladen';
+    else
+        {
+            //Er is iets fout gelopen, errors weergeven
+            var errors = new Array();
+            
+            for(i=0;i<ajax.errorList.length;i++)
+                {
+                    errors.push(ajax.errorList[i].value);
+                }
+            
+            upload.changeStatus('error',errors);
+        }
 }
 
-function uploadMonitor(fileName,dataUrl)
+function uploadMonitor(file)
 {
-    //private vars
-    
     //private methods
+    function loadPreview(file)
+    {
+            var reader = new FileReader();
+            reader.onload = function(e) {previewElement.src = e.target.result;};
+            reader.readAsDataURL(file);
+    }
     
     //CONSTRUCTOR
         //Eerst halen we de div voor de uploads op
@@ -84,7 +73,11 @@ function uploadMonitor(fileName,dataUrl)
             //De div met de preview
             var previewDiv = document.createElement('div');
             previewDiv.classList.add('preview');
-            previewDiv.innerHTML = "<img src='/modules/fotoalbum/photos/13.jpg'>";
+            
+                var previewElement = document.createElement('img');
+                loadPreview(file);
+                
+            previewDiv.appendChild(previewElement);
             
             //Het rechterdeel met de statusgegevens
             var statusDiv = document.createElement('div');
@@ -92,7 +85,7 @@ function uploadMonitor(fileName,dataUrl)
             
                 //De bestandsnaam
                 var filename = document.createElement('h2');
-                filename.innerHTML = fileName;
+                filename.innerHTML = file.name;
                 
                 //progressindicator
                 var progressIndicator = document.createElement('div');
@@ -147,11 +140,12 @@ function uploadMonitor(fileName,dataUrl)
     };
 }
 
+/*DEBUG
 function addUpload()
 {
     var test = new uploadMonitor('test.jpg');
     
     var errorlist = new Array("een","twee");
     
-    test.changeStatus('ok');
-}
+    
+}*/
