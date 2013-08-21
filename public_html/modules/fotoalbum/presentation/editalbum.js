@@ -4,21 +4,28 @@ function uploadPicture(formElement)
     //Alle formuliervelden worden automatisch klaargezet in het transactieobject
     
     var uploadTransaction = new ajaxTransaction(formElement);
+    var albumId = document.getElementById('album').value;
     
+    //We halen de gegevens van het geselecteerde bestand op
+    var selectedFiles = document.getElementById('photopath').files;
+    
+    for(i=0;i<selectedFiles.length;i++)
+        {
+            createUpload(selectedFiles[i],albumId);
+        }
+    /*
     //Nu moeten we de voortgang tonen
-    createUpload(formElement);
+    createUpload(file);
+    */
+   
+    //We maken het uploadformulier leeg
+    document.getElementById('photopath').value='';
 }
 
-function createUpload(formElement)
+function createUpload(file,albumId)
 {
     //We halen de referentie naar de div uploads op
     var uploadsDiv = document.getElementById('uploads');
- 
-    //We creëren de basisDiv waar we alles aan zullen hangen
-    var imageUploadMonitor = document.createElement('div');
-    
-    //We halen de gegevens van het geselecteerde bestand op
-    var file = document.getElementById('photopath').files[0];
     
     var filename = file.name;
     
@@ -26,7 +33,15 @@ function createUpload(formElement)
     var upload = new uploadMonitor(file);
     
     //Nu kunnen we het bestand beginnen uploaden
+    
+    /*
     var ajax = new ajaxTransaction('uploadForm');
+    */
+   
+    var ajax = new ajaxTransaction();
+    ajax.addData('album',albumId);
+    ajax.addData('photopath',file);
+    
     ajax.destination='/modules/fotoalbum/logic/albumlogic.php';
     ajax.phpfunction='addPhoto';
     ajax.onComplete = function(){processResponse(ajax,upload);};
@@ -102,7 +117,17 @@ function uploadMonitor(file)
         mainDiv.appendChild(previewDiv);
         mainDiv.appendChild(statusDiv);
         
-        uploadList.appendChild(mainDiv);
+        
+       //we willen de mainDiv nu zichtbaar maken door deze aan uploads toe te voegen
+       //We willen dat deze bovenaan komt.
+        var uploads =uploadList.getElementsByClassName('uploadMonitor');
+        
+        if(uploads !== undefined)
+            {
+                uploadList.insertBefore(mainDiv,uploads[0]);
+            }
+       
+        //uploadList.appendChild(mainDiv);
         
     
     
