@@ -12,6 +12,7 @@
 }
 
 .uploadMonitor{
+    position: relative;
     border-style: solid;
     border-width: 1px;
     border-color: #CCCCCC;
@@ -56,4 +57,11 @@
     width: 20em;
     margin-right: 2em;
     overflow: hidden;
+}
+
+.closeMonitor {
+    clear: both;
+    position: absolute;
+    right: 0px;
+    top: 0px;
 }

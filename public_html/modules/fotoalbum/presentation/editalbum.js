@@ -112,7 +112,14 @@ function uploadMonitor(file)
                 
                 statusDiv.appendChild(filename);
                 statusDiv.appendChild(progressIndicator);
-                
+             
+             //Een absoluut gepositioneerde div voor de afsluitknop
+             var closeButton = document.createElement('div');
+             closeButton.classList.add('closeMonitor');
+             closeButton.innerHTML='Afsluiten';
+             
+             
+             
         
         //We hangen alles samen op één div met de class uploadMonitor
         var mainDiv = document.createElement('div');
@@ -120,6 +127,7 @@ function uploadMonitor(file)
         
         mainDiv.appendChild(previewDiv);
         mainDiv.appendChild(statusDiv);
+        mainDiv.appendChild(closeButton);
         
         
        //we willen de mainDiv nu zichtbaar maken door deze aan uploads toe te voegen
