@@ -123,4 +123,34 @@ function data_addPhoto(photo $photo)
     
     return $newphoto;
 }
+
+function data_editPhoto(photo $photo)
+{
+    $query = "UPDATE photos SET album=@albumid,description='@description' WHERE photos.id=@photoid";
+    
+    $db = new DataConnection();
+    $db->setQuery($query);
+    $db->setAttribute('albumid', $photo->getAlbumId());
+    $db->setAttribute('description', $photo->getDescription());
+    $db->setAttribute('photoid', $photo->getId());
+    
+    $db->ExecuteQuery();
+}
+
+function data_getPhotoById($id)
+{
+    ###We zoeken de foto gegevens op en creëren een object
+    $query = 'SELECT id,album,description FROM photos WHERE photos.id=@id';
+    
+    $db = new DataConnection();
+    $db->setQuery($query);
+    $db->setAttribute('id',$id);
+    
+    $db->ExecuteQuery();
+    
+    $result = $db->GetResultArray();
+    
+    $photo = new photo($result[0]['album'],$result[0]['id'],$result[0]['description']);
+    return $photo;
+}
 ?>

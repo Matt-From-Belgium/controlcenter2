@@ -54,6 +54,7 @@ function processResponse(ajax,upload)
     if(ajax.successIndicator)
         {
             //We passen de uploadMonitor aan
+            upload.newId = ajax.result[0].id;
             upload.changeStatus('ok');
         }
     else
@@ -72,6 +73,9 @@ function processResponse(ajax,upload)
 
 function uploadMonitor(file)
 {
+    //Public vars
+    this.newId= null;
+    
     //private methods
     function loadPreview(file)
     {
@@ -141,7 +145,7 @@ function uploadMonitor(file)
                 //We moeten nu een formulier voorzien om een beschrijving in te voeren
                 var descriptionForm = document.createElement('div');
                 descriptionForm.classList.add('description');
-                descriptionForm.innerHTML = "<form method='post'><label for='description'>Beschrijving</label><textarea cols=50 rows=5></textarea><br/><label for='verzend'>&nbsp;</label><input type='submit' id='verzend' value='verzend'></form>";
+                descriptionForm.innerHTML = "<form method='post'><input type='hidden' id='photoid' value='"+ this.newId +"'><label for='description'>Beschrijving</label><textarea cols=50 rows=5 id='description'></textarea><br/><label for='verzend'>&nbsp;</label><input type='button' id='verzend' value='verzend' onClick='javascript:saveDescription(this)'></form>";
                 statusDiv.appendChild(descriptionForm);
             }
        else if(status==='error')
@@ -163,6 +167,50 @@ function uploadMonitor(file)
                progressIndicator.appendChild(errors);
            }
     };
+}
+
+function saveDescription(formElement)
+{
+    //We krijgen als formElement de submitknop waarop geklikt werd.
+    //We gaan dus eerst op zoek naar het bovenliggende form element
+    var form = formElement.parentNode;
+    var photoid = null;
+    var description = null;
+    //Aangezien getElementById blijkbaar niet werkt op element-niveau moeten we
+    //lussen om de elementen te overlopen
+    for(i=0;i<form.childNodes.length;i++)
+        {
+            if(form.childNodes[i].id==='photoid')
+                {
+                    photoid=form.childNodes[i].value;
+                }
+            if(form.childNodes[i].id === 'description')
+                {
+                    description = form.childNodes[i].value;
+                }
+        }
+        
+        //We hebben de nodige variabelen opgehaald, nu kunnen we alles verzenden
+        changeDescription(photoid,description);
+}
+
+function changeDescription(id,value)
+{
+    var ajax = new ajaxTransaction();
+    
+    ajax.addData('id',id);
+    ajax.addData('description',value);
+    
+    ajax.destination='/modules/fotoalbum/logic/albumlogic.php';
+    ajax.phpfunction='changeDescription';
+    
+    ajax.onComplete= function(){changeDescriptionComplete(ajax)};
+    ajax.ExecuteRequest();
+}
+
+function changeDescriptionComplete(ajax)
+{
+    
 }
 
 /*DEBUG
