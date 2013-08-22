@@ -1,15 +1,24 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'].'/core/logic/parameters.php';
 
 class fileValidator
 {   
     ###privates
-    private $extension = null;
+    private $extension = Array();
     private $maxSize = null;
     
     
     public function setExtension($extension)
     {
-        $this->extension=$extension;
+        ###REVISIE 1: verschillende extensies toegelaten
+        if(is_array($extension))
+        {
+            $this->extension=$extension;
+        }
+        else
+        {
+        $this->extension[]=$extension;
+        }
     }
     
     public function setMaxSize($sizeinMB)
@@ -25,9 +34,18 @@ class fileValidator
             $parts = explode('.',$filearray['name']);
             $extension = end($parts);
             
-            if($extension <> $this->extension)
+            ###REVISIE 1: verschillende extensies
+            if(array_search($extension, $this->extension)===FALSE)
             {
-                $newerror['message']="Enkel ".$this->extension."-bestanden worden aanvaard";
+                ###REVISIE 1: verschillende extensies
+                $extensionstring = $this->extension[0];
+               
+                for($i=1;$i<count($this->extension);$i++)
+                {
+                    $extensionstring = $extensionstring.', '.$this->extension[$i];
+                }
+                
+                $newerror['message']="Enkel bestanden met extensies $extensionstring worden aanvaard";
                 $errors[]=$newerror;
             }
             
@@ -45,9 +63,18 @@ class fileValidator
         else
         {
             ###Wel fouten bij het opladen
-            $newerror['message']="Er is iets foutgelopen bij het uploaden";
-            
-            $errors[] = $newerror;
+            ###REVISIE1: Als CORE_DEBUG_MODE gelijk is aan 1 tonen we de fout
+            ###Anders tonen we gewoon de melding 'er is iets fout gelopen bij het uploaden'
+            if(getDebugMode())
+            {
+               $newerror['message']="DEBUG: errorcode ".$filearray['error'];
+               $errors[] = $newerror;
+            }
+            else
+            {
+                $newerror['message']="Er is iets fout gelopen bij het uploaden";
+                $errors[] = $newerror;
+            }
         }
         
         return $errors;
