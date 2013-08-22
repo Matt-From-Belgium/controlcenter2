@@ -115,8 +115,9 @@ function uploadMonitor(file)
              
              //Een absoluut gepositioneerde div voor de afsluitknop
              var closeButton = document.createElement('div');
+             closeButton.style.visibility = 'hidden';
              closeButton.classList.add('closeMonitor');
-             closeButton.innerHTML='Afsluiten';
+             closeButton.innerHTML='<img src="/modules/fotoalbum/presentation/assets/close-icon.png">';
              
              
              
@@ -153,8 +154,13 @@ function uploadMonitor(file)
                 //We moeten nu een formulier voorzien om een beschrijving in te voeren
                 var descriptionForm = document.createElement('div');
                 descriptionForm.classList.add('description');
-                descriptionForm.innerHTML = "<form method='post'><input type='hidden' id='photoid' value='"+ this.newId +"'><label for='description'>Beschrijving</label><textarea cols=50 rows=5 id='description'></textarea><br/><label for='verzend'>&nbsp;</label><input type='button' id='verzend' value='verzend' onClick='javascript:saveDescription(this)'></form>";
+                descriptionForm.innerHTML = "<form method='post'><input type='hidden' id='photoid' value='"+ this.newId +"'><label for='description'>Beschrijving</label><textarea cols=50 rows=5 id='description'></textarea><br/><label for='verzend'>&nbsp;</label><input type='button' id='verzend' value='verzend' onClick='javascript:saveDescription(this)'><span id='loadIndicator' style='visibility:hidden'>Bezig met opslaan...</span></form>";
                 statusDiv.appendChild(descriptionForm);
+                
+                //De afsluitenknop mag nu getoond worden
+                mainDiv.onmouseover = function(){closeButton.style.visibility='visible';closeButton.style.cursor='pointer';};
+                mainDiv.onmouseout = function(){closeButton.style.visibility='hidden';};
+                closeButton.onclick = function(){uploadList.removeChild(mainDiv);};
             }
        else if(status==='error')
            {
@@ -184,6 +190,7 @@ function saveDescription(formElement)
     var form = formElement.parentNode;
     var photoid = null;
     var description = null;
+    var loadIndicator = null;
     //Aangezien getElementById blijkbaar niet werkt op element-niveau moeten we
     //lussen om de elementen te overlopen
     for(i=0;i<form.childNodes.length;i++)
@@ -196,10 +203,31 @@ function saveDescription(formElement)
                 {
                     description = form.childNodes[i].value;
                 }
+            if(form.childNodes[i].id === 'loadIndicator')
+                {
+                    //We halen de span loadIndicator eruit om daar de vooruitgang te tonen
+                    loadIndicator = form.childNodes[i];
+                }
         }
         
+    //We maken de loadIndicator zichtbaar om te tonen aan de gebruiker dat er iets gebeurt
+    //We stellen ook de innerHTML in want het kan de tweede keer zijn dat er gewijzigd wordt
+    loadIndicator.innerHTML = 'Bezig met opslaan...';
+    loadIndicator.style.visibility='visible';
+        
+    var ajax = new ajaxTransaction();
+    
+    ajax.addData('id',photoid);
+    ajax.addData('description',description);
+    
+    ajax.destination='/modules/fotoalbum/logic/albumlogic.php';
+    ajax.phpfunction='changeDescription';
+    
+    ajax.onComplete= function(){changeDescriptionComplete(ajax,loadIndicator);};
+    ajax.ExecuteRequest();
+        
         //We hebben de nodige variabelen opgehaald, nu kunnen we alles verzenden
-        changeDescription(photoid,description);
+        //changeDescription(photoid,description,loadIndicator);
 }
 
 function changeDescription(id,value)
@@ -216,9 +244,16 @@ function changeDescription(id,value)
     ajax.ExecuteRequest();
 }
 
-function changeDescriptionComplete(ajax)
+function changeDescriptionComplete(ajax,loadIndicator)
 {
-    
+    if(ajax.successIndicator)
+    {
+        loadIndicator.innerHTML = 'Wijzigingen opgeslagen';
+    }
+    else
+    {
+        loadIndicator.innerHTML = 'FOUT!';
+    }
 }
 
 /*DEBUG

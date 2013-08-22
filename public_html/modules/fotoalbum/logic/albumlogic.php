@@ -85,6 +85,7 @@ function addPhoto()
     ###Eerst moeten we controleren of het bestand aan de vereisten voldoet
     $filevalidator = new fileValidator();
     $filevalidator->setExtension('jpg');
+    $filevalidator->setExtension('png');
     $filevalidator->setMaxSize(5);
     $errors=$filevalidator->validateFile($_FILES['photopath']);
     
