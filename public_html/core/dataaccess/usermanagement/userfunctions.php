@@ -12,7 +12,7 @@ function dataaccess_AddUser($userobject,$password)
 	if($userobject instanceof User)
 	{
 		#Eerst moet de query gedefinieerd worden
-		$query = "INSERT INTO users (username,password,passwordchangerequired,userconfirmation,adminconfirmation,realname,realfirstname,mailadress,website,country) VALUES ('@username','@password','@passwordchangerequired','@userconfirmation','@adminconfirmation','@realname','@realfirstname','@mailadress','@website','@country')";
+		$query = "INSERT INTO users (username,password,passwordchangerequired,userconfirmation,adminconfirmation,realname,realfirstname,mailadress) VALUES ('@username','@password','@passwordchangerequired','@userconfirmation','@adminconfirmation','@realname','@realfirstname','@mailadress')";
 		
 		include $_SERVER['DOCUMENT_ROOT']."/core/pathtoconfig.php";
 		require_once $pathtoconfig."/salt.php";
@@ -31,8 +31,7 @@ function dataaccess_AddUser($userobject,$password)
 		$db->setAttribute("realname",$userobject->getRealname());
 		$db->setAttribute("realfirstname",$userobject->getRealFirstname());
 		$db->setAttribute("mailadress",$userobject->getMailadress());
-		$db->setAttribute("website",$userobject->getWebsite());
-		$db->setAttribute("country",$userobject->getCountry());
+
 		
 		$db->ExecuteQuery();
 		
@@ -330,7 +329,7 @@ function dataaccess_getUser($userid)
 {
 	###Deze functie haalt de gebruikersgegevens op van de gebruiker met id $userid
 
-		$query = "SELECT users.id,users.username,users.passwordchangerequired,users.userconfirmation,users.adminconfirmation,users.realname,users.realfirstname,users.mailadress,users.website,users.country FROM users WHERE users.id=@userid";
+		$query = "SELECT users.id,users.username,users.passwordchangerequired,users.userconfirmation,users.adminconfirmation,users.realname,users.realfirstname,users.mailadress FROM users WHERE users.id=@userid";
 	
 		$db = new dataconnection;
 		$db->setQuery($query);
@@ -347,8 +346,6 @@ function dataaccess_getUser($userid)
 			$returneduser->setRealName($realname);
 			$returneduser->setRealFirstName($realfirstname);
 			$returneduser->setMailAdress($mailadress);
-			$returneduser->setWebsite($website);
-			$returneduser->setCountry($country);
 			$returneduser->setUserConfirmationStatus($userconfirmation);
 			$returneduser->setAdminConfirmationStatus($adminconfirmation);
 			
@@ -409,7 +406,7 @@ function dataaccess_EditUser($userobject,$password)
 	
 	
 		###De overige wijzigingen worden naar de database geschreven.
-		$query = "UPDATE users SET users.passwordchangerequired='@passwordchangerequired',users.userconfirmation='@userconfirmation',users.adminconfirmation='@adminconfirmation',users.realname='@realname',users.realfirstname='@realfirstname',users.mailadress='@mailadress',users.website='@website',users.country='@country' WHERE users.id=@userid";
+		$query = "UPDATE users SET users.passwordchangerequired='@passwordchangerequired',users.userconfirmation='@userconfirmation',users.adminconfirmation='@adminconfirmation',users.realname='@realname',users.realfirstname='@realfirstname',users.mailadress='@mailadress' WHERE users.id=@userid";
 		
 		$db = new dataconnection;
 		$db->setQuery($query);
@@ -419,8 +416,6 @@ function dataaccess_EditUser($userobject,$password)
 		$db->setAttribute("realname",$userobject->getRealName());
 		$db->setAttribute("realfirstname",$userobject->getRealFirstName());
 		$db->setAttribute("mailadress",$userobject->getMailAdress());
-		$db->setAttribute("website",$userobject->getWebsite());
-		$db->setAttribute("country",$userobject->getCountry());
 		$db->setAttribute("userid",$userobject->getId());
 		
 

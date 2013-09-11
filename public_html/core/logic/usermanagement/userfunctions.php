@@ -29,8 +29,6 @@ function AddUserINT($inputarray)
 	$newuser->setMailadress($inputarray['mail']);
 	$newuser->setRealName($inputarray['lastname']);
 	$newuser->setRealFirstName($inputarray['firstname']);
-	$newuser->setWebsite($inputarray['website']);
-	$newuser->setCountry($inputarray['country']);
 	
 	###Het gaat om een intern geregistreerde gebruiker => userconfirmation en adminconfirmation komen op 1
 	$newuser->setUserConfirmationStatus('1');

@@ -95,19 +95,6 @@ class UserValidator extends Validator
 		}
 	}
 	
-	private function ValidateWebsite($value)
-	{
-	}
-	
-	private function ValidateCountry($value)
-	{
-		if(empty($value))
-		{
-			$returnmessage['fieldname'] = "country";
-			$returnmessage['message'] = LANG_ERROR_COUNTRY_EMPTY;
-			return $returnmessage;
-		}
-	}
 
 	public function ValidateObject($object)
 	{
@@ -124,8 +111,6 @@ class UserValidator extends Validator
 			$errormessages[] = $this->ValidateMail($object->getMailadress(),$id);
 			$errormessages[] = $this->ValidateFirstname($object->GetRealFirstname());
 			$errormessages[] = $this->ValidateLastname($object->getRealname());
-			$errormessages[] = $this->ValidateWebsite($object->getWebsite());
-			$errormessages[] = $this->ValidateCountry($object->getCountry());
 			
 			##Nu hebben we een array $errormessages met foutmeldingen maar ook de geslaagde validaties
 			##hebben een entry in deze array (deze is leeg maar ze is er...)=>De lege items moeten gewist worden.

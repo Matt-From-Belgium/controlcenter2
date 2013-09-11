@@ -16,14 +16,7 @@
 	<HR>
 	<label for="firstname"><!CC LANG [LANG_FIRSTNAME]></LABEL><INPUT TYPE="text" id="firstname" name="firstname" MAXLENGTH="30" value="<!CC VAR [firstname]>"/><BR />
 	<label for="lastname"><!CC LANG [LANG_LASTNAME]></label><input type="text" id="lastname" name="lastname" maxlength="30" value="<!CC VAR [lastname]>" /><BR />
-	<label for="website"><!CC LANG [LANG_WEBSITE]></label><input type="text" id="website" name="website" maxlength="50" value="<!CC VAR [website]>"/><BR />
-	<label for="country"><!CC LANG [LANG_COUNTRY]></label>
-	<select id="country" name="country">
-	<OPTION VALUE=''><!CC LANG [LANG_SELECT_COUNTRY]></OPTION>
-	<!CC LOOP [countrylist]>
-	<OPTION VALUE='<!CC LVAR [countrycode]>' <!CC LVAR [selectionflag]>><!CC LANG [LANG_COUNTRY_<!CC LVAR [countrycode]>]></OPTION>
-	<!CC END LOOP [countrylist]>
-	</select><BR />
+	
 	<hr>
 	<h2><!CC LANG [LANG_USERGROUP_MEMBERSHIP]></h2>
 	<div id="usergrouplist">
