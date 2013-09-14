@@ -130,4 +130,35 @@ function getDebugMailadress()
     $debugmail = dataaccess_GetParameter('CORE_DEBUG_MAIL');
     return $debugmail->getValue();
 }
+
+function getFacebookLoginStatus()
+{
+    ###Geeft true of false terug afhankelijk of facebook gebruikt kan worden om accounts te creëren
+    $fbloginstatus = dataaccess_GetParameter('CORE_FB_LOGIN_ENABLED');
+    
+    if($fbloginstatus->getValue()==1)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+function getFacebookAppID()
+{
+    ###Deze functie haalt de publieke facebook appid op
+    $appid = dataaccess_GetParameter('CORE_FB_APPID');
+    
+    return $appid->getValue();
+}
+
+function getFacebookSappId()
+{
+    ###Deze functie haalt de geheime appid op
+    $sappid = dataaccess_GetParameter('CORE_FB_SAPPID');
+    
+    return $sappid->getValue();
+}
 ?>
