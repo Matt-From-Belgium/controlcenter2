@@ -29,7 +29,12 @@ if(getSelfRegisterStatus())
 		
 			$html->setVariable("errorlist",$errors);
 
-		
+                        ###De variabele fbintegration zal ervoor zorgen dat de link voor facebooklogin zichtbaar is
+                        if(getFacebookLoginStatus())
+                        {
+                        $html->setVariable('fbintegration', true);
+                        }
+                        
 			#De waarden die eventueel bij een eerste foutieve ingave werden ingevoerd moeten hier opnieuw
 			#doorgegeven worden zodat de gebruiker het formulier kan aanvullen.
 			$html->setVariable("userid",-1);

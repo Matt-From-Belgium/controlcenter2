@@ -161,4 +161,91 @@ function getFacebookSappId()
     
     return $sappid->getValue();
 }
+
+function getFacebookJavaCode()
+{
+    $appid = getFacebookAppID();
+    
+    $code = "<div id=\"fb-root\"></div>
+        <script>
+          function facebookStatus(){
+            this.sdkLoaded = false;
+            this.userID = null;
+            this.authStatus = false;
+          };
+        
+        var facebookStatus = new facebookStatus();
+        
+          window.fbAsyncInit = function() {
+            // init the FB JS SDK
+            FB.init({
+              appId      : '$appid',                        // App ID from the app dashboard
+              channelUrl : '//controlcenter2.dragoneyehosting.be/core/social/facebook/javascript/channel.html', // Channel file for x-domain comms
+              status     : true,                                 // Check Facebook Login status
+              xfbml      : true                                  // Look for social plugins on the page
+            });
+            
+            // Additional initialization code such as adding Event Listeners goes here                 
+
+            var message = null;
+            var userID = null;
+
+            FB.getLoginStatus(function(response){
+                if(response.status === 'connected')
+                    {
+                        //Ingelogd + auth ok
+                        message = 'connected';
+                        userID = response.authResponse.userID;
+                    }
+                else if(response.status === 'not_authorized')
+                    {
+                        //Ingelogd maar geen auth
+                        message = 'not_authorized';
+                    }
+                else
+                    {
+                        //Niet ingelogd, we weten dus helemaal niks;
+                        message = false;
+                    }
+                    
+                        //Wanneer de SDK geladen is wordt een event uitgestuurd met gegevens
+                         //Over de status van de gebruiker
+                         var fbSDKLoadedEvent = new CustomEvent('fbSDKLoaded',
+                         {
+                                 detail: {
+                                         status: message,
+                                         userID: userID,
+                                 },
+                                 bubbles: true,
+                                 cancelable: true
+                         }
+                         );
+                
+                 document.getElementById('fb-root').dispatchEvent(fbSDKLoadedEvent);
+            });
+          };
+          
+          //We linken hier een functie aan het fbSDKLoadedEvent zodat we
+          //facebookStatus kunnen invullen met de juiste waarden
+          document.addEventListener('fbSDKLoaded',saveFbParams,false);
+          
+          function saveFbParams(e)
+          {
+            facebookStatus.sdkLoaded = true;
+            facebookStatus.userID= e.detail.userID;
+            facebookStatus.authStatus = e.detail.message;
+          }
+
+          // Load the SDK asynchronously
+          (function(d, s, id){
+             var js, fjs = d.getElementsByTagName(s)[0];
+             if (d.getElementById(id)) {return;}
+             js = d.createElement(s); js.id = id;
+             js.src = \"//connect.facebook.net/en_US/all.js\";
+             fjs.parentNode.insertBefore(js, fjs);
+           }(document, 'script', 'facebook-jssdk'));
+        </script>";
+    
+    return $code;
+}
 ?>

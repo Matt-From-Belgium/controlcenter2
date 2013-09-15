@@ -11,6 +11,12 @@ class htmlpage
 	private $html;
 	private $variables;
 	private $bovenliggendearraystring;
+        
+        /*#Social integration: als enableFacebookAPI true is dan wordt de Javascript facebook-api automatisch
+         *Toegevoegd aan de code. Wanneer de parameter CORE_FB_LOGIN_ENABLED 1 is dan is de standaardwaarde hier true
+         *In alle andere gevallen is de standaardwaarde false maar kan deze manueel ingeschakeld worden
+         */
+        private $enableFacebookAPI;
 
 	
 ###CONSTRUCTOR FUNCTIONALITEIT
@@ -29,6 +35,16 @@ class htmlpage
 				/*#De taalconstanten worden opgehaald				
 				$this->LoadLanguageFiles();	
 				*/
+                                
+                                /*De alias is verwerkt, nu moeten we kijken welke standaardwaarde $this->enableFacebookAPI moet krijgen*/
+                                 if(getFacebookLoginStatus())
+                                 {
+                                     $this->enableFacebookAPI=true;
+                                 }
+                                 else
+                                 {
+                                     $this->enableFacebookAPI=false;
+                                 }
 			}
 			else
 			{
@@ -116,8 +132,18 @@ class htmlpage
 			}
 		}while($hits>0);
 		
+                
+                ###Facebook integratie: Nu de HTML compleet is voegen we indien nodig de Facebook Javascript api toe
+                ###We doen dat net na de body tag. Maar... enkel wanneer $this->enableFacebookAPI = true (zie commentaar bovenaan)
+                if($this->enableFacebookAPI)
+                {
+                    $pattern = "/(?i)<\s*body\s*>/";
+                    $html =  @preg_replace_callback($pattern,array($this,'addFacebookAPI'), $html, 1);
+                }
 		
 		return $html;
+                 
+                 
 	}
 	
 	private function SecondParse($matches)
@@ -178,6 +204,19 @@ class htmlpage
 			}
 	}
 	
+        private function addFacebookAPI($matches)
+        {
+            require_once $_SERVER['DOCUMENT_ROOT'].'/core/logic/parameters.php';
+            
+            ###Body tag moet natuurlijk behouden blijven
+            $html = '<body>';
+            $fbjscode = getFacebookJavaCode();
+            
+            $html = $html.$fbjscode;
+            
+            return $html;
+            
+        }
 #CUSTOM TAG PARSE FUNCTIES
 	private function parseAddin($matches)
 	{
@@ -464,6 +503,19 @@ class htmlpage
 		$codetoinsert = $codestring . "\n<PageContent>\n";
 		$this->html = preg_replace($pattern,$codetoinsert,$this->html);
 	}
+        
+        public function setFacebookIntegration($value)
+        {
+            if(is_bool($value))
+            {
+                ###Enkel booleans worden aanvaard
+                $this->enableFacebookAPI = $value;
+            }
+            else
+            {
+                throw new Exception('setFacebookIntegration aanvaardt enkel een boolean als argument');
+            }
+        }
 	
 	public function PrintHTML()
 	{

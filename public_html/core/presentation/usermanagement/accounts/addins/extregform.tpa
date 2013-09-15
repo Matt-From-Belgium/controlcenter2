@@ -7,7 +7,9 @@
 <!CC END LOOP [errorlist]>
 </UL>
 <!CC END IFSET [errorlist]>
-
+<!CC IFSET [fbintegration]>
+    <a href='#'>Login met Facebook</a>
+<!CC END IFSET [fbintegration]>
 <FORM method="post" enctype="application/x-www-form-urlencoded" id="userform">
 	<input type="hidden" id="userid" name="userid" value='<!CC var [userid]>'>
 	<label for="text"><!CC LANG [LANG_USERNAME]></LABEL><INPUT TYPE="text" id="username" name="username" MAXLENGTH="15" value="<!CC VAR [username]>"/><BR />
