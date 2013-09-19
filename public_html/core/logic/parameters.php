@@ -1,5 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'].'/core/dataaccess/parameters.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/core/entity/ajaxresponse.php';
 
 function getLanguage()
 {
@@ -166,16 +167,23 @@ function getFacebookJavaCode()
 {
     $appid = getFacebookAppID();
     
+    $desiredscope = getFacebookScope();
+    
     $code = "<div id=\"fb-root\"></div>
         <script>
+
+
           function facebookStatus(){
             this.sdkLoaded = false;
             this.userID = null;
             this.authStatus = false;
+            this.desiredScope = '$desiredscope';
           };
+        
         
         var facebookStatus = new facebookStatus();
         
+
           window.fbAsyncInit = function() {
             // init the FB JS SDK
             FB.init({
@@ -233,7 +241,7 @@ function getFacebookJavaCode()
           {
             facebookStatus.sdkLoaded = true;
             facebookStatus.userID= e.detail.userID;
-            facebookStatus.authStatus = e.detail.message;
+            facebookStatus.authStatus = e.detail.status;
           }
 
           // Load the SDK asynchronously
@@ -247,5 +255,24 @@ function getFacebookJavaCode()
         </script>";
     
     return $code;
+}
+
+function getFacebookScope()
+{
+    $scope=dataaccess_GetParameter('CORE_FB_SCOPE');
+    return $scope->getValue();
+}
+
+function getFacebookScopeAjax()
+{
+    $data = array();
+    $data['scope']=getFacebookScope();
+    
+    $result = new ajaxResponse('ok');
+    $result->addField('scope');
+    
+    $result->addData($data);
+    $result->getXML();
+    
 }
 ?>

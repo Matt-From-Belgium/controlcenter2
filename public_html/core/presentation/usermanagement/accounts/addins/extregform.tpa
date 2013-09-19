@@ -1,4 +1,5 @@
-
+<script type="text/javascript" SRC="/core/presentation/ajax/ajaxtransaction.js"></script>
+<script language='javascript' src='/core/presentation/usermanagement/accounts/fbRegister.js'></script>
 <H1 id="userformheader"><!CC LANG [LANG_CREATE_NEW_ACCOUNT]></H1>
 <!CC IFSET [errorlist]>
 <UL id="uservalidator" class="errorbox">
@@ -8,10 +9,11 @@
 </UL>
 <!CC END IFSET [errorlist]>
 <!CC IFSET [fbintegration]>
-    <a href='#'>Login met Facebook</a>
+    <a href='javascript:registerWithFacebook()'>Login met Facebook</a>
 <!CC END IFSET [fbintegration]>
 <FORM method="post" enctype="application/x-www-form-urlencoded" id="userform">
 	<input type="hidden" id="userid" name="userid" value='<!CC var [userid]>'>
+        <input type="hidden" id="facebookid" name="facebookid" value="">
 	<label for="text"><!CC LANG [LANG_USERNAME]></LABEL><INPUT TYPE="text" id="username" name="username" MAXLENGTH="15" value="<!CC VAR [username]>"/><BR />
     <label for="mail"><!CC LANG [LANG_MAIL]></label><input type="text" id="mail" name="mail" MAXLENGTH="50" VALUE="<!CC VAR [mail]>" /><BR />
 <label for="firstname"><!CC LANG [LANG_FIRSTNAME]></LABEL><INPUT TYPE="text" id="firstname" name="firstname" MAXLENGTH="30" value="<!CC VAR [firstname]>"/><BR />

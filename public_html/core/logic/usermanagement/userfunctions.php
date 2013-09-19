@@ -82,8 +82,6 @@ function AddUserEXT($inputarray)
 	$newuser->setMailadress($inputarray['mail']);
 	$newuser->setRealName($inputarray['lastname']);
 	$newuser->setRealFirstName($inputarray['firstname']);
-	$newuser->setWebsite($inputarray['website']);
-	$newuser->setCountry($inputarray['country']);
 	
 	###Het gaat om een extern gecre�erde gebruiker => nakijken of er activatie nodig is
 	if(getUserActivationParameter())
