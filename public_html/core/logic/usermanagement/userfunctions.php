@@ -162,6 +162,91 @@ function AddUserEXT($inputarray)
 	return $errormessages;
 }
 
+function addUserEXT_FB($inputarray)
+{
+    	##Deze functie handelt de externe aanmaak van een gebruikersaccount via Facebook af
+	require_once $_SERVER['DOCUMENT_ROOT']."/core/entity/user.php";
+	require_once $_SERVER['DOCUMENT_ROOT']."/core/logic/usermanagement/uservalidator.php";
+	require_once $_SERVER['DOCUMENT_ROOT']."/core/dataaccess/usermanagement/userfunctions.php";
+	require_once $_SERVER['DOCUMENT_ROOT']."/core/logic/parameters.php";
+	
+	#De inputarray zal normaal de waarde krijgen van $_POST
+	#er moet een userobject gebouwd worden met deze gegevens en dat moet dan door de validator gehaald worden
+	$newuser = new user($inputarray['username']);
+	$newuser->setFacebookID($inputarray['facebookid']);
+	$newuser->setMailadress($inputarray['mail']);
+	$newuser->setRealName($inputarray['lastname']);
+	$newuser->setRealFirstName($inputarray['firstname']);
+	
+	###Het gaat om een extern gecre�erde gebruiker => nakijken of er activatie nodig is
+	if(getUserActivationParameter())
+	{
+		###er is wel gebruikersactivatie nodig => confirmationstatus is 0
+		$newuser->setUserConfirmationStatus(0);
+	}
+	else
+	{
+		###er is geen gebruikersactivatie nodig => confirmationstatus wordt 1
+		$newuser->setUserConfirmationStatus(1);
+	}
+	
+	if(getAdminActivationParameter())
+	{
+		###er is administrator toestemming nodig voor een account-> adminconfimationstatus is 0
+		$newuser->setAdminConfirmationStatus(0);
+	}
+	else
+	{
+		###er is geen admin toestemming nodig voor een account => adminconfirmationstatus is 1
+		$newuser->setAdminConfirmationStatus(1);
+        }
+        
+	$validator = new UserValidator();
+	$errormessages = $validator->ValidateObject($newuser);
+	
+	###Het gaat om externe registratie => nakijken bij welke gebruikersgroep de account moet ingedeeld worden
+	$defaultusergroupid = dataaccess_getDefaultUsergroup();
+	
+	###het id van de defaultusergroup moet nu in het userobject verwerkt worden zodat het in de database geregistreerd kan worden
+	$usergrouparray[] = $defaultusergroupid;
+	$newuser->setUsergroups($usergrouparray);	
+	
+	if(empty($errormessages))
+	{
+		###Geen fouten => gebruiker toevoegen
+                
+                ###Aangezien de gebruiker geen wachtwoord moet opgeven en we ook niet willen dat het wachtwoord achterhaald kan worden
+                ###plaatsen we een willekeurige waarde als wachtwoord
+                $fictionalpass = md5(microtime());
+            
+		$newuserid=dataaccess_Adduser($newuser,$fictionalpass);
+		
+		###Afhankelijk van de activatieprocedure die is ingesteld moet er een mail gestuurd worden naar de gebruiker.
+		if(getUserActivationParameter())
+		{
+			###Bevestiging van het mailadres door de gebruiker is nodig => mail naar de gebruiker versturen.
+			require_once $_SERVER['DOCUMENT_ROOT']."/core/email/email.php";
+			$activatiemail = new Email();
+			$activatiemail->setTo($newuser->getMailadress());
+			
+			$sitename = getSiteName();
+			
+			$activatiemail->setSubject(LANG_USER_SELF_ACTIVATION_WELCOMETO . "$sitename");
+			$activatiemail->setMessageAddin("/core/presentation/usermanagement/accounts/addins/useractivationmail.tpa");
+			$activatiemail->setVariable("sitename","$sitename");
+			
+			###De activatielink moet verwijzen naar het userid dat werd teruggegeven door dataaccess_adduser
+			#en naar het activatiescript op de server waarop Controlcenter2 draait.
+			$activatielink = "http://".$_SERVER['HTTP_HOST']."/core/presentation/usermanagement/accounts/activate.php?id=".$newuserid;
+			
+			$activatiemail->setVariable("activationlink",$activatielink);
+			$activatiemail->Send();
+		}
+	}
+
+	return $errormessages;
+}
+
 function AddUsergroup($inputarray)
 {
 	require_once $_SERVER['DOCUMENT_ROOT']."/core/logic/usermanagement/usergroupvalidator.php";

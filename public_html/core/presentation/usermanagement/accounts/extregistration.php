@@ -12,13 +12,24 @@ if(getSelfRegisterStatus())
 
 		if(isset($_POST['submit']))
 		{
+                    ###Wanneer er met Facebook geregistreerd wordt kunnen we dat herkennen aan de waarde 
+                    #$_POST['facebookid']
+                    if(empty($_POST['facebookid']))
+                    {
+                        #Facebookid heeft geen waarde => normale loginprocedure
+                        
 			#ValidateUser() controleert de gebruiker en schrijft deze weg naar de database als 
 			#de gegevens correct zijn. 
 			#Wanneer errors een array is betekent het dat er fouten zijn opgetreden
 			#Wanneer errors de waarde true heeft dan is de gebruiker toegevoegd.
 
 			$errors = AddUserEXT($_POST);		
-
+                    }
+                    else
+                    {
+                        $errors = addUserEXT_FB($_POST);
+                    }
+                    
 		}
 		
 		#Het formulier moet enkel worden weergegeven wanneer er nog geen input werd gedetecteerd of

@@ -43,17 +43,17 @@ function getFacebookUserDetails()
         document.getElementById('username').value = response.first_name+' '+response.last_name;
         document.getElementById('facebookid').value = response.id;
         
-        document.getElementById('mail').disabled = true;
+        document.getElementById('mail').readOnly = true;
         document.getElementById('mail').value = response.email;
         
-        document.getElementById('firstname').disabled = true;
+        document.getElementById('firstname').readOnly = true;
         document.getElementById('firstname').value = response.first_name;
         
-        document.getElementById('lastname').disabled = true;
+        document.getElementById('lastname').readOnly = true;
         document.getElementById('lastname').value = response.last_name;
         
-        document.getElementById('password').disabled = true;
-        document.getElementById('password2').disabled = true;
+        document.getElementById('password').readOnly = true;
+        document.getElementById('password2').readOnly = true;
     });
 }
 

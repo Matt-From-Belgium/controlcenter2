@@ -12,7 +12,7 @@ function dataaccess_AddUser($userobject,$password)
 	if($userobject instanceof User)
 	{
 		#Eerst moet de query gedefinieerd worden
-		$query = "INSERT INTO users (username,password,passwordchangerequired,userconfirmation,adminconfirmation,realname,realfirstname,mailadress) VALUES ('@username','@password','@passwordchangerequired','@userconfirmation','@adminconfirmation','@realname','@realfirstname','@mailadress')";
+		$query = "INSERT INTO users (username,facebookid,password,passwordchangerequired,userconfirmation,adminconfirmation,realname,realfirstname,mailadress) VALUES ('@username','@facebookid','@password','@passwordchangerequired','@userconfirmation','@adminconfirmation','@realname','@realfirstname','@mailadress')";
 		
 		include $_SERVER['DOCUMENT_ROOT']."/core/pathtoconfig.php";
 		require_once $pathtoconfig."/salt.php";
@@ -24,6 +24,7 @@ function dataaccess_AddUser($userobject,$password)
 		$db = new dataconnection;
 		$db->setQuery($query);
 		$db->setAttribute("username",$userobject->getUsername());
+                $db->setAttribute("facebookid",$userobject->getFacebookID());
 		$db->setAttribute("password",$password);
 		$db->setAttribute("passwordchangerequired",$userobject->getPasswordchangeRequired());
 		$db->setAttribute("userconfirmation",$userobject->getUserConfirmationStatus());

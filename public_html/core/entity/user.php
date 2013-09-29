@@ -5,12 +5,11 @@ class User
 
 ###DEFINITIE VAN PRIVATES
 	private $id="";
+        private $facebook_id="";
 	private $username="";
 	private $realname="";
 	private $realfirstname="";
 	private $mailadress="";
-	private $website="";
-	private $country="";
 	private $usergroups="";
 	private $userconfirmation="0";
 	private $adminconfirmation="0";
@@ -28,6 +27,16 @@ class User
 	{
 		return $this->id;
 	}
+        
+        public function getFacebookID()
+        {
+            return $this->facebook_id;
+        }
+        
+        public function setFacebookID($id)
+        {
+            $this->facebook_id=$id;
+        }
 
 	public function getUsername()
 	{
@@ -62,26 +71,6 @@ class User
 	public function getMailadress()
 	{
 		return $this->mailadress;
-	}
-	
-	public function setWebsite($value)
-	{
-		$this->website = strtolower($value);
-	}
-	
-	public function getWebsite()
-	{
-		return $this->website;
-	}
-	
-	public function setCountry($value)
-	{
-		$this->country = $value;
-	}
-	
-	public function getCountry()
-	{
-		return $this->country;
 	}
 	
 	public function setUserConfirmationStatus($value)
