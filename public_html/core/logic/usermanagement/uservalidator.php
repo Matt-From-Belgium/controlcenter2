@@ -107,11 +107,21 @@ class UserValidator extends Validator
 		{
 			$id = $object->getId();
 			##Validatie wordt gestart
-			$errormessages[] = $this->ValidateUsername($object->getUsername(),$id);
-			$errormessages[] = $this->ValidateMail($object->getMailadress(),$id);
-			$errormessages[] = $this->ValidateFirstname($object->GetRealFirstname());
-			$errormessages[] = $this->ValidateLastname($object->getRealname());
-			
+                        if(empty($object->getFacebookID()))
+                        {
+                            ###Het gaat niet om een Facebook registratie
+                            $errormessages[] = $this->ValidateUsername($object->getUsername(),$id);
+                            $errormessages[] = $this->ValidateMail($object->getMailadress(),$id);
+                            $errormessages[] = $this->ValidateFirstname($object->GetRealFirstname());
+                            $errormessages[] = $this->ValidateLastname($object->getRealname());
+                        }
+                        else
+                        {
+                            ###Het gaat wel om facebook login
+                            #Dus moet er minder gecontroleerd worden, of op een andere manier
+                            
+                        }
+                        
 			##Nu hebben we een array $errormessages met foutmeldingen maar ook de geslaagde validaties
 			##hebben een entry in deze array (deze is leeg maar ze is er...)=>De lege items moeten gewist worden.
 			foreach($errormessages as $key=>$value)
