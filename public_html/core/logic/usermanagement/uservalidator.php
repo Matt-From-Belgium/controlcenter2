@@ -94,6 +94,17 @@ class UserValidator extends Validator
 			return $returnmessage;
 		}
 	}
+        
+        public function ValidateFacebookID($id)
+        {
+             if(!dataaccess_FacebookIdUnique($id))
+             {
+                 $returnmessage['fieldname'] = "facebiijud";
+		 $returnmessage['message'] = LANG_ERROR_FACEBOOK_DUPLICATE_ID;
+		 return $returnmessage;
+             }
+
+        }
 	
 
 	public function ValidateObject($object)
@@ -106,8 +117,10 @@ class UserValidator extends Validator
 		if($object instanceof user)
 		{
 			$id = $object->getId();
+                        
 			##Validatie wordt gestart
-                        if(empty($object->getFacebookID()))
+                        $facebookId = $object->getFacebookID();
+                        if(empty($facebookId))
                         {
                             ###Het gaat niet om een Facebook registratie
                             $errormessages[] = $this->ValidateUsername($object->getUsername(),$id);
@@ -119,6 +132,14 @@ class UserValidator extends Validator
                         {
                             ###Het gaat wel om facebook login
                             #Dus moet er minder gecontroleerd worden, of op een andere manier
+                            
+                            #We controleren username en mail omdat die manueel gewijzigd mogen worden
+                            $errormessages[] = $this->ValidateUsername($object->getUsername(),$id);
+                            $errormessages[] = $this->ValidateMail($object->getMailadress(),$id);
+                        
+                            #We controleren ook of er nog geen gebruiker is met dit facebook-profiel
+                            $errormessages[] = $this->ValidateFacebookID($object->getFacebookID());
+                            
                             
                         }
                         

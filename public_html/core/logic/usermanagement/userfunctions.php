@@ -175,9 +175,35 @@ function addUserEXT_FB($inputarray)
 	$newuser = new user($inputarray['username']);
 	$newuser->setFacebookID($inputarray['facebookid']);
 	$newuser->setMailadress($inputarray['mail']);
-	$newuser->setRealName($inputarray['lastname']);
-	$newuser->setRealFirstName($inputarray['firstname']);
-	
+        
+        if(empty($inputarray['facebookid']))
+        {
+            ###Geen Facebook account, waarden van formulier gebruiken
+            $newuser->setRealName($inputarray['lastname']);
+            $newuser->setRealFirstName($inputarray['firstname']);
+        }
+	else
+        {
+            ###Wel Facebook account, voornaam en achternaam uit profiel halen
+            #Voornaam en familienaam komen uit het facebookprofiel
+                            require_once($_SERVER['DOCUMENT_ROOT'].'/core/social/facebook/php/facebook.php');
+                            
+                            $fbappid = getFacebookAppID();
+                            $fbsappid = getFacebookSappId();
+                            
+                            $config = array();
+                            $config['appId']=$fbappid;
+                            $config['secret']=$fbsappid;
+                            $config['fileUpload']=false;
+                            
+                            $facebook = new Facebook($config);
+                            
+                            $profile=$facebook->api('/me','get');
+                            $newuser->setRealFirstname($profile['first_name']);
+                            $newuser->setRealname($profile['last_name']);
+        }
+
+                                    
 	###Het gaat om een extern gecre�erde gebruiker => nakijken of er activatie nodig is
 	if(getUserActivationParameter())
 	{

@@ -190,6 +190,7 @@ function getFacebookJavaCode()
               appId      : '$appid',                        // App ID from the app dashboard
               channelUrl : '//controlcenter2.dragoneyehosting.be/core/social/facebook/javascript/channel.html', // Channel file for x-domain comms
               status     : true,                                 // Check Facebook Login status
+              cookie     : true,                                 //Share session with PHP
               xfbml      : true                                  // Look for social plugins on the page
             });
             

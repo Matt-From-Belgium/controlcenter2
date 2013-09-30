@@ -55,7 +55,8 @@ if(getSelfRegisterStatus())
 			$html->setVariable("mail",$_POST['mail']);
 			$html->setVariable("firstname",$_POST['firstname']);
 			$html->setVariable("lastname",$_POST['lastname']);
-		
+                        $html->setVariable('facebookid', $_POST['facebookid']);
+                        
 			$html->LoadAddin("/core/presentation/usermanagement/accounts/addins/extregform.tpa");
 
 

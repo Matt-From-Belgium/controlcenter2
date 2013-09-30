@@ -41,6 +41,7 @@ define('LANG_ERROR_NOACCESS',"U heeft geen toegang tot deze pagina. Als u zich a
 define('LANG_ERROR_NEWPASSWORD_REQUIRED',"Uw nieuwe wachtwoord mag niet hetzelfde zijn als het oude wachtwoord.");
 define('LANG_ERROR_NEWPASS_EMPTY',"U moet een nieuw wachtwoord opgeven");
 define('LANG_ERROR_PASSWORD_INCORRECT',"Het huidige wachtwoord dat u opgaf is niet correct");
+define('LANG_ERROR_FACEBOOK_DUPLICATE_ID',"We hebben al een account gekoppeld aan uw Facebook-profiel");
 
 #OTHER MESSAGES
 define('LANG_USER_ADDED_TITLE',"Gebruiker aangemaakt");
@@ -125,7 +126,7 @@ define('LANG_COUNTRY_KM',"Comoros");
 define('LANG_COUNTRY_CG',"Congo");
 define('LANG_COUNTRY_CK',"Cook Islands");
 define('LANG_COUNTRY_CR',"Costa Rica");
-define('LANG_COUNTRY_CI',"Côte d'Ivoire");
+define('LANG_COUNTRY_CI',"Cï¿½te d'Ivoire");
 define('LANG_COUNTRY_HR',"Croatia");
 define('LANG_COUNTRY_CU',"Cuba");
 define('LANG_COUNTRY_CY',"Cyprus");
@@ -251,11 +252,11 @@ define('LANG_COUNTRY_PL',"Poland");
 define('LANG_COUNTRY_PT',"Portugal");
 define('LANG_COUNTRY_PR',"Puerto Rico");
 define('LANG_COUNTRY_QA',"Quatar");
-define('LANG_COUNTRY_RE',"Réunion");
+define('LANG_COUNTRY_RE',"Rï¿½union");
 define('LANG_COUNTRY_RO',"Romania");
 define('LANG_COUNTRY_RU',"Russian Federation");
 define('LANG_COUNTRY_RW',"Rwanda");
-define('LANG_COUNTRY_BL',"Saint Barthélemy");
+define('LANG_COUNTRY_BL',"Saint Barthï¿½lemy");
 define('LANG_COUNTRY_SH',"Saint Helena");
 define('LANG_COUNTRY_KN',"Saint Kitts and Nevis");
 define('LANG_COUNTRY_LC',"Lucia");
