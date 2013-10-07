@@ -33,11 +33,19 @@ hs.addSlideshow({
 <link href="/extracss/equus.css" rel="stylesheet" type="text/css" />
 <div id="ongelikt">
 	<div id="ongelikt-inhoud">
-<iframe width="480" height="360" src="//www.youtube.com/embed/nrCD8ZCh8Xs" frameborder="0" allowfullscreen></iframe>
+<div id="video"><iframe width="480" height="360" src="//www.youtube.com/embed/nrCD8ZCh8Xs" frameborder="0" allowfullscreen></iframe></div>
 	</div>
 
 </div>
-<h2>test</h2>
+<h2>Wanneer?</h2>
+<h3>EQUUS wordt opgevoerd op volgende data:
+<ul>
+<li>vrijdag 29 november 2013 om 20u</li>
+<li>zaterdag 30 november 2013 om 20u</li>
+<li>zondag 1 december 2013 om 20u</li>
+</ul></h3>
+<h3><b><a href='/modules/ticketserver/bestel.php'>Bestel je tickets online! Snel, veilig en zo gemakkelijk!</a></b></h3>
+<h2>Inhoud</h2>
 <h3>Psychiater Martin Dysart (Tom Durie) wordt aangewezen om 
 een onderzoek in te stellen naar dit onbeschrijfelijke gedrag 
 en graaft diep in de psyche van Alan. Hij wordt hierbij gecon-
@@ -47,3 +55,5 @@ Schapman) een sleutelrol speelt. Ook ontdekt Dysart dat het
 paard voor Alan een bijzondere symbolische betekenis heeft. 
 In dit alles wordt Dysart ook geconfronteerd met de duistere 
 demonen die in zijn eigen ziel begraven liggen.</h3>
+<h2>Cast</h2>
+<h3>TODO</h3>

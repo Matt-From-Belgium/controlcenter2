@@ -2,7 +2,8 @@
 /* CSS Document */
 #ongelikt
 {
-	background:url(/images/equus/header.png) no-repeat top;
+	background:url(/images/equus/header.png) no-repeat 0px 20px;
+        
 	padding-top: 85px;
         padding-left: 250px;
         height: 400px;
@@ -41,4 +42,8 @@ h3 {
     font-weight:  normal;
     padding-left: 20px;
     font-size: 15px;
+}
+
+#video {
+    padding-top: 10px;
 }
