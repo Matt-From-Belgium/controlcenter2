@@ -1,0 +1,87 @@
+    
+<script type="text/javascript" src="/highslide/highslide-with-gallery.js"></script>
+<script type="text/javascript">
+hs.graphicsDir = '/highslide/graphics/';
+hs.align = 'center';
+hs.transitions = ['expand', 'crossfade'];
+hs.outlineType = 'rounded-white';
+hs.fadeInOut = true;
+//hs.dimmingOpacity = 0.75;
+
+// Add the controlbar
+hs.addSlideshow({
+	//slideshowGroup: 'group1',
+	interval: 5000,
+	repeat: false,
+	useControls: true,
+	fixedControls: 'fit',
+	overlayOptions: {
+		opacity: .75,
+		position: 'bottom center',
+		hideOnMouseOut: true
+	}
+});
+</script>
+
+<link rel="stylesheet" type="text/css" href="/highslide/highslide.css" />
+<link href="/extracss/equus.css" rel="stylesheet" type="text/css" />
+<div id="ongelikt">
+	<div id="ongelikt-inhoud">
+    <div id="video">
+        <!--<iframe width="480" height="360" src="//www.youtube.com/embed/nrCD8ZCh8Xs" frameborder="0" allowfullscreen></iframe>-->
+        <video id='equusvid'width=480preload="auto">
+            <source src="/assets/equus.mp4" type="video/mp4">
+            <source src="/assets/equus.ogv" type="video/ogg">
+        </video>
+    </div>
+</div>
+<script LANGUAGE='javascript'>
+var video = document.getElementById('equusvid');
+video.canplaythrough = video.play();
+video.load();
+video.canplaythrough = video.play();
+</script>
+</div>
+<h2>Wanneer?</h2>
+<h3>EQUUS wordt opgevoerd op volgende data:
+<ul>
+<li>vrijdag 29 november 2013 om 20u</li>
+<li>zaterdag 30 november 2013 om 20u</li>
+<li>zondag 1 december 2013 om 19u</li>
+</ul></h3>
+<h3><b><a href='/modules/ticketserver/bestel.php'>Bestel je tickets online! Snel, veilig en zo gemakkelijk!</a></b></h3>
+<h2>Inhoud</h2>
+<h3>Wat brengt Alan Strang (Jeroen Logghe), een jonge, 17-jarige,
+verwarde stalknecht, ertoe om zes paarden met een metalen
+haak blind te maken? Psychiater Martin Dysart (Tom Durie) wordt aangewezen om 
+een onderzoek in te stellen naar dit onbeschrijfelijke gedrag 
+en graaft diep in de psyche van Alan. Hij wordt hierbij geconfronteerd met Alan’s seksuele passie en waanzin en zijn streng 
+religieuze opvoeding waarin zijn moeder Dora Strang (Ella 
+Schapman) een sleutelrol speelt. Ook ontdekt Dysart dat het 
+paard voor Alan een bijzondere symbolische betekenis heeft. 
+In dit alles wordt Dysart ook geconfronteerd met de duistere 
+demonen die in zijn eigen ziel begraven liggen.</h3>
+<h2>Cast</h2>
+<h3>
+<table>
+<tr><th>Alan Strang</th><td>Jeroen Logghe</td></tr>
+<tr><th>Martin Dysart</th><td>Tom Durie</td></tr>
+<tr><th>Frank Strang</th><td>Kristof Decapmaker</td></tr>
+<tr><th>Dora Strang</th><td>Ella Schapman</td></tr>
+<tr><th>Hesther Salomon</th><td>Leen Remaut</td></tr>
+<tr><th>Jill Mason</th><td>Ellen Onraedt</td></tr>
+<tr><th>Harry Dalton</th><td>Maxim Vermeersch</td></tr>
+<tr><th>Jonge ruiter</th><td>Jeroen Vanbelleghem</td></tr>
+<tr><th>Verpleegster</th><td>Sofie Neuville</td></tr>
+<tr><th valign='top'>Paarden</th><td>
+    <ul>
+    <li>Rien Maartens</li>
+    <li>Robrecht Deschepper</li>
+    <li>Robrecht Neyrinck</li>
+    <li>Yarne Deschepper</li>
+    <li>Jarne Waeyaert</li>
+    </ul>
+</td></tr>
+
+</table>
+</h3>

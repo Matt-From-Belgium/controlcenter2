@@ -2,8 +2,10 @@
 /* CSS Document */
 #ongelikt
 {
-	background:url(/images/ongelikt/ongelikt-header.jpg) no-repeat top;
-	padding-top: 185px;
+	background:url(/images/equus/header.png) no-repeat top;
+	padding-top: 85px;
+        padding-left: 250px;
+        height: 300px;
 }
 
 #ongelikt-inhoud
@@ -15,6 +17,7 @@
 	font-style: normal;
 	font-weight: normal;
 	font-variant: normal;
+        color: #FFFFFF;
 }
 
 #ongelikt-inhoud h2
