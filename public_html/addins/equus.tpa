@@ -1,10 +1,4 @@
-    <meta property="fb:app_id"               content="316000411841757"> 
-     <meta property="og:type"                 content="website"> 
-     <meta property="og:url"                  content="http://www.detoverlantaarn.be/equus.php"> 
-     <meta property="og:image"                content="http://www.detoverlantaarn.be/images/equus/fbavatar.png">
-     <meta property="og:title"                content="EQUUS">
-     <meta property="og:description"          content="Wat brengt Alan Strang (Jeroen Logghe), een jonge, 17-jarige, verwarde stalknecht, ertoe om zes paarden met een metalen 
-haak blind te maken?">
+    
 <script type="text/javascript" src="/highslide/highslide-with-gallery.js"></script>
 <script type="text/javascript">
 hs.graphicsDir = '/highslide/graphics/';
@@ -35,7 +29,7 @@ hs.addSlideshow({
 	<div id="ongelikt-inhoud">
     <div id="video">
         <!--<iframe width="480" height="360" src="//www.youtube.com/embed/nrCD8ZCh8Xs" frameborder="0" allowfullscreen></iframe>-->
-        <video id='equusvid'width=480 height=360 preload="auto">
+        <video id='equusvid'width=480preload="auto">
             <source src="/assets/equus.mp4" type="video/mp4">
             <source src="/assets/equus.ogv" type="video/ogg">
         </video>
