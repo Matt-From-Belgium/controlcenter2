@@ -3,14 +3,14 @@
 <p>
 <font face="Arial, Helvetica, sans-serif" color="#333333">
 <center><table border=0 cellspacing=0 cellpadding=0 width=450>
-<tr><td>Voorstelling: </td><td><b>De Muizenval</b></td></tr>
+<tr><td>Voorstelling: </td><td><b>EQUUS</b></td></tr>
 <tr><td>Zaal:</td><td><b>CC Het Kruispunt, Maria Doolaeghestraat 2b 8600 Diksmuide</b>
 <tr><td>Datum:</td><td><b><!CC VAR [datum]></b></td></tr>
 <tr><td>Aantal Tickets:</td><td><b><!CC VAR [aantal]></b></td></tr>
 <tr><td>Totale prijs:</td><td><b><!CC VAR [totaal]> EUR</b></td></tr>
 </table></center>
 </font>
-<p>Gelieve binnen de <!CC VAR [herinneringstermijn]> dagen <!CC VAR [totaal]> EUR over te schrijven op rekeningnummer BE23 8508 1297 6091 (BIC: SPAA BE 22. De oude schrijfwijze van het rekeningnummer is 850-8129760-91) met als vermelding 'internetreservatie <!CC VAR [reservatienummer]> De Muizenval'
+<p>Gelieve binnen de <!CC VAR [herinneringstermijn]> dagen <!CC VAR [totaal]> EUR over te schrijven op rekeningnummer BE23 8508 1297 6091 (BIC: SPAA BE 22. De oude schrijfwijze van het rekeningnummer is 850-8129760-91) met als vermelding 'internetreservatie <!CC VAR [reservatienummer]> EQUUS'
 <p>Uw reservatie wordt pas definitief van zodra wij uw betaling ontvangen hebben, uw tickets liggen klaar aan de kassa op de avond van de voorstelling. 
 <p>Wij danken u voor uw reservatie en wensen u alvast een aangename voorstelling,
 <p>Jeugdtheater De Toverlantaarn
