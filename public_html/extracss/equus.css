@@ -48,6 +48,15 @@ h3 {
     padding-top: 50px;
 }
 
+#video-overlay {
+    position: absolute;
+    vertical-align:  middle;
+    top: 220px;
+    right: 200px;
+    visibility: hidden;
+    opacity: 0.8;
+}
+
 ul{
     list-style: none;
 }

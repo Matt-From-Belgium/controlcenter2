@@ -28,7 +28,10 @@ hs.addSlideshow({
 <div id="ongelikt">
 	<div id="ongelikt-inhoud">
     <div id="video">
-        <!--<iframe width="480" height="360" src="//www.youtube.com/embed/nrCD8ZCh8Xs" frameborder="0" allowfullscreen></iframe>-->
+        
+        <div id="video-overlay">
+            <img id='toggleimg' src='/assets/pauze.png'>
+        </div>
         <video id='equusvid'width=480preload="auto">
             <source src="/assets/equus.mp4" type="video/mp4">
             <source src="/assets/equus.ogv" type="video/ogg">
@@ -36,10 +39,34 @@ hs.addSlideshow({
     </div>
 </div>
 <script LANGUAGE='javascript'>
+
+
 var video = document.getElementById('equusvid');
+
+function togglePlay()
+{
+    if(video.paused)
+    {
+        video.play();
+        document.getElementById('toggleimg').src='/assets/pauze.png';
+    }
+    else
+    {
+        video.pause();
+        document.getElementById('toggleimg').src='/assets/play.png';
+    }
+}
+
+var videodiv = document.getElementById('video');
+videodiv.onmouseover = function(){document.getElementById('video-overlay').style.visibility = 'visible';};
+videodiv.onmouseout = function(){document.getElementById('video-overlay').style.visibility='hidden';};
+videodiv.onclick = function(){togglePlay();};
+
 video.canplaythrough = video.play();
 video.load();
 video.canplaythrough = video.play();
+
+
 </script>
 </div>
 <h2>Wanneer?</h2>
@@ -75,7 +102,7 @@ demonen die in zijn eigen ziel begraven liggen.</h3>
 <tr><th>Verpleegster</th><td>Sofie Neuville</td></tr>
 <tr><th valign='top'>Paarden</th><td>
     <ul>
-    <li>Rien Maartens</li>
+    <li>Rien Maertens</li>
     <li>Robrecht Deschepper</li>
     <li>Robrecht Neyrinck</li>
     <li>Yarne Deschepper</li>
