@@ -1,0 +1,261 @@
+/* 
+    Document   : basic
+    Created on : 13-okt-2013, 14:53:23
+    Author     : matthiasba
+    Description:
+        Purpose of the stylesheet follows.
+*/
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+@font-face {
+    font-family: 'denseregular';
+    src: url('fonts/dense/dense-regular-webfont.eot');
+    src: url('fonts/dense/dense-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/dense/dense-regular-webfont.woff') format('woff'),
+         url('fonts/dense/dense-regular-webfont.ttf') format('truetype'),
+         url('fonts/dense/dense-regular-webfont.svg#denseregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'bebas_neueregular';
+    src: url('fonts/bebas/BebasNeue-webfont.eot');
+    src: url('fonts/bebas/BebasNeue-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/bebas/BebasNeue-webfont.woff') format('woff'),
+         url('fonts/bebas/BebasNeue-webfont.ttf') format('truetype'),
+         url('fonts/bebas/BebasNeue-webfont.svg#bebas_neueregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'colaboratelightregular';
+    src: url('fonts/colaborate/colaborate_light_dutch/ColabLig-webfont.eot');
+    src: url('fonts/colaborate/colaborate_light_dutch/ColabLig-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/colaborate/colaborate_light_dutch/ColabLig-webfont.woff') format('woff'),
+         url('fonts/colaborate/colaborate_light_dutch/ColabLig-webfont.ttf') format('truetype'),
+         url('fonts/colaborate/colaborate_light_dutch/ColabLig-webfont.svg#colaboratelightregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+body { 
+    display: block;
+    margin: 0em;
+    padding: 0em;
+    width: 100%;
+     
+}
+
+header{
+    background-color: #323A45;
+    font-family: 'Open Sans';
+    color: #FFFFFF;
+    font-size: 0.7em;
+}
+
+    header #header-content{
+        width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 2em;
+        padding-top: 0.8em;
+    }
+        
+        header #header-left {
+            float: left;
+        }
+        
+        header #header-right {
+            float: right;
+        }
+
+#central-image {
+ height: 35.5em;
+ background: #000000;
+ background-image: url('../assets/kerstconcert-transedge.png');
+ background-repeat: no-repeat;
+ background-position: top center;
+ background-size: 1300px auto;
+}
+
+    #central-image-content{
+       background-color: rgba(107,91,75,0.7);
+       height: 3em;
+    }
+
+        nav {
+           width: 1000px;
+            margin-left: auto;
+            margin-right: auto;           
+           color: #FFFFFF; 
+           height: 100%;
+
+        }
+        
+            #logo {
+                position: absolute;
+                padding-top: 2.1em;
+            }
+        
+            ul {
+               display: inline-block;
+               font-family: 'denseregular';
+               font-size: 1.6em;
+               letter-spacing: 2px;
+               list-style: none;
+               margin: 0px;
+               float: right;
+               height: 100%;
+            }
+            
+            li {
+                clear: both;
+                padding-top: 0.5em;
+                height: 1.3em;
+                display: inline-block;
+                padding-right: 6px;
+                padding-left: 6px;
+                margin-right: 2px;
+                
+                transition: background-color 0.2s, border 0.2s;
+                transition-timing-function: ease-out;
+
+            }
+            
+            li:hover{
+                background-color: rgba(255,255,255,0.4);
+                border-bottom: 0.2em solid #f1ae1e;
+                
+                transition: background-color 0.4s, border 0.2s;
+                transition-timing-function: ease-out;
+                
+            }
+            
+            li:active{
+                background-color: #f1ae1e;
+                color: #000000;
+                transition: none;
+            }
+
+#diagonal-shell {
+    position: relative;
+    top: -5em;
+    
+    height: 8em;
+    width: 100%;
+    overflow: hidden;
+}
+            
+    #diagonal {
+          -moz-transform: rotate(-2deg); 
+          -ms-transform: rotate(-2deg); 
+          -o-transform: rotate(-2deg); 
+          -webkit-transform: rotate(-2deg); 
+          transform: rotate(-2deg); 
+          position: relative;
+          top: 2.8em;
+    }
+
+
+        #orangeline {
+            display: block;
+            width: 105%;
+
+            background-color: #f1ae1e;
+            height: 1.5em;
+
+        }
+
+        #whiteline {
+            position: relative;
+            width: 105%;
+            top: -0.7em;
+            background-color: #FFFFFF;
+            height: 3em;
+            /*border: 1px solid;*/
+            -moz-transform: rotate(0.5deg); 
+            -ms-transform: rotate(0.5deg); 
+            -o-transform: rotate(0.5deg); 
+            -webkit-transform: rotate(0.5deg); 
+            transform: rotate(0.5deg);
+        }
+
+#content {
+    position: relative;
+    top: -7em;
+}
+
+    #content-box{
+        width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .block {
+        float: left;
+        margin-bottom: 1em;
+
+        font-family: 'colaboratelightregular';
+        font-weight: normal;
+        font-style: normal;
+        color: #666666;
+        font-size: 1.2em;
+        width: 80%;
+    }
+    
+    .block h1 {
+        margin-top: 0.2em;
+        font-family: 'bebas_neueregular';
+        font-size: 2.5em;
+        color:#6B5B4B;
+        font-weight: normal;
+        font-style: normal;
+        letter-spacing: 2px;
+        margin-bottom: 0.2em;
+    }
+    
+
+    
+#footer{
+    clear:both;
+    background-color:  #CCCCCC;
+    height: 5em;
+    
+}
+
+    #footer-content {
+       position: relative;
+       top: -4em;
+       background-color:  #CCCCCC;
+       height: 4em;
+       border-top: #666666 solid 1px;
+   }
+   
+   #footer-content-center {
+       position: relative;
+       top: -2em;
+       width: 1000px;
+       margin-left: auto;
+       margin-right: auto;
+       font-family: ''colaboratelightregular'';
+   }
+   
+   #footer-content-center img {
+       float:left;
+   }
+   
+   #footer-content-center h1 {
+       float: left;
+       break-before:  avoid;
+       margin-top: 2.5em;
+       margin-left: 0.5em;
+       padding-top: 0px;
+       font-size: 1em;
+   }
