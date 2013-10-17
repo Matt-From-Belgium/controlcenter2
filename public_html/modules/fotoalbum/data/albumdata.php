@@ -153,4 +153,38 @@ function data_getPhotoById($id)
     $photo = new photo($result[0]['album'],$result[0]['id'],$result[0]['description']);
     return $photo;
 }
+
+function data_getAlbumPhotos($albumid)
+{
+    require_once $_SERVER['DOCUMENT_ROOT'].'/modules/fotoalbum/entity/photo.php';
+    
+    if(is_int($albumid))
+    {
+        $query = "SELECT photos.id,photos.album,photos.description FROM photos WHERE photos.album='@id'";
+        $db = new DataConnection();
+        $db->setQuery($query);
+        $db->setAttribute("id", $albumid);
+        $db->ExecuteQuery();
+        
+        $result = $db->GetResultArray();
+        $photos = Array();
+        
+        foreach($result as $value)
+        {
+            $newphoto = new photo($value['album'], $value['id'], $value['description']);
+            $photos[] = $newphoto;            
+        }
+        
+        ###Aan het einde van de rit geven we het array met objecten terug
+        
+        ###DEBUG
+        /*print_r($photos);*/
+        
+        return $photos;
+    }
+    else
+    {
+        throw new exception('$albumid must be an integer');
+    }
+}
 ?>

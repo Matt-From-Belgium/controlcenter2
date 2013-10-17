@@ -170,4 +170,16 @@ function changeDescription()
     $response = new ajaxResponse('ok');
     $response->getXML();
 }
+
+function getAlbumPhotos($id)
+{
+    if(is_int($id))
+    {
+        return data_getAlbumPhotos($id);
+    }
+    else
+    {
+        throw new exception('$albumid must be an integer');
+    }
+}
 ?>
