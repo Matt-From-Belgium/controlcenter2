@@ -109,9 +109,13 @@ function addPhoto()
         #Eerst maken we een lijn aan in de databasetabel photos
         $photo2=data_addPhoto($photo);
         
+        ##We hebben de extensie nodig om juist te saven
+        $parts = explode('.',$_FILES['photopath']['name']);
+        $extension = end($parts);
+        
         #De databasefunctie geeft een gewijzigd object terug met de waarde id ingevuld
         #Deze wordt gebruikt als bestandsnaam
-        move_uploaded_file($_FILES['photopath']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/modules/fotoalbum/photos/'.$photo2->getId().'.jpg');
+        move_uploaded_file($_FILES['photopath']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/modules/fotoalbum/photos/'.$photo2->getId().$extension);
         
         $result = new ajaxResponse('ok');
         
