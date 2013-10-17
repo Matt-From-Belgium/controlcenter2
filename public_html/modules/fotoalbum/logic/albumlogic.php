@@ -103,15 +103,16 @@ function addPhoto()
     }
     else
     {
+        ###Extensie ophalen zodat we verder kunnen
+        $parts = explode('.',$_FILES['photopath']['name']);
+        $extension = end($parts);
+        
         ###Geen errors, dus we gaan verder
-        $photo = new photo($_POST['album']);
+        $photo = new photo($_POST['album'],$extension);
         
         #Eerst maken we een lijn aan in de databasetabel photos
         $photo2=data_addPhoto($photo);
         
-        ##We hebben de extensie nodig om juist te saven
-        $parts = explode('.',$_FILES['photopath']['name']);
-        $extension = end($parts);
         
         #De databasefunctie geeft een gewijzigd object terug met de waarde id ingevuld
         #Deze wordt gebruikt als bestandsnaam
@@ -161,7 +162,7 @@ function changeDescription()
     $photoToChange = getPhotoById($id);
     
     ###We creëren nu een nieuw object met dezelfde gegevens, maar een andere beschrijving
-    $editedPhoto= new photo($photoToChange->getAlbumId(), $photoToChange->getId(), $description);
+    $editedPhoto= new photo($photoToChange->getAlbumId(),$photoToChange->getExtension(), $photoToChange->getId(), $description);
     
     ###We sturen het nieuwe object naar de databank om het oude te vervangen
     editPhoto($editedPhoto);

@@ -10,14 +10,18 @@ function ajaxGetAlbumPhotos()
     $result = new ajaxResponse('ok');
     $result->addField('id');
     $result->addField('album');
-    $result->addField('path');
+    $result->addField('filename');
+    $result->addField('description');
+    
     
     foreach($photoArray as $value)
     {
         $newarray = array();
         $newarray['id'] = $value->getId();
         $newarray['album']=$value->getAlbumId();
-        $newarray['path'] = $value->getServerPath();
+        $newarray['filename'] = $value->getFilename();
+        $newarray['description']= $value->getDescription();
+        
         
         $result->addData($newarray);
     }

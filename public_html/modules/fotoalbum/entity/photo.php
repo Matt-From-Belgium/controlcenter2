@@ -8,10 +8,11 @@ class photo
     private $extension;
     
     ###constructor
-    function __construct($album,$id=-1,$description="") {
+    function __construct($album,$extension,$id=-1,$description="") {
         $this->description = $description;
         $this->id=$id;
         $this->album=$album;
+        $this->extension = $extension;
     }
     
     ###public methods
@@ -48,13 +49,19 @@ class photo
         if($this->getId()>0)
         {
             $prefix = $_SERVER['DOCUMENT_ROOT'].'/modules/fotoalbum/photos/';
-            $path = $prefix.$this->getId();
+            $path = $prefix.$this->getId().'.'.$this->getExtension();
             return $path;
         }
         else
         {
             throw new Exception("You cannot get the path of a photo that has not been saved");
         }
+    }
+    
+    function getFilename()
+    {
+        $file = $this->getId().'.'.$this->getExtension();
+        return $file;
     }
     
     function setExtension($ext)

@@ -110,27 +110,30 @@ function data_addPhoto(photo $photo)
     ###We voegen een rij toe in de tabel photo en vervangen de id in het object.
     ###Bij het uploaden zelf wordt er geen beschrijving meegegeven
     
-    $query = "INSERT INTO photos (album,description) VALUES (@album,'@description')";
+    $query = "INSERT INTO photos (album,extension,description) VALUES (@album,'@extension','@description')";
     
     $db = new DataConnection();
     $db->setQuery($query);
     $db->setAttribute('album', $photo->getAlbumId());
+    $db->setAttribute('extension', $photo->getExtension());
     $db->setAttribute('description', $photo->getDescription());
     $db->ExecuteQuery();
     
     ###We vervangen het id in het object door een nieuw te creëren
-    $newphoto = new photo($photo->getAlbumId(), $db->getLastId());
+    $newphoto = new photo($photo->getAlbumId(), $photo->getExtension(), $db->getLastId());
+    
     
     return $newphoto;
 }
 
 function data_editPhoto(photo $photo)
 {
-    $query = "UPDATE photos SET album=@albumid,description='@description' WHERE photos.id=@photoid";
+    $query = "UPDATE photos SET album=@albumid,extension='@extension',description='@description' WHERE photos.id=@photoid";
     
     $db = new DataConnection();
     $db->setQuery($query);
     $db->setAttribute('albumid', $photo->getAlbumId());
+    $db->setAttribute('extension', $photo->getExtension());
     $db->setAttribute('description', $photo->getDescription());
     $db->setAttribute('photoid', $photo->getId());
     
@@ -140,7 +143,7 @@ function data_editPhoto(photo $photo)
 function data_getPhotoById($id)
 {
     ###We zoeken de foto gegevens op en creëren een object
-    $query = 'SELECT id,album,description FROM photos WHERE photos.id=@id';
+    $query = 'SELECT id,album,extension,description FROM photos WHERE photos.id=@id';
     
     $db = new DataConnection();
     $db->setQuery($query);
@@ -150,7 +153,7 @@ function data_getPhotoById($id)
     
     $result = $db->GetResultArray();
     
-    $photo = new photo($result[0]['album'],$result[0]['id'],$result[0]['description']);
+    $photo = new photo($result[0]['album'],$result[0]['extension'],$result[0]['id'],$result[0]['description']);
     return $photo;
 }
 
@@ -160,7 +163,7 @@ function data_getAlbumPhotos($albumid)
     
     if(is_int($albumid))
     {
-        $query = "SELECT photos.id,photos.album,photos.description FROM photos WHERE photos.album='@id'";
+        $query = "SELECT photos.id,photos.extension,photos.album,photos.description FROM photos WHERE photos.album='@id'";
         $db = new DataConnection();
         $db->setQuery($query);
         $db->setAttribute("id", $albumid);
@@ -171,7 +174,7 @@ function data_getAlbumPhotos($albumid)
         
         foreach($result as $value)
         {
-            $newphoto = new photo($value['album'], $value['id'], $value['description']);
+            $newphoto = new photo($value['album'],$value['extension'], $value['id'], $value['description']);
             $photos[] = $newphoto;            
         }
         
