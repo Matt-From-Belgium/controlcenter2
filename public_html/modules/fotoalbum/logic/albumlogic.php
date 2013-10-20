@@ -116,7 +116,7 @@ function addPhoto()
         
         #De databasefunctie geeft een gewijzigd object terug met de waarde id ingevuld
         #Deze wordt gebruikt als bestandsnaam
-        move_uploaded_file($_FILES['photopath']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/modules/fotoalbum/photos/'.$photo2->getId().$extension);
+        move_uploaded_file($_FILES['photopath']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/modules/fotoalbum/photos/'.$photo2->getId().'.'.$extension);
         
         $result = new ajaxResponse('ok');
         

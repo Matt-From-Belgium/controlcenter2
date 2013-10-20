@@ -33,10 +33,6 @@ function createUpload(file,albumId)
     var upload = new uploadMonitor(file);
     
     //Nu kunnen we het bestand beginnen uploaden
-    
-    /*
-    var ajax = new ajaxTransaction('uploadForm');
-    */
    
     var ajax = new ajaxTransaction();
     ajax.addData('album',albumId);
@@ -240,7 +236,7 @@ function changeDescription(id,value)
     ajax.destination='/modules/fotoalbum/logic/albumlogic.php';
     ajax.phpfunction='changeDescription';
     
-    ajax.onComplete= function(){changeDescriptionComplete(ajax)};
+    ajax.onComplete= function(){changeDescriptionComplete(ajax);};
     ajax.ExecuteRequest();
 }
 
@@ -256,12 +252,88 @@ function changeDescriptionComplete(ajax,loadIndicator)
     }
 }
 
-/*DEBUG
-function addUpload()
+function getAlbumPhotos(id)
 {
-    var test = new uploadMonitor('test.jpg');
+    if(id)
+    {
+        var ajax = new ajaxTransaction();
+        ajax.addData('albumid',id);
+        ajax.destination = '/modules/fotoalbum/logic/ajaxLogic.php';
+        ajax.phpfunction = 'GetAlbumPhotosAjax';
+        
+        ajax.onComplete = function(){
+            if(ajax.successIndicator)
+                {
+                    var photoCollection= new Array();
+                    for(i=0;i<ajax.result.length;i++)
+                        {
+                            var newPhoto = new photo;
+                            newPhoto.setFilename(ajax.result[i].filename);
+                            newPhoto.id= ajax.result[i].id;
+                            newPhoto.description = ajax.result[i].description;
+                            
+                            photoCollection.push(newPhoto);
+                        }
+                    
+                    return photoCollection;
+                    
+                }
+            
+        };
+        
+        ajax.ExecuteRequest();
+    }
+    else
+    {
+        throw exception('id must be set')
+    }
+}
+
+function photo()
+{
+    //private vars
+    var filename;
+    var path;
     
-    var errorlist = new Array("een","twee");
+    //public vars
+    this.description;
+    this.id;
     
+    this.setFilename= function(name)
+    {
+        filename = name;
+        
+        //onmiddellijk inladen
+        path = '/modules/fotoalbum/photos/'+filename;
+        new Image().src = path;
+    };
     
-}*/
+    this.getFilename = function() {
+        return filename;
+    };
+    
+    this.getPath = function() {
+        return path;
+    };
+}
+
+function photoViewer(collection,element)
+{
+    var previewElement;
+    var photoList;
+    
+    //CONSTRUCTOR
+    //Eerst zoeken we het opgegeven element om ons object eraan te koppelen
+    previewElement = document.getElementById(element);
+    
+    if(previewElement)
+    {
+        photoList = collection;
+        
+        alert(photoList.length);
+    }
+    else
+    {
+        throw 'element not found';
+    }
+}

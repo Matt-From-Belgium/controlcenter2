@@ -1,7 +1,8 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'].'/modules/fotoalbum/logic/albumlogic.php';
 
-function ajaxGetAlbumPhotos()
-{
+function GetAlbumPhotosAjax()
+{   
     ###DEBUG
     $_POST['albumid']=1;
     

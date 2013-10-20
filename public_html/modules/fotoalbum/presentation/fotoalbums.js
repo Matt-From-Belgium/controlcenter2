@@ -11,7 +11,7 @@ function addAlbum(albumNaam)
     transactie.destination='/modules/fotoalbum/logic/albumlogic.php';
     transactie.phpfunction = 'addAlbum';
     
-    transactie.onComplete= function(){ addAlbumResponse(transactie)};
+    transactie.onComplete= function(){ addAlbumResponse(transactie);};
     
     transactie.addData('albumnaam',albumNaam);
     
@@ -50,7 +50,7 @@ function getAlbums()
     
     transactie.destination = '/modules/fotoalbum/logic/albumlogic.php';
     transactie.phpfunction = 'getAlbums';
-    transactie.onComplete = function() { showAlbums(transactie)};
+    transactie.onComplete = function() { showAlbums(transactie);};
     
     transactie.ExecuteRequest();
 }
@@ -72,7 +72,7 @@ function showAlbums(transactie)
             }
             else
             {
-                albums.innerHTML = "Er zijn momenteel geen albums aanwezig..."
+                albums.innerHTML = "Er zijn momenteel geen albums aanwezig...";
             }
         }
 }
