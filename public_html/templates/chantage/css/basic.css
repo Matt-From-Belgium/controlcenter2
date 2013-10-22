@@ -191,6 +191,7 @@ header{
     position: relative;
     
     margin-top: -7.5em;
+    
 }
 
     #content-box{
@@ -224,7 +225,20 @@ header{
         margin-bottom: 0.2em;
     }
     
-
+    #sponsors {
+        clear:both;
+        height: 8em;
+        background-color: #CCCCCC;
+        font-family: 'colaboratelightregular';
+        color: #666;
+        padding-top: 0.3em;
+    }
+    
+        #sponsors-content {
+            margin-left: auto;
+            margin-right: auto;
+            width: 1200px;
+        }
     
     #footer {
         clear: both;
