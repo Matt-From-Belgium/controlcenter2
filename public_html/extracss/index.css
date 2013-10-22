@@ -1,0 +1,22 @@
+/* 
+    Document   : index
+    Created on : 22-okt-2013, 16:03:01
+    Author     : matthiasba
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.block {
+    width: 75%;
+}
+
+    #index-sponsors {
+        
+        width: 20%;
+        float: right;
+        height: 40em;
+    }
+    
+    #index-sponsors h1 {
+        font-size: 1em;
+    }
