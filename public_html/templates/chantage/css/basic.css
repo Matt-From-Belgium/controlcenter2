@@ -75,6 +75,12 @@ header{
         header #header-right {
             float: right;
         }
+        
+            #header-right img {
+                margin-left: 10px;
+            }
+            
+            
 
 #central-image {
  height: 35.5em;
@@ -142,6 +148,11 @@ header{
                 background-color: #f1ae1e;
                 color: #000000;
                 transition: none;
+            }
+            
+            nav a {
+                color:#FFFFFF;
+                text-decoration: none;
             }
 
 #diagonal-shell {

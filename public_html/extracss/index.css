@@ -19,4 +19,12 @@
     
     #index-sponsors h1 {
         font-size: 1em;
+        margin-bottom: 1em;
     }
+
+    
+#sponsors {
+    display: none;
+} 
+    
+    
