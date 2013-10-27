@@ -1,14 +1,28 @@
 <link rel="stylesheet" href="/extracss/index.css">
-<div  id="index-sponsors" class="block">
-                <h1>Met de steun van:</h1>
-                <img src='/templates/chantage/assets/sponsor-lotto.png'>
-            </div>
+<div id='leftcol'>
             <div class="block">
                 <h1>Tijd voor iets nieuws!</h1>
                 <img src="/images/index/koor.png">
                 <p>Eind 2012 besloten een aantal enthousiastelingen dat het tijd was voor een nieuwe uitdaging. Begin 2013 werden audities georganiseerd voor een nieuw projectkoor. Uit meer dan 100 kandidaten werden 29 zangers geselecteerd om het nieuwe koor op te starten. Ondertussen zijn we verschillende maanden verder en maakt projectkoor CHANTage zich op voor haar eerste concert. Achter de schermen wordt momenteel hard gewerkt en we popelen om u het resultaat te laten horen!</p>
             </div>
-<div class="block">
-                <h1>ons volgende project</h1>
+            <div class="block">
+                <h1>ons volgend project</h1>
                     <img src='/images/index/indexbanner.png'>
-                </div>
+            </div>
+</div>
+<div id='rightcol'>
+            <div  id="index-sponsors" class="block">
+                <h1>Met de steun van:</h1>
+                <img src='/templates/chantage/assets/sponsor-lotto.png'>
+                <img src='/templates/chantage/assets/sponsors/advertentie-debofisc-wit.png'>
+                <img src='/templates/chantage/assets/sponsors/Automobilia.png'>
+                <img src='/templates/chantage/assets/sponsors/sym3.png'>
+                <img src='/templates/chantage/assets/sponsors/danbred.png'>
+                <img src='/templates/chantage/assets/sponsors/elflorido.png'>
+                <img src='/templates/chantage/assets/sponsors/diseno.png'>
+                <img src='/templates/chantage/assets/sponsors/lartduvin.png'>
+                <img src='/templates/chantage/assets/sponsors/logo-tuinendewyse.png'>
+                <img src='/templates/chantage/assets/sponsors/maria-ter-engelen.png'>
+                
+            </div>
+</div>

@@ -6,25 +6,36 @@
         Purpose of the stylesheet follows.
 */
 
-.block {
-    width: 75%;
+#leftcol {
+   float:left; 
+   width: 70%;
 }
 
-    #index-sponsors {
-        
-        width: 20%;
-        float: right;
-        height: 40em;
-    }
+#leftcol .block {
+    /*background-color: #00FF00;*/
     
-    #index-sponsors h1 {
-        font-size: 1em;
-        margin-bottom: 1em;
-    }
+}
 
+#rightcol {
+    padding-left: 5%;
+    width: 20%;
+    float: left;
+}
+
+#rightcol .block {
+    /*background-color: #FF0000;*/
+}
+
+#rightcol h1 {
+    font-size: 1em;
+}
+
+#rightcol img {
+    padding-bottom: 1em;
+}
     
 #sponsors {
+    background-color: #000000;
     display: none;
 } 
-    
     

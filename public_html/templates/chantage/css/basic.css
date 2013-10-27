@@ -51,7 +51,7 @@ body {
     padding: 0em;
     width: 100%;
     
-        margin-bottom: 1em;
+        
         margin-top: 0em;
         margin-left: 0em;
         margin-right: 0em;
@@ -223,9 +223,11 @@ header{
 }
 
     #content-box{
+        /*height: 72em;*/
         width: 1100px;
         margin-left: auto;
         margin-right: auto;
+        
     }
 
     .block {
@@ -269,12 +271,13 @@ header{
     }
     
     .block img {
-        margin-left: 3em;
+        
     }
     
     #sponsors {
         clear:both;
-        height: 8em;
+        
+        
         background-color: #CCCCCC;
         font-family: 'colaboratelightregular';
         color: #666;
@@ -282,9 +285,16 @@ header{
     }
     
         #sponsors-content {
+            
             margin-left: auto;
             margin-right: auto;
             width: 1200px;
+            
+        }
+        
+        #sponsors-content img {
+            vertical-align: middle;
+            margin-right: 1em;
         }
     
     #footer {
