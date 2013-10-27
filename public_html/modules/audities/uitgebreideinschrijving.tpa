@@ -1,0 +1,52 @@
+<link href="/modules/audities/uitgebreideinschrijving.css" rel="stylesheet" type="text/css" />
+<h1>Bevestig je inschrijving</h1>
+Blij dat je de uitdaging aangaat! Vul onderstaand formulier in om je inschrijving te bevestigen.
+<p>
+<!CC IFSET [errors]>
+<div id="errors">
+Helaas, niet alle velden werden correct ingevuld:
+<ul>
+<!CC LOOP [errors]>
+<li><!CC LVAR [message]></li>
+<!CC END LOOP [errors]>
+</ul>
+</div>
+<!CC END IFSET [errors]>
+<form method="post" ENCODE="application/x-www-form-urlencoded">
+<input type="hidden" NAME="key" VALUE="<!CC VAR [key]>">
+<div id='inschrijving'>
+<label>Voornaam:</label><!CC VAR [voornaam]><br />
+<label>Naam:</label><!CC VAR [naam]><br />
+<label>Mailadres:</label><!CC VAR [mailadres]><br />
+<label>Stemgroep:</label><!CC VAR [stemgroep]><br />
+<label>Adres:</label><TEXTAREA NAME='adres' rows=4 cols=30><!CC VAR [adres]></textarea><br />
+<label>Telefoonnummer (liefst GSM):</label><input type="text" SIZE="4" MAXLENGTH="4" NAME="zonetel" VALUE="<!CC VAR [zonetel]>">/<input type="text" NAME="telrest" SIZE=6 MAXLENGTH=6 VALUE="<!CC VAR [telrest]>"><br />
+<label>Geboortedatum:</label>
+	<SELECT NAME="geboortedag" class="geboortedag">
+		<OPTION VALUE="" LENGTH=2>Dag</option>
+		<!CC LOOP [dagen]>
+			<option VALUE='<!CC LVAR [nummer]>' <!CC LVAR [checkedflag]>><!CC LVAR [nummer]></option>
+		<!CC END LOOP [dagen]>
+	</SELECT>/
+	<SELECT NAME="geboortemaand" class ="geboortemaand">
+		<option label="Maand" VALUE="">Maand</option>
+		<!CC LOOP [maanden]>
+			<option value='<!CC LVAR [value]>' <!CC LVAR [checkedflag]>><!CC LVAR [naam]></option>
+		<!CC END LOOP [maanden]>
+	</select>/
+	<select name="geboortejaar" class="geboortemaand">
+		<option VALUE ="">Jaar</option>
+		<!CC LOOP [jaren]>
+			<option value='<!CC LVAR [nummer]>' <!CC LVAR [checkedflag]>><!CC LVAR [nummer]></option>
+		<!CC END LOOP [jaren]>
+	</select><br />
+<label>Wat is je hoogste noot?</label><input type="text" NAME="hoogstenoot" SIZE=40 MAXLENGTH=50 VALUE="<!CC VAR [hoogstenoot]>"><br />
+<label>Wat is je laagste noot?</label><input type="text" NAME="laagstenoot" SIZE=40 MAXLENGTH=50  VALUE="<!CC VAR [laagstenoot]>"><br />
+<label>Kun je partituren lezen?</label><input type="radio" NAME="partituren" VALUE="Y" <!CC VAR [partituurja]>>Ja<input type="radio" NAME="partituren" VALUE='N' <!CC VAR [partituurnee]>>Neen<br />
+<label>Heb je ervaring met meerstemmig zingen?</label><TEXTAREA NAME="ervaring" COLS=30 ROWS=4><!CC VAR [ervaring]></TEXTAREA><br />
+<label>Heb je zangles gevolgd?</label><INPUT TYPE="radio" NAME="zangles" VALUE='Y' <!CC VAR [zanglesja]>>Ja<INPUT TYPE="radio" NAME="zangles" VALUE='N' <!CC VAR [zanglesnee]>>Neen<br />
+<label>Bespeel je een instrument? Welk?</label><INPUT TYPE="text" NAME="instrument" VALUE="<!CC VAR [instrument]>" SIZE=40 MAXLENGTH=100><br />
+<label>Heb je ervaring met het spelen van een instrument in een orkest/hafabra?</label><TEXTAREA NAME="ervaringinstrument" COLS=30 ROWS=4><!CC VAR [ervaringinstrument]></TEXTAREA><br />
+<label>Wat is je motivatie om deel uit te maken van ons koor?</label><TEXTAREA NAME="motivatie" COLS=30 ROWS=4><!CC VAR [motivatie]></TEXTAREA><br />
+<input type="submit" name="send" value="Versturen">
+</div>

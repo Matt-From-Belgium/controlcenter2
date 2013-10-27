@@ -1,0 +1,11 @@
+<h1>Welkom <!CC VAR [voornaam]> <!CC VAR [naam]>!</h1>
+Dit is je persoonlijke auditie-pagina. Met onderstaande links kan je het auditiepakket downloaden en je inschrijving voor de audities bevestigen.
+<p><span id="nadruk">OPGELET! Een deel van het auditiemateriaal is auteursrechterlijk beschermd. Dit houdt in dat je als auditiekandidaat deze bestanden enkel mag gebruiken om je auditie voor te bereiden. Elke andere vorm van gebruik en/of verspreiding is een strafbaar feit en kan gerechtelijk vervolgd worden! Iedere kandidaat kreeg van onze server een unieke sleutel toegekend. Op die manier kunnen wij misbruik van deze bestanden traceren.
+<p><h2><a href="/modules/audities/download.php?key=<!CC VAR [key]>&f=auditie.zip">Download je auditiepakket!</a></h2>
+<!CC IFSET [nognietingeschreven]>
+<p><b>OPGELET: </b>Omdat we je de kans willen geven eerst het materiaal door te nemen vooraleer je je definitief kandidaat stelt moet je je inschrijving nog definitief bevestigen. Klik op 'bevestig mijn inschrijving' om je inschrijving definitief te maken!
+<p><h2><a href="/modules/audities/uitgebreideinschrijving.php?key=<!CC VAR [key]>">Bevestig je inschrijving</a></h2>
+<!CC END IFSET [nognietingeschreven]>
+<!CC IFSET [welingeschreven]>
+Je bent definitief ingeschreven voor de audities! Hou je mailbox in de gaten voor het precieze tijdstip van auditie.
+<!CC END IFSET [welingeschreven]>

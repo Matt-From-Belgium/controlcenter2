@@ -1,0 +1,65 @@
+<script type='text/javascript'>
+var alreadyClicked = false;
+
+function submitform()
+{
+	if(alreadyClicked)
+	{
+		alert('HOLA! Eénmaal klikken is voldoende :-). Even geduld, we zijn je gegevens aan het noteren.');
+	}
+	else
+	{
+	alreadyClicked = true;
+    document.forms["inschrijving"].submit();
+	}
+}
+</script>
+
+<h1>Gezocht: zangers/zangeressen</h1>
+
+Kan je goed zingen en heb je zin in een uitdaging? Je hebt er altijd al van gedroomd om in groep 4 tot 8-stemmig te zingen ? Ben je tussen 18 en 50 jaar oud? Dan zit je goed!
+Projectkoor.be werd opgezet om zangers en zangeressen te rekruteren voor een projectkoor in de regio Diksmuide onder de leiding van Geert De Deygere. We zoeken getalenteerde mensen die gemotiveerd zijn om mee te stappen in ons idee. We zetten de voornaamste elementen van ons concept op een rijtje:
+<p><ul>
+<li><span id="nadruk">We pinnen ons niet vast op &eacute;&eacute;n genre</span>: ieder project heeft een thema dat kan vari&euml;ren van musical over jazz naar klassiek. Vandaar 'projectkoor'.</li>
+<li>We <span id="nadruk">repeteren beperkt</span>: we voorzien &eacute;&eacute;n repetitieweekend per maand: in dat weekend repeteren we op vrijdagavond ( 19.30-22.00u)en op zondagmorgen ( 9.30-12.00u)</li>
+<li>We vragen een <span id="nadruk">grote mate van zelfstandigheid</span>: Aangezien we beperkt repeteren  studeer je zelfstandig je partituren in en kom je voorbereid aan op de repetities. Op die manier kunnen we tijdens de repetities uitsluitend bezig zijn met de 'afwerking' en kunnen we van bij het begin tot het einde van de repetitie de hele tijd samen zingen.</li>
+<li>De repetities vinden plaats in Maria Ter Engelen in Klerken waar we zowel de kapel als de bar tot onze beschikking hebben om het nuttige en het aangename perfect in balans te houden.</li>
+<li>De repetities worden <span id="nadruk">live begeleid op piano door een professioneel pianist.</span></li>
+<li>We streven naar <span id="nadruk">kwaliteit</span>: We willen net dat ietsje meer. Daarom werken wij ook met audities. Zo garanderen we een kwalitatief hoogstaand koor en kunnen we ook peilen naar je motivatie.</li>
+</ul>
+
+<p>Om dit concept uit te werken organiseren wij audities op 22, 23 en 24 februari 2013. Ben je ge&#239;nteresseerd? Vul dan onderstaand formulier in en we sturen je alle auditie-info en het volledige auditiepakket door. 
+
+<p>Hopelijk tot binnenkort?
+
+<p>Voor de werkgroep 'Projectkoor',
+<br />Matthias Bauw, Els Vanoverschelde, Sarah Finaut, Nele Fiers en Geert De Deygere.
+
+<br /><br />
+<form id="inschrijving" method="post" ENCODE="application/x-www-form-urlencoded">
+<!CC IFSET [errors]>
+<div id='errors'>
+Helaas, niet alle velden werden correct ingevuld:
+<ul>
+<!CC LOOP [errors]>
+<li><!CC LVAR [message]></li>
+<!CC END LOOP [errors]>
+</ul>
+</div>
+<!CC END IFSET [errors]>
+<h1>Auditiepakket aanvragen</h1>
+<div id="inschrijvingsformulier">
+<input type='hidden' name="send" value="ok">
+<label>Voornaam:</label><input type="text" SIZE='30' name="voornaam" /><br/>
+<label>Naam:</label><input type="text" SIZE='50' name="naam" /><br/>
+<label>E-mailadres:</label><input type="text" SIZE='30' name="mail" /><br/>
+<label>Stemgroep:</label><select name="stemgroep"><option value="0" label="Selecteer je stemgroep"><option value="1"size='30'>Sopraan</option><option value="2">Mezzo</option><option value="3">Alt</option><option VALUE="4">Tenor</option><option value="5">Bariton</option><option value="6">Bas</option></select><br/>
+<br />
+
+</div>
+<div id='knoppen'>
+<img src='/modules/audities/ikgaervoor.png' onClick="javascript:submitform()" class="ikgaervoor"/>&nbsp;&nbsp;<img src='/modules/audities/neeschrik.png' onClick="javascript:document.location.href='http://nl.barbie.com/'" class="ikgaervoor" />
+</div>
+<p>Nodig een vriend uit! <div class="fb-send" data-href="http://www.projectkoor.be" data-colorscheme="dark" data-font="arial"></div>
+<div id="vraagofprobleem">Heb je een vraag/probleem ivm het gebruik van deze website? contacteer <a href="mailto:info@projectkoor.be">info@projectkoor.be</a></div>
+</form>

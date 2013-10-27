@@ -50,8 +50,20 @@ body {
     margin: 0em;
     padding: 0em;
     width: 100%;
+    
+        margin-bottom: 1em;
+        margin-top: 0em;
+        margin-left: 0em;
+        margin-right: 0em;
+        font-family: 'colaboratelightregular';
+        font-weight: normal;
+        font-style: normal;
+        color: #666666;
+        
+        
+    }
      
-}
+
 
 header{
     background-color: #323A45;
@@ -110,7 +122,7 @@ header{
                 padding-top: 2.1em;
             }
         
-            ul {
+            nav ul {
                display: inline-block;
                font-family: 'denseregular';
                font-size: 1.6em;
@@ -121,7 +133,7 @@ header{
                height: 100%;
             }
             
-            li {
+            nav li {
                 clear: both;
                 padding-top: 0.5em;
                 height: 1.3em;
@@ -135,7 +147,7 @@ header{
 
             }
             
-            li:hover{
+            nav li:hover{
                 background-color: rgba(255,255,255,0.4);
                 border-bottom: 0.2em solid #f1ae1e;
                 
@@ -144,7 +156,7 @@ header{
                 
             }
             
-            li:active{
+            nav li:active{
                 background-color: #f1ae1e;
                 color: #000000;
                 transition: none;
@@ -230,7 +242,7 @@ header{
         width: 100%;
     }
     
-    .block h1 {
+    h1 {
         margin-top: 0.2em;
         font-family: 'bebas_neueregular';
         font-size: 2.5em;
@@ -241,7 +253,7 @@ header{
         margin-bottom: 0.2em;
     }
     
-    .block h2 {
+    h2 {
         margin-top: 0.2em;
         font-family: 'bebas_neueregular';
         font-size: 1.5em;
@@ -252,7 +264,7 @@ header{
         margin-bottom: 0.2em;      
     }
     
-    .block h3 {
+    h3 {
         margin: 0px;
     }
     
@@ -315,4 +327,9 @@ a {
 
 a:hover{
     color: #FC3333;
+}
+
+label {
+    display: inline-block;
+    width: 100px;
 }
