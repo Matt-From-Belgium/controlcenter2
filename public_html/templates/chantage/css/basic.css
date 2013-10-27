@@ -61,7 +61,7 @@ header{
 }
 
     header #header-content{
-        width: 1000px;
+        width: 1200px;
         margin-left: auto;
         margin-right: auto;
         height: 2em;
@@ -154,6 +154,11 @@ header{
                 color:#FFFFFF;
                 text-decoration: none;
             }
+            
+            nav a:hover {
+                 color:#FFFFFF;
+                text-decoration: none;               
+            }
 
 #diagonal-shell {
     position: relative;
@@ -236,6 +241,25 @@ header{
         margin-bottom: 0.2em;
     }
     
+    .block h2 {
+        margin-top: 0.2em;
+        font-family: 'bebas_neueregular';
+        font-size: 1.5em;
+        color:#6B5B4B;
+        font-weight: normal;
+        font-style: normal;
+        letter-spacing: 2px;
+        margin-bottom: 0.2em;      
+    }
+    
+    .block h3 {
+        margin: 0px;
+    }
+    
+    .block img {
+        margin-left: 3em;
+    }
+    
     #sponsors {
         clear:both;
         height: 8em;
@@ -267,8 +291,28 @@ header{
             font-size: 0.7em;
             text-align:  center;
         }
-        
-
-
-
+  
+table {
     
+    width: 100%;
+    background-color: #eee;
+}
+
+    th {
+        background-color: #323A45;
+        color: #FFFFFF;
+    }
+    
+    td {
+        text-align: center;
+    }
+
+
+
+a {
+    color: #e78a2d;
+}    
+
+a:hover{
+    color: #FC3333;
+}

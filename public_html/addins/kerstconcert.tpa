@@ -1,7 +1,25 @@
-<!DOCTYPE html>
+<link rel="stylesheet" href="/extracss/kerstconcert.css">
 <section class="block">
     <h1>Kerstconcert</h1>
+    <img src='/images/kerstconcert/koor-boven.png'>
     <p>Projectkoor CHANTage stelt zich aan u voor. We brengen een kerstconcert dat u niet snel zal vergeten. </p>
     <p>Dit concert gaat door in de kerk van Woumen. Het unieke interieur van deze kerk biedt een mix van moderne en authentieke elementen. Dat is meteen ook het concept voor dit eerste concert. We willen ons profileren als een koor dat veel verschillende genres aankan en u een mix van klassieke werken (Mendelssohn, Pachelbel), musicalnummers (Martin Guerre), pop (Sting) tot klassieke kerstnummers (verschillende medleys).</p>
     <p>Het concert wordt gedirigeerd door Geert De Deygere (o.a. muzikaal verantwoordelijke voor de Belgische premiere van 3 Musketiers, de musical in 2011). Het koor wordt begeleid door pianist Jürgen Degryse (leerkracht piano aan de academie van Blankenberge). De helft van de nummers worden volledig a capella gebracht.</p>
+</section>
+<section class="block">
+<h1>Praktisch</h1>
+
+<h2>Wanneer?</h2>
+21 december 2013
+<br /><b>deuren open:</b> 19u30
+<br /><b>start concert: 20u00 (stipt!)</b>
+<h2>Waar?</h2>
+Sint-Andreaskerk te Woumen
+<br />kerkstraat 251
+<br />8600 Woumen
+<p><a href='https://www.google.be/maps?q=kerkstraat+251+woumen&hl=en&ll=51.000861,2.87153&spn=0.006144,0.016512&sll=51.010947,2.91069&sspn=0.098716,0.264187&hnear=Kerkstraat,+Woumen+8600&t=m&z=17' target='_blank'>Zoek op Google Maps</a>
+<h2>Tickets bestellen</h2>
+De tickets voor het kerstconcert kosten <b>10 EUR per ticket</b>
+<p>U kan de tickets bestellen op het nummer <b>0495/231169 </b>(U wordt geholpen door Vanessa van Wijnhandel <a href='http://www.lartduvin.be' target='_blank'>Lartduvin</a>)</p>
+<p>Of u kan tickets kopen <b>via de leden</b> van projectkoor CHANTage</p>
 </section>
