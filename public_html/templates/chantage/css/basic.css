@@ -347,3 +347,50 @@ label {
 a img {
     border: 0px;
 }
+
+#leftcol {
+   float:left; 
+   width: 70%;
+}
+
+#leftcol .block {
+    /*background-color: #00FF00;*/
+    
+}
+
+#rightcol {
+    padding-left: 5%;
+    width: 20%;
+    float: left;
+}
+
+#rightcol .block {
+    /*background-color: #FF0000;*/
+}
+
+#rightcol h1 {
+    font-size: 1em;
+}
+
+#rightcol img {
+    padding-bottom: 1em;
+}
+    
+#sponsors {
+    background-color: #000000;
+    display: none;
+} 
+
+#indexbanner img {
+    float: left;
+    margin-right: 1em;
+}
+
+.sponsors {
+    margin-bottom: 7em;
+}
+
+.sponsors img {
+    vertical-align: top;
+    margin-right: 1em;
+}
