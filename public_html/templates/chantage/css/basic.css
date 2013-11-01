@@ -343,3 +343,7 @@ label {
     display: inline-block;
     width: 100px;
 }
+
+a img {
+    border: 0px;
+}

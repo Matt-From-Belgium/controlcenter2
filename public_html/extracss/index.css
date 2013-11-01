@@ -38,4 +38,8 @@
     background-color: #000000;
     display: none;
 } 
-    
+
+#indexbanner img {
+    float: left;
+    margin-right: 1em;
+}

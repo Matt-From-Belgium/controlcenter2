@@ -1,3 +1,25 @@
-<div class="block">
+<link rel="stylesheet" href="/extracss/sponsors.css">
+<div class="block sponsors">
     <h1>Sponsors</h1>
+                <a href='http://www.nationale-loterij.be/' target='_blank'><img src='/templates/chantage/assets/sponsor-lotto.png'></a>
+                <a href='http://www.goudengids.be/debofisc-cva-zarren-8610/' target='_blank'><img src='/templates/chantage/assets/sponsors/advertentie-debofisc-wit.png'></a>
+                <a href='http://www.automobilia.be/' target='_blank'><img src='/templates/chantage/assets/sponsors/Automobilia.png'></a>
+                <a href='http://www.sym3.be/sym3.aspx' target='_blank'><img src='/templates/chantage/assets/sponsors/sym3.png'></a>
+                <a href='http://www.danbredint.be/' target='_blank'><img src='/templates/chantage/assets/sponsors/danbred.png'></a>
+                <a href='http://www.goudengids.be/el-florido-zarren-8610/' target='_blank'><img src='/templates/chantage/assets/sponsors/elflorido.png'></a>
+                <a href='http://www.diseno.be/' target='_blank'><img src='/templates/chantage/assets/sponsors/diseno.png'></a>
+                <a href='http://www.lartduvin.be/nl' target='_blank'><img src='/templates/chantage/assets/sponsors/lartduvin.png'></a>
+                <a href='http://tuinendewyse.be/' target='_blank'><img src='/templates/chantage/assets/sponsors/logo-tuinendewyse.png'></a>
+                <a href='http://www.mariaterengelen.be/' target='_blank'><img src='/templates/chantage/assets/sponsors/maria-ter-engelen.png'></a>
+
+                
+</div>
+<div class="block sponsors">
+    <a href='http://collegediksmuide.be/' target='_blank'><img src='/images/sponsors/college.png'></a>
+    <a href='http://www.salonssaintgermain.be/' target='_blank'><img src='/images/sponsors/stgermain.png'></a>    
+    <a href='http://www.cornelis-bvba.be/' target='_blank'><img src='/images/sponsors/cornelis.png'></a>
+    <a href='http://www.kantoorvv.be/nl/index.php' target='_blank'><img src='/images/sponsors/venv.png'></a>
+    <a href='http://www.vinckier-nv.be/en/' target='_blank'><img src='/images/sponsors/vinckier.png'></a>
+    <a href='http://www.meubelmakerijverlinde.be/' target='_blank'><img src='/images/sponsors/verlinde.png'></a>
+    
 </div>

@@ -5,24 +5,30 @@
                 <img src="/images/index/koor.png">
                 <p>Eind 2012 besloten een aantal enthousiastelingen dat het tijd was voor een nieuwe uitdaging. Begin 2013 werden audities georganiseerd voor een nieuw projectkoor. Uit meer dan 100 kandidaten werden 29 zangers geselecteerd om het nieuwe koor op te starten. Ondertussen zijn we verschillende maanden verder en maakt projectkoor CHANTage zich op voor haar eerste concert. Achter de schermen wordt momenteel hard gewerkt en we popelen om u het resultaat te laten horen!</p>
             </div>
-            <div class="block">
+            <div class="block" id="indexbanner">
                 <h1>ons volgend project</h1>
                     <img src='/images/index/indexbanner.png'>
+<h2>KERSTCONCERT</h2>
+29 enthousiaste zangers geven het beste van zichzelf in een kerstconcert waar zowel pop als klassiek, maar ook musical en traditionele kerstliederen een plaatsje krijgen. Alle muziek wordt vier tot achtstemmig uitgevoerd.
+<p>Het concert wordt gedirigeerd door Geert De Deygere (bekend van o.a. 3 musketiers de musical). Het koor wordt begeleid door pianist Jürgen Degryse, maar gaat ook de a capella toer op.</p>
+ 
+Het kerstconcert vindt plaats op zaterdag 21 december 2013 om 20u stipt in de kerk van Woumen. 
+<p><a href='/kerstconcert.php'>Klik hier voor meer info</a>
             </div>
 </div>
 <div id='rightcol'>
             <div  id="index-sponsors" class="block">
                 <h1>Met de steun van:</h1>
-                <img src='/templates/chantage/assets/sponsor-lotto.png'>
-                <img src='/templates/chantage/assets/sponsors/advertentie-debofisc-wit.png'>
-                <img src='/templates/chantage/assets/sponsors/Automobilia.png'>
-                <img src='/templates/chantage/assets/sponsors/sym3.png'>
-                <img src='/templates/chantage/assets/sponsors/danbred.png'>
-                <img src='/templates/chantage/assets/sponsors/elflorido.png'>
-                <img src='/templates/chantage/assets/sponsors/diseno.png'>
-                <img src='/templates/chantage/assets/sponsors/lartduvin.png'>
-                <img src='/templates/chantage/assets/sponsors/logo-tuinendewyse.png'>
-                <img src='/templates/chantage/assets/sponsors/maria-ter-engelen.png'>
+                <a href='http://www.nationale-loterij.be/' target='_blank'><img src='/templates/chantage/assets/sponsor-lotto.png'></a>
+                <a href='http://www.goudengids.be/debofisc-cva-zarren-8610/' target='_blank'><img src='/templates/chantage/assets/sponsors/advertentie-debofisc-wit.png'></a>
+                <a href='http://www.automobilia.be/' target='_blank'><img src='/templates/chantage/assets/sponsors/Automobilia.png'></a>
+                <a href='http://www.sym3.be/sym3.aspx' target='_blank'><img src='/templates/chantage/assets/sponsors/sym3.png'></a>
+                <a href='http://www.danbredint.be/' target='_blank'><img src='/templates/chantage/assets/sponsors/danbred.png'></a>
+                <a href='http://www.goudengids.be/el-florido-zarren-8610/' target='_blank'><img src='/templates/chantage/assets/sponsors/elflorido.png'></a>
+                <a href='http://www.diseno.be/' target='_blank'><img src='/templates/chantage/assets/sponsors/diseno.png'></a>
+                <a href='http://www.lartduvin.be/nl' target='_blank'><img src='/templates/chantage/assets/sponsors/lartduvin.png'></a>
+                <a href='http://tuinendewyse.be/' target='_blank'><img src='/templates/chantage/assets/sponsors/logo-tuinendewyse.png'></a>
+                <a href='http://www.mariaterengelen.be/' target='_blank'><img src='/templates/chantage/assets/sponsors/maria-ter-engelen.png'></a>
                 
             </div>
 </div>

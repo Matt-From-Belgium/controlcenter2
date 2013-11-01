@@ -1,0 +1,19 @@
+/* 
+    Document   : sponsors
+    Created on : 1-nov-2013, 11:38:49
+    Author     : matthiasba
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+#sponsors {
+    display: none;
+}
+
+.sponsors {
+    margin-bottom: 10em;
+}
+
+.sponsors img {
+    vertical-align: top;
+}
