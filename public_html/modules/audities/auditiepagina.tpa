@@ -1,3 +1,4 @@
+<div class="block">
 <h1>Welkom <!CC VAR [voornaam]> <!CC VAR [naam]>!</h1>
 Dit is je persoonlijke auditie-pagina. Met onderstaande links kan je het auditiepakket downloaden en je inschrijving voor de audities bevestigen.
 <p><span id="nadruk">OPGELET! Een deel van het auditiemateriaal is auteursrechterlijk beschermd. Dit houdt in dat je als auditiekandidaat deze bestanden enkel mag gebruiken om je auditie voor te bereiden. Elke andere vorm van gebruik en/of verspreiding is een strafbaar feit en kan gerechtelijk vervolgd worden! Iedere kandidaat kreeg van onze server een unieke sleutel toegekend. Op die manier kunnen wij misbruik van deze bestanden traceren.
@@ -9,3 +10,4 @@ Dit is je persoonlijke auditie-pagina. Met onderstaande links kan je het auditie
 <!CC IFSET [welingeschreven]>
 Je bent definitief ingeschreven voor de audities! Hou je mailbox in de gaten voor het precieze tijdstip van auditie.
 <!CC END IFSET [welingeschreven]>
+</div>

@@ -1,3 +1,4 @@
+<div class="block">
 <script type='text/javascript'>
 var alreadyClicked = false;
 
@@ -63,3 +64,4 @@ Helaas, niet alle velden werden correct ingevuld:
 <p>Nodig een vriend uit! <div class="fb-send" data-href="http://www.projectkoor.be" data-colorscheme="dark" data-font="arial"></div>
 <div id="vraagofprobleem">Heb je een vraag/probleem ivm het gebruik van deze website? contacteer <a href="mailto:info@projectkoor.be">info@projectkoor.be</a></div>
 </form>
+</div>

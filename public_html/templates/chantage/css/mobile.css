@@ -1,0 +1,100 @@
+/* 
+    Document   : mobile.css
+    Created on : 1-nov-2013, 13:29:17
+    Author     : matthiasba
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+body {
+    width: 100%;
+    overflow:  hidden;
+    
+}
+
+#central-image {
+    height: 30em;
+    background-size: auto 100%;
+    /*background-image: none;*/
+}
+
+#central-image-content {
+    height: 100%;
+    background-color: rgba(50,58,69,0.7);
+}
+
+#central-image-content ul {
+    display: none;
+}
+
+#central-image-content select {
+    float: right;
+    display: inline-block;
+    font-size: 5em;
+    margin-left: 2em;
+    margin-top: 4.5em;
+    
+    background-color: #524333;
+    font-family: 'denseregular';
+    color: #FFFFFF;
+    
+}
+
+header #header-content,nav,#content-box,#sponsors-content,#footer-center,#central-image{
+    width: 100%;
+}
+
+#diagonal-shell {
+    display:none;
+}
+
+#content {
+    margin-top : 2em;
+}
+
+#logo {
+    padding-top: 1em;
+}
+
+#logo img {
+    width: 25em;
+    
+}
+
+#rightcol {
+   display: none; 
+   width: 0%;
+}
+
+#leftcol {
+    width: 100%;
+    float: none;
+    
+}
+
+#orangeline {
+    display:none;
+    width: 100%;
+}
+
+#whiteline {
+    display:none;
+    width:100%;
+}
+
+#wieisbegonnen {
+    max-width: 100%;
+}
+
+h1 {
+    font-size: 5em;
+}
+
+.block {
+    width: 90%;
+    margin-left: 2em;
+}
+
+header {
+    display:none;
+}

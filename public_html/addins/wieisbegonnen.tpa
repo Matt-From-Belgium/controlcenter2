@@ -1,9 +1,18 @@
 <div class="block">
 <h1>Wie is begonnen?</h1>
-<img src='/images/wieisbegonnen/wieisbegonnen.png'>
-<p>Eerlijk? Dat weten we zelf al lang niet meer. Eén ding is zeker: de bal ging aan het rollen op een huwelijksreceptie. We kwamen tot de vaststelling dat veel van onze vrienden op zoek waren naar een nieuwe muzikale uitdaging. Een paar dagen later zaten Els, Nele, Matthias, Sarah en Geert rond de tafel om te zien of er voldoende raakpunten waren om samen 'iets te doen'. Wel... dat 'iets' is uiteindelijk een projectkoor geworden.
-<p>In januari 2013 lanceerden we een auditieoproep via mail, sociale netwerken en de krant. Meer dan honderd mensen stelden zich kandidaat. Uit die groep selecteerden wij 29 zangers waarmee we de repetities konden starten. En de rest van het verhaal? Dat beleeft u samen met ons wanneer we op 21 december ons eerste concert uitvoeren.
+<div id='wieisbegonnen'>
+<img src='/images/wieisbegonnen/wieisbegonnen.png' width=100%>
 </div>
+<p>Eerlijk? Dat weten we zelf al lang niet meer. Eén ding is zeker: de bal ging aan het rollen op een huwelijksreceptie. We kwamen tot de vaststelling dat veel van onze vrienden op zoek waren naar een nieuwe muzikale uitdaging. Een paar dagen later zaten Els, Nele, Matthias, Sarah en Geert rond de tafel om te zien of er voldoende raakpunten waren om samen 'iets te doen'. Wel... dat 'iets' is uiteindelijk een projectkoor geworden.
+<p class='woordenboek'>
+<b>proj<u>e</u>ctkoor</b> (o.; koren; -tje) [< Lat. <i>chorus proiectus</i>]
+<br /><b>1. </b>door een aantal personen gezamenlijk voortgebracht stemgeluid, met dezelfde bedoeling, m.n. zich gezamenlijk en gelijktijdig laten horen. Altijd met een onderwerp dat gezamenlijk in studie werd genomen en waarvan de uitkomst op een samenkomst ten gehore wordt gebracht.
+<br /><b>2. </b>een groep van personen die één of meerdere gezangen uitvoeren en dat zich niet vastpint op één genre. Per concert zoeken ze een welbepaald thema... iedere keer verrassend, nieuw... telkens een fijne uitdaging!
+</p>
+<p>In januari 2013 lanceerden we een auditieoproep via mail, sociale netwerken en de krant. Meer dan honderd mensen stelden zich kandidaat. Uit die groep selecteerden wij 29 zangers waarmee we de repetities konden starten. En de rest van het verhaal? Dat beleeft u samen met ons wanneer we op 21 december ons eerste concert uitvoeren.
+
+</div>
+
 <div class="block">
 <h1>Koorbezetting</h1>
 <table cellspacing=0>

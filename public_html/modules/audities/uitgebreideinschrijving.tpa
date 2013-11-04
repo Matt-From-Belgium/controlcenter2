@@ -1,3 +1,4 @@
+<div class="block">
 <link href="/modules/audities/uitgebreideinschrijving.css" rel="stylesheet" type="text/css" />
 <h1>Bevestig je inschrijving</h1>
 Blij dat je de uitdaging aangaat! Vul onderstaand formulier in om je inschrijving te bevestigen.
@@ -49,4 +50,5 @@ Helaas, niet alle velden werden correct ingevuld:
 <label>Heb je ervaring met het spelen van een instrument in een orkest/hafabra?</label><TEXTAREA NAME="ervaringinstrument" COLS=30 ROWS=4><!CC VAR [ervaringinstrument]></TEXTAREA><br />
 <label>Wat is je motivatie om deel uit te maken van ons koor?</label><TEXTAREA NAME="motivatie" COLS=30 ROWS=4><!CC VAR [motivatie]></TEXTAREA><br />
 <input type="submit" name="send" value="Versturen">
+</div>
 </div>

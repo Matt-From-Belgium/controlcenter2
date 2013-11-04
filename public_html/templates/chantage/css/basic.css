@@ -97,7 +97,7 @@ header{
 #central-image {
  height: 35.5em;
  background: #000000;
- background-image: url('../assets/kerstconcert-transedge.png');
+ background-image: url('../assets/kerstconcert-transedge-optimized.png');
  background-repeat: no-repeat;
  background-position: top center;
  background-size: 1300px auto;
@@ -120,6 +120,10 @@ header{
             #logo {
                 position: absolute;
                 padding-top: 2.1em;
+            }
+            
+            #central-image-content select {
+                display: none;
             }
         
             nav ul {
@@ -277,7 +281,7 @@ header{
     #sponsors {
         clear:both;
         
-        
+        display: block;
         background-color: #CCCCCC;
         font-family: 'colaboratelightregular';
         color: #666;
@@ -376,10 +380,6 @@ a img {
     padding-bottom: 1em;
 }
     
-#sponsors {
-    background-color: #000000;
-    display: none;
-} 
 
 #indexbanner img {
     float: left;
@@ -393,4 +393,13 @@ a img {
 .sponsors img {
     vertical-align: top;
     margin-right: 1em;
+}
+
+#mobilefooter {
+    display: none;
+}
+
+.woordenboek {
+    margin-left: 2em;
+    font-size: 0.9em;
 }
