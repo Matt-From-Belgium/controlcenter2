@@ -1,7 +1,6 @@
 <div id="siteNews">
             <div id="item1" class="newsItem">
-                <h1>Blijf op de hoogte</h1>
-                <h1 class="nadruk">Schrijf je in voor de nieuwsbrief</h1>
+                <img src='/pages/debus.png'>
             </div>
         </div>
         <div class="block">
