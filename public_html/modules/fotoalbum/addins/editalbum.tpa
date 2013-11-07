@@ -1,0 +1,14 @@
+<link href="/modules/fotoalbum/presentation/css/fotoalbum.css" rel="stylesheet" type="text/css" />
+<h1>Wijzig album '<!CC VAR [albumname]>'</h1>
+<h2>Huidige inhoud</h2>
+<h2>Foto's toevoegen</h2>
+<form id='uploadForm' name='uploadForm'>
+<input type='hidden' id='album' name='album' value='<!CC VAR [albumid]>'>
+Selecteer een bestand <input type='file' id='photopath' name='photopath' multiple onChange="javascript:uploadPicture('uploadForm')" accept='image/jpeg,image/png'></form>
+<h2>Uploads</h2>
+<div id="uploads">      
+</div>
+</div>
+<script type="text/javascript" SRC="/core/presentation/ajax/ajaxtransaction.js"></script>
+<script type="text/javascript" src="/modules/fotoalbum/presentation/editalbum.js"></script>
+
