@@ -1,0 +1,28 @@
+/* 
+    Document   : showphoto
+    Created on : 6-nov-2013, 21:31:01
+    Author     : matthiasba
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+.viewer {
+    width: 1000px;
+    border: 1px #000000 solid;
+}
+
+.imagePreview {
+    display: inline-block;
+    overflow: hidden;
+    width: 150px;
+    height: 100px;
+}
+
+.imagePreview img {
+    
+    width: 150px;
+}

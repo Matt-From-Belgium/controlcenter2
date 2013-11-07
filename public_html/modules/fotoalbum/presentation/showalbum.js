@@ -114,23 +114,32 @@ function photo()
     //private vars
     var filename;
     var path;
+    var tnPath;
+    
     
     
     //public vars
     this.description;
     this.id;
     this.src;
+    this.thumbnail;
     
     this.setFilename= function(name)
     {
         filename = name;
         
-        //onmiddellijk inladen
+        //onmiddellijk inladen van de afbeelding
         path = '/modules/fotoalbum/photos/'+filename;
         var img =new Image();
         img.src = path;
         this.src = img.src;
         
+        
+        //en inladen van de thumbnail
+        tnPath = '/modules/fotoalbum/photos/tn_'+filename;
+        var tnImg = new Image();
+        tnImg.src = tnPath;
+        this.thumbnail = tnImg.src;
     };
     
     this.getFilename = function() {
@@ -187,8 +196,11 @@ function photoViewer(albumid,previewElement)
             //aan het ogegeven HTML DOM element
             var imageDiv = document.createElement('div');
             imageDiv.classList.add('imagePreview');
+            
+            imageDiv.onclick = function(){window.open(photo.src);};
+            
             var imageTag = document.createElement('img');
-            imageTag.src = photo.src;
+            imageTag.src = photo.thumbnail;
             
             imageDiv.appendChild(imageTag);
             return imageDiv;

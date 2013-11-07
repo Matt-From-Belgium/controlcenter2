@@ -105,7 +105,7 @@ function addPhoto()
     {
         ###Extensie ophalen zodat we verder kunnen
         $parts = explode('.',$_FILES['photopath']['name']);
-        $extension = end($parts);
+        $extension = strtolower(end($parts));
         
         ###Geen errors, dus we gaan verder
         $photo = new photo($_POST['album'],$extension);
@@ -117,6 +117,41 @@ function addPhoto()
         #De databasefunctie geeft een gewijzigd object terug met de waarde id ingevuld
         #Deze wordt gebruikt als bestandsnaam
         move_uploaded_file($_FILES['photopath']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/modules/fotoalbum/photos/'.$photo2->getId().'.'.$extension);
+        
+        ###thumbnail genereren en opslaan
+        switch($extension)
+        {
+            case 'jpg':
+              $source_image = imagecreatefromjpeg($_SERVER['DOCUMENT_ROOT'].'/modules/fotoalbum/photos/'.$photo2->getId().'.'.$extension);
+              $width = imagesx($source_image);
+              $height = imagesy($source_image);
+              
+              $desiredwidth= 300;
+              
+              $desired_height = floor($height * ($desiredwidth/$width));
+              
+              $virtual_image = imagecreatetruecolor($desiredwidth, $desired_height);
+              
+              imagecopyresampled($virtual_image, $source_image, 0, 0, 0, 0, $desiredwidth, $desired_height, $width, $height);
+              imagejpeg($virtual_image,$_SERVER['DOCUMENT_ROOT'].'/modules/fotoalbum/photos/tn_'.$photo2->getId().'.'.$extension,100);
+
+             break;
+         
+             case 'png':
+              $source_image = imagecreatefrompng($_SERVER['DOCUMENT_ROOT'].'/modules/fotoalbum/photos/'.$photo2->getId().'.'.$extension);
+              $width = imagesx($source_image);
+              $height = imagesy($source_image);
+              
+              $desiredwidth= 300;
+              
+              $desired_height = floor($height * ($desiredwidth/$width));
+              
+              $virtual_image = imagecreatetruecolor($desiredwidth, $desired_height);
+              
+              imagecopyresampled($virtual_image, $source_image, 0, 0, 0, 0, $desiredwidth, $desired_height, $width, $height);
+              imagepng($virtual_image,$_SERVER['DOCUMENT_ROOT'].'/modules/fotoalbum/photos/tn_'.$photo2->getId().'.'.$extension);              
+              break;
+        }
         
         $result = new ajaxResponse('ok');
         
