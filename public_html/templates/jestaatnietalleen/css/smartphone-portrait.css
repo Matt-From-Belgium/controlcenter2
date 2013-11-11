@@ -33,7 +33,7 @@
     margin-left: auto;
     margin-right: auto;
     padding: 0em;
-    height: 12em;
+    height: 17em;
 
     width: 20em;
     background: #FFFFFF;
@@ -78,4 +78,16 @@
 
 .navLink:hover{
     background-color: #90CA77;
+}
+
+input[type='text'] {
+    font-size: 2em;
+}
+
+input[type='button'] {
+    font-size: 3em;
+}
+
+label {
+    font-size: 2em;
 }

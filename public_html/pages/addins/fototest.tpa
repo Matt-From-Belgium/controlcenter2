@@ -1,0 +1,18 @@
+<link rel="stylesheet" href="/modules/fotoalbum/presentation/css/showphoto.css">
+<script type="text/javascript" SRC="/core/presentation/ajax/ajaxtransaction.js"></script>
+<script src="/modules/fotoalbum/presentation/showalbum.js"> </script>
+<div id='photoViewer' class='viewer'></div>
+            <script>
+            /*function alertPhotos()    
+            {
+                alert(test.photoCollection.length);
+            }
+                
+            //getAlbumPhotos(1,function(){alertPhotos();});
+            
+            var test = new albumLoader(1);
+            test.onComplete=function(){alertPhotos();};
+            test.load();*/
+    
+            var test = new photoViewer(1,'photoViewer');
+        </script>

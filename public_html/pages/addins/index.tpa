@@ -1,6 +1,7 @@
 <div id="siteNews">
             <div id="item1" class="newsItem">
-                <img src='/pages/debus.png'>
+                <h1>Blijf op de hoogte</h1>
+                <h1 class="nadruk">Schrijf je in voor de nieuwsbrief</h1>
             </div>
         </div>
         <div class="block">
@@ -21,9 +22,9 @@
 
         <div>Sed vehicula venenatis ipsum, ut tristique libero rutrum eget. Donec ut velit sit amet orci laoreet posuere at ut ante. Suspendisse semper quam scelerisque arcu molestie, sit amet gravida nunc hendrerit. In hac habitasse platea dictumst. Pellentesque aliquet molestie risus eget hendrerit. Cras id nulla mi. Fusce tellus ligula, fermentum in mollis eget, ornare nec tellus. Cras at egestas dolor, vel varius enim. Nulla lacinia ornare tincidunt. Mauris sit amet lorem eget massa fringilla vulputate eu sed justo. Nunc blandit risus nunc, eu vestibulum sem placerat quis. Quisque ut ante a erat iaculis tristique nec et est.</div>
         <div><h1>Formulier</h1></div>
-        <label for="gemeente">gemeente</label><input type="text" size="50" id="gemeente">
-        <br /><label for="gemeente">gemeente</label><input type="text" size="50" id="gemeente">
-        <br /><label for="gemeente">gemeente</label><input type="text" size="50" id="gemeente">
+        <label for="gemeente">gemeente</label><input type="text" size="20" id="gemeente">
+        <br /><label for="gemeente">gemeente</label><input type="text" size="20" id="gemeente">
+        <br /><label for="gemeente">gemeente</label><input type="text" size="20" id="gemeente">
         <br /><input type="submit" value="Verstuur">
         </div>
         <div class="green">
@@ -41,9 +42,9 @@ Sed vehicula venenatis ipsum, ut tristique libero rutrum eget. Donec ut velit si
             </div>
             <div class="block">
                 <div><h1>Formulier</h1></div>
-                <label for="gemeente">gemeente</label><input type="text" size="50" id="gemeente">
-                <br /><label for="gemeente">gemeente</label><input type="text" size="50" id="gemeente">
-                <br /><label for="gemeente">gemeente</label><input type="text" size="50" id="gemeente">
+                <label for="gemeente">gemeente</label><input type="text" size="20" id="gemeente">
+                <br /><label for="gemeente">gemeente</label><input type="text" size="20" id="gemeente">
+                <br /><label for="gemeente">gemeente</label><input type="text" size="20" id="gemeente">
                 <br /><input type="submit" value="Verstuur">
             </div>
             </div>

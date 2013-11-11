@@ -14,7 +14,20 @@
 
 }
 
+#mobileMenu {
+    display: block;
+    float: right;
+    margin-right: 2em;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.navSmall #navLinks {
+    display: none;
+}
+
 .navBig #navLinks {
+    display: none;
     position: relative;
     top: 0.2em;
     left: 15em;
