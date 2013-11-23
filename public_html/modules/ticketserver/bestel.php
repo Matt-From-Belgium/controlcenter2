@@ -63,8 +63,11 @@ try
 	}
 	else
 	{
-		showMessage('Reservatie ontvangen','Wij hebben uw reservatie ontvangen. U ontvangt in de komende minuten een bevestigingsmail met betalingsgegevens.');
-	
+                #Wijziging: bevestigingspagina wordt apart php pagina om tracking mogelijk te maken
+		#showMessage('Reservatie ontvangen','Wij hebben uw reservatie ontvangen. U ontvangt in de komende minuten een bevestigingsmail met betalingsgegevens.');
+                header('location:/modules/ticketserver/confirmation.php');
+            
+            
 		###De input was correct, er moet enkel een bevestigingspagina worden weergegeven.
 		#$html = new htmlpage("frontend");
 		#$html->LoadAddin("/addins/message.tpa");
