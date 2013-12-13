@@ -379,8 +379,8 @@ function editUser($inputarray)
 	$editeduser->setMailAdress($inputarray['mail']);
 	$editeduser->setRealName($inputarray['lastname']);
 	$editeduser->setRealFirstName($inputarray['firstname']);
-	$editeduser->setWebsite($inputarray['website']);
-	$editeduser->setCountry($inputarray['country']);
+	
+	
 
 	###Bij wijziging moet er normaal gezien niet opnieuw geactiveerd worden.
 	$editeduser->setUserConfirmationStatus(1);
@@ -496,6 +496,59 @@ function Login($username,$password,$d)
 	{
 		###de parameters zijn niet correct => return false
 		return false;
+	}
+}
+
+function Login_FB()
+{
+	require_once $_SERVER['DOCUMENT_ROOT']."/core/dataaccess/usermanagement/userfunctions.php";
+        require_once $_SERVER['DOCUMENT_ROOT']."/core/social/facebook/php/facebook.php";
+	
+        ###Deze functie haalt het facebook ID van de ingelogde gebruiker op en kijkt of er een gebruikers
+        ###account aan gekoppeld is
+        ###Eerst kijken of er een Facebook sessie is
+        $config = array();
+
+        $config['appId'] = getFacebookAppID();
+        $config['secret'] = getFacebookSappId();
+
+        $facebook = new Facebook($config);
+
+        $fbUser = $facebook->getUser();
+        
+
+	###Eerst laten we de DataAccess layer controleren of de gegevens kloppen
+	$id=  dataaccess_checkUserFacebookId($fbUser);
+	if(!empty($id))
+	{
+		###De aangeleverde gegevens zijn correct
+		###We halen de gebruikersgegevens op in een userobject
+		$user = getUser($id);
+		
+
+			###CONTROLE: Moet de useraccount nog geactiveerd worden door een administrator?
+			if($user->getAdminConfirmationStatus()==1)
+			{
+				###De gebruikersgegevens waren correct, en de account is volledig actief => de gebruiker mag ingelogd worden
+				$_SESSION['currentuser'] = $user;
+				
+				
+			}
+			else
+			{
+				###De gebruiker heeft zijn account wel geactiveerd maar de admin moet nog zijn/haar toestemming geven
+                                ###Errorcode 2
+                                return '2';
+			}
+		
+
+		
+	}
+	else
+	{
+		###de parameters zijn niet correct => return false
+                ###Errorcode 1: geen fb account gelinkt aan een gebruikersaccount
+		return '1';
 	}
 }
 

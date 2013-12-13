@@ -1,4 +1,4 @@
-function registerWithFacebook()
+function registerWithFacebook(onCompleteFunction)
 {
     if(facebookStatus.sdkLoaded)
     {
@@ -7,7 +7,17 @@ function registerWithFacebook()
               {
                   //De gebruiker heeft al toegang verleend, is er niet al een account gemaakt
                   //voor deze gebruiker?
-                  getFacebookUserDetails();
+                  //getFacebookUserDetails();
+                  
+                           if(typeof onCompleteFunction != 'function')
+                           {
+                               throw 'onCompleteFunction is not an actual function';
+                           }
+                           else
+                            {
+
+                                onCompleteFunction();
+                            }
               }
          else
              {
@@ -24,7 +34,17 @@ function registerWithFacebook()
                        //We kunnen dus beginnen met gegevens ophalen
                        //MAAR: facebookStatus heeft hier geen waarde omdat de gebruiker onload nog niet
                        //verbonden was met onze app.
-                       getFacebookUserDetails();
+                         //getFacebookUserDetails();
+                           if(typeof onCompleteFunction != 'function')
+                           {
+                               throw 'onCompleteFunction is not an actual function';
+                           }
+                           else
+                            {
+
+                                onCompleteFunction();
+                            }                       
+
                    }
                  }, {scope: facebookStatus.desiredScope});
              }
@@ -55,7 +75,6 @@ function getFacebookUserDetails()
         document.getElementById('password2').disabled = true;
     });
 }
-
           
 function getFacebookScope()
 {

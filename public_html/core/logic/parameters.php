@@ -170,6 +170,7 @@ function getFacebookJavaCode()
     $desiredscope = getFacebookScope();
     
     $code = "<div id=\"fb-root\"></div>
+        <script type='text/javascript' SRC='/core/presentation/ajax/ajaxtransaction.js'></script>
         <script>
 
 
@@ -188,7 +189,7 @@ function getFacebookJavaCode()
             // init the FB JS SDK
             FB.init({
               appId      : '$appid',                        // App ID from the app dashboard
-              channelUrl : '//controlcenter2.dragoneyehosting.be/core/social/facebook/javascript/channel.html', // Channel file for x-domain comms
+              channelUrl : 'http://controlcenter2.dragoneyehosting.be/core/social/facebook/javascript/channel.html', // Channel file for x-domain comms
               status     : true,                                 // Check Facebook Login status
               cookie     : true,                                 //Share session with PHP
               xfbml      : true                                  // Look for social plugins on the page
@@ -244,6 +245,47 @@ function getFacebookJavaCode()
             facebookStatus.userID= e.detail.userID;
             facebookStatus.authStatus = e.detail.status;
           }
+          
+            function checkFBAccount()
+            {
+                
+                //De functie wordt gestart wanneer de SDK geladen is
+                //Als de gebruiker niet verbonden is met Facebook heeft het geen zin om verder te zoeken
+                if(facebookStatus.authStatus==='connected')
+                {
+                    var ajax = new ajaxTransaction();
+                    ajax.destination = '/core/logic/usermanagement/fbLoginAjax.php';
+                    ajax.phpfunction = 'checkFBAccount';
+
+                    ajax.onComplete = function(){
+                        if(ajax.successIndicator)
+                            {
+                                alert(ajax.result[0].userId);
+                                
+                                //We lanceren een event zodat we de gewijzigde logintoestand kunnen opvangen
+                                        var userLoggedIn = new CustomEvent('userLoggedIn',
+                                        {
+                                                detail: {
+                                                        
+                                                },
+                                                bubbles: true,
+                                                cancelable: true
+                                        }
+                                        );
+                                document.getElementById('fb-root').dispatchEvent(userLoggedIn);
+                            }
+                            else{
+                                //Waarde 1 betekent dat er geen gebruiker gevonden is met dit facebookid
+                                //Waarde 2 betekent dat de account nog geactiveerd moet worden door de admin
+                                //Waarde 3 betekent dat er al een gebruiker ingelogd is
+
+                                
+                            }
+                    };
+
+                    ajax.ExecuteRequest();
+                }
+            }
 
           // Load the SDK asynchronously
           (function(d, s, id){
@@ -253,6 +295,11 @@ function getFacebookJavaCode()
              js.src = \"//connect.facebook.net/en_US/all.js\";
              fjs.parentNode.insertBefore(js, fjs);
            }(document, 'script', 'facebook-jssdk'));
+           
+           document.addEventListener('fbSDKLoaded',checkFBAccount,false);
+
+           
+
         </script>";
     
     return $code;

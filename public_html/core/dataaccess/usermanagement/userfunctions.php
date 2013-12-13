@@ -456,6 +456,38 @@ function dataaccess_getDefaultUsergroup()
 	return $defaultusergroup->getValue();
 }
 
+function dataaccess_checkUserFacebookId($id)
+{
+    if(!empty($id))
+    {
+        $query = "SELECT id,facebookid FROM users WHERE facebookid='@id'";
+        
+        $db = new dataconnection();
+        $db->setQuery($query);
+        $db->setAttribute('id', $id);
+        $db->ExecuteQuery();
+        
+        if($db->GetNumRows()==1)
+        {
+            ###Alleen maar als er één resultaat is mag er verder gegaan worden
+            $result = $db->GetResultArray();
+            return $result[0]['id'];
+        }
+        else 
+        {
+            if($db->GetNumRows()>1)
+            {
+                throw new Exception('Multiple user accounts with same Facebook id?');
+            }
+            return false;
+        }
+    }
+    else
+    {
+        throw new Exception('$id must be set');
+    }
+}
+
 function dataaccess_checkUserPassword($username,$password)
 {
 	###Eerst nakijken of beide waarden werden opgegeven
