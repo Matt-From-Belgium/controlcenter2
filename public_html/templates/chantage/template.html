@@ -8,10 +8,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
             
         <meta property="og:type"                 content="website"> 
-        <meta property="og:url"                  content="http://www.projectkoorchantage.be"> 
+        <meta property="og:url"                  content="http://www.projectkoorchantage.be/modules/audities/index.php"> 
         <meta property="og:image" content="http://www.projectkoorchantage.be/images/chantage-fb.png">
-        <meta property="og:title"                content="CHANTage brengt een kerstconcert">
-        <meta property="og:description"          content="Dit concert gaat door in de kerk van Woumen. Het unieke interieur van deze kerk biedt een mix van moderne en authentieke elementen. Dat is meteen ook het concept voor dit eerste concert. We willen ons profileren als een koor dat veel verschillende genres aankan en brengen u met dit concert een mix van klassieke werken (Mendelssohn, Pachelbel), musicalnummers (Martin Guerre), pop (Sting) tot klassieke kerstnummers (verschillende medleys).">
+        <meta property="og:title"                content="CHANTage zoekt zangers/zangeressen">
+        <meta property="og:description"          content="Kan je goed zingen en heb je zin in een uitdaging? Dan is dit iets voor jou!">
 
         <script type="text/javascript">
 
@@ -50,11 +50,42 @@
                 link.href = '/templates/chantage/css/mobile.css';
                 link.media = 'all';
                 head.appendChild(link);
+                
+                //We geven de sponsors 
             }
+            
+            
+            function hideSponsors()
+                {
+                    if(checkMobile()===false)
+                        {
+                            var filename = window.location.pathname.split( '/' ).pop();
+                            var file = filename.split('.');
+
+                            switch(file[0])
+                            {
+                                case 'index':
+                                    document.getElementById('sponsors').style.display='none';
+                                case 'sponsors':
+                                    document.getElementById('sponsors').style.display='none';
+                            }
+                        }
+                }
         </script>
         
     </head>
-    <body>
+    <body onload="hideSponsors()">
+        
+<div id="fb-root"></div>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/nl_NL/all.js#xfbml=1&appId=219035668268270";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+        
         <header>
             <section id="header-content">
                 <section id="header-left">

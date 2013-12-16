@@ -1,17 +1,17 @@
 Een van de kandidaten heeft zijn inschrijving bevestigd:
 
-<p>Naam: <!CC VAR [naam]>
-<br />Voornaam: <!CC VAR [voornaam]>
-<br />Mailadres: <!CC VAR [mail]>
-<br />Stemgroep: <!CC VAR [stemgroep]>
-<br />Adres: <!CC VAR [adres]>
-<br />Telefoonnummer: <!CC VAR [telefoonnummer]>
-<br />Geboortedatum: <!CC VAR [geboortedatum]>
-<br />Hoogste noot: <!CC VAR [hoogstenoot]>
-<br />Laagste noot: <!CC VAR [laatstenoot]>
-<br />Kan je partituren lezen: <!CC VAR [partiturenlezen]>
-<br />Ervaring: <!CC VAR [ervaring]>
-<br />Zangles: <!CC VAR [zangles]>
-<br />Bespeel je een instrument: <!CC VAR [instrument]>
-<br />Heb je ervaring in orket/hafabra: <!CC VAR [ervaringinstrument]>
-<br />Motivatie: <!CC VAR [motivatie]>
+<p><b>Naam:</b> <!CC VAR [naam]>
+<p /><b>Voornaam:</b> <!CC VAR [voornaam]>
+<p /><b>Mailadres:</b> <!CC VAR [mail]>
+<p /><b>Stemgroep:</b> <!CC VAR [stemgroep]>
+<p /><b>Adres:</b> <!CC VAR [adres]>
+<p /><b>Telefoonnummer:</b> <!CC VAR [telefoonnummer]>
+<p /><b>Geboortedatum:</b> <!CC VAR [geboortedatum]>
+<p /><b>Hoogste noot:</b> <!CC VAR [hoogstenoot]>
+<p /><b>Laagste noot:</b> <!CC VAR [laatstenoot]>
+<p /><b>Kan je partituren lezen:</b> <!CC VAR [partiturenlezen]>
+<p /><b>Ervaring:</b> <!CC VAR [ervaring]>
+<p /><b>Zangles:</b> <!CC VAR [zangles]>
+<p /><b>Bespeel je een instrument:</b> <!CC VAR [instrument]>
+<p /><b>Heb je ervaring in orket/hafabra:</b> <!CC VAR [ervaringinstrument]>
+<p /><b>Motivatie:</b> <!CC VAR [motivatie]>

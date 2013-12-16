@@ -44,11 +44,11 @@ Helaas, niet alle velden werden correct ingevuld:
 <label>Wat is je hoogste noot?</label><input type="text" NAME="hoogstenoot" SIZE=40 MAXLENGTH=50 VALUE="<!CC VAR [hoogstenoot]>"><br />
 <label>Wat is je laagste noot?</label><input type="text" NAME="laagstenoot" SIZE=40 MAXLENGTH=50  VALUE="<!CC VAR [laagstenoot]>"><br />
 <label>Kun je partituren lezen?</label><input type="radio" NAME="partituren" VALUE="Y" <!CC VAR [partituurja]>>Ja<input type="radio" NAME="partituren" VALUE='N' <!CC VAR [partituurnee]>>Neen<br />
-<label>Heb je ervaring met meerstemmig zingen?</label><TEXTAREA NAME="ervaring" COLS=30 ROWS=4><!CC VAR [ervaring]></TEXTAREA><br />
+<label>Heb je ervaring met meerstemmig zingen?</label><TEXTAREA NAME="ervaring" COLS=50 ROWS=10><!CC VAR [ervaring]></TEXTAREA><br />
 <label>Heb je zangles gevolgd?</label><INPUT TYPE="radio" NAME="zangles" VALUE='Y' <!CC VAR [zanglesja]>>Ja<INPUT TYPE="radio" NAME="zangles" VALUE='N' <!CC VAR [zanglesnee]>>Neen<br />
 <label>Bespeel je een instrument? Welk?</label><INPUT TYPE="text" NAME="instrument" VALUE="<!CC VAR [instrument]>" SIZE=40 MAXLENGTH=100><br />
-<label>Heb je ervaring met het spelen van een instrument in een orkest/hafabra?</label><TEXTAREA NAME="ervaringinstrument" COLS=30 ROWS=4><!CC VAR [ervaringinstrument]></TEXTAREA><br />
-<label>Wat is je motivatie om deel uit te maken van ons koor?</label><TEXTAREA NAME="motivatie" COLS=30 ROWS=4><!CC VAR [motivatie]></TEXTAREA><br />
+<label>Heb je ervaring met het spelen van een instrument in een orkest/hafabra?</label><TEXTAREA NAME="ervaringinstrument" COLS=50 ROWS=10><!CC VAR [ervaringinstrument]></TEXTAREA><br />
+<label>Wat is je motivatie om deel uit te maken van ons koor?</label><TEXTAREA NAME="motivatie" COLS=50 ROWS=10><!CC VAR [motivatie]></TEXTAREA><br />
 <input type="submit" name="send" value="Versturen">
 </div>
 </div>

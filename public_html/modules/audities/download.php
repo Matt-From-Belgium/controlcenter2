@@ -15,8 +15,8 @@ else
 	
 	if($kandidaat instanceOf auditieKandidaat)
 	{
-			$basepath = "/home/projectk/protectedfiles";
-			$fileparts = split("/",$_GET['f']);
+			$basepath = "/home/chantage/protectedfiles";
+			$fileparts = explode("/",$_GET['f']);
 			$filesize = filesize($basepath."/$_GET[f]");
 			$recommendedfilename = $fileparts[count($fileparts)-1];
 			

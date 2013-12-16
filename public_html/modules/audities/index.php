@@ -40,9 +40,12 @@ if(getAuditiepakketStatus())
     }
 }
 else
-{
-    showMessage("Audities", "Helaas! op dit moment zijn wij niet op zoek naar kandidaten. Wil je je toch spontaan aanbieden? Stuur dan een mail naar ".dataaccess_getParameter('AUDITIES_ADMIN_MAIL')->getValue());
-   
+{    
+    #showMessage("Audities", "Helaas! op dit moment zijn wij niet op zoek naar kandidaten. Wil je je toch spontaan aanbieden? Stuur dan een mail naar ".dataaccess_getParameter('AUDITIES_ADMIN_MAIL')->getValue());
+    $html = new htmlpage('frontend');
+    $html->LoadAddin('/modules/audities/geenaudities.tpa');
+    $html->setVariable(mailadres, dataaccess_getParameter('AUDITIES_ADMIN_MAIL')->getValue());
+    $html->printHTML();
 }
 
 ?>

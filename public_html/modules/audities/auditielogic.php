@@ -21,7 +21,7 @@ function addKandidaat(auditieKandidaat $kandidaat)
 		###Bevestigingsmail naar kandidaat
 		$bevestigingsmail = new Email();
 		$bevestigingsmail->setTo($kandidaat->getMailadres());
-		$bevestigingsmail->setSubject("Projectkoor.be audities");
+		$bevestigingsmail->setSubject("CHANTage audities");
 		$bevestigingsmail->setMessageAddin('/modules/audities/aanvraagmail.tpa');
 		$bevestigingsmail->setVariable('voornaam',$kandidaat->getVoornaam());
 		$bevestigingsmail->setVariable('key',$kandidaat->getKey());

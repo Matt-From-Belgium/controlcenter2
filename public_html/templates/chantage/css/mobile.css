@@ -13,7 +13,7 @@ body {
 }
 
 #central-image {
-    height: 30em;
+    height: 20em;
     background-size: auto 100%;
     /*background-image: none;*/
 }
@@ -30,9 +30,9 @@ body {
 #central-image-content select {
     float: right;
     display: inline-block;
-    font-size: 5em;
+    font-size: 3em;
     margin-left: 2em;
-    margin-top: 4.5em;
+    margin-top: 5em;
     
     background-color: #524333;
     font-family: 'denseregular';
@@ -57,7 +57,7 @@ header #header-content,nav,#content-box,#sponsors-content,#footer-center,#centra
 }
 
 #logo img {
-    width: 25em;
+    width: 15em;
     
 }
 
@@ -93,8 +93,18 @@ h1 {
 .block {
     width: 90%;
     margin-left: 2em;
+    font-size: 1.5em;
+}
+
+.block h1 {
+    font-size: 3em;
 }
 
 header {
     display:none;
+}
+
+b {
+    font-weight: 400;
+    text-shadow: 0.5px 0.5px; 
 }

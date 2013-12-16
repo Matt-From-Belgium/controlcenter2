@@ -198,7 +198,7 @@ class defKandidaatValidator
 	
 	public function validateGeboortedatum($datum)
 	{
-		$datumarray = split('/',$datum);
+		$datumarray = explode('/',$datum);
 		foreach($datumarray as $key=>$value)
 		{
 			if(empty($value))

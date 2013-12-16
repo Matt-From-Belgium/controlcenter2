@@ -1,6 +1,6 @@
 Er werd een nieuwe aanvraag voor het auditiepakket ontvangen
 
-<p>Naam: <!CC VAR [naam]>
-<br />Voornaam: <!CC VAR [voornaam]>
-<br />Mailadres: <!CC VAR [mail]>
-<br />Stemgroep: <!CC VAR [stemgroep]>
+<p><b>Naam:</b> <!CC VAR [naam]>
+<br /><b>Voornaam:</b> <!CC VAR [voornaam]>
+<br /><b>Mailadres:</b> <!CC VAR [mail]>
+<br /><b>Stemgroep:</b> <!CC VAR [stemgroep]>
