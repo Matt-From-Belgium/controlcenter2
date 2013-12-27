@@ -3,9 +3,10 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/modules/fotoalbum/logic/albumlogic.php'
 
 function GetAlbumPhotosAjax()
 {   
-    ###DEBUG
-    $_POST['albumid']=1;
+    /*###DEBUG
+    $_POST['albumid']=1;*/
     
+    $_POST['albumid']= intval($_POST['albumid']);
     $photoArray=getAlbumPhotos($_POST['albumid']);
     
     $result = new ajaxResponse('ok');

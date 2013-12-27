@@ -1,4 +1,4 @@
-function getAlbumPhotos(id,onCompleteFunction)
+/*function getAlbumPhotos(id,onCompleteFunction)
 {
     if(id)
     {
@@ -40,12 +40,13 @@ function getAlbumPhotos(id,onCompleteFunction)
     {
         throw exception('id must be set')
     }
-}
+}*/
 
 function albumLoader(id)
 {
     //private vars
     var that = this;
+    var id= id;
     
     //public vars
     this.onComplete=null;
@@ -86,6 +87,7 @@ function albumLoader(id)
                                 newPhoto.id= ajax.result[i].id;
                                 newPhoto.description = ajax.result[i].description;
 
+                                
                                 photoCollection.push(newPhoto);
                             }
                             
@@ -168,6 +170,9 @@ function photoViewer(albumid,previewElement)
         
         loader.load();
     
+        //Nu moeten we een element aanmaken voor de weergave
+        var photoDisplay = new photoDisplayer;
+        
     //private methods
         function populateElement()
         {
@@ -197,7 +202,8 @@ function photoViewer(albumid,previewElement)
             var imageDiv = document.createElement('div');
             imageDiv.classList.add('imagePreview');
             
-            imageDiv.onclick = function(){window.open(photo.src);};
+            /*imageDiv.onclick = function(){window.open(photo.src);};*/
+            imageDiv.onclick = function(){photoDisplay.displayImage(photo);};
             
             var imageTag = document.createElement('img');
             imageTag.src = photo.thumbnail;
@@ -205,8 +211,78 @@ function photoViewer(albumid,previewElement)
             imageDiv.appendChild(imageTag);
             return imageDiv;
         }
+        
+ 
     
     //public methods
 }
 
+function photoDisplayer()
+{
+    //private vars
+    
+    //constructor
+       //We halen het body element op
+       var body = document.getElementsByTagName('body')[0];
+ 
+       //We creëren een container die zich over het ganse oppervlak van de pagina moet kunnen zetten
+       //Zo krijgen we een 'dim the lights' effect
+       var displayContainer = document.createElement('div');
+       displayContainer.id= 'displayContainer';
+       displayContainer.style.display='none';
+       
+            //Wanneer de gebruiker naast de viewer klikt moet alles afsluiten
+            displayContainer.onclick = function(){
+                displayContainer.style.display='none';
+                
+                
+            };
+       
+       //Binnen displayContainer moeten we nu onze elementen van de viewer creëren
+       var photoDisplayer = document.createElement('div');
+       photoDisplayer.id='photoDisplayer';
+       
+       var photoContainer = document.createElement('div');
+       photoContainer.id='photoContainer';
+       
+       var imageTag = document.createElement('img');
+       imageTag.id='photo';
+       
+       var description = document.createElement('div');
+       description.id='description';
+       description.innerHTML='test';
+       
+       var controls = document.createElement('div');
+       controls.id='controls';
+       
+       photoContainer.appendChild(imageTag);
+       photoContainer.appendChild(description);
+       photoContainer.appendChild(controls);
+       
+       photoDisplayer.appendChild(photoContainer);
+       
+       displayContainer.appendChild(photoDisplayer);
+       
+       //We hangen de displayContainer aan body om deze zichtbaar te maken in het DOM Model
+       //Het element moet eerst komen na het body element anders zal het effect niet werken
+       body.insertBefore(displayContainer,body.firstChild);
+       
+    this.displayImage = function(photoObject)
+    {
+           displayContainer.style.display='block';
+           
+           imageTag.src = photoObject.src;
+           if(photoObject.description !== 'null')
+               {
+                   description.innerHTML=photoObject.description;
+                   description.style.visibility='visible';
+               }
+           else
+               {
+                   description.style.visibility='hidden';
+                   description.innerHTML=null;
+               }
+    };
+    
+}
 
