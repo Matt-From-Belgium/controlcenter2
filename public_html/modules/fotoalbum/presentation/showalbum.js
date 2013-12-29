@@ -184,7 +184,7 @@ function photoViewer(albumid,previewElement)
                     
                     for(i=0;i<photoCollection.length;i++)
                         {
-                            var preview=createImage(photoCollection[i]);
+                            var preview=createImage(i);
                             photoPreviewElement.appendChild(preview);
                         }
                 }
@@ -195,18 +195,23 @@ function photoViewer(albumid,previewElement)
                 }
         }
         
-        function createImage(photo)
+        function createImage(photoIndex)
         {
+            
             //We creëren met deze functie een kant en klare div om te koppelen
             //aan het ogegeven HTML DOM element
             var imageDiv = document.createElement('div');
             imageDiv.classList.add('imagePreview');
             
             /*imageDiv.onclick = function(){window.open(photo.src);};*/
-            imageDiv.onclick = function(){photoDisplay.displayImage(photo);};
+            imageDiv.onclick = function()
+            {
+                photoDisplay.setCollection(photoCollection);
+                photoDisplay.displayImage(photoIndex);
+            };
             
             var imageTag = document.createElement('img');
-            imageTag.src = photo.thumbnail;
+            imageTag.src = photoCollection[photoIndex].thumbnail;
             
             imageDiv.appendChild(imageTag);
             return imageDiv;
@@ -220,6 +225,9 @@ function photoViewer(albumid,previewElement)
 function photoDisplayer()
 {
     //private vars
+    var displayPhotoCollection=null;
+    var currentIndex=null;
+    var that = this;
     
     //constructor
        //We halen het body element op
@@ -255,6 +263,8 @@ function photoDisplayer()
        var controls = document.createElement('div');
        controls.id='controls';
        
+       
+       
        photoContainer.appendChild(imageTag);
        photoContainer.appendChild(description);
        photoContainer.appendChild(controls);
@@ -266,12 +276,36 @@ function photoDisplayer()
        //We hangen de displayContainer aan body om deze zichtbaar te maken in het DOM Model
        //Het element moet eerst komen na het body element anders zal het effect niet werken
        body.insertBefore(displayContainer,body.firstChild);
-       
-    this.displayImage = function(photoObject)
+    
+    this.setCollection = function(photoCollection)
     {
+      displayPhotoCollection=photoCollection;
+    };
+            
+    this.displayImage = function(photoIndex)
+    {
+           
+           currentIndex = photoIndex;
+           
            displayContainer.style.display='block';
            
+           photoObject = displayPhotoCollection[photoIndex];
+           
            imageTag.src = photoObject.src;
+           
+           //Wanneer een gebruiker op de afbeelding klikt moet de volgende
+           //weergegeven worden
+           imageTag.onclick = function(e){
+               
+               //Wanneer dit event geactiveerd wordt moeten we zorgen dat het onCLick op de onderliggende
+               //laag niet geactiveerd wordt, dit doen we door het propageren tegen te gaan.
+               var event = e || window.event;
+               e.cancelBubble=true;
+               
+               that.nextImage();
+               
+           };
+           
            if(photoObject.description !== 'null')
                {
                    description.innerHTML=photoObject.description;
@@ -283,6 +317,11 @@ function photoDisplayer()
                    description.innerHTML=null;
                }
     };
-    
+
+    this.nextImage=function()
+    {
+        currentIndex++;
+        this.displayImage(currentIndex);
+    };
 }
 
