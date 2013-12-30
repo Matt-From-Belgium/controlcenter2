@@ -45,13 +45,21 @@ body {
 #photoDisplayer {  
     display: block;
     background-color: rgba(10,10,10,0.8);
-    width: 40%;
+    width: 70em;
     min-height: 1em;
-    margin-top: 10em;
+    margin-top: 5em;
     margin-left: auto;
     margin-right: auto;
     border-radius: 1em;
     padding: 1.5em;
+    
+    
+    transition: width 1s, height 1s;
+}
+
+#photoDisplayer.portraitMode {
+    width: 32em;
+    transition: width 0.5s, height 0.5s;
 }
 
 #photoContainer {
@@ -93,6 +101,14 @@ body {
     top: -4.3em;
     vertical-align: middle;
     margin-bottom: -4.3em;
+    
 }
 
-
+#controls img {
+    display: inline;
+    height: 75%;
+    vertical-align: middle;
+    padding-top: 0.2em;
+    margin-left: 0.05em;
+    margin-right: 0.05em;
+}

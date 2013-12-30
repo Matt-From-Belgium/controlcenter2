@@ -117,7 +117,7 @@ function photo()
     var filename;
     var path;
     var tnPath;
-    
+    var that = this;
     
     
     //public vars
@@ -125,6 +125,8 @@ function photo()
     this.id;
     this.src;
     this.thumbnail;
+    this.height;
+    this.width;
     
     this.setFilename= function(name)
     {
@@ -134,6 +136,15 @@ function photo()
         path = '/modules/fotoalbum/photos/'+filename;
         var img =new Image();
         img.src = path;
+        
+        //De hoogte en breedte moeten gedetecteerd worden van zodra het laden
+        //voltooid is
+        img.onload=function() {
+            
+            that.height = this.height;
+            that.width = this.width;
+        };
+        
         this.src = img.src;
         
         
@@ -228,6 +239,8 @@ function photoDisplayer()
     var displayPhotoCollection=null;
     var currentIndex=null;
     var that = this;
+    var slideshowDelay = 3000;
+    var slideShowInterval = null;
     
     //constructor
        //We halen het body element op
@@ -241,9 +254,16 @@ function photoDisplayer()
        
             //Wanneer de gebruiker naast de viewer klikt moet alles afsluiten
             displayContainer.onclick = function(){
-                displayContainer.style.display='none';
+            
+            //Als de slideshow actief is moet deze gestopt worden
+            if(slideShowInterval)
+                {
+                   that.toggleSlideShow();
+                }
                 
+            displayContainer.style.display='none';
                 
+            
             };
        
        //Binnen displayContainer moeten we nu onze elementen van de viewer creëren
@@ -263,6 +283,46 @@ function photoDisplayer()
        var controls = document.createElement('div');
        controls.id='controls';
        
+            var nextPhotoButton = document.createElement('img');
+            nextPhotoButton.onclick = function(e){
+               //Wanneer dit event geactiveerd wordt moeten we zorgen dat het onCLick op de onderliggende
+               //laag niet geactiveerd wordt, dit doen we door het propageren tegen te gaan.
+               var event = e || window.event;
+               e.cancelBubble=true;
+                that.nextImage();
+            };
+                
+            nextPhotoButton.src='/modules/fotoalbum/presentation/assets/volgendeknop.png';
+                
+            
+            
+            var toggleSlideShowButton = document.createElement('img');
+            toggleSlideShowButton.onclick = function(e){
+                //Wanneer dit event geactiveerd wordt moeten we zorgen dat het onCLick op de onderliggende
+                //laag niet geactiveerd wordt, dit doen we door het propageren tegen te gaan.
+                var event = e || window.event;
+                e.cancelBubble=true; 
+                
+                that.toggleSlideShow(this);
+            };
+            
+            toggleSlideShowButton.src = '/modules/fotoalbum/presentation/assets/playknop.png';
+            
+            var previousPhotoButton = document.createElement('img');
+            previousPhotoButton.onclick = function(e) {
+                  //Wanneer dit event geactiveerd wordt moeten we zorgen dat het onCLick op de onderliggende
+                  //laag niet geactiveerd wordt, dit doen we door het propageren tegen te gaan.
+                  var event = e || window.event;
+                  e.cancelBubble=true;  
+                  
+                  that.previousImage();
+            };
+            
+            previousPhotoButton.src = '/modules/fotoalbum/presentation/assets/terugknop.png';
+       
+       controls.appendChild(previousPhotoButton);
+       controls.appendChild(toggleSlideShowButton);
+       controls.appendChild(nextPhotoButton);
        
        
        photoContainer.appendChild(imageTag);
@@ -286,10 +346,23 @@ function photoDisplayer()
     {
            
            currentIndex = photoIndex;
+
            
-           displayContainer.style.display='block';
+           photoObject = displayPhotoCollection[photoIndex];  
+
            
-           photoObject = displayPhotoCollection[photoIndex];
+        
+           //Nu gaan we detecteren of het een rechtstaande of liggende afbeelding is
+           if(photoObject.height>photoObject.width)
+               {
+                   
+                   photoDisplayer.classList.add('portraitMode');
+               }
+           else
+               {
+                   
+                   photoDisplayer.classList.remove('portraitMode');
+               }
            
            imageTag.src = photoObject.src;
            
@@ -316,12 +389,50 @@ function photoDisplayer()
                    description.style.visibility='hidden';
                    description.innerHTML=null;
                }
+               
+            displayContainer.style.display='block';
+    };
+    
+    this.previousImage = function() {
+        currentIndex--;
+        if(currentIndex<0)
+            {
+                currentIndex=displayPhotoCollection.length - 1;
+            }
+            
+        this.displayImage(currentIndex);
     };
 
     this.nextImage=function()
     {
         currentIndex++;
+        
+        if(currentIndex >= (displayPhotoCollection.length - 1))
+            {
+                currentIndex = 0;
+            }
+            
         this.displayImage(currentIndex);
+    };
+    
+    this.toggleSlideShow=function(element)
+    {
+       if(slideShowInterval)
+           {
+               //Slide show is actief en moet gestopt worden
+               clearInterval(slideShowInterval);
+               slideShowInterval = null;
+               
+               toggleSlideShowButton.src = '/modules/fotoalbum/presentation/assets/playknop.png';
+           }
+       else
+           {
+               //Slideshow is niet actief en moet gestart worden
+               slideShowInterval = setInterval(function(){that.nextImage();},slideshowDelay);
+               
+               toggleSlideShowButton.src='/modules/fotoalbum/presentation/assets/pauzeknop.png';
+               
+           }
     };
 }
 
