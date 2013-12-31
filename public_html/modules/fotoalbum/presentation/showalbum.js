@@ -134,7 +134,8 @@ function photo()
         
         //onmiddellijk inladen van de afbeelding
         path = '/modules/fotoalbum/photos/'+filename;
-        var img =new Image();
+        /*var img =new Image();
+        
         img.src = path;
         
         //De hoogte en breedte moeten gedetecteerd worden van zodra het laden
@@ -146,7 +147,8 @@ function photo()
         };
         
         this.src = img.src;
-        
+        */
+       this.src = path;
         
         //en inladen van de thumbnail
         tnPath = '/modules/fotoalbum/photos/tn_'+filename;
@@ -163,6 +165,24 @@ function photo()
         return path;
     };
     
+    this.preLoad= function() {
+        //Doel is om de foto zo snel mogelijk in te laden
+        //Oorspronkelijk gebeurde dat samen met de thumbnails maar dit werd aangepast
+        //Het is beter om eerst alle thumbs in te laden en dan pas te beginnen met de grote afbeeldingen
+        var img =new Image();
+        
+        img.src = path;
+        
+        //De hoogte en breedte moeten gedetecteerd worden van zodra het laden
+        //voltooid is
+        img.onload=function() {
+            
+            that.height = this.height;
+            that.width = this.width;
+        };
+        
+        this.src = img.src;
+    };
  
 }
 
@@ -199,13 +219,22 @@ function photoViewer(albumid,previewElement)
                         {
                             var preview=createImage(i);
                             photoPreviewElement.appendChild(preview);
+                            
+                            //Nu gaan we de foto zelf voorladen, thumbs worden geladen bij de creatie van het
+                            //photo object
+                            photoCollection[i].preLoad();
                         }
+                     
+                    
+                    
                 }
             else
                 {
                     //Element niet gevonden => stop
                     throw 'Element not found';
                 }
+                
+             
         }
         
         function createImage(photoIndex)
@@ -356,7 +385,9 @@ function photoDisplayer()
            var tempImage = new Image();
            tempImage.onload = function(){
                //Nu gaan we detecteren of het een rechtstaande of liggende afbeelding is
-                 if(photoObject.height>photoObject.width)
+               
+               
+                 if(tempImage.height>tempImage.width)
                     {
 
                         photoDisplayer.classList.add('portraitMode');
@@ -366,7 +397,7 @@ function photoDisplayer()
 
                         photoDisplayer.classList.remove('portraitMode');
                     }
-           
+               
                 imageTag.src = photoObject.src;
            };
            
