@@ -52,14 +52,11 @@ body {
     margin-right: auto;
     border-radius: 1em;
     padding: 1.5em;
-    
-    
-    transition: width 1s, height 1s;
 }
 
 #photoDisplayer.portraitMode {
-    width: 32em;
-    transition: width 0.5s, height 0.5s;
+    width: 31em;
+    
 }
 
 #photoContainer {
@@ -74,7 +71,7 @@ body {
 
 #photo {
     width: 100%;
-    
+    max-height: 50em;
 }
 
 #description {

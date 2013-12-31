@@ -162,6 +162,8 @@ function photo()
     this.getPath = function() {
         return path;
     };
+    
+ 
 }
 
 function photoViewer(albumid,previewElement)
@@ -350,21 +352,27 @@ function photoDisplayer()
            
            photoObject = displayPhotoCollection[photoIndex];  
 
+           //onload werkt alleen op alle browsers als je een nieuwe image aanmaakt.
+           var tempImage = new Image();
+           tempImage.onload = function(){
+               //Nu gaan we detecteren of het een rechtstaande of liggende afbeelding is
+                 if(photoObject.height>photoObject.width)
+                    {
+
+                        photoDisplayer.classList.add('portraitMode');
+                    }
+                else
+                    {
+
+                        photoDisplayer.classList.remove('portraitMode');
+                    }
            
+                imageTag.src = photoObject.src;
+           };
+           
+           tempImage.src = displayPhotoCollection[photoIndex].src;
         
-           //Nu gaan we detecteren of het een rechtstaande of liggende afbeelding is
-           if(photoObject.height>photoObject.width)
-               {
-                   
-                   photoDisplayer.classList.add('portraitMode');
-               }
-           else
-               {
-                   
-                   photoDisplayer.classList.remove('portraitMode');
-               }
            
-           imageTag.src = photoObject.src;
            
            //Wanneer een gebruiker op de afbeelding klikt moet de volgende
            //weergegeven worden
