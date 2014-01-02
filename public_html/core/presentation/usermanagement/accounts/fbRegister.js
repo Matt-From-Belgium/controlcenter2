@@ -8,7 +8,7 @@ function registerWithFacebook(onCompleteFunction)
                   //De gebruiker heeft al toegang verleend, is er niet al een account gemaakt
                   //voor deze gebruiker?
                   //getFacebookUserDetails();
-                  
+                  alert('connected');
                            if(typeof onCompleteFunction != 'function')
                            {
                                throw 'onCompleteFunction is not an actual function';
@@ -22,6 +22,7 @@ function registerWithFacebook(onCompleteFunction)
          else
              {
                  //Ofwel is er nog geen toegang verleend of de gebruiker is niet ingelogd.
+                 //OF THIRD PARTY COOKIES DISABLED!
                  //We moeten sowieso passeren via de login flow
                  
                  //We halen eerst de scope op die moet toegekend worden door de gebruiker

@@ -200,8 +200,10 @@ function getFacebookJavaCode()
             var message = null;
             var userID = null;
 
+            
+
             FB.getLoginStatus(function(response){
-                if(response.status === 'connected')
+                    if(response.status === 'connected')
                     {
                         //Ingelogd + auth ok
                         message = 'connected';
@@ -215,7 +217,8 @@ function getFacebookJavaCode()
                 else
                     {
                         //Niet ingelogd, we weten dus helemaal niks;
-                        message = false;
+                        //of... third party cookies disabled
+                        message = 'unknown';
                     }
                     
                         //Wanneer de SDK geladen is wordt een event uitgestuurd met gegevens
@@ -251,7 +254,7 @@ function getFacebookJavaCode()
                 
                 //De functie wordt gestart wanneer de SDK geladen is
                 //Als de gebruiker niet verbonden is met Facebook heeft het geen zin om verder te zoeken
-                if(facebookStatus.authStatus==='connected')
+                if((facebookStatus.authStatus==='connected'))
                 {
                     var ajax = new ajaxTransaction();
                     ajax.destination = '/core/logic/usermanagement/fbLoginAjax.php';
@@ -278,7 +281,7 @@ function getFacebookJavaCode()
                                 //Waarde 1 betekent dat er geen gebruiker gevonden is met dit facebookid
                                 //Waarde 2 betekent dat de account nog geactiveerd moet worden door de admin
                                 //Waarde 3 betekent dat er al een gebruiker ingelogd is
-
+                                //alert(ajax.errorList[0].value);
                                 
                             }
                     };
