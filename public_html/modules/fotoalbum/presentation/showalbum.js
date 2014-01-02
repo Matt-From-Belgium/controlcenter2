@@ -399,6 +399,8 @@ function photoDisplayer()
                     }
                
                 imageTag.src = photoObject.src;
+                
+                displayContainer.style.display='block';
            };
            
            tempImage.src = displayPhotoCollection[photoIndex].src;
@@ -429,7 +431,7 @@ function photoDisplayer()
                    description.innerHTML=null;
                }
                
-            displayContainer.style.display='block';
+            
     };
     
     this.previousImage = function() {
