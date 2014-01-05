@@ -229,13 +229,14 @@ function changeDescription()
     
     ###Ajax functie: de waarden id en description komen door
     $id = intval($_POST['id']);
-    $description= $_POST['description'];
+    $description= $_POST['newdescription'];
     
     ###We halen eerst het oorspronkelijke object op
     $photoToChange = getPhotoById($id);
     
     ###We creëren nu een nieuw object met dezelfde gegevens, maar een andere beschrijving
     $editedPhoto= new photo($photoToChange->getAlbumId(),$photoToChange->getExtension(), $photoToChange->getId(), $description);
+    
     
     ###We sturen het nieuwe object naar de databank om het oude te vervangen
     editPhoto($editedPhoto);

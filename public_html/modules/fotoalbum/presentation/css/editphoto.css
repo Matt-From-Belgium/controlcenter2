@@ -1,0 +1,35 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 5-jan-2014, 14:08:33
+    Author     : matthiasba
+*/
+
+.imagePreview .imageOptions {
+    position: absolute;
+    display: block;
+    height: 1em;
+    background-color: #333333;
+    color: #FFFFFF;
+    bottom: -2em;
+    width: 100%;
+    padding: 0.4em;
+    
+    transition: bottom 1s;
+}
+
+.imageOptionsOver {
+    position: absolute;
+    display: block;
+    height: 1em;
+    background-color: #333333;
+    color: #FFFFFF;
+    bottom: 0em;
+    width: 100%;
+    padding: 0.4em;
+    
+    transition: bottom 0.5s;
+}

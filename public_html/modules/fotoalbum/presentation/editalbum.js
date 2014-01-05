@@ -150,7 +150,7 @@ function uploadMonitor(file)
                 //We moeten nu een formulier voorzien om een beschrijving in te voeren
                 var descriptionForm = document.createElement('div');
                 descriptionForm.classList.add('description');
-                descriptionForm.innerHTML = "<form method='post'><input type='hidden' id='photoid' value='"+ this.newId +"'><label for='description'>Beschrijving</label><textarea cols=50 rows=5 id='description'></textarea><br/><label for='verzend'>&nbsp;</label><input type='button' id='verzend' value='verzend' onClick='javascript:saveDescription(this)'><span id='loadIndicator' style='visibility:hidden'>Bezig met opslaan...</span></form>";
+                descriptionForm.innerHTML = "<form method='post'><input type='hidden' id='photoid' value='"+ this.newId +"'><label for='description'>Beschrijving</label><textarea cols=50 rows=5 id='newdescription'></textarea><br/><label for='verzend'>&nbsp;</label><input type='button' id='verzend' value='verzend' onClick='javascript:saveDescription(this)'><span id='loadIndicator' style='visibility:hidden'>Bezig met opslaan...</span></form>";
                 statusDiv.appendChild(descriptionForm);
                 
                 //De afsluitenknop mag nu getoond worden
@@ -185,7 +185,7 @@ function saveDescription(formElement)
     //We gaan dus eerst op zoek naar het bovenliggende form element
     var form = formElement.parentNode;
     var photoid = null;
-    var description = null;
+    var newdescription = null;
     var loadIndicator = null;
     //Aangezien getElementById blijkbaar niet werkt op element-niveau moeten we
     //lussen om de elementen te overlopen
@@ -195,9 +195,9 @@ function saveDescription(formElement)
                 {
                     photoid=form.childNodes[i].value;
                 }
-            if(form.childNodes[i].id === 'description')
+            if(form.childNodes[i].id === 'newdescription')
                 {
-                    description = form.childNodes[i].value;
+                    newdescription = form.childNodes[i].value;
                 }
             if(form.childNodes[i].id === 'loadIndicator')
                 {
@@ -214,7 +214,7 @@ function saveDescription(formElement)
     var ajax = new ajaxTransaction();
     
     ajax.addData('id',photoid);
-    ajax.addData('description',description);
+    ajax.addData('newdescription',newdescription);
     
     ajax.destination='/modules/fotoalbum/logic/albumlogic.php';
     ajax.phpfunction='changeDescription';
@@ -252,3 +252,121 @@ function changeDescriptionComplete(ajax,loadIndicator)
     }
 }
 
+function photoEditor(albumid,previewElement)
+{
+    //private vars
+    var photoCollection = null;
+    
+    //public vars
+    
+    //constructor
+        //We gaan eerst het album inladen
+        var loader = new albumLoader(albumid);
+        loader.onComplete=function(){
+            photoCollection = loader.photoCollection;
+            populateElement();
+        };
+        
+        loader.load();
+    
+        //Nu moeten we een element aanmaken voor de weergave
+        var photoDisplay = new photoDisplayer;
+        
+    //private methods
+        function populateElement()
+        {
+            //De foto's zijn ingeladen en nu voegen we die toe aan het element
+            if(document.getElementById(previewElement))
+                {
+                    //Element gevonden in de DOM structuur => we kunnen verder
+                    var photoPreviewElement = document.getElementById(previewElement);
+                    
+                    for(i=0;i<photoCollection.length;i++)
+                        {
+                            var preview=createImage(i);
+                            photoPreviewElement.appendChild(preview);
+                            
+                            //Nu gaan we de foto zelf voorladen, thumbs worden geladen bij de creatie van het
+                            //photo object
+                            photoCollection[i].preLoad();
+                        }
+                     
+                    
+                    
+                }
+            else
+                {
+                    //Element niet gevonden => stop
+                    throw 'Element not found';
+                }
+                
+             
+        }
+        
+        function createImage(photoIndex)
+        {
+            
+            //We creëren met deze functie een kant en klare div om te koppelen
+            //aan het ogegeven HTML DOM element
+            var imageDiv = document.createElement('div');
+            imageDiv.classList.add('imagePreview');
+            
+            
+            imageDiv.onmouseover = function() {
+                //Er zit één div onder imageDiv met de optieknoppen
+                optionsDiv.classList.toggle('imageOptionsOver');
+                optionsDiv.classList.toggle('imageOptions');
+            };
+            
+             imageDiv.onmouseout= function() {
+                //Er zit één div onder imageDiv met de optieknoppen
+                optionsDiv.classList.toggle('imageOptionsOver');
+                optionsDiv.classList.toggle('imageOptions');
+            };
+            
+            /*imageDiv.onclick = function()
+            {
+                photoDisplay.setCollection(photoCollection);
+                photoDisplay.displayImage(photoIndex);
+            };*/
+            
+            var imageTag = document.createElement('img');
+            imageTag.src = photoCollection[photoIndex].thumbnail;
+            
+            imageDiv.appendChild(imageTag);
+            
+            var optionsDiv = document.createElement('div');
+            
+                //Options div bevat 2 knoppen: verwijderen en aanpassen
+                var deletePhoto = document.createElement('a');
+                
+                deletePhoto.innerHTML = 'verwijder';
+                deletePhoto.onclick = function() {
+                    var bevestiging = confirm('Bent u zeker dat u deze foto wil verwijderen?');
+                };
+                
+               
+                
+                var editDescription = document.createElement('a');
+                
+                editDescription.innerHTML = 'aanpassen';
+                
+                editDescription.onclick = function(){
+                    photoDisplay.setCollection(photoCollection);
+                    photoDisplay.displayImage(photoIndex);
+                };    
+            
+            
+            optionsDiv.classList.add('imageOptions');
+            
+            optionsDiv.appendChild(editDescription);
+             optionsDiv.appendChild(deletePhoto);
+            
+            imageDiv.appendChild(optionsDiv);
+            return imageDiv;
+        }
+        
+ 
+    
+    //public methods
+}
