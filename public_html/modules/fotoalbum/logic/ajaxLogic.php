@@ -9,7 +9,7 @@ function GetAlbumPhotosAjax()
     $_POST['albumid']= intval($_POST['albumid']);
     $photoArray=getAlbumPhotos($_POST['albumid']);
     
-    if(is_array(photoArray))
+    if(is_array($photoArray))
     {
         $result = new ajaxResponse('ok');
         $result->addField('id');

@@ -174,12 +174,16 @@ function data_getAlbumPhotos($albumid)
         
         if($db->GetNumRows()>0)
         {
+            
          foreach($result as $value)
             {
                 $newphoto = new photo($value['album'],$value['extension'], $value['id'], $value['description']);
                 $photos[] = $newphoto;     
-                return $photos;
-            }   
+                
+               
+                
+            }  
+             return $photos;
         }
         else
         {
