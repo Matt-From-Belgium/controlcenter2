@@ -99,7 +99,16 @@ function albumLoader(id)
                     }
                 else
                     {
-                        throw('server error');
+                        //Er is een error teruggekeerd. Mogelijk omdat het album geen fotos bevat
+                        var error = ajax.errorList[0];
+                        if(error.value === 'Dit album bevat nog geen fotos')
+                        {
+                            console.log('Album bevat geen fotos');
+                        }
+                        else
+                        {
+                            throw('serverfout');
+                        }
                     }
                 
                  };

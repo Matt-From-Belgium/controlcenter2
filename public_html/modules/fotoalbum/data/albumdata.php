@@ -172,18 +172,27 @@ function data_getAlbumPhotos($albumid)
         $result = $db->GetResultArray();
         $photos = Array();
         
-        foreach($result as $value)
+        if($db->GetNumRows()>0)
         {
-            $newphoto = new photo($value['album'],$value['extension'], $value['id'], $value['description']);
-            $photos[] = $newphoto;            
+         foreach($result as $value)
+            {
+                $newphoto = new photo($value['album'],$value['extension'], $value['id'], $value['description']);
+                $photos[] = $newphoto;     
+                return $photos;
+            }   
         }
+        else
+        {
+            return false;
+        }
+        
         
         ###Aan het einde van de rit geven we het array met objecten terug
         
         ###DEBUG
         /*print_r($photos);*/
         
-        return $photos;
+        
     }
     else
     {
