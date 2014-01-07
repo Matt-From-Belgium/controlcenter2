@@ -39,7 +39,7 @@ body {
     height: 100%;
     background-color: rgba(20,20,20,0.7);
     vertical-align:  middle;
-    
+    z-index: 1000;
     
 }
 

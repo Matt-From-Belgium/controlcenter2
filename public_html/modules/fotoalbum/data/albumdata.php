@@ -151,10 +151,17 @@ function data_getPhotoById($id)
     
     $db->ExecuteQuery();
     
-    $result = $db->GetResultArray();
+    if($db->GetNumRows()>0)
+    {
+        $result = $db->GetResultArray();
     
-    $photo = new photo($result[0]['album'],$result[0]['extension'],$result[0]['id'],$result[0]['description']);
-    return $photo;
+        $photo = new photo($result[0]['album'],$result[0]['extension'],$result[0]['id'],$result[0]['description']);
+        return $photo;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 function data_getAlbumPhotos($albumid)
@@ -203,4 +210,21 @@ function data_getAlbumPhotos($albumid)
         throw new exception('$albumid must be an integer');
     }
 }
+
+function data_deletePhoto($photo)
+{
+    if($photo instanceof photo)
+    {
+        $query = 'DELETE FROM photos where id=@id';
+        $db = new DataConnection();
+        $db->setQuery($query);
+        $db->setAttribute('id', $photo->getId());
+        $db->ExecuteQuery();
+    }
+    else
+    {
+        throw new Exception('$hoto moet instantie zijn van photo');
+    }
+}
+
 ?>

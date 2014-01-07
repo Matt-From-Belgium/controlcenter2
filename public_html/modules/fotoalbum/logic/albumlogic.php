@@ -257,4 +257,37 @@ function getAlbumPhotos($id)
         throw new exception('$albumid must be an integer');
     }
 }
+
+function deletePhoto()
+{
+    checkPermission('fotoalbum', 'manage albums');
+    
+    ###Eerst halen we de foto op uit de databank
+    $photo = data_getPhotoById($_POST['id']);
+    
+    if($photo)
+    {
+        ###De foto is gevonden
+        ###Eerst verwijderen we de bijhorende bestanden
+        $pathToPhoto = $_SERVER['DOCUMENT_ROOT'].'/modules/fotoalbum/photos/'.$photo->getFilename();
+        $pathToThumb = $_SERVER['DOCUMENT_ROOT'].'/modules/fotoalbum/photos/'.$photo->getThumbFilename();
+        
+        unlink($pathToPhoto);
+        unlink($pathToThumb);
+        
+        ###Nu moet de foto verwijderd worden uit de databank
+        data_deletePhoto($photo);
+        
+        ##hierna moet een response gegeven worden
+        $response = new ajaxResponse('ok');
+        $response->getXML();
+    }
+    else
+    {
+        ###Er is geen foto met dat id
+        throw new Exception("Geen foto met id $id");
+    }
+    
+}
+
 ?>

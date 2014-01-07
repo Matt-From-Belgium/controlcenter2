@@ -17,6 +17,7 @@ Selecteer een bestand <input type='file' id='photopath' name='photopath' multipl
 <script type="text/javascript" src="/modules/fotoalbum/presentation/editalbum.js"></script>
 <script type="text/javascript" src="/modules/fotoalbum/presentation/showalbum.js"></script>
 <script>
-var photoeditor = new photoEditor(1,'fotoeditor');
+var albumeditor = new albumEditor(<!CC VAR [albumid]>,'fotoeditor');
+
 </script>
 

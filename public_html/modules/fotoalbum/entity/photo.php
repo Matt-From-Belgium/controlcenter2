@@ -64,6 +64,12 @@ class photo
         return $file;
     }
     
+    function getThumbFilename()
+    {
+        $thumb = 'tn_'.$this->getId().'.'.$this->getExtension();
+        return $thumb;
+    }
+    
     function setExtension($ext)
     {
         $this->extension = $ext;

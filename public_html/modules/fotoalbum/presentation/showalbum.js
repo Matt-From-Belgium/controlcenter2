@@ -457,7 +457,7 @@ function photoDisplayer()
     {
         currentIndex++;
         
-        if(currentIndex >= (displayPhotoCollection.length - 1))
+        if(currentIndex >= (displayPhotoCollection.length))
             {
                 currentIndex = 0;
             }

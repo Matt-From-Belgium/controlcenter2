@@ -226,7 +226,7 @@ function saveDescription(formElement)
         //changeDescription(photoid,description,loadIndicator);
 }
 
-function changeDescription(id,value)
+/*function changeDescription(id,value)
 {
     var ajax = new ajaxTransaction();
     
@@ -238,7 +238,7 @@ function changeDescription(id,value)
     
     ajax.onComplete= function(){changeDescriptionComplete(ajax);};
     ajax.ExecuteRequest();
-}
+}*/
 
 function changeDescriptionComplete(ajax,loadIndicator)
 {
@@ -252,7 +252,9 @@ function changeDescriptionComplete(ajax,loadIndicator)
     }
 }
 
-function photoEditor(albumid,previewElement)
+
+
+function albumEditor(albumid,previewElement)
 {
     //private vars
     var photoCollection = null;
@@ -270,7 +272,7 @@ function photoEditor(albumid,previewElement)
         loader.load();
     
         //Nu moeten we een element aanmaken voor de weergave
-        var photoDisplay = new photoDisplayer;
+        var photoDisplay = new photoEditor;
         
     //private methods
         function populateElement()
@@ -338,20 +340,25 @@ function photoEditor(albumid,previewElement)
             var optionsDiv = document.createElement('div');
             
                 //Options div bevat 2 knoppen: verwijderen en aanpassen
-                var deletePhoto = document.createElement('a');
+                var deletePhotoButton = document.createElement('a');
                 
-                deletePhoto.innerHTML = 'verwijder';
-                deletePhoto.onclick = function() {
+                deletePhotoButton.innerHTML = 'verwijder';
+                deletePhotoButton.onclick = function() {
                     var bevestiging = confirm('Bent u zeker dat u deze foto wil verwijderen?');
+                    
+                    if(bevestiging)
+                    {
+                        deletePhoto(photoCollection[photoIndex]);
+                    }
                 };
                 
                
                 
-                var editDescription = document.createElement('a');
+                var editDescriptionButton = document.createElement('a');
                 
-                editDescription.innerHTML = 'aanpassen';
+                editDescriptionButton.innerHTML = 'aanpassen';
                 
-                editDescription.onclick = function(){
+                editDescriptionButton.onclick = function(){
                     photoDisplay.setCollection(photoCollection);
                     photoDisplay.displayImage(photoIndex);
                 };    
@@ -359,8 +366,8 @@ function photoEditor(albumid,previewElement)
             
             optionsDiv.classList.add('imageOptions');
             
-            optionsDiv.appendChild(editDescription);
-             optionsDiv.appendChild(deletePhoto);
+            optionsDiv.appendChild(editDescriptionButton);
+             optionsDiv.appendChild(deletePhotoButton);
             
             imageDiv.appendChild(optionsDiv);
             return imageDiv;
@@ -369,4 +376,226 @@ function photoEditor(albumid,previewElement)
  
     
     //public methods
+}
+
+function deletePhoto(photo)
+{
+    //De foto moet verwijderd worden
+    var ajax = new ajaxTransaction();
+    ajax.addData('id',photo.id);
+    
+    ajax.destination = '/modules/fotoalbum/logic/albumlogic.php';
+    ajax.phpfunction = 'deletePhoto';
+    
+    ajax.onComplete = function() {
+        if(ajax.successIndicator)
+        {
+            alert('photo verwijderd');
+        }
+        
+    };
+    
+    ajax.ExecuteRequest();
+}
+
+function photoEditor()
+{
+    //private vars
+    var displayPhotoCollection=null;
+    var currentIndex=null;
+    var that = this;
+    var slideshowDelay = 3000;
+    var slideShowInterval = null;
+    
+    //constructor
+       //We halen het body element op
+       var body = document.getElementsByTagName('body')[0];
+ 
+       //We creëren een container die zich over het ganse oppervlak van de pagina moet kunnen zetten
+       //Zo krijgen we een 'dim the lights' effect
+       var displayContainer = document.createElement('div');
+       displayContainer.id= 'displayContainer';
+       displayContainer.style.display='none';
+       
+            //Wanneer de gebruiker naast de viewer klikt moet alles afsluiten
+            displayContainer.onclick = function(){
+                
+            displayContainer.style.display='none';
+                
+            
+            };
+       
+       //Binnen displayContainer moeten we nu onze elementen van de viewer creëren
+       var photoDisplayer = document.createElement('div');
+       photoDisplayer.id='photoDisplayer';
+       
+       photoDisplayer.onclick = function (e) {
+           //Enkel wanneer er op de displaycontainer geklikt wordt mag alles afgesloten worden
+           //Hier moeten we dit dus blokkeren.
+           var event = e || window.event;
+               e.cancelBubble=true;
+       };
+       
+       var photoContainer = document.createElement('div');
+       photoContainer.id='photoContainer';
+       
+       var imageTag = document.createElement('img');
+       imageTag.id='photo';
+       
+       var description = document.createElement('div');
+       description.id='description';
+       
+        //Formulier voor het wijzigen van de beschrijving
+        var descriptionFormTag = document.createElement('form');
+        descriptionFormTag.id='descriptionform';
+        
+        var descriptionTextBox = document.createElement('textarea');
+        descriptionTextBox.setAttribute('rows',3);
+        descriptionTextBox.style.width='80%';
+        descriptionTextBox.style.display= 'inline-block';
+   
+        var descriptionProgressDiv = document.createElement('div');
+        
+        descriptionProgressDiv.style.display='hidden';
+        
+        
+        var descriptionSubmitButton = document.createElement('input');
+        descriptionSubmitButton.setAttribute('type','button');
+        descriptionSubmitButton.setAttribute('value','Opslaan');
+        descriptionSubmitButton.style.display= 'inline-block';
+        
+
+        descriptionSubmitButton.onclick = function(){
+                var ajax = new ajaxTransaction();
+    
+                ajax.addData('id',displayPhotoCollection[currentIndex].id);
+                
+                ajax.addData('newdescription',descriptionTextBox.value);
+
+                ajax.destination='/modules/fotoalbum/logic/albumlogic.php';
+                ajax.phpfunction='changeDescription';
+
+                ajax.onComplete= function(){
+                    
+                };
+                ajax.ExecuteRequest();
+        };
+        
+        descriptionFormTag.appendChild(descriptionTextBox);
+        descriptionFormTag.appendChild(descriptionProgressDiv);
+        descriptionFormTag.appendChild(descriptionSubmitButton);
+        
+        description.appendChild(descriptionFormTag);
+       
+       var controls = document.createElement('div');
+       controls.id='controls';
+       
+            var nextPhotoButton = document.createElement('img');
+            nextPhotoButton.onclick = function(e){
+                that.nextImage();
+            };
+                
+            nextPhotoButton.src='/modules/fotoalbum/presentation/assets/volgendeknop.png';
+                
+            
+            
+            
+            var previousPhotoButton = document.createElement('img');
+            previousPhotoButton.onclick = function(e) {
+                  
+                  that.previousImage();
+            };
+            
+            previousPhotoButton.src = '/modules/fotoalbum/presentation/assets/terugknop.png';
+       
+       controls.appendChild(previousPhotoButton);
+       controls.appendChild(nextPhotoButton);
+       
+       
+       photoContainer.appendChild(imageTag);
+       photoContainer.appendChild(description);
+       photoContainer.appendChild(controls);
+       
+       photoDisplayer.appendChild(photoContainer);
+       
+       displayContainer.appendChild(photoDisplayer);
+       
+       //We hangen de displayContainer aan body om deze zichtbaar te maken in het DOM Model
+       //Het element moet eerst komen na het body element anders zal het effect niet werken
+       body.insertBefore(displayContainer,body.firstChild);
+    
+    this.setCollection = function(photoCollection)
+    {
+      displayPhotoCollection=photoCollection;
+    };
+            
+    this.displayImage = function(photoIndex)
+    {
+           
+           currentIndex = photoIndex;
+
+           
+           photoObject = displayPhotoCollection[photoIndex];  
+
+           //onload werkt alleen op alle browsers als je een nieuwe image aanmaakt.
+           var tempImage = new Image();
+           tempImage.onload = function(){
+               //Nu gaan we detecteren of het een rechtstaande of liggende afbeelding is
+               
+               
+                 if(tempImage.height>tempImage.width)
+                    {
+
+                        photoDisplayer.classList.add('portraitMode');
+                    }
+                else
+                    {
+
+                        photoDisplayer.classList.remove('portraitMode');
+                    }
+               
+                imageTag.src = photoObject.src;
+                
+                displayContainer.style.display='block';
+           };
+           
+           tempImage.src = displayPhotoCollection[photoIndex].src;
+        
+          
+           
+           if(photoObject.description !== 'null')
+               {
+                  descriptionTextBox.value = photoObject.description;
+               }
+           else
+                {
+                    descriptionTextBox.value = '';
+                }
+               
+            
+    };
+    
+    this.previousImage = function() {
+        currentIndex--;
+        if(currentIndex<0)
+            {
+                currentIndex=displayPhotoCollection.length - 1;
+            }
+            
+        this.displayImage(currentIndex);
+    };
+
+    this.nextImage=function()
+    {
+        currentIndex++;
+        
+        if(currentIndex >= (displayPhotoCollection.length))
+            {
+                currentIndex = 0;
+            }
+            
+        this.displayImage(currentIndex);
+    };
+    
+    
 }
