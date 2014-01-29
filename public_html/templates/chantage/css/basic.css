@@ -43,7 +43,29 @@
 
 }
 
+@font-face {
+    font-family: 'cafebrewery';
+    src: url('fonts/cafebrewery/caf__brewery-webfont.eot');
+    src: url('fonts/cafebrewery/caf__brewery-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/cafebrewery/caf__brewery-webfont.woff') format('woff'),
+         url('fonts/cafebrewery/caf__brewery-webfont.ttf') format('truetype'),
+         url('fonts/cafebrewery/caf__brewery-webfont.svg#colaboratelightregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
 
+}
+
+@font-face {
+    font-family: 'fathernelson';
+    src: url('fonts/fathernelson/father_nelson_regular-webfont.eot');
+    src: url('fonts/fathernelson/father_nelson_regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/fathernelson/father_nelson_regular-webfont.woff') format('woff'),
+         url('fonts/fathernelson/father_nelson_regular-webfont.ttf') format('truetype'),
+         url('fonts/fathernelson/father_nelson_regular-webfont.svg#colaboratelightregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
 
 body { 
     display: block;
@@ -73,7 +95,8 @@ header{
 }
 
     header #header-content{
-        width: 1200px;
+        width: 80%;
+        min-width: 1200px;
         margin-left: auto;
         margin-right: auto;
         height: 2em;
@@ -97,19 +120,22 @@ header{
 #central-image {
  height: 35.5em;
  background: #000000;
- background-image: url('../assets/kerstconcert-transedge-optimized.png');
+ background-image: url('../assets/chantagefoto.png');
  background-repeat: no-repeat;
  background-position: top center;
- background-size: 1300px auto;
+ //background-size: auto 100%;
+ background-size: cover;
+ 
 }
 
     #central-image-content{
-       background-color: rgba(107,91,75,0.7);
+       background-color: rgba(107,91,75,0.9);
        height: 3em;
     }
 
         nav {
-           width: 1200px;
+           width: 80%;
+           min-width: 1200px;
             margin-left: auto;
             margin-right: auto;           
            color: #FFFFFF; 
@@ -228,7 +254,8 @@ header{
 
     #content-box{
         /*height: 72em;*/
-        width: 1100px;
+        width: 80%;
+        min-width: 1200px;
         margin-left: auto;
         margin-right: auto;
         
@@ -251,8 +278,8 @@ header{
     
     h1 {
         margin-top: 0.2em;
-        font-family: 'bebas_neueregular';
-        font-size: 2.5em;
+        font-family: 'fathernelson';
+        font-size: 2em;
         color:#6B5B4B;
         font-weight: normal;
         font-style: normal;
@@ -262,7 +289,7 @@ header{
     
     h2 {
         margin-top: 0.2em;
-        font-family: 'bebas_neueregular';
+        font-family: 'cafebrewery';
         font-size: 1.5em;
         color:#6B5B4B;
         font-weight: normal;
@@ -293,7 +320,8 @@ header{
             
             margin-left: auto;
             margin-right: auto;
-            width: 1200px;
+            width: 80%;
+            min-width: 1200px;
             
         }
         
@@ -425,4 +453,10 @@ a img {
 
 .nadruk-rood {
     color: #FC3333;
+}
+
+#wieisbegonnen {
+    width:70%;
+    margin-left: auto;
+    margin-right: auto;
 }

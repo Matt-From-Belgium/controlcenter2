@@ -20,7 +20,7 @@ Meer info volgt...
 </div>
 <div id='rightcol'>
             <div  id="index-sponsors" class="block">
-                <h1>Met de steun van:</h1>
+                <h2>Met de steun van:</h2>
                 <a href='http://www.nationale-loterij.be/' target='_blank'><img src='/templates/chantage/assets/sponsor-lotto.png'></a>
                 <a href='http://www.goudengids.be/debofisc-cva-zarren-8610/' target='_blank'><img src='/templates/chantage/assets/sponsors/advertentie-debofisc-wit.png'></a>
                 <a href='http://www.automobilia.be/' target='_blank'><img src='/templates/chantage/assets/sponsors/Automobilia.png'></a>
