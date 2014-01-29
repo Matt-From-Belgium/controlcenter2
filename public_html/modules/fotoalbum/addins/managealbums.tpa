@@ -1,0 +1,12 @@
+
+<h1>Beheer fotoalbums</h1>
+<table id="albums">
+</table>
+<h2>Voeg nieuw album toe</h2>
+<form method="post">
+<div id="errorlist"></div>
+<input type="text" name="nieuwalbum" id="nieuwalbum">
+<!-- OPGELET BUTTON TYPE!! EVENTUEEL NAAR SUBMIT VERANDEREN LATER!!!-->
+<input type="button" name="submit" value="Album aanmaken" onClick="javascript:addAlbum(document.getElementById('nieuwalbum').value)">
+<script type="text/javascript" SRC="/core/presentation/ajax/ajaxtransaction.js"></script>
+<script type="text/javascript" SRC="fotoalbums.js"></script>

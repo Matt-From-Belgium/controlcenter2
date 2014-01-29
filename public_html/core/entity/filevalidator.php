@@ -13,11 +13,16 @@ class fileValidator
         ###REVISIE 1: verschillende extensies toegelaten
         if(is_array($extension))
         {
+            ##Bugfix: extension mag niet case sensitive zijn
+            foreach($extension as $key=>$value)
+            {
+              $extension[$key] = strtolower($value);  
+            }
             $this->extension=$extension;
         }
         else
         {
-        $this->extension[]=$extension;
+        $this->extension[]=strtolower($extension);
         }
     }
     
@@ -32,7 +37,8 @@ class fileValidator
         {
             ###Geen fouten gebeurd bij het opladen
             $parts = explode('.',$filearray['name']);
-            $extension = end($parts);
+            
+            $extension = strtolower(end($parts));
             
             ###REVISIE 1: verschillende extensies
             if(array_search($extension, $this->extension)===FALSE)
