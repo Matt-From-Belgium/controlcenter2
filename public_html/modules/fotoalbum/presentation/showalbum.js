@@ -310,6 +310,13 @@ function photoDisplayer()
        var photoDisplayer = document.createElement('div');
        photoDisplayer.id='photoDisplayer';
        
+       photoDisplayer.onclick= function(e){
+           //Wanneer dit event geactiveerd wordt moeten we zorgen dat het onCLick op de onderliggende
+               //laag niet geactiveerd wordt, dit doen we door het propageren tegen te gaan.
+               var event = e || window.event;
+               e.cancelBubble=true;
+       };
+       
        var photoContainer = document.createElement('div');
        photoContainer.id='photoContainer';
        
@@ -325,10 +332,6 @@ function photoDisplayer()
        
             var nextPhotoButton = document.createElement('img');
             nextPhotoButton.onclick = function(e){
-               //Wanneer dit event geactiveerd wordt moeten we zorgen dat het onCLick op de onderliggende
-               //laag niet geactiveerd wordt, dit doen we door het propageren tegen te gaan.
-               var event = e || window.event;
-               e.cancelBubble=true;
                 that.nextImage();
             };
                 
@@ -338,10 +341,7 @@ function photoDisplayer()
             
             var toggleSlideShowButton = document.createElement('img');
             toggleSlideShowButton.onclick = function(e){
-                //Wanneer dit event geactiveerd wordt moeten we zorgen dat het onCLick op de onderliggende
-                //laag niet geactiveerd wordt, dit doen we door het propageren tegen te gaan.
-                var event = e || window.event;
-                e.cancelBubble=true; 
+
                 
                 that.toggleSlideShow(this);
             };
@@ -350,10 +350,7 @@ function photoDisplayer()
             
             var previousPhotoButton = document.createElement('img');
             previousPhotoButton.onclick = function(e) {
-                  //Wanneer dit event geactiveerd wordt moeten we zorgen dat het onCLick op de onderliggende
-                  //laag niet geactiveerd wordt, dit doen we door het propageren tegen te gaan.
-                  var event = e || window.event;
-                  e.cancelBubble=true;  
+
                   
                   that.previousImage();
             };
@@ -419,11 +416,7 @@ function photoDisplayer()
            //Wanneer een gebruiker op de afbeelding klikt moet de volgende
            //weergegeven worden
            imageTag.onclick = function(e){
-               
-               //Wanneer dit event geactiveerd wordt moeten we zorgen dat het onCLick op de onderliggende
-               //laag niet geactiveerd wordt, dit doen we door het propageren tegen te gaan.
-               var event = e || window.event;
-               e.cancelBubble=true;
+
                
                that.nextImage();
                

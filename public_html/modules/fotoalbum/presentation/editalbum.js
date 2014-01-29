@@ -263,18 +263,31 @@ function albumEditor(albumid,previewElement)
     
     //constructor
         //We gaan eerst het album inladen
-        var loader = new albumLoader(albumid);
+        /*var loader = new albumLoader(albumid);
         loader.onComplete=function(){
             photoCollection = loader.photoCollection;
             populateElement();
         };
         
-        loader.load();
+        loader.load();*/
+    
+        loadAlbum();
     
         //Nu moeten we een element aanmaken voor de weergave
         var photoDisplay = new photoEditor;
         
     //private methods
+        function loadAlbum()
+        {
+            var loader = new albumLoader(albumid);
+            loader.onComplete=function(){
+            photoCollection = loader.photoCollection;
+            populateElement();
+        };
+        
+        loader.load();
+        }
+    
         function populateElement()
         {
             //De foto's zijn ingeladen en nu voegen we die toe aan het element
@@ -282,6 +295,11 @@ function albumEditor(albumid,previewElement)
                 {
                     //Element gevonden in de DOM structuur => we kunnen verder
                     var photoPreviewElement = document.getElementById(previewElement);
+                    
+                    //Deze functie kan ook aangeroepen worden bij het herladen nadat
+                    //een wijziging werd uitgevoerd => eerst alles leegmaken
+                    photoPreviewElement.innerHTML='';
+                    
                     
                     for(i=0;i<photoCollection.length;i++)
                         {
@@ -349,6 +367,7 @@ function albumEditor(albumid,previewElement)
                     if(bevestiging)
                     {
                         deletePhoto(photoCollection[photoIndex]);
+                        loadAlbum();
                     }
                 };
                 
@@ -390,7 +409,7 @@ function deletePhoto(photo)
     ajax.onComplete = function() {
         if(ajax.successIndicator)
         {
-            alert('photo verwijderd');
+            /*loadAlbum();*/
         }
         
     };
