@@ -261,6 +261,11 @@ function photoViewer(albumid,previewElement)
                 photoDisplay.displayImage(photoIndex);
             };
             
+
+                
+                imageDiv.style.cursor = 'pointer';
+
+            
             var imageTag = document.createElement('img');
             imageTag.src = photoCollection[photoIndex].thumbnail;
             
@@ -296,13 +301,7 @@ function photoDisplayer()
             displayContainer.onclick = function(){
             
             //Als de slideshow actief is moet deze gestopt worden
-            if(slideShowInterval)
-                {
-                   that.toggleSlideShow();
-                }
-                
-            displayContainer.style.display='none';
-                
+            that.closeDisplayer();
             
             };
        
@@ -320,6 +319,19 @@ function photoDisplayer()
        var photoContainer = document.createElement('div');
        photoContainer.id='photoContainer';
        
+       var closeButton = document.createElement('div');
+       closeButton.style.cursor='pointer';
+       
+       closeButton.onclick = function() {
+           that.closeDisplayer();
+       };
+       
+       closeButton.id='closebutton';
+       var closeButtonImage = document.createElement('img');
+       closeButtonImage.src = '/modules/fotoalbum/presentation/assets/photoclose.png';
+       
+       closeButton.appendChild(closeButtonImage);
+       
        var imageTag = document.createElement('img');
        imageTag.id='photo';
        
@@ -334,12 +346,15 @@ function photoDisplayer()
             nextPhotoButton.onclick = function(e){
                 that.nextImage();
             };
+            
+            nextPhotoButton.style.cursor='pointer';
                 
             nextPhotoButton.src='/modules/fotoalbum/presentation/assets/volgendeknop.png';
                 
             
             
             var toggleSlideShowButton = document.createElement('img');
+            toggleSlideShowButton.style.cursor='pointer';
             toggleSlideShowButton.onclick = function(e){
 
                 
@@ -349,8 +364,10 @@ function photoDisplayer()
             toggleSlideShowButton.src = '/modules/fotoalbum/presentation/assets/playknop.png';
             
             var previousPhotoButton = document.createElement('img');
+            previousPhotoButton.style.cursor = 'pointer';
+    
             previousPhotoButton.onclick = function(e) {
-
+            
                   
                   that.previousImage();
             };
@@ -362,10 +379,12 @@ function photoDisplayer()
        controls.appendChild(nextPhotoButton);
        
        
+       
        photoContainer.appendChild(imageTag);
        photoContainer.appendChild(description);
        photoContainer.appendChild(controls);
        
+       photoDisplayer.appendChild(closeButton);
        photoDisplayer.appendChild(photoContainer);
        
        displayContainer.appendChild(photoDisplayer);
@@ -476,6 +495,16 @@ function photoDisplayer()
                toggleSlideShowButton.src='/modules/fotoalbum/presentation/assets/pauzeknop.png';
                
            }
+    };
+    
+    this.closeDisplayer=function(){
+            if(slideShowInterval)
+                {
+                   that.toggleSlideShow();
+                }
+                
+            displayContainer.style.display='none';
+                
     };
 }
 

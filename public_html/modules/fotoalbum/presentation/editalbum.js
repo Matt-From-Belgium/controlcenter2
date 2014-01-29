@@ -358,9 +358,13 @@ function albumEditor(albumid,previewElement)
             var optionsDiv = document.createElement('div');
             
                 //Options div bevat 2 knoppen: verwijderen en aanpassen
-                var deletePhotoButton = document.createElement('a');
+                var deletePhotoButton = document.createElement('img');
                 
-                deletePhotoButton.innerHTML = 'verwijder';
+                deletePhotoButton.style.cursor = 'pointer';
+                
+                deletePhotoButton.classList.add('editButtons');
+                deletePhotoButton.src='/modules/fotoalbum/presentation/assets/delete-icon.png';
+                
                 deletePhotoButton.onclick = function() {
                     var bevestiging = confirm('Bent u zeker dat u deze foto wil verwijderen?');
                     
@@ -373,9 +377,15 @@ function albumEditor(albumid,previewElement)
                 
                
                 
-                var editDescriptionButton = document.createElement('a');
+                var editDescriptionButton = document.createElement('img');
                 
-                editDescriptionButton.innerHTML = 'aanpassen';
+                editDescriptionButton.style.cursor = 'pointer';
+                
+                editDescriptionButton.classList.add('editButtons');
+                editDescriptionButton.src='/modules/fotoalbum/presentation/assets/edit-icon.png';
+                
+                
+                
                 
                 editDescriptionButton.onclick = function(){
                     photoDisplay.setCollection(photoCollection);
@@ -455,6 +465,19 @@ function photoEditor()
                e.cancelBubble=true;
        };
        
+       var closeButton = document.createElement('div');
+       closeButton.style.cursor='pointer';
+       
+       closeButton.onclick = function() {
+           that.closeDisplayer();
+       };
+       
+       closeButton.id='closebutton';
+       var closeButtonImage = document.createElement('img');
+       closeButtonImage.src = '/modules/fotoalbum/presentation/assets/photoclose.png';
+       
+       closeButton.appendChild(closeButtonImage);
+       
        var photoContainer = document.createElement('div');
        photoContainer.id='photoContainer';
        
@@ -510,6 +533,9 @@ function photoEditor()
        controls.id='controls';
        
             var nextPhotoButton = document.createElement('img');
+            
+            nextPhotoButton.style.cursor='pointer';
+            
             nextPhotoButton.onclick = function(e){
                 that.nextImage();
             };
@@ -520,6 +546,9 @@ function photoEditor()
             
             
             var previousPhotoButton = document.createElement('img');
+            
+            previousPhotoButton.style.cursor='pointer';
+            
             previousPhotoButton.onclick = function(e) {
                   
                   that.previousImage();
@@ -535,6 +564,7 @@ function photoEditor()
        photoContainer.appendChild(description);
        photoContainer.appendChild(controls);
        
+       photoDisplayer.appendChild(closeButton);
        photoDisplayer.appendChild(photoContainer);
        
        displayContainer.appendChild(photoDisplayer);
@@ -616,5 +646,13 @@ function photoEditor()
         this.displayImage(currentIndex);
     };
     
-    
+    this.closeDisplayer=function(){
+            if(slideShowInterval)
+                {
+                   that.toggleSlideShow();
+                }
+                
+            displayContainer.style.display='none';
+                
+    };
 }
