@@ -133,7 +133,7 @@ function uploadMonitor(file)
         
         if(uploads !== undefined)
             {
-                uploadList.insertBefore(mainDiv,uploads[0]);
+                uploadList.appendChild(mainDiv);
             }
        
         //uploadList.appendChild(mainDiv);

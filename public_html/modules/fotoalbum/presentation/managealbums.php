@@ -4,7 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/core/logic/usermanagement/userfunctions
 
 checkPermission('fotoalbum', 'manage albums');
 
-$html = new htmlpage('frontend');
+$html = new htmlpage('backend');
 $html->LoadAddin('/modules/fotoalbum/addins/managealbums.tpa');
 $html->PrintHTML();
 ?>
