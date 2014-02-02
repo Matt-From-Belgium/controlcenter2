@@ -54,7 +54,7 @@ function getAlbums()
             {
                    $item = array();
                    $item['id'] = $fotoalbum->getID();
-                   $item['name']= $fotoalbum->getName();
+                   $item['name']= ucfirst($fotoalbum->getName());
 
                    $response->addData($item);
             }    

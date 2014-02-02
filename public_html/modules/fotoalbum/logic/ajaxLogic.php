@@ -15,7 +15,7 @@ function GetAlbumPhotosAjax()
         ###Het id is geen integer maar mogelijk wel een albumnaam
         ###We proberen het id van het album op te zoeken
         
-        $album = data_getAlbumByName($_POST[albumid]);
+        $album = data_getAlbumByName(strtolower($_POST[albumid]));
         $albumid = intval($album->getId());
         
     }

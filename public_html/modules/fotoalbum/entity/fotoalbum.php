@@ -7,7 +7,7 @@ class fotoalbum
     
     ###constructor
     function __construct($name,$id=-1) {
-        $this->name = $name;
+        $this->setName($name);
         $this->id=$id;
     }
     
@@ -17,10 +17,6 @@ class fotoalbum
         return $this->id;
     }
     
-    function setNaam($name)
-    {
-        $this->name=$name;
-    }
     
     function getName()
     {
@@ -29,7 +25,7 @@ class fotoalbum
     
     function setName($name)
     {
-        $this->name= $name;
+        $this->name= strtolower($name);
     }
 }
 ?>
