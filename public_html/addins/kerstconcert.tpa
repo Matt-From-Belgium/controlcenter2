@@ -1,9 +1,23 @@
 
 <section class="block">
     <h1>Kerstconcert</h1>
-    <img src='/images/kerstconcert/koor-boven.png'>
     <p>Met dit kerstconcert kon u voor het eerst kennismaken met Projectkoor CHANTage. Het werd een avond om nooit te vergeten.
     <p>In een tot de nok gevulde Sint-Andreaskerk brachten wij u een unieke mix van nummers onder de noemer 'kerst'. We konden ons onmiddellijk profileren als een koor dat alle genres aankan en brachten u klassieke nummers, musicalnummers maar ook traditionele kerstliederen.
     <p>Voor ons was het een unieke belevenis, we hopen van u hetzelfde...
+    <p><a href='#guestbook'>Laat ons weten wat u ervan vond</a> of Bekijk de <a href='#foto'>Foto's</a> 
+</section>
+
+<section class="block">
+    <h1>Foto's</h1>
+    <a id='foto'></a>
+    <div id='kerstconcertalbum'>
+    </div>
+    <script>
+        var test = new photoViewer(1,'kerstconcertalbum');
+    </script>
+</section>
+<section class="block">
+<a id='guestbook'></a><h1>En...? Wat vond u ervan?</h1>
+<div class="fb-comments" data-href="http://www.projectkoorchantage.be/kerstconcert.php" data-width="1000" data-numposts="10" data-colorscheme="light"></div>
 </section>
 
