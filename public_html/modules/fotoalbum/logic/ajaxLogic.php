@@ -6,8 +6,22 @@ function GetAlbumPhotosAjax()
     /*###DEBUG
     $_POST['albumid']=1;*/
     
-    $_POST['albumid']= intval($_POST['albumid']);
-    $photoArray=getAlbumPhotos($_POST['albumid']);
+    if(is_numeric($_POST['albumid']))
+    {
+        $albumid= intval($_POST['albumid']);
+    }
+    else 
+    {
+        ###Het id is geen integer maar mogelijk wel een albumnaam
+        ###We proberen het id van het album op te zoeken
+        
+        $album = data_getAlbumByName($_POST[albumid]);
+        $albumid = intval($album->getId());
+        
+    }
+    
+    
+    $photoArray=getAlbumPhotos($albumid);
     
     if(is_array($photoArray))
     {

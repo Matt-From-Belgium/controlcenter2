@@ -105,6 +105,35 @@ function data_getAlbum($id)
     }
 }
 
+function data_getAlbumByName($albumname)
+{
+    
+    if(isset($albumname))
+    {
+        $query = "SELECT albums.id FROM albums WHERE albums.name='@name'";
+        $db = new DataConnection();
+        $db->setQuery($query);
+        $db->setAttribute('name', $albumname);
+        $db->ExecuteQuery();
+        
+        if($db->GetNumRows()==1)
+        {
+            ###Het albumid is gevonden, nu gaan we het album ophalen
+            
+            return data_getAlbum(intval($db->GetScalar()));
+        }
+        else
+        {
+            throw new Exception('album $albumname does not exist');
+        }
+    }
+    else
+    {
+        throw new Exception('$albumname has no value');
+    }
+    
+}
+
 function data_addPhoto(photo $photo)
 {
     ###We voegen een rij toe in de tabel photo en vervangen de id in het object.
