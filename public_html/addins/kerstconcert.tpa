@@ -13,7 +13,7 @@
     <div id='kerstconcertalbum'>
     </div>
     <script>
-        var test = new photoViewer(1,'kerstconcertalbum');
+        var test = new photoViewer('kerstconcert','kerstconcertalbum');
     </script>
 </section>
 <section class="block">
