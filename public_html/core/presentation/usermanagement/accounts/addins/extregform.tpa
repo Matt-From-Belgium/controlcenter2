@@ -27,3 +27,11 @@
 </FORM>
 <SCRIPT LANGUAGE="javascript" SRC="/core/logic/common.js"></SCRIPT>
 <SCRIPT LANGUAGE="javascript" SRC="/core/logic/usermanagement/uservalidation.js"></SCRIPT>
+<!CC IFSET [autoFacebook]>
+<script>
+function autoFB()
+{
+registerWithFacebook(getFacebookUserDetails)
+}
+document.addEventListener('fbSDKLoaded',autoFB,false);</script>
+<!CC END IFSET [autoFacebook]>

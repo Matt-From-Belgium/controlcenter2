@@ -8,7 +8,7 @@ function registerWithFacebook(onCompleteFunction)
                   //De gebruiker heeft al toegang verleend, is er niet al een account gemaakt
                   //voor deze gebruiker?
                   //getFacebookUserDetails();
-                  alert('connected');
+                  //alert('connected');
                            if(typeof onCompleteFunction != 'function')
                            {
                                throw 'onCompleteFunction is not an actual function';

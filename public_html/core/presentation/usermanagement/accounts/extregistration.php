@@ -57,6 +57,18 @@ if(getSelfRegisterStatus())
 			$html->setVariable("lastname",$_POST['lastname']);
                         $html->setVariable('facebookid', $_POST['facebookid']);
                         
+                        ###Met deze code zal er automatisch verbinding gemaakt worden met Facebook bij het
+                        ###laden van de pagina. Dit gebeurt in 2 gevallen
+                        #- er wordt fb=1 toegevoegd in de querystring
+                        #- er wordt een facebookid gepost (bijvoorbeeld na een eerste poging)
+                        ##Deze code wordt nooit uitgevoerd als de facebookondersteuning niet actief is
+                        if(getFacebookLoginStatus() and (($_GET['fb']==1) or (isset($_POST['facebookid']))))
+                        {
+                            $html->setVariable('autoFacebook', 'true');
+                        }
+                        
+                        
+                        
 			$html->LoadAddin("/core/presentation/usermanagement/accounts/addins/extregform.tpa");
 
 

@@ -25,6 +25,7 @@ function getParameterByName(name) {
 
 function redirectAfterLogin()
 {
+    
     var destination = getParameterByName('d');
     window.location.assign(destination);
 }
