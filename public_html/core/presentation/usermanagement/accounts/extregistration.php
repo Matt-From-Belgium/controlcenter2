@@ -36,6 +36,8 @@ if(getSelfRegisterStatus())
 		#wanneer er input met fouten is.
 		if((!isset($_POST['submit'])) or ((is_array($errors))))
 		{
+                        require_once $_SERVER['DOCUMENT_ROOT'].'/core/social/facebook/php/facebook.php';
+                    
 			$html = new htmlpage("frontend");
 		
 			$html->setVariable("errorlist",$errors);
@@ -44,7 +46,8 @@ if(getSelfRegisterStatus())
                         if(getFacebookLoginStatus())
                         {
                         $html->setVariable('fbintegration', true);
-                        }
+                        }             
+
                         
 			#De waarden die eventueel bij een eerste foutieve ingave werden ingevoerd moeten hier opnieuw
 			#doorgegeven worden zodat de gebruiker het formulier kan aanvullen.
@@ -57,16 +60,38 @@ if(getSelfRegisterStatus())
 			$html->setVariable("lastname",$_POST['lastname']);
                         $html->setVariable('facebookid', $_POST['facebookid']);
                         
-                        ###Met deze code zal er automatisch verbinding gemaakt worden met Facebook bij het
-                        ###laden van de pagina. Dit gebeurt in 2 gevallen
-                        #- er wordt fb=1 toegevoegd in de querystring
-                        #- er wordt een facebookid gepost (bijvoorbeeld na een eerste poging)
-                        ##Deze code wordt nooit uitgevoerd als de facebookondersteuning niet actief is
+                        ###als fb=1 zullen er automatisch gegevens ingevuld worden in het formulier
+                        #Echter, manueel ingevulde waarden hebben voorrang
                         if(getFacebookLoginStatus() and (($_GET['fb']==1) or (isset($_POST['facebookid']))))
                         {
-                            $html->setVariable('autoFacebook', 'true');
+                            $config = array();
+
+                            $config['appId'] = getFacebookAppID();
+                            $config['secret'] = getFacebookSappId();
+
+                            $facebook = new Facebook($config);
+                            
+                            if($facebook->getUser())
+                            {
+                                    $userdetails = $facebook->api('/me','GET');
+                                    
+                                    $html->setVariable('facebookid',$userdetails['id']);
+                                    $html->setVariable('firstname',$userdetails['first_name']);
+                                    $html->setVariable('lastname',$userdetails['last_name']);
+                                    
+                                    if(!isset($_POST['username']))
+                                    {
+                                        $html->setVariable("username",$userdetails['first_name'].' '.$userdetails['last_name']);
+                                    }
+                                    
+                                    if(!isset($_POST['mail']))
+                                    {
+                                       $html->setVariable('mail', $userdetails['email']);
+                                    }
+                                    
+                                    
+                            }
                         }
-                        
                         
                         
 			$html->LoadAddin("/core/presentation/usermanagement/accounts/addins/extregform.tpa");

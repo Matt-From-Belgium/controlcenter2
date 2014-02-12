@@ -69,12 +69,15 @@ function getFacebookUserDetails()
         document.getElementById('firstname').readOnly = true;
         document.getElementById('firstname').value = response.first_name;
         
-        document.getElementById('lastname').readOnly = true;
-        document.getElementById('lastname').value = response.last_name;
-        
+        blockPasswordFields();
+
+    });
+}
+
+function blockPasswordFields()
+{
         document.getElementById('password').disabled = true;
         document.getElementById('password2').disabled = true;
-    });
 }
           
 function getFacebookScope()

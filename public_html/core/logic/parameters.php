@@ -263,7 +263,7 @@ function getFacebookJavaCode()
                     ajax.onComplete = function(){
                         if(ajax.successIndicator)
                             {
-                                alert(ajax.result[0].userId);
+                                //alert(ajax.result[0].userId);
                                 
                                 //We lanceren een event zodat we de gewijzigde logintoestand kunnen opvangen
                                         var userLoggedIn = new CustomEvent('userLoggedIn',

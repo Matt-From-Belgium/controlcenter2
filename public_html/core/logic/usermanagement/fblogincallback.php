@@ -43,6 +43,7 @@
             switch($resultcode)
             {
                 case 1:
+                    ###Er is nog geen gebruikersaccount aan deze facebook account gekoppeld
                     $location = '/core/presentation/usermanagement/accounts/extregistration.php?fb=1&d='.$_GET['d'];
                     header('location: '.$location);
                     break;

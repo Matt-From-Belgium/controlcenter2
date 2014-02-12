@@ -27,11 +27,18 @@
 </FORM>
 <SCRIPT LANGUAGE="javascript" SRC="/core/logic/common.js"></SCRIPT>
 <SCRIPT LANGUAGE="javascript" SRC="/core/logic/usermanagement/uservalidation.js"></SCRIPT>
-<!CC IFSET [autoFacebook]>
+
 <script>
+
+document.addEventListener('fbSDKLoaded',autoFB,false);
+
 function autoFB()
 {
-registerWithFacebook(getFacebookUserDetails)
+    if(document.getElementById('facebookid').value)
+    {
+        document.getElementById('password').disabled = true;
+        document.getElementById('password2').disabled = true;
+    }
 }
-document.addEventListener('fbSDKLoaded',autoFB,false);</script>
-<!CC END IFSET [autoFacebook]>
+
+</script>
