@@ -197,12 +197,19 @@ function getFacebookJavaCode()
             
             // Additional initialization code such as adding Event Listeners goes here                 
 
-            var message = null;
-            var userID = null;
 
-            
 
-            FB.getLoginStatus(function(response){
+            refreshFacebookLoginStatus();
+
+
+          };
+          
+          function refreshFacebookLoginStatus()
+          {
+                var message = null;
+                var userID = null;
+
+                 FB.getLoginStatus(function(response){
                     if(response.status === 'connected')
                     {
                         //Ingelogd + auth ok
@@ -236,8 +243,8 @@ function getFacebookJavaCode()
                 
                  document.getElementById('fb-root').dispatchEvent(fbSDKLoadedEvent);
             });
-          };
-          
+          }
+
           //We linken hier een functie aan het fbSDKLoadedEvent zodat we
           //facebookStatus kunnen invullen met de juiste waarden
           document.addEventListener('fbSDKLoaded',saveFbParams,false);

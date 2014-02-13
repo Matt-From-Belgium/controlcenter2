@@ -42,8 +42,11 @@ function registerWithFacebook(onCompleteFunction)
                            }
                            else
                             {
-
+                                refreshFacebookLoginStatus();
                                 onCompleteFunction();
+                                
+                                //We halen de gegevens op van de gebruiker en werken facebookStatus bij
+                                
                             }                       
 
                    }
