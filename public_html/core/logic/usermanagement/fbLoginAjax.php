@@ -36,7 +36,7 @@ function checkFBAccount()
             $result->addData($row);
 
 
-            echo $result->getXML();
+            return $result->getXML();
         }
         else
         {
