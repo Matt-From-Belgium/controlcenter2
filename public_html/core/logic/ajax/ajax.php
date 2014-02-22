@@ -10,8 +10,21 @@ if(isset($_POST['destination']) && isset($_POST['phpfunction']))
 
         try
         {
-	$functionResult = $_POST['phpfunction']();
-        echo $functionResult;
+            $functionResult = $_POST['phpfunction']();
+            
+            ###DEBUG: de functie kon misbruikt worden door clientside Javascript
+            if(substr_count($functionResult,'<response>')>=1)
+            {
+                ###het antwoord bevat de XML-response tag van ajaxresponse=>verder gaan
+                echo $functionResult;
+            }
+            else {
+                ###geen response-tag => poging om variabelen op te halen die niet publiek zijn?
+                    $exceptionResponse = new ajaxResponse('error');
+                    $exceptionResponse->addErrorMessage('test', 'response not XML');
+                    echo $exceptionResponse->getXML(); 
+            }
+           
         }
         catch(Exception $ex)
         {

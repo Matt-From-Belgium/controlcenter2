@@ -95,7 +95,7 @@ class ajaxResponse
 			}
 		
 		header('Content-type: text/xml');
-		echo $this->xmlroot->saveXML();		
+		return $this->xmlroot->saveXML();		
 		}
 		
 		public function addField($string)
