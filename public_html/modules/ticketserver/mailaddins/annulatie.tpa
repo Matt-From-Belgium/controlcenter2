@@ -1,0 +1,15 @@
+<br/>Beste heer/mevrouw <!CC VAR [familienaam]>,
+<p>Uw reservatie met onderstaande gegevens werd op uw aanvraag geannuleerd.
+<p>
+<font face="Arial, Helvetica, sans-serif" color="#333333">
+<center><table border=0 cellspacing=0 cellpadding=0 width=450>
+<tr><td>Reservatienummer:</td><td><b><!CC VAR [reservatienummer]></b></td></tr>
+<tr><td>Voorstelling: </td><td><b>EQUUS</b></td></tr>
+<tr><td>Datum:</td><td><b><!CC VAR [datum]></b></td></tr>
+<tr><td>Aantal Tickets:</td><td><b><!CC VAR [aantal]></b></td></tr>
+</table></center>
+</font>
+<p>Indien u van mening bent dat deze annulatie onterecht werd uitgevoerd, kan u ons contacteren op secretariaat@detoverlantaarn.be
+<p>Met vriendelijke groeten,
+<p>Theater De Toverlantaarn
+<br />
