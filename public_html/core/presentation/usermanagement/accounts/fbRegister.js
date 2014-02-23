@@ -1,5 +1,6 @@
 function registerWithFacebook(onCompleteFunction,manualPermissions)
-{
+{  
+    
     if(facebookStatus.sdkLoaded)
     {
         //We gaan eerst de scope opbouwen die we voor deze request willen bereiken
@@ -12,44 +13,59 @@ function registerWithFacebook(onCompleteFunction,manualPermissions)
         else
         {
            //Als manualPermissions wel een waarde heeft voegen we die toe aan desiredscope
+           manualPermissions.toLowerCase();
            var desiredscope = facebookStatus.desiredScope;
            var scope = desiredscope + ',' + manualPermissions;
            
+        }  
+        
+        if(facebookStatus.authStatus==='connected')
+        {
+            //We gaan de scope opbreken in aparte permissions en die vergelijken met de
+            //toegestane permissions. Zo kunnen we nagaan of het nodig is om de login flow
+            //nogmaals te laten lopen
+            var scopeArray = new Array();
+            var scopeArray = scope.split(',');
+
+            var grantedPermissionsArray = facebookStatus.grantedPermissions;
+
+            var allPermissionsGranted = true;
+
+            for(i=0;i<scopeArray.length;i++)
+            {
+                if(grantedPermissionsArray.indexOf(scopeArray[i])<0)
+                {
+                    allPermissionsGranted = false;
+                }
+            }
+        }
+        else
+        {
+            var allPermissionsGranted = false;
         }
         
-        
-        /*
-        //Dan gaan we kijken of de gebruiker zijn/haar account heeft verbonden
-        //Als dat het geval is gaan we na of we alle permissions die nodig zijn al hebben
-        //Als dat niet het geval is moeten we alle permissions opvragen
-        if(facebookStatus.authStatus==='connected')
-              {
-                  //De gebruiker heeft al toegang verleend, is er niet al een account gemaakt
-                  //voor deze gebruiker?
-                  //getFacebookUserDetails();
-                  //alert('connected');
-                  
-                  //Er is dus al een verbinding met deze gebruiker, maar zijn alle permissions er?
-                  
-                           if(typeof onCompleteFunction != 'function')
-                           {
-                               throw 'onCompleteFunction is not an actual function';
-                           }
-                           else
-                            {
+        if(allPermissionsGranted)
+        {
+            //We moeten niet langs de login-flow, alles is toegekend
+            //We mogen de onCompleteFunction dus uitvoeren
+            if(typeof onCompleteFunction != 'function')
+                {
+                    throw 'onCompleteFunction is not an actual function';
+                }
+                else
+                 {
+                     refreshFacebookLoginStatus();
+                     onCompleteFunction();
 
-                                onCompleteFunction();
-                            }
-              }
-         else
-             {
-                 //Ofwel is er nog geen toegang verleend of de gebruiker is niet ingelogd.
-                 //OF THIRD PARTY COOKIES DISABLED!
-                 //We moeten sowieso passeren via de login flow
-                 
-*/
-                 
-                 
+                     //We halen de gegevens op van de gebruiker en werken facebookStatus bij
+
+                 }      
+        }
+        else
+        {
+                //Eén of meerdere toegangsrechten zijn niet toegekend => we moeten de login
+                //flow opstarten
+        
                  FB.login(function(response){
                    if(response.authResponse)
                    {
@@ -123,6 +139,7 @@ function registerWithFacebook(onCompleteFunction,manualPermissions)
                    }
                  }, {scope: scope});
            /*  }*/
+       }
     }
     else
         {
