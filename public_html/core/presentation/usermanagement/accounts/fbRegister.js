@@ -1,6 +1,5 @@
 function registerWithFacebook(onCompleteFunction,manualPermissions)
-{
-    manualPermissions.toLowerCase();
+{  
     
     if(facebookStatus.sdkLoaded)
     {
@@ -14,12 +13,51 @@ function registerWithFacebook(onCompleteFunction,manualPermissions)
         else
         {
            //Als manualPermissions wel een waarde heeft voegen we die toe aan desiredscope
+           manualPermissions.toLowerCase();
            var desiredscope = facebookStatus.desiredScope;
            var scope = desiredscope + ',' + manualPermissions;
            
         }  
           
-       
+        //We gaan de scope opbreken in aparte permissions en die vergelijken met de
+        //toegestane permissions. Zo kunnen we nagaan of het nodig is om de login flow
+        //nogmaals te laten lopen
+        var scopeArray = new Array();
+        var scopeArray = scope.split(',');
+        
+        var grantedPermissionsArray = facebookStatus.grantedPermissions;
+        
+        var allPermissionsGranted = true;
+        
+        for(i=0;i<scopeArray.length;i++)
+        {
+            if(grantedPermissionsArray.indexOf(scopeArray[i])<0)
+            {
+                allPermissionsGranted = false;
+            }
+        }
+        
+        if(allPermissionsGranted)
+        {
+            //We moeten niet langs de login-flow, alles is toegekend
+            //We mogen de onCompleteFunction dus uitvoeren
+            if(typeof onCompleteFunction != 'function')
+                {
+                    throw 'onCompleteFunction is not an actual function';
+                }
+                else
+                 {
+                     refreshFacebookLoginStatus();
+                     onCompleteFunction();
+
+                     //We halen de gegevens op van de gebruiker en werken facebookStatus bij
+
+                 }      
+        }
+        else
+        {
+                //Eén of meerdere toegangsrechten zijn niet toegekend => we moeten de login
+                //flow opstarten
         
                  FB.login(function(response){
                    if(response.authResponse)
@@ -94,6 +132,7 @@ function registerWithFacebook(onCompleteFunction,manualPermissions)
                    }
                  }, {scope: scope});
            /*  }*/
+       }
     }
     else
         {
