@@ -179,6 +179,7 @@ function getFacebookJavaCode()
             this.userID = null;
             this.authStatus = false;
             this.desiredScope = '$desiredscope';
+            this.grantedPermissions = null;
           };
         
         
@@ -215,26 +216,52 @@ function getFacebookJavaCode()
                         //Ingelogd + auth ok
                         message = 'connected';
                         userID = response.authResponse.userID;
+                        
+                        //Voor we het signaal geven dat de SDK geladen is vragen
+                        //we ook de permissions op
+                        FB.api('/me/permissions','get',function(response)
+                        {
+                           //We zetten het JSON object in response.data[0] om in een array
+                           var grantedPermissions = response.data[0];
+                           var grantedPermissionsArray = new Array();
+                           
+                           for(var key in grantedPermissions)
+                           {
+                               grantedPermissionsArray.push(key);
+                           }
+                           
+                           //We zijn, klaar.
+                           dispatchSdkLoadedEvent(message,userID,grantedPermissionsArray);
+                        });
+
+                        
                     }
                 else if(response.status === 'not_authorized')
                     {
                         //Ingelogd maar geen auth
                         message = 'not_authorized';
+                        dispatchSdkLoadedEvent(message,userID,null);
                     }
                 else
                     {
                         //Niet ingelogd, we weten dus helemaal niks;
                         //of... third party cookies disabled
                         message = 'unknown';
+                        dispatchSdkLoadedEvent(message,userID,null);
                     }
                     
-                        //Wanneer de SDK geladen is wordt een event uitgestuurd met gegevens
-                         //Over de status van de gebruiker
-                         var fbSDKLoadedEvent = new CustomEvent('fbSDKLoaded',
+                 
+            });
+          }
+
+          function dispatchSdkLoadedEvent(message,userID,grantedPermissions)
+          {
+            var fbSDKLoadedEvent = new CustomEvent('fbSDKLoaded',
                          {
                                  detail: {
                                          status: message,
                                          userID: userID,
+                                         grantedPermissions: grantedPermissions,
                                  },
                                  bubbles: true,
                                  cancelable: true
@@ -242,7 +269,6 @@ function getFacebookJavaCode()
                          );
                 
                  document.getElementById('fb-root').dispatchEvent(fbSDKLoadedEvent);
-            });
           }
 
           //We linken hier een functie aan het fbSDKLoadedEvent zodat we
@@ -254,7 +280,10 @@ function getFacebookJavaCode()
             facebookStatus.sdkLoaded = true;
             facebookStatus.userID= e.detail.userID;
             facebookStatus.authStatus = e.detail.status;
+            facebookStatus.grantedPermissions=e.detail.grantedPermissions;
           }
+          
+          
           
             function checkFBAccount()
             {
