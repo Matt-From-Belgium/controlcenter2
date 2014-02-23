@@ -18,23 +18,30 @@ function registerWithFacebook(onCompleteFunction,manualPermissions)
            var scope = desiredscope + ',' + manualPermissions;
            
         }  
-          
-        //We gaan de scope opbreken in aparte permissions en die vergelijken met de
-        //toegestane permissions. Zo kunnen we nagaan of het nodig is om de login flow
-        //nogmaals te laten lopen
-        var scopeArray = new Array();
-        var scopeArray = scope.split(',');
         
-        var grantedPermissionsArray = facebookStatus.grantedPermissions;
-        
-        var allPermissionsGranted = true;
-        
-        for(i=0;i<scopeArray.length;i++)
+        if(facebookStatus.authStatus==='connected')
         {
-            if(grantedPermissionsArray.indexOf(scopeArray[i])<0)
+            //We gaan de scope opbreken in aparte permissions en die vergelijken met de
+            //toegestane permissions. Zo kunnen we nagaan of het nodig is om de login flow
+            //nogmaals te laten lopen
+            var scopeArray = new Array();
+            var scopeArray = scope.split(',');
+
+            var grantedPermissionsArray = facebookStatus.grantedPermissions;
+
+            var allPermissionsGranted = true;
+
+            for(i=0;i<scopeArray.length;i++)
             {
-                allPermissionsGranted = false;
+                if(grantedPermissionsArray.indexOf(scopeArray[i])<0)
+                {
+                    allPermissionsGranted = false;
+                }
             }
+        }
+        else
+        {
+            var allPermissionsGranted = false;
         }
         
         if(allPermissionsGranted)
