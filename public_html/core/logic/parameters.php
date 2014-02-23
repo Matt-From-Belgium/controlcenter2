@@ -185,12 +185,16 @@ function getFacebookJavaCode()
         
         var facebookStatus = new facebookStatus();
         
+        //We gaan de channelURL genereren
+        var hostname = window.location.hostname;
+        var channel = 'http://'+hostname+'/core/social/facebook/javascript/channel.html';
+        
 
           window.fbAsyncInit = function() {
             // init the FB JS SDK
             FB.init({
               appId      : '$appid',                        // App ID from the app dashboard
-              channelUrl : 'http://controlcenter2.dragoneyehosting.be/core/social/facebook/javascript/channel.html', // Channel file for x-domain comms
+              channelUrl : channel, // Channel file for x-domain comms
               status     : true,                                 // Check Facebook Login status
               cookie     : true,                                 //Share session with PHP
               xfbml      : true                                  // Look for social plugins on the page
