@@ -132,13 +132,17 @@ class htmlpage
 			}
 		}while($hits>0);
 		
+                ###META
+                ###We voegen nu nog de meta gegevens toe op basis van wat in de databank zit
+                $patternhead = "/(?i)<\s*head\s*>/";
+                $html =  @preg_replace_callback($patternhead,array($this,'addMetaData'), $html, 1);
                 
                 ###Facebook integratie: Nu de HTML compleet is voegen we indien nodig de Facebook Javascript api toe
                 ###We doen dat net na de body tag. Maar... enkel wanneer $this->enableFacebookAPI = true (zie commentaar bovenaan)
                 if($this->enableFacebookAPI)
                 {
-                    $pattern = "/(?i)<\s*body\s*>/";
-                    $html =  @preg_replace_callback($pattern,array($this,'addFacebookAPI'), $html, 1);
+                    $patternbody = "/(?i)<\s*body\s*>/";
+                    $html =  @preg_replace_callback($patternbody,array($this,'addFacebookAPI'), $html, 1);
                 }
 		
 		return $html;
@@ -204,6 +208,31 @@ class htmlpage
 			}
 	}
 	
+        private function addMetaData($matches)
+        {
+            $metadata = getSiteMeta();
+            $fbappid = getFacebookAppID();
+            
+            ###We creëren eerst de gewone meta tags
+            $metahtml[] = "<meta name=description content='$metadata[description]' />";
+            
+            ###nu de Facebook meta
+            $metahtml[] = "<meta property='fb:app_id' content='$fbappid' />";
+            $metahtml[] = "<meta property='og:type' content='website' />";
+            $metahtml[] = "<meta property='og:url'  content='$metadata[url]'/>";
+            $metahtml[] = "<meta property='og:title' content='$metadata[title]' />";
+            $metahtml[] = "<meta property='og:image' content='$metadata[image]' />";
+            
+            $html = '<head>';
+            
+            foreach($metahtml as $value)
+            {
+                $html = $html.$value;
+            }
+            
+            return $html;
+        }
+        
         private function addFacebookAPI($matches)
         {
             require_once $_SERVER['DOCUMENT_ROOT'].'/core/logic/parameters.php';
@@ -217,6 +246,8 @@ class htmlpage
             return $html;
             
         }
+        
+        
 #CUSTOM TAG PARSE FUNCTIES
 	private function parseAddin($matches)
 	{
