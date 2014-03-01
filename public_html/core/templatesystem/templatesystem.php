@@ -17,6 +17,8 @@ class htmlpage
          *In alle andere gevallen is de standaardwaarde false maar kan deze manueel ingeschakeld worden
          */
         private $enableFacebookAPI;
+        
+        private $customMeta;
 
 	
 ###CONSTRUCTOR FUNCTIONALITEIT
@@ -210,18 +212,25 @@ class htmlpage
 	
         private function addMetaData($matches)
         {
-            $metadata = getSiteMeta();
-            $fbappid = getFacebookAppID();
-            
-            ###We creëren eerst de gewone meta tags
-            $metahtml[] = "<meta name=description content='$metadata[description]' />";
-            
-            ###nu de Facebook meta
-            $metahtml[] = "<meta property='fb:app_id' content='$fbappid' />";
-            $metahtml[] = "<meta property='og:type' content='website' />";
-            $metahtml[] = "<meta property='og:url'  content='$metadata[url]'/>";
-            $metahtml[] = "<meta property='og:title' content='$metadata[title]' />";
-            $metahtml[] = "<meta property='og:image' content='$metadata[image]' />";
+           ###Hiermee voegen we de META tags toe. Er zijn 2 mogelijkheden:
+           # -> We gebruiken de standaard meta-waarden uit de databank
+           # -> We gebruiken de gegevens die in $this->customMeta
+
+           if(!is_array($this->customMeta))
+           {
+                $metadata = getSiteMeta();
+                $fbappid = getFacebookAppID();
+
+
+                ###We creëren eerst de gewone meta tags
+                $metahtml[] = "<meta name=description content='$metadata[description]' />";
+
+                ###nu de Facebook meta
+                $metahtml[] = "<meta property='fb:app_id' content='$fbappid' />";
+                $metahtml[] = "<meta property='og:type' content='website' />";
+                $metahtml[] = "<meta property='og:url'  content='$metadata[url]'/>";
+                $metahtml[] = "<meta property='og:title' content='$metadata[title]' />";
+                $metahtml[] = "<meta property='og:image' content='$metadata[image]' />";
             
             $html = '<head>';
             
@@ -229,7 +238,20 @@ class htmlpage
             {
                 $html = $html.$value;
             }
-            
+           }
+           else
+           {
+               ###CustomMeta heeft waarde => we genereren de meta op basis daarvan
+               $html = '<head>';
+               
+               foreach($this->customMeta as $value)
+               {
+                   $newmeta= "<meta property='$value[property]' content='$value[content]'/> ";
+                   $html = $html.$newmeta;
+                   
+               }
+           }
+           
             return $html;
         }
         
@@ -546,6 +568,16 @@ class htmlpage
             {
                 throw new Exception('setFacebookIntegration aanvaardt enkel een boolean als argument');
             }
+        }
+        
+        public function addCustomMeta($property,$content)
+        {
+            ###Hiermee kunnen we zelf meta-tags toekennen aan de pagina
+            ###Van zodra deze functie gebruikt wordt zal de standaard meta niet meer gegenereerd worden
+            $newmeta['property']=$property;
+            $newmeta['content']= $content;
+            
+            $this->customMeta[] = $newmeta;
         }
 	
 	public function PrintHTML()
