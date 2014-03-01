@@ -17,7 +17,7 @@ class htmlpage
          *In alle andere gevallen is de standaardwaarde false maar kan deze manueel ingeschakeld worden
          */
         private $enableFacebookAPI;
-        
+        private $scripts;
         private $customMeta;
 
 	
@@ -134,6 +134,15 @@ class htmlpage
 			}
 		}while($hits>0);
 		
+                
+                ###SCRIPTS
+                ###We voegen de scripts in die specifiek voor deze pagina geladen moeten worden
+                if(is_array($this->scripts))
+                {
+                $patternhead = "/(?i)<\s*head\s*>/";
+                $html =  @preg_replace_callback($patternhead,array($this,'addScripts'), $html, 1);
+                }
+                
                 ###META
                 ###We voegen nu nog de meta gegevens toe op basis van wat in de databank zit
                 $patternhead = "/(?i)<\s*head\s*>/";
@@ -210,6 +219,22 @@ class htmlpage
 			}
 	}
 	
+        private function addScripts()
+        {
+            if(is_array($this->scripts))
+            {
+                $html = '<head>';
+                foreach($this->scripts as $value)
+                {
+                    $newhtml = "<script src='$value' ></script>";
+                    $html = $html.$newhtml;
+                }
+                
+                return $html;
+            }
+            
+        }
+        
         private function addMetaData($matches)
         {
            ###Hiermee voegen we de META tags toe. Er zijn 2 mogelijkheden:
@@ -578,6 +603,12 @@ class htmlpage
             $newmeta['content']= $content;
             
             $this->customMeta[] = $newmeta;
+        }
+        
+        public function loadScript($location)
+        {
+            ###Hiermee kunnen javascripts per pagina geladen worden
+            $this->scripts[] = $location;
         }
 	
 	public function PrintHTML()
