@@ -330,7 +330,7 @@ function dataaccess_getUser($userid)
 {
 	###Deze functie haalt de gebruikersgegevens op van de gebruiker met id $userid
 
-		$query = "SELECT users.id,users.username,users.passwordchangerequired,users.userconfirmation,users.adminconfirmation,users.realname,users.realfirstname,users.mailadress FROM users WHERE users.id=@userid";
+		$query = "SELECT users.id,users.username,users.facebookid,users.passwordchangerequired,users.userconfirmation,users.adminconfirmation,users.realname,users.realfirstname,users.mailadress FROM users WHERE users.id=@userid";
 	
 		$db = new dataconnection;
 		$db->setQuery($query);
@@ -341,8 +341,9 @@ function dataaccess_getUser($userid)
 		{
 			$result = $db->getResultArray();
 		
-			list($id,$username,$passwordchange,$userconfirmation,$adminconfirmation,$realname,$realfirstname,$mailadress,$website,$country) = $result[0];
+			list($id,$username,$facebookid,$passwordchange,$userconfirmation,$adminconfirmation,$realname,$realfirstname,$mailadress,$website,$country) = $result[0];
 			$returneduser  = new user($username,$id);
+                        $returneduser->setFacebookID($facebookid);
 			$returneduser->setPasswordchangeRequired($passwordchange);
 			$returneduser->setRealName($realname);
 			$returneduser->setRealFirstName($realfirstname);
@@ -407,11 +408,12 @@ function dataaccess_EditUser($userobject,$password)
 	
 	
 		###De overige wijzigingen worden naar de database geschreven.
-		$query = "UPDATE users SET users.passwordchangerequired='@passwordchangerequired',users.userconfirmation='@userconfirmation',users.adminconfirmation='@adminconfirmation',users.realname='@realname',users.realfirstname='@realfirstname',users.mailadress='@mailadress' WHERE users.id=@userid";
+		$query = "UPDATE users SET users.passwordchangerequired='@passwordchangerequired', users.facebookid='@facebookid' ,users.userconfirmation='@userconfirmation',users.adminconfirmation='@adminconfirmation',users.realname='@realname',users.realfirstname='@realfirstname',users.mailadress='@mailadress' WHERE users.id=@userid";
 		
 		$db = new dataconnection;
 		$db->setQuery($query);
 		$db->setAttribute("passwordchangerequired",$userobject->getPasswordchangeRequired());
+                $db->setAttribute('facebookid',$userobject->getFacebookID());
 		$db->setAttribute("userconfirmation",$userobject->getUserConfirmationStatus());
 		$db->setAttribute("adminconfirmation",$userobject->getAdminConfirmationStatus());
 		$db->setAttribute("realname",$userobject->getRealName());

@@ -6,7 +6,9 @@
 <!CC END LOOP [errorlist]>
 </UL>
 <!CC END IFSET [errorlist]>
+<!CC IFSET [fbloginlink]>
 <h3><a href='<!CC VAR [fbloginlink]>'>Login met je Facebook-account</a></h3>
+<!CC END IFSET [fbloginlink]>
 <form method="post">
 
 <input type="hidden" name="d" value="<!CC VAR [d]>">

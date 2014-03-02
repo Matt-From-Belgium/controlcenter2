@@ -17,6 +17,8 @@ class htmlpage
          *In alle andere gevallen is de standaardwaarde false maar kan deze manueel ingeschakeld worden
          */
         private $enableFacebookAPI;
+        private $scripts;
+        private $customMeta;
 
 	
 ###CONSTRUCTOR FUNCTIONALITEIT
@@ -133,12 +135,25 @@ class htmlpage
 		}while($hits>0);
 		
                 
+                ###SCRIPTS
+                ###We voegen de scripts in die specifiek voor deze pagina geladen moeten worden
+                if(is_array($this->scripts))
+                {
+                $patternhead = "/(?i)<\s*head\s*>/";
+                $html =  @preg_replace_callback($patternhead,array($this,'addScripts'), $html, 1);
+                }
+                
+                ###META
+                ###We voegen nu nog de meta gegevens toe op basis van wat in de databank zit
+                $patternhead = "/(?i)<\s*head\s*>/";
+                $html =  @preg_replace_callback($patternhead,array($this,'addMetaData'), $html, 1);
+                
                 ###Facebook integratie: Nu de HTML compleet is voegen we indien nodig de Facebook Javascript api toe
                 ###We doen dat net na de body tag. Maar... enkel wanneer $this->enableFacebookAPI = true (zie commentaar bovenaan)
                 if($this->enableFacebookAPI)
                 {
-                    $pattern = "/(?i)<\s*body\s*>/";
-                    $html =  @preg_replace_callback($pattern,array($this,'addFacebookAPI'), $html, 1);
+                    $patternbody = "/(?i)<\s*body\s*>/";
+                    $html =  @preg_replace_callback($patternbody,array($this,'addFacebookAPI'), $html, 1);
                 }
 		
 		return $html;
@@ -204,6 +219,67 @@ class htmlpage
 			}
 	}
 	
+        private function addScripts()
+        {
+            if(is_array($this->scripts))
+            {
+                $html = '<head>';
+                foreach($this->scripts as $value)
+                {
+                    $newhtml = "<script src='$value' ></script>";
+                    $html = $html.$newhtml;
+                }
+                
+                return $html;
+            }
+            
+        }
+        
+        private function addMetaData($matches)
+        {
+           ###Hiermee voegen we de META tags toe. Er zijn 2 mogelijkheden:
+           # -> We gebruiken de standaard meta-waarden uit de databank
+           # -> We gebruiken de gegevens die in $this->customMeta
+
+           if(!is_array($this->customMeta))
+           {
+                $metadata = getSiteMeta();
+                $fbappid = getFacebookAppID();
+
+
+                ###We creëren eerst de gewone meta tags
+                $metahtml[] = "<meta name=description content='$metadata[description]' />";
+
+                ###nu de Facebook meta
+                $metahtml[] = "<meta property='fb:app_id' content='$fbappid' />";
+                $metahtml[] = "<meta property='og:type' content='website' />";
+                $metahtml[] = "<meta property='og:url'  content='$metadata[url]'/>";
+                $metahtml[] = "<meta property='og:title' content='$metadata[title]' />";
+                $metahtml[] = "<meta property='og:image' content='$metadata[image]' />";
+            
+            $html = '<head>';
+            
+            foreach($metahtml as $value)
+            {
+                $html = $html.$value;
+            }
+           }
+           else
+           {
+               ###CustomMeta heeft waarde => we genereren de meta op basis daarvan
+               $html = '<head>';
+               
+               foreach($this->customMeta as $value)
+               {
+                   $newmeta= "<meta property='$value[property]' content='$value[content]'/> ";
+                   $html = $html.$newmeta;
+                   
+               }
+           }
+           
+            return $html;
+        }
+        
         private function addFacebookAPI($matches)
         {
             require_once $_SERVER['DOCUMENT_ROOT'].'/core/logic/parameters.php';
@@ -217,6 +293,8 @@ class htmlpage
             return $html;
             
         }
+        
+        
 #CUSTOM TAG PARSE FUNCTIES
 	private function parseAddin($matches)
 	{
@@ -515,6 +593,22 @@ class htmlpage
             {
                 throw new Exception('setFacebookIntegration aanvaardt enkel een boolean als argument');
             }
+        }
+        
+        public function addCustomMeta($property,$content)
+        {
+            ###Hiermee kunnen we zelf meta-tags toekennen aan de pagina
+            ###Van zodra deze functie gebruikt wordt zal de standaard meta niet meer gegenereerd worden
+            $newmeta['property']=$property;
+            $newmeta['content']= $content;
+            
+            $this->customMeta[] = $newmeta;
+        }
+        
+        public function loadScript($location)
+        {
+            ###Hiermee kunnen javascripts per pagina geladen worden
+            $this->scripts[] = $location;
         }
 	
 	public function PrintHTML()

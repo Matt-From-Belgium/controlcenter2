@@ -62,6 +62,17 @@ function getSiteName()
 	return $sitename->getValue();
 }
 
+function getSiteMeta()
+{
+    ###De gegevens die vooral gebruikt worden om de meta voor social media toe te voegen
+    $meta['title'] = dataaccess_GetParameter('SITE_META_TITLE')->getValue();
+    $meta['description'] = dataaccess_GetParameter('SITE_META_DESCRIPTION')->getValue();
+    $meta['image'] = dataaccess_GetParameter('SITE_META_IMAGE')->getValue();
+    $meta['url'] = dataaccess_GetParameter('SITE_META_URL')->getValue();
+    
+    return $meta;
+}
+
 function getCaptchaPublicKey()
 {
 	require_once $_SERVER['DOCUMENT_ROOT']."/core/dataaccess/parameters.php";	
@@ -163,18 +174,42 @@ function getFacebookSappId()
     return $sappid->getValue();
 }
 
+function getFacebookNameSpace()
+{
+    ###Deze functie haalt de namespace op die gebruikt kan worden voor
+    ##API aanroepen
+    $namespace = dataaccess_GetParameter('CORE_FB_APP_NAMESPACE');
+    
+    return $namespace->getValue();
+}
+
 function getFacebookJavaCode()
 {
     $appid = getFacebookAppID();
     
     $desiredscope = getFacebookScope();
     
+    $appnamespace = strtolower(getFacebookNameSpace());
+    
     $code = "<div id=\"fb-root\"></div>
         <script type='text/javascript' SRC='/core/presentation/ajax/ajaxtransaction.js'></script>
         <script>
+           (function () {
+            function CustomEvent ( event, params ) {
+              params = params || { bubbles: false, cancelable: false, detail: undefined };
+              var evt = document.createEvent( 'CustomEvent' );
+              evt.initCustomEvent( event, params.bubbles, params.cancelable, params.detail );
+              return evt;
+             };
 
+            CustomEvent.prototype = window.CustomEvent.prototype;
+
+            window.CustomEvent = CustomEvent;
+          })();
+          
 
           function facebookStatus(){
+            this.appNamespace = '$appnamespace';
             this.sdkLoaded = false;
             this.userID = null;
             this.authStatus = false;
@@ -185,12 +220,16 @@ function getFacebookJavaCode()
         
         var facebookStatus = new facebookStatus();
         
+        //We gaan de channelURL genereren
+        var hostname = window.location.hostname;
+        var channel = 'http://'+hostname+'/core/social/facebook/javascript/channel.html';
+        
 
           window.fbAsyncInit = function() {
             // init the FB JS SDK
             FB.init({
               appId      : '$appid',                        // App ID from the app dashboard
-              channelUrl : 'http://controlcenter2.dragoneyehosting.be/core/social/facebook/javascript/channel.html', // Channel file for x-domain comms
+              channelUrl : channel, // Channel file for x-domain comms
               status     : true,                                 // Check Facebook Login status
               cookie     : true,                                 //Share session with PHP
               xfbml      : true                                  // Look for social plugins on the page
