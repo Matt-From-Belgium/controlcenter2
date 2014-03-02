@@ -8,7 +8,7 @@
 <!CC END IFSET [errorlist]>
 <FORM method="post" enctype="application/x-www-form-urlencoded" id="userform">
 	<input type="hidden" id="userid" name="userid" value='<!CC var [userid]>'>
-	<label for="text"><!CC LANG [LANG_USERNAME]></LABEL><INPUT TYPE="text" id="username" name="username" MAXLENGTH="15" value="<!CC VAR [username]>" DISABLED/><BR />
+	<label for="text"><!CC LANG [LANG_USERNAME]></LABEL><INPUT TYPE="text" id="username" name="username" MAXLENGTH="20" value="<!CC VAR [username]>" DISABLED/><BR />
     <label for="mail"><!CC LANG [LANG_MAIL]></label><input type="text" id="mail" name="mail" MAXLENGTH="50" VALUE="<!CC VAR [mail]>" /><BR />
     <label for="password"><!CC LANG [LANG_PASSWORD]></LABEL><INPUT TYPE="password" id="password" name="password" MAXLENGTH="20" value="<!CC VAR [password]>"/><BR />
     <label for="password2"><!CC LANG [LANG_PASSWORD_CONFIRM]></label><INPUT TYPE="password" id="password2" name="password2" MAXLENGTH="20" value="<!CC VAR [password2]>"/><BR />
