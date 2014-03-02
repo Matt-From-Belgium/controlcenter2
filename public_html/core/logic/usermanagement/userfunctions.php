@@ -419,6 +419,35 @@ function editUser($inputarray)
 	return $errormessages;
 }
 
+function editUserObject($user)
+{
+    require_once $_SERVER['DOCUMENT_ROOT']."/core/entity/user.php";
+    require_once $_SERVER['DOCUMENT_ROOT']."/core/entity/exception.php";
+    require_once $_SERVER['DOCUMENT_ROOT']."/core/logic/usermanagement/uservalidator.php";
+    
+    ###$user moet instantie zijn van user
+    if($user instanceof User)
+    {
+        ###We kijken de gegevens na
+        $uservalidator = new uservalidator();
+	$errormessages = $uservalidator->validateObject($user);
+        
+        if(empty($errormessages))
+	{
+		##Wijzigingen ok => gebruiker mag gewijzigd worden.
+                ##DEZE FUNCTIE KAN GEEN WACHTWOORDEN WIJZIGEN!
+		dataaccess_EditUser($user,'');
+	}
+
+	return $errormessages;
+	
+    }
+    else
+    {
+        throw new Exception('$user must be an instance of user');
+    }
+}
+
 function checkUserPassword($username,$password)
 {
 	###Deze functie controleert of de combinatie $username/$password klopt en geeft true of false terug.

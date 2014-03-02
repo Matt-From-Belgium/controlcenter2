@@ -407,11 +407,12 @@ function dataaccess_EditUser($userobject,$password)
 	
 	
 		###De overige wijzigingen worden naar de database geschreven.
-		$query = "UPDATE users SET users.passwordchangerequired='@passwordchangerequired',users.userconfirmation='@userconfirmation',users.adminconfirmation='@adminconfirmation',users.realname='@realname',users.realfirstname='@realfirstname',users.mailadress='@mailadress' WHERE users.id=@userid";
+		$query = "UPDATE users SET users.passwordchangerequired='@passwordchangerequired', users.facebookid='@facebookid' ,users.userconfirmation='@userconfirmation',users.adminconfirmation='@adminconfirmation',users.realname='@realname',users.realfirstname='@realfirstname',users.mailadress='@mailadress' WHERE users.id=@userid";
 		
 		$db = new dataconnection;
 		$db->setQuery($query);
 		$db->setAttribute("passwordchangerequired",$userobject->getPasswordchangeRequired());
+                $db->setAttribute('facebookid',$userobject->getFacebookID());
 		$db->setAttribute("userconfirmation",$userobject->getUserConfirmationStatus());
 		$db->setAttribute("adminconfirmation",$userobject->getAdminConfirmationStatus());
 		$db->setAttribute("realname",$userobject->getRealName());
