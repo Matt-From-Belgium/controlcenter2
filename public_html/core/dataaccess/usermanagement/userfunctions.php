@@ -330,7 +330,7 @@ function dataaccess_getUser($userid)
 {
 	###Deze functie haalt de gebruikersgegevens op van de gebruiker met id $userid
 
-		$query = "SELECT users.id,users.username,users.passwordchangerequired,users.userconfirmation,users.adminconfirmation,users.realname,users.realfirstname,users.mailadress FROM users WHERE users.id=@userid";
+		$query = "SELECT users.id,users.username,users.facebookid,users.passwordchangerequired,users.userconfirmation,users.adminconfirmation,users.realname,users.realfirstname,users.mailadress FROM users WHERE users.id=@userid";
 	
 		$db = new dataconnection;
 		$db->setQuery($query);
@@ -341,8 +341,9 @@ function dataaccess_getUser($userid)
 		{
 			$result = $db->getResultArray();
 		
-			list($id,$username,$passwordchange,$userconfirmation,$adminconfirmation,$realname,$realfirstname,$mailadress,$website,$country) = $result[0];
+			list($id,$username,$facebookid,$passwordchange,$userconfirmation,$adminconfirmation,$realname,$realfirstname,$mailadress,$website,$country) = $result[0];
 			$returneduser  = new user($username,$id);
+                        $returneduser->setFacebookID($facebookid);
 			$returneduser->setPasswordchangeRequired($passwordchange);
 			$returneduser->setRealName($realname);
 			$returneduser->setRealFirstName($realfirstname);

@@ -57,10 +57,10 @@ function checkFBAccount()
             #doen we dat nu. Wanneer een gebruiker geen basistoegang heeft gegeven
             #komen we niet in dit codepad want dan zal de javascriptcode dit script niet aanroepen
             $userfbid = $_SESSION['currentuser']->getFacebookID();
+            
             if(empty($userfbid))
             {
-               
-                
+
                ###We halen het facebook ID op
                $config['appId'] = getFacebookAppID();
                $config['secret'] = getFacebookSappId();
@@ -76,14 +76,10 @@ function checkFBAccount()
                if(is_array($errormessages))
                {
                    $arrayoutput = print_r($errormessages,true);
-                   throw new Exception('Facebookaccount kon niet automatisch gekoppeld worden. De inhoud van errormessages is $arrayoutput');
+                   throw new Exception("Facebookaccount kon niet automatisch gekoppeld worden. De inhoud van errormessages is $arrayoutput");
                }
             }
-            else {
-                $currentuser = $_SESSION['currentuser'];
-                $currentuser = print_r($currentuser, TRUE);
-                throw new Exception("fbid is gelijk aan $currentuser");
-            }
+
         
             $resultnegative = new ajaxResponse('error');
             $resultnegative->addErrorMessage('error', '3');
