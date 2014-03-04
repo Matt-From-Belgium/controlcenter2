@@ -2,6 +2,7 @@
     require_once $_SERVER['DOCUMENT_ROOT'].'/core/social/facebook/php/facebook.php';
     require_once $_SERVER['DOCUMENT_ROOT']."/core/logic/usermanagement/userfunctions.php";
     require_once $_SERVER['DOCUMENT_ROOT']."/core/logic/parameters.php";
+    require_once $_SERVER['DOCUMENT_ROOT'].'/core/presentation/general/commonfunctions.php';
     
     ###Deze pagina vangt de gebruiker op nadat er op 'login met Facebook' werd geklikt
     ###De gebruiker werd doorgelust naar een pagina van Facebook waar hij/zij toegang heeft gegeven tot de site
@@ -44,8 +45,18 @@
             {
                 case 1:
                     ###Er is nog geen gebruikersaccount aan deze facebook account gekoppeld
-                    $location = '/core/presentation/usermanagement/accounts/extregistration.php?fb=1&d='.$_GET['d'];
-                    header('location: '.$location);
+                    ###Als EXT registration aanstaat mag de gebruiker een nieuwe account aanmaken
+                    if(getSelfRegisterStatus())
+                    {
+                        ###De gebruiker mag zichzelf registreren
+                        $location = '/core/presentation/usermanagement/accounts/extregistration.php?fb=1&d='.$_GET['d'];
+                        header('location: '.$location);
+                    }
+                    else {
+                        ###Gebruiker mag geen account maken, we kunnen niets doen
+                        showMessage(LANG_ERROR_EXTREG_DISABLED_HEADER, LANG_ERROR_EXTREG_DISABLED_MESSAGE);
+                    }
+                    
                     break;
                 case 2:
                                 ###De gebruiker heeft zijn account wel geactiveerd maar de admin moet nog zijn/haar toestemming geven

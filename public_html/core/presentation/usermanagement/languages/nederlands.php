@@ -42,6 +42,8 @@ define('LANG_ERROR_NEWPASSWORD_REQUIRED',"Uw nieuwe wachtwoord mag niet hetzelfd
 define('LANG_ERROR_NEWPASS_EMPTY',"U moet een nieuw wachtwoord opgeven");
 define('LANG_ERROR_PASSWORD_INCORRECT',"Het huidige wachtwoord dat u opgaf is niet correct");
 define('LANG_ERROR_FACEBOOK_DUPLICATE_ID',"We hebben al een account gekoppeld aan uw Facebook-profiel");
+define('LANG_ERROR_EXTREG_DISABLED_HEADER',"Accountregistratie niet mogelijk");
+define('LANG_ERROR_EXTREG_DISABLED_MESSAGE',"Het is niet toegestaan zelf een account te creëren, contacteer de administrator");
 
 #OTHER MESSAGES
 define('LANG_USER_ADDED_TITLE',"Gebruiker aangemaakt");
