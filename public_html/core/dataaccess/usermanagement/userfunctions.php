@@ -12,7 +12,7 @@ function dataaccess_AddUser($userobject,$password)
 	if($userobject instanceof User)
 	{
 		#Eerst moet de query gedefinieerd worden
-		$query = "INSERT INTO users (username,password,passwordchangerequired,userconfirmation,adminconfirmation,realname,realfirstname,mailadress,website,country) VALUES ('@username','@password','@passwordchangerequired','@userconfirmation','@adminconfirmation','@realname','@realfirstname','@mailadress','@website','@country')";
+		$query = "INSERT INTO users (username,facebookid,password,passwordchangerequired,userconfirmation,adminconfirmation,realname,realfirstname,mailadress) VALUES ('@username','@facebookid','@password','@passwordchangerequired','@userconfirmation','@adminconfirmation','@realname','@realfirstname','@mailadress')";
 		
 		include $_SERVER['DOCUMENT_ROOT']."/core/pathtoconfig.php";
 		require_once $pathtoconfig."/salt.php";
@@ -24,6 +24,7 @@ function dataaccess_AddUser($userobject,$password)
 		$db = new dataconnection;
 		$db->setQuery($query);
 		$db->setAttribute("username",$userobject->getUsername());
+                $db->setAttribute("facebookid",$userobject->getFacebookID());
 		$db->setAttribute("password",$password);
 		$db->setAttribute("passwordchangerequired",$userobject->getPasswordchangeRequired());
 		$db->setAttribute("userconfirmation",$userobject->getUserConfirmationStatus());
@@ -31,8 +32,7 @@ function dataaccess_AddUser($userobject,$password)
 		$db->setAttribute("realname",$userobject->getRealname());
 		$db->setAttribute("realfirstname",$userobject->getRealFirstname());
 		$db->setAttribute("mailadress",$userobject->getMailadress());
-		$db->setAttribute("website",$userobject->getWebsite());
-		$db->setAttribute("country",$userobject->getCountry());
+
 		
 		$db->ExecuteQuery();
 		
@@ -330,7 +330,7 @@ function dataaccess_getUser($userid)
 {
 	###Deze functie haalt de gebruikersgegevens op van de gebruiker met id $userid
 
-		$query = "SELECT users.id,users.username,users.passwordchangerequired,users.userconfirmation,users.adminconfirmation,users.realname,users.realfirstname,users.mailadress,users.website,users.country FROM users WHERE users.id=@userid";
+		$query = "SELECT users.id,users.username,users.facebookid,users.passwordchangerequired,users.userconfirmation,users.adminconfirmation,users.realname,users.realfirstname,users.mailadress FROM users WHERE users.id=@userid";
 	
 		$db = new dataconnection;
 		$db->setQuery($query);
@@ -341,14 +341,13 @@ function dataaccess_getUser($userid)
 		{
 			$result = $db->getResultArray();
 		
-			list($id,$username,$passwordchange,$userconfirmation,$adminconfirmation,$realname,$realfirstname,$mailadress,$website,$country) = $result[0];
+			list($id,$username,$facebookid,$passwordchange,$userconfirmation,$adminconfirmation,$realname,$realfirstname,$mailadress,$website,$country) = $result[0];
 			$returneduser  = new user($username,$id);
+                        $returneduser->setFacebookID($facebookid);
 			$returneduser->setPasswordchangeRequired($passwordchange);
 			$returneduser->setRealName($realname);
 			$returneduser->setRealFirstName($realfirstname);
 			$returneduser->setMailAdress($mailadress);
-			$returneduser->setWebsite($website);
-			$returneduser->setCountry($country);
 			$returneduser->setUserConfirmationStatus($userconfirmation);
 			$returneduser->setAdminConfirmationStatus($adminconfirmation);
 			
@@ -409,18 +408,17 @@ function dataaccess_EditUser($userobject,$password)
 	
 	
 		###De overige wijzigingen worden naar de database geschreven.
-		$query = "UPDATE users SET users.passwordchangerequired='@passwordchangerequired',users.userconfirmation='@userconfirmation',users.adminconfirmation='@adminconfirmation',users.realname='@realname',users.realfirstname='@realfirstname',users.mailadress='@mailadress',users.website='@website',users.country='@country' WHERE users.id=@userid";
+		$query = "UPDATE users SET users.passwordchangerequired='@passwordchangerequired', users.facebookid='@facebookid' ,users.userconfirmation='@userconfirmation',users.adminconfirmation='@adminconfirmation',users.realname='@realname',users.realfirstname='@realfirstname',users.mailadress='@mailadress' WHERE users.id=@userid";
 		
 		$db = new dataconnection;
 		$db->setQuery($query);
 		$db->setAttribute("passwordchangerequired",$userobject->getPasswordchangeRequired());
+                $db->setAttribute('facebookid',$userobject->getFacebookID());
 		$db->setAttribute("userconfirmation",$userobject->getUserConfirmationStatus());
 		$db->setAttribute("adminconfirmation",$userobject->getAdminConfirmationStatus());
 		$db->setAttribute("realname",$userobject->getRealName());
 		$db->setAttribute("realfirstname",$userobject->getRealFirstName());
 		$db->setAttribute("mailadress",$userobject->getMailAdress());
-		$db->setAttribute("website",$userobject->getWebsite());
-		$db->setAttribute("country",$userobject->getCountry());
 		$db->setAttribute("userid",$userobject->getId());
 		
 
@@ -458,6 +456,38 @@ function dataaccess_getDefaultUsergroup()
 	$defaultusergroup = dataaccess_getParameter("CORE_USER_EXT_USERGROUP");
 
 	return $defaultusergroup->getValue();
+}
+
+function dataaccess_checkUserFacebookId($id)
+{
+    if(!empty($id))
+    {
+        $query = "SELECT id,facebookid FROM users WHERE facebookid='@id'";
+        
+        $db = new dataconnection();
+        $db->setQuery($query);
+        $db->setAttribute('id', $id);
+        $db->ExecuteQuery();
+        
+        if($db->GetNumRows()==1)
+        {
+            ###Alleen maar als er één resultaat is mag er verder gegaan worden
+            $result = $db->GetResultArray();
+            return $result[0]['id'];
+        }
+        else 
+        {
+            if($db->GetNumRows()>1)
+            {
+                throw new Exception('Multiple user accounts with same Facebook id?');
+            }
+            return false;
+        }
+    }
+    else
+    {
+        throw new Exception('$id must be set');
+    }
 }
 
 function dataaccess_checkUserPassword($username,$password)
@@ -666,5 +696,28 @@ function dataaccess_changePassword($userid,$newpassword)
 	$db->setAttribute("newpassword",$newpassword);
 	$db->setAttribute("userid",$userid);
 	$db->executeQuery();
+}
+
+function dataaccess_FacebookIdUnique($id)
+{
+    ###Deze functie gaat na of een facebook ID al voorkomt in de tabel users
+    #Anders zouden er verschillende controlcenter accounts aan één profiel gekoppeld 
+    #kunnen worden
+    
+    $query= "SELECT users.id FROM users WHERE users.facebookid='@id'";
+    
+    $db = new DataConnection;
+    $db->setQuery($query);
+    $db->setAttribute('id', $id);
+    $db->ExecuteQuery();
+    
+    if($db->GetNumRows()>0)
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
 }
 ?>

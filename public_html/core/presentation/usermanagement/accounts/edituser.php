@@ -18,7 +18,7 @@ checkPermission('usermanagement','edit users');
 		{
 			require_once $_SERVER['DOCUMENT_ROOT']."/core/templatesystem/templatesystem.php";
 			require_once $_SERVER['DOCUMENT_ROOT']."/core/logic/usermanagement/userfunctions.php";
-			require_once $_SERVER['DOCUMENT_ROOT']."/core/logic/usermanagement/countryfunctions.php";
+			
 
 			##De gebruikersgegevens moeten worden opgehaald. De functie getUser geeft een gebruikersobject terug
 			##of false als er geen gebruiker werd gevonden.
@@ -46,7 +46,7 @@ checkPermission('usermanagement','edit users');
 					$html->setVariable("mail",$_POST['mail']);
 					$html->setVariable("firstname",$_POST['firstname']);
 					$html->setVariable("lastname",$_POST['lastname']);
-					$html->setVariable("website",$_POST['website']);
+					
 
 					$html->setVariable("password",$_POST['password']);
 					$html->setVariable("password2",$_POST['password2']);
@@ -64,27 +64,10 @@ checkPermission('usermanagement','edit users');
 					$html->setVariable("mail",$usertoedit->getMailAdress());
 					$html->setVariable("firstname",$usertoedit->getRealFirstName());
 					$html->setVariable("lastname",$usertoedit->getRealName());
-					$html->setVariable("website",$usertoedit->getWebsite());
+					
 				}
 		
-				$clist = getCountries();
-		
-						foreach($clist as $key=>$value)
-						{
-							$newitem ="";
-							$newitem['countrycode']=$value;
-						
-							##Als het land het land is dat geselecteerd werd dan moet dit opnieuw als geselecteerd
-							##worden weergegeven, dit kan door de selectionflag loopvariable te gebruiken
-							if($value == $usertoedit->getCountry())
-							{
-								$newitem['selectionflag'] = "selected";
-							}
-					
-							$countrylist[]=$newitem;
-						}
-		
-				$html->setVariable("countrylist",$countrylist);
+				
 				
 			###De gebruikersgroepen moeten opgehaald worden
 			$usergrouplist = getUsergroups();
