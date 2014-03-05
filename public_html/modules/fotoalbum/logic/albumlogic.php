@@ -15,7 +15,7 @@ function addAlbum()
         $response = new ajaxResponse('error');
         $response->addErrorMessage('albumnaam', 'U bent verplicht een albumnaam op te geven');
         
-        echo $response->getXML();
+        return $response->getXML();
     }
     else
     {
@@ -25,7 +25,7 @@ function addAlbum()
             $response = new ajaxResponse('error');
             $response->addErrorMessage('albumnaam', 'Er bestaat reeds een album met deze naam');
             
-            echo $response->getXML();
+            return $response->getXML();
             
         }
         else
@@ -36,7 +36,7 @@ function addAlbum()
             $id=data_albumToevoegen($newalbum);
             
             $response = new ajaxResponse('ok');
-            echo $response->getXML();
+            return $response->getXML();
         }
     }
 }
@@ -243,7 +243,7 @@ function changeDescription()
     
     ###Hierna geven we bevestiging dat alles ok is
     $response = new ajaxResponse('ok');
-    $response->getXML();
+    return $response->getXML();
 }
 
 function getAlbumPhotos($id)
