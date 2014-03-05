@@ -1,7 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT']."/core/entity/exception.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/core/templatesystem/templatesystem.php";
-require_once $_SERVER['DOCUMENT_ROOT']."/core/logic/usermanagement/countryfunctions.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/core/logic/usermanagement/userfunctions.php";
 
 ###Om deze pagina te kunnen gebruiken moet de gebruiker het toegangsniveau usermanagement::add users
@@ -50,32 +49,15 @@ checkPermission('usermanagement','add users');
 			$html->setVariable("mail",$_POST['mail']);
 			$html->setVariable("firstname",$_POST['firstname']);
 			$html->setVariable("lastname",$_POST['lastname']);
-			$html->setVariable("website",$_POST['website']);
+			
                    }
 			$html->LoadAddin("/core/presentation/usermanagement/accounts/addins/intregform.tpa");
 	
 			#De Addin intregform bevat een loop met als parameter de array countrylist
 			#deze moet dus gedefinieerd worden.
-			$clist = getCountries();
-	
-			foreach($clist as $key=>$value)
-			{
-				$newitem ="";
-				$newitem['countrycode']=$value;
 			
-				##Als het land het land is dat geselecteerd werd dan moet dit opnieuw als geselecteerd
-				##worden weergegeven, dit kan door de selectionflag loopvariable te gebruiken
-                                if(isset($_POST['country']))    
-                                {
-                                    if($value == $_POST['country'])
-                                    {
-                                		$newitem['selectionflag'] = "selected";
-                                    }
-                                }
-				$countrylist[]=$newitem;
-			}
 	
-			$html->setVariable("countrylist",$countrylist);
+			
 			
 			###De gebruikersgroepen moeten opgehaald worden
 			$usergrouplist = getUsergroups();
