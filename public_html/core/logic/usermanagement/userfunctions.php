@@ -29,8 +29,6 @@ function AddUserINT($inputarray)
 	$newuser->setMailadress($inputarray['mail']);
 	$newuser->setRealName($inputarray['lastname']);
 	$newuser->setRealFirstName($inputarray['firstname']);
-	$newuser->setWebsite($inputarray['website']);
-	$newuser->setCountry($inputarray['country']);
 	
 	###Het gaat om een intern geregistreerde gebruiker => userconfirmation en adminconfirmation komen op 1
 	$newuser->setUserConfirmationStatus('1');
@@ -84,8 +82,6 @@ function AddUserEXT($inputarray)
 	$newuser->setMailadress($inputarray['mail']);
 	$newuser->setRealName($inputarray['lastname']);
 	$newuser->setRealFirstName($inputarray['firstname']);
-	$newuser->setWebsite($inputarray['website']);
-	$newuser->setCountry($inputarray['country']);
 	
 	###Het gaat om een extern gecre�erde gebruiker => nakijken of er activatie nodig is
 	if(getUserActivationParameter())
@@ -139,6 +135,117 @@ function AddUserEXT($inputarray)
 	{
 		###Geen fouten => gebruiker toevoegen
 		$newuserid=dataaccess_Adduser($newuser,$inputarray['password']);
+		
+		###Afhankelijk van de activatieprocedure die is ingesteld moet er een mail gestuurd worden naar de gebruiker.
+		if(getUserActivationParameter())
+		{
+			###Bevestiging van het mailadres door de gebruiker is nodig => mail naar de gebruiker versturen.
+			require_once $_SERVER['DOCUMENT_ROOT']."/core/email/email.php";
+			$activatiemail = new Email();
+			$activatiemail->setTo($newuser->getMailadress());
+			
+			$sitename = getSiteName();
+			
+			$activatiemail->setSubject(LANG_USER_SELF_ACTIVATION_WELCOMETO . "$sitename");
+			$activatiemail->setMessageAddin("/core/presentation/usermanagement/accounts/addins/useractivationmail.tpa");
+			$activatiemail->setVariable("sitename","$sitename");
+			
+			###De activatielink moet verwijzen naar het userid dat werd teruggegeven door dataaccess_adduser
+			#en naar het activatiescript op de server waarop Controlcenter2 draait.
+			$activatielink = "http://".$_SERVER['HTTP_HOST']."/core/presentation/usermanagement/accounts/activate.php?id=".$newuserid;
+			
+			$activatiemail->setVariable("activationlink",$activatielink);
+			$activatiemail->Send();
+		}
+	}
+
+	return $errormessages;
+}
+
+function addUserEXT_FB($inputarray)
+{
+    	##Deze functie handelt de externe aanmaak van een gebruikersaccount via Facebook af
+	require_once $_SERVER['DOCUMENT_ROOT']."/core/entity/user.php";
+	require_once $_SERVER['DOCUMENT_ROOT']."/core/logic/usermanagement/uservalidator.php";
+	require_once $_SERVER['DOCUMENT_ROOT']."/core/dataaccess/usermanagement/userfunctions.php";
+	require_once $_SERVER['DOCUMENT_ROOT']."/core/logic/parameters.php";
+	
+	#De inputarray zal normaal de waarde krijgen van $_POST
+	#er moet een userobject gebouwd worden met deze gegevens en dat moet dan door de validator gehaald worden
+	$newuser = new user($inputarray['username']);
+	$newuser->setFacebookID($inputarray['facebookid']);
+	$newuser->setMailadress($inputarray['mail']);
+        
+        if(empty($inputarray['facebookid']))
+        {
+            ###Geen Facebook account, waarden van formulier gebruiken
+            $newuser->setRealName($inputarray['lastname']);
+            $newuser->setRealFirstName($inputarray['firstname']);
+        }
+	else
+        {
+            ###Wel Facebook account, voornaam en achternaam uit profiel halen
+            #Voornaam en familienaam komen uit het facebookprofiel
+                            require_once($_SERVER['DOCUMENT_ROOT'].'/core/social/facebook/php/facebook.php');
+                            
+                            $fbappid = getFacebookAppID();
+                            $fbsappid = getFacebookSappId();
+                            
+                            $config = array();
+                            $config['appId']=$fbappid;
+                            $config['secret']=$fbsappid;
+                            $config['fileUpload']=false;
+                            
+                            $facebook = new Facebook($config);
+                            
+                            $profile=$facebook->api('/me','get');
+                            $newuser->setRealFirstname($profile['first_name']);
+                            $newuser->setRealname($profile['last_name']);
+        }
+
+                                    
+	###Het gaat om een extern gecre�erde gebruiker => nakijken of er activatie nodig is
+	if(getUserActivationParameter())
+	{
+		###er is wel gebruikersactivatie nodig => confirmationstatus is 0
+		$newuser->setUserConfirmationStatus(0);
+	}
+	else
+	{
+		###er is geen gebruikersactivatie nodig => confirmationstatus wordt 1
+		$newuser->setUserConfirmationStatus(1);
+	}
+	
+	if(getAdminActivationParameter())
+	{
+		###er is administrator toestemming nodig voor een account-> adminconfimationstatus is 0
+		$newuser->setAdminConfirmationStatus(0);
+	}
+	else
+	{
+		###er is geen admin toestemming nodig voor een account => adminconfirmationstatus is 1
+		$newuser->setAdminConfirmationStatus(1);
+        }
+        
+	$validator = new UserValidator();
+	$errormessages = $validator->ValidateObject($newuser);
+	
+	###Het gaat om externe registratie => nakijken bij welke gebruikersgroep de account moet ingedeeld worden
+	$defaultusergroupid = dataaccess_getDefaultUsergroup();
+	
+	###het id van de defaultusergroup moet nu in het userobject verwerkt worden zodat het in de database geregistreerd kan worden
+	$usergrouparray[] = $defaultusergroupid;
+	$newuser->setUsergroups($usergrouparray);	
+	
+	if(empty($errormessages))
+	{
+		###Geen fouten => gebruiker toevoegen
+                
+                ###Aangezien de gebruiker geen wachtwoord moet opgeven en we ook niet willen dat het wachtwoord achterhaald kan worden
+                ###plaatsen we een willekeurige waarde als wachtwoord
+                $fictionalpass = md5(microtime());
+            
+		$newuserid=dataaccess_Adduser($newuser,$fictionalpass);
 		
 		###Afhankelijk van de activatieprocedure die is ingesteld moet er een mail gestuurd worden naar de gebruiker.
 		if(getUserActivationParameter())
@@ -272,8 +379,8 @@ function editUser($inputarray)
 	$editeduser->setMailAdress($inputarray['mail']);
 	$editeduser->setRealName($inputarray['lastname']);
 	$editeduser->setRealFirstName($inputarray['firstname']);
-	$editeduser->setWebsite($inputarray['website']);
-	$editeduser->setCountry($inputarray['country']);
+	
+	
 
 	###Bij wijziging moet er normaal gezien niet opnieuw geactiveerd worden.
 	$editeduser->setUserConfirmationStatus(1);
@@ -310,6 +417,35 @@ function editUser($inputarray)
 	}
 
 	return $errormessages;
+}
+
+function editUserObject($user)
+{
+    require_once $_SERVER['DOCUMENT_ROOT']."/core/entity/user.php";
+    require_once $_SERVER['DOCUMENT_ROOT']."/core/entity/exception.php";
+    require_once $_SERVER['DOCUMENT_ROOT']."/core/logic/usermanagement/uservalidator.php";
+    
+    ###$user moet instantie zijn van user
+    if($user instanceof User)
+    {
+        ###We kijken de gegevens na
+        $uservalidator = new uservalidator();
+	$errormessages = $uservalidator->validateObject($user);
+        
+        if(empty($errormessages))
+	{
+		##Wijzigingen ok => gebruiker mag gewijzigd worden.
+                ##DEZE FUNCTIE KAN GEEN WACHTWOORDEN WIJZIGEN!
+		dataaccess_EditUser($user,'');
+	}
+
+	return $errormessages;
+	
+    }
+    else
+    {
+        throw new Exception('$user must be an instance of user');
+    }
 }
 
 function checkUserPassword($username,$password)
@@ -389,6 +525,59 @@ function Login($username,$password,$d)
 	{
 		###de parameters zijn niet correct => return false
 		return false;
+	}
+}
+
+function Login_FB()
+{
+	require_once $_SERVER['DOCUMENT_ROOT']."/core/dataaccess/usermanagement/userfunctions.php";
+        require_once $_SERVER['DOCUMENT_ROOT']."/core/social/facebook/php/facebook.php";
+	
+        ###Deze functie haalt het facebook ID van de ingelogde gebruiker op en kijkt of er een gebruikers
+        ###account aan gekoppeld is
+        ###Eerst kijken of er een Facebook sessie is
+        $config = array();
+
+        $config['appId'] = getFacebookAppID();
+        $config['secret'] = getFacebookSappId();
+
+        $facebook = new Facebook($config);
+
+        $fbUser = $facebook->getUser();
+        
+
+	###Eerst laten we de DataAccess layer controleren of de gegevens kloppen
+	$id=  dataaccess_checkUserFacebookId($fbUser);
+	if(!empty($id))
+	{
+		###De aangeleverde gegevens zijn correct
+		###We halen de gebruikersgegevens op in een userobject
+		$user = getUser($id);
+		
+
+			###CONTROLE: Moet de useraccount nog geactiveerd worden door een administrator?
+			if($user->getAdminConfirmationStatus()==1)
+			{
+				###De gebruikersgegevens waren correct, en de account is volledig actief => de gebruiker mag ingelogd worden
+				$_SESSION['currentuser'] = $user;
+				
+				
+			}
+			else
+			{
+				###De gebruiker heeft zijn account wel geactiveerd maar de admin moet nog zijn/haar toestemming geven
+                                ###Errorcode 2
+                                return '2';
+			}
+		
+
+		
+	}
+	else
+	{
+		###de parameters zijn niet correct => return false
+                ###Errorcode 1: geen fb account gelinkt aan een gebruikersaccount
+		return '1';
 	}
 }
 
