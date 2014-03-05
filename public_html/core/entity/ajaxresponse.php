@@ -95,7 +95,7 @@ class ajaxResponse
 			}
 		
 		header('Content-type: text/xml');
-		echo $this->xmlroot->saveXML();		
+		return $this->xmlroot->saveXML();		
 		}
 		
 		public function addField($string)
@@ -104,7 +104,8 @@ class ajaxResponse
 			if($this->status == "ok")
 			{
 				###Deze functie voegt een item toe aan het array velden.
-				$this->velden[] = strtolower($string);		
+                                ###OPGELET: VELDNAMEN ZIJN CASE SENSITIVE!
+				$this->velden[] = $string;		
 			}
 			else 
 			{
@@ -140,6 +141,7 @@ class ajaxResponse
 				
 					if($arrayok == true)
 					{
+                                                
 						$this->data[] = $array;
 					}
 				}

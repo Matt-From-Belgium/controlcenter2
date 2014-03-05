@@ -15,6 +15,9 @@ if(isset($_GET['id']))
       ###We hebben ons album gevonden   
         $html = new htmlpage('backend');
         $html->LoadAddin('/modules/fotoalbum/addins/editalbum.tpa');
+        $html->loadScript('/core/presentation/ajax/ajaxtransaction.js');
+        $html->loadScript('/modules/fotoalbum/presentation/editalbum.js');
+        $html->loadScript('/modules/fotoalbum/presentation/showalbum.js');
         $html->setVariable('albumname', $album->getName());
         $html->setVariable('albumid', $album->getId());
         $html->PrintHTML();

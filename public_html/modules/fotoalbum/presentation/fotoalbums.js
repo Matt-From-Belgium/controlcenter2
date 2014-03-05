@@ -1,5 +1,4 @@
-var errordiv = document.getElementById('errorlist');
-errordiv.innerHTML=null;
+
 
 function addAlbum(albumNaam)
 {

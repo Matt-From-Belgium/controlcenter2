@@ -1,9 +1,10 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'].'/core/logic/parameters.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/core/email/email.php';
+##BUGFIX: aangezien dit script over geincluded wordt mogen de requires maar effectief uitgevoerd worden wanneer 
+##de functies aangeroepen worden. Anders creëert dat teveel problemen met scripts die geladen worden wanneer niet nodig.
 
 function CC_Exception_Handler(Exception $ex)
 {
+    require_once $_SERVER['DOCUMENT_ROOT'].'/core/logic/parameters.php';
 
     CC_Send_Error_report($ex);
     
@@ -22,6 +23,8 @@ function CC_Exception_Handler(Exception $ex)
 
 function CC_Send_Error_report(Exception $ex)
 {
+    require_once $_SERVER['DOCUMENT_ROOT'].'/core/logic/parameters.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/core/email/email.php';
     ###We versturen het foutrapport
     ###BUGFIX: moet voor het gooien van de exception komen als debug mode actief is anders wordt 
     ###de mail niet verstuurd aangezien de exception alles stil legt.

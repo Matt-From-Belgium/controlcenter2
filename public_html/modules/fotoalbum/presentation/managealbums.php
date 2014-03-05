@@ -6,5 +6,7 @@ checkPermission('fotoalbum', 'manage albums');
 
 $html = new htmlpage('backend');
 $html->LoadAddin('/modules/fotoalbum/addins/managealbums.tpa');
+$html->loadScript('/core/presentation/ajax/ajaxtransaction.js');
+$html->loadScript('fotoalbums.js');
 $html->PrintHTML();
 ?>
