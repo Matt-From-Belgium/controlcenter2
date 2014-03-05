@@ -14,7 +14,7 @@ body {
 
 #central-image {
     height: 20em;
-    background-size: auto 100%;
+    background-size: cover;
     /*background-image: none;*/
 }
 
