@@ -255,6 +255,7 @@ class htmlpage
                 $metahtml[] = "<meta property='og:type' content='website' />";
                 $metahtml[] = "<meta property='og:url'  content='$metadata[url]'/>";
                 $metahtml[] = "<meta property='og:title' content='$metadata[title]' />";
+                $metahtml[] = "<meta property='og:description' content='$metadata[description]' />";
                 $metahtml[] = "<meta property='og:image' content='$metadata[image]' />";
             
             $html = '<head>';
