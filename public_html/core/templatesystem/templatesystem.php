@@ -18,6 +18,7 @@ class htmlpage
          */
         private $enableFacebookAPI;
         private $scripts;
+        private $stylesheets;
         private $customMeta;
 
 	
@@ -134,7 +135,7 @@ class htmlpage
 			}
 		}while($hits>0);
 		
-                
+                /*
                 ###SCRIPTS
                 ###We voegen de scripts in die specifiek voor deze pagina geladen moeten worden
                 if(is_array($this->scripts))
@@ -147,12 +148,19 @@ class htmlpage
                 ###We voegen nu nog de meta gegevens toe op basis van wat in de databank zit
                 $patternhead = "/(?i)<\s*head\s*>/";
                 $html =  @preg_replace_callback($patternhead,array($this,'addMetaData'), $html, 1);
+                 *                  */
+                
+                ###We vullen de head tag aan met javascripts en metadata
+                $patternhead = "/(?i)<\s*head\s*>/";
+                $html = @preg_replace_callback($patternhead,array($this,'appendHeadTag'), $html, 1);
+                
                 
                 ###Facebook integratie: Nu de HTML compleet is voegen we indien nodig de Facebook Javascript api toe
                 ###We doen dat net na de body tag. Maar... enkel wanneer $this->enableFacebookAPI = true (zie commentaar bovenaan)
                 if($this->enableFacebookAPI)
                 {
-                    $patternbody = "/(?i)<\s*body\s*>/";
+                    ###bugfix: rekening houden met mogelijke onLoad
+                    $patternbody = "/(?i)<\s*body\s*[a-z0-9=\"\']*\s*>/";
                     $html =  @preg_replace_callback($patternbody,array($this,'addFacebookAPI'), $html, 1);
                 }
 		
@@ -218,6 +226,71 @@ class htmlpage
 				throw new Exception("The custom tag $matches[1] does not exist (Third parse)");
 			}
 	}
+        
+        private function appendHeadTag($matches)
+        {
+            $html = $matches[0];
+            
+            ###javascripts toevoegen
+            if(is_array($this->scripts))
+            {
+                foreach($this->scripts as $value)
+                {
+                    $newhtml = "<script src='$value' ></script>".PHP_EOL;
+                    $html = $html.$newhtml.PHP_EOL;
+                }
+            }
+            
+            ###META data
+                if(!is_array($this->customMeta))
+                {
+                     $metadata = getSiteMeta();
+                     $fbappid = getFacebookAppID();
+
+
+                     ###We creëren eerst de gewone meta tags
+                     $metahtml[] = "<meta name=description content='$metadata[description]' />";
+
+                     ###nu de Facebook meta
+                     $metahtml[] = "<meta property='fb:app_id' content='$fbappid' />";
+                     $metahtml[] = "<meta property='og:type' content='website' />";
+                     $metahtml[] = "<meta property='og:url'  content='$metadata[url]'/>";
+                     $metahtml[] = "<meta property='og:title' content='$metadata[title]' />";
+                     $metahtml[] = "<meta property='og:description' content='$metadata[description]' />";
+                     $metahtml[] = "<meta property='og:image' content='$metadata[image]' />";
+
+
+
+                 foreach($metahtml as $value)
+                 {
+                     $html = $html.$value.PHP_EOL;
+                 }
+                }
+                else
+                {
+                    ###CustomMeta heeft waarde => we genereren de meta op basis daarvan                   
+
+                    foreach($this->customMeta as $value)
+                    {
+                        $newmeta= "<meta property='$value[property]' content='$value[content]'/> ";
+                        $html = $html.$newmeta . PHP_EOL;
+
+                    }
+                }
+                
+            ###CSS
+                if(is_array($this->stylesheets))
+                {
+                    ###Er zijn scripts om bij te voegen
+                    foreach($this->stylesheets as $value)
+                    {
+                        $newcode = "<link href='$value' rel='stylesheet' type='text/css'>";
+                        $html = $html . $newcode . PHP_EOL;
+                    }
+                }
+            
+            return $html;
+        }
 	
         private function addScripts()
         {
@@ -232,6 +305,7 @@ class htmlpage
                 
                 return $html;
             }
+          
             
         }
         
@@ -286,7 +360,7 @@ class htmlpage
             require_once $_SERVER['DOCUMENT_ROOT'].'/core/logic/parameters.php';
             
             ###Body tag moet natuurlijk behouden blijven
-            $html = '<body>';
+            $html = $matches[0];
             $fbjscode = getFacebookJavaCode();
             
             $html = $html.$fbjscode;
@@ -610,6 +684,12 @@ class htmlpage
         {
             ###Hiermee kunnen javascripts per pagina geladen worden
             $this->scripts[] = $location;
+        }
+        
+        public function loadCSS($location)
+        {
+            ###Hiermee kunnen CSS scripts per pagina geladen worden
+            $this->stylesheets[]= $location;
         }
 	
 	public function PrintHTML()
