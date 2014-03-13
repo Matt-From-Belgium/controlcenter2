@@ -1,0 +1,67 @@
+<section class="beatlesheader"><img src='/images/beatles/logo.png'></center></section>
+<section class="block">
+
+<img src='/images/beatles/lovebeatles.png' class='left'>In 1964 beleefden 'The Beatles' hun grote doorbraak. Ze werden de grondleggers van de hedendaagse popmuziek. Doe zelf de test: wedden dat u minstens één van hun nummers kan meeneuriën? En toch... zo heeft u hen nog nooit gehoord. Projectkoor CHANTage brengt u een mix van hun meest gekende nummers in een uniek arrangement. Wij verrassen u met nummers die u al jaren kent. 
+<p />Nog geen Beatles-fan? Kom langs en we laten u kennis maken met de groep de popmuziek blijvend veranderde.
+<p />Dit concert wordt gedirigeerd door Geert De Deygere en begeleid op piano door pianist Jürgen Degryse, de helft van de nummers worden 'a capella' gebracht.
+ </section>
+<section class="block">
+<hr>
+</section>
+<section class="beatleskolommen">
+<section class="beatleskolom">    
+    <h1>Wanneer?</h1>
+
+Het beatlesconcert wordt 3 keer uitgevoerd:
+    <ul>
+        <li>26 september 2014 om 20u</li>
+        <li>27 september 2014 om 20u</li>
+        <li>28 september 2014 om 20u</li>
+    </ul>
+</section>
+<section class="beatleskolom">
+    <h1>Waar?</h1>
+    <div id='kruispuntlogo'>
+    <img src='/images/beatles/kruispuntlogo.png'>
+    </div>
+    De concerten gaan door in cultureel centrum Het Kruispunt in Diksmuide.
+    <h3>Adres</h3>
+    Maria Doolaeghestraat 2b
+    <br />8600 Diksmuide
+    <h3><a href='https://www.google.be/maps?q=maria+doolaeghestraat+2b+diksmuide&hl=en&sll=51.031252,2.865372&sspn=0.001439,0.004123&t=m&hnear=Maria+Doolaeghestraat+2,+8600+Diksmuide&z=16' target='_blank'>Google Maps</a></h3>
+    <img src='/images/beatles/kruispunt.png'width='100%'>
+</section>
+<section class="beatleskolom">
+    <h1>Tickets</h1>
+    <div id='ticketcountdown'>
+    Ticketverkoop start binnen
+    <h1><div id='tickettimer'></div></h1>
+    </div>
+    De ticketverkoop start op 01 juni 2014. Bij ons vorige concert waren alle zitjes na 3 weken verkocht, <b>wees er dus snel bij!</b></li>
+    <h3>Hoe bestellen?</h3>
+    Van zodra de ticketverkoop start kan je deze bestellen via onze website of telefonisch. Meer info volgt binnenkort.
+    <p />Tickets kosten <b>10,00 EUR</b>
+</section>
+</section>
+<section class='block'>
+<hr>
+</section>
+<section class='block'>
+<h1>Geen zin om alleen te gaan? Hoeft ook niet!</h1>
+<div id='fbfunctioncontainer'>
+<div id='friendsthatgo'>
+    Waarom geen vrienden meenemen? Klik <a href='javascript:registerWithFacebook(showFriends)'>hier</a> en bekijk wie van je Facebookvrienden ook aanwezig zal zijn! Spreek samen af en maak van ons concert een leuke groepsactiviteit!
+</div>
+<div id="enjij">
+<h1>En jij?</h1>
+<span class="aanwezig"><input type="radio" id="rsvp" name="rsvp" value="ik ga" onClick="registerWithFacebook(rsvp,'rsvp_event')">Ik ga!</input></span>
+<br /><input type="radio" id="rsvp" name="rsvp" value="misschien" onClick="registerWithFacebook(rsvp,'rsvp_event')"><span class="misschien">Misschien... ik denk er nog even over na</span></input>
+<br /><input type="radio" id="rsvp" name="rsvp" value="niet" onMouseOver="jump()"><span class="niet">Ik ga niet </span> <i>(gebruik deze optie enkel in geval van een geplande catastrofe zoals daar zijn: invasie door aliens, het einde van de wereld, vulkaanuitbarsting, uitbraak van de pest, etc.)</input></i>
+<form>
+
+</form>
+</div>
+</section>
+
+
+

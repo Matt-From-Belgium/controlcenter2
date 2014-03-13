@@ -289,7 +289,7 @@ header{
     
     h2 {
         margin-top: 0.2em;
-        font-family: 'cafebrewery';
+        font-family: 'colaboratelightregular';
         font-size: 1.5em;
         color:#6B5B4B;
         font-weight: normal;
@@ -299,7 +299,8 @@ header{
     }
     
     h3 {
-        margin: 0px;
+        
+        
     }
     
     .block img {
@@ -419,6 +420,7 @@ a img {
 
 .sponsors {
     margin-bottom: 7em;
+
 }
 
 .sponsors img {
@@ -459,4 +461,13 @@ a img {
     width:70%;
     margin-left: auto;
     margin-right: auto;
+}
+
+img.left {
+    float: left;
+    margin-right: 1em;
+}
+
+img.right {
+    float: right;
 }

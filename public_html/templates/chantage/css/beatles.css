@@ -1,0 +1,118 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 10-mrt-2014, 21:11:51
+    Author     : matthiasba
+*/
+
+#content {
+   
+}
+
+.beatlesheader {
+    width: 100%;
+    text-align: center;
+}
+
+hr {
+    display: block;
+    width: 100%;
+    background-color:#000000;
+    height: 0.12em;
+    border: 0;
+    margin-top: 1em;
+}
+
+.beatleskolom {
+    width: 30%;
+    
+    margin-left: 1em;
+    margin-right: 1em;
+    float: left;
+}
+
+.beatleskolommen {
+    position: relative;
+    width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1em;
+    font-size: 1.2em;
+}
+
+#ticketcountdown {
+    background:#b39f85;
+    font-size: 1.5em;
+    height: 3em;
+    border-radius: 0.5em;
+    text-align: center;
+    margin-bottom: 0.5em;
+}
+
+#ticketcountdown h1 {
+    color:#ebe4da;
+    font-size: 1.5em;
+    margin-top: 0em;
+}
+
+.friendimg {
+    border-radius: 4.7em;
+    border-style: solid;
+    border-width: 0.5em;
+    border-color: #6b5b4b;
+}
+
+.friendname {
+    text-align: center;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.friend {
+    float: left;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    margin-bottom: 0.2em;
+}
+
+.friendstext {
+    margin-bottom: 1em;
+}
+
+#enjij {
+    clear: both;
+    margin-top: 1em;
+    margin-left: 5em;
+}
+
+.aanwezig {
+    color: #3ec42e;
+    font-size: 2em;
+}
+
+.misschien {
+    color:  #cd8333;
+    font-size: 1.5em;
+}
+
+.niet {
+    color: maroon;
+}
+
+input[type='radio'] {
+    width: 2em;
+    height: 2em;
+}
+
+#kruispuntlogo {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#friendsthatgo {
+    float: left;
+    width: 50%;
+}
