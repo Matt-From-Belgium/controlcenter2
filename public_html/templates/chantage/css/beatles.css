@@ -82,26 +82,6 @@ hr {
     margin-bottom: 1em;
 }
 
-#enjij {
-    clear: both;
-    margin-top: 1em;
-    margin-left: 5em;
-}
-
-.aanwezig {
-    color: #3ec42e;
-    font-size: 2em;
-}
-
-.misschien {
-    color:  #cd8333;
-    font-size: 1.5em;
-}
-
-.niet {
-    color: maroon;
-}
-
 input[type='radio'] {
     width: 2em;
     height: 2em;
@@ -112,7 +92,53 @@ input[type='radio'] {
     margin-right: auto;
 }
 
+#fbfunctioncontainer {
+    position: relative;
+    display: none;
+}
+
 #friendsthatgo {
     float: left;
-    width: 50%;
+    width: 75%;
+}
+
+#enjij {
+    float:left;
+    width: 20%;
+    height: 30em;
+    background-color:  #b39f85;
+    border-radius: 1em;
+    margin-left: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+    color: #000000;
+}
+
+#enjij h1 {
+    color: #ebe4da;
+}
+
+.aanwezig {
+    color:#1a5724;
+    font-size: 2em;
+}
+
+.misschien {
+    color:#824402;
+    font-size: 1.5em;
+}
+
+.niet {
+    color: maroon;
+}
+
+.niettekst {
+    color: #333333;
+    font-style:  italic;
+    font-size: 0.7em;
+    margin-left: 2em;
+}
+
+#fbloginbutton {
+    text-align: center;
 }

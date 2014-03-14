@@ -11,7 +11,7 @@ function showFriendsOnLoad(e)
 {
     if(e.detail.status==="connected")
     {
-        showFriends();
+        showFriends(e);
     }
 }
 
@@ -19,8 +19,8 @@ function showFriendsOnLoad(e)
 
 function updateTicketTimer()
 {
-    var endDate = new Date(2014, 5, 1, 9);
-    //var endDate = new Date(2014,2,13,21,15);
+    var endDate = new Date(2014, 5, 1, 10);
+    //var endDate = new Date(2014,2,14,7,46);
     
     
     var date = new Date();
@@ -49,8 +49,19 @@ function updateTicketTimer()
 
 }
 
-function showFriends()
+function showFriends(e)
 {    
+    //Wie is de gebruiker?
+    if(e)
+    {
+        //Functie wordt geladen bij startup met event als argument
+        var userID = e.detail.userID;
+    }
+    else
+    {
+        var userID = facebookStatus.userID;
+    }
+    
     FB.api('269412919890552/attending?fields=picture.width(100).height(100).type(square),first_name,id','GET',function(response){
         //We krijgen een array terug met de gegevens die we nodig hebben
         if(!response || response.error){
@@ -76,11 +87,10 @@ function showFriends()
             
                     friendsdiv.innerHTML='';
 
-                    var friendstext = document.createElement('div');
-                    friendstext.classList.add("friendstext");
+                    var friendstext = document.getElementById('friendstext');
                     friendstext.innerHTML='Waarom geen vrienden meenemen? Deze Facebookvrienden hebben aangegeven dat ze aanwezig zullen zijn! Spreek samen af en maak van ons concert een leuke groepsactiviteit!';
 
-                    friendsdiv.appendChild(friendstext);
+                    
 
                     for(i=0;i<response.data.length;i++)
                     {
@@ -105,6 +115,17 @@ function showFriends()
                             friendsdiv.appendChild(friend);
                         }
                         
+                    //We zoeken nu ook nog even de gegevens van de actieve gebruiker op
+                    
+                    
+                    //We zijn klaar
+                    //We verbergen de knop
+                    var fbbutton = document.getElementById('fbloginbutton');
+                    fbbutton.style.display='none';
+                    
+                    //We maken de container zichtbaar
+                    var fbdiv = document.getElementById('fbfunctioncontainer');
+                    fbdiv.style.display = 'block';
                         
                     }
                 }
