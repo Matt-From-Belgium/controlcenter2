@@ -116,16 +116,25 @@ function showFriends(e)
                         }
                         
                     //We zoeken nu ook nog even de gegevens van de actieve gebruiker op
-                    
-                    
-                    //We zijn klaar
-                    //We verbergen de knop
-                    var fbbutton = document.getElementById('fbloginbutton');
-                    fbbutton.style.display='none';
-                    
-                    //We maken de container zichtbaar
-                    var fbdiv = document.getElementById('fbfunctioncontainer');
-                    fbdiv.style.display = 'block';
+                    FB.api('/me?fields=picture.width(100).height(100).type(square),first_name', 'GET', function(userdata){
+                        
+                        var userPic = document.getElementById('userpic');
+                        userPic.src = userdata.picture.data.url;
+                        
+                        var userName = document.getElementById('username');
+                        username.innerHTML = userdata.first_name;
+                        
+                        //We zijn klaar
+                        //We verbergen de knop
+                        var fbbutton = document.getElementById('fbloginbutton');
+                        fbbutton.style.display='none';
+
+                        //We maken de container zichtbaar
+                        var fbdiv = document.getElementById('fbfunctioncontainer');
+                        fbdiv.style.display = 'block';
+                        
+                    });
+                   
                         
                     }
                 }

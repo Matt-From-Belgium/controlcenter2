@@ -45,7 +45,7 @@ hr {
 
 #ticketcountdown {
     background:#b39f85;
-    font-size: 1.5em;
+    font-size: 1em;
     height: 3em;
     border-radius: 0.5em;
     text-align: center;
@@ -83,8 +83,8 @@ hr {
 }
 
 input[type='radio'] {
-    width: 2em;
-    height: 2em;
+    width: 1.2em;
+    height: 1.5em;
 }
 
 #kruispuntlogo {
@@ -118,6 +118,9 @@ input[type='radio'] {
     color: #ebe4da;
 }
 
+#enjij a {
+    color: #6b5b4b;
+}
 .aanwezig {
     color:#1a5724;
     font-size: 2em;
@@ -136,9 +139,21 @@ input[type='radio'] {
     color: #333333;
     font-style:  italic;
     font-size: 0.7em;
-    margin-left: 2em;
+    margin-left: 2.5em;
+}
+
+#userdiv {
+    text-align: center;
 }
 
 #fbloginbutton {
     text-align: center;
+}
+
+#username {
+    margin-bottom: 1em;
+}
+
+#promotext {
+    margin-bottom: 1em;
 }
