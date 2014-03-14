@@ -62,7 +62,7 @@ Het beatlesconcert wordt 3 keer uitgevoerd:
 <div id='userdiv'><img src='' id='userpic' class='friendimg'>
 <div id='username' class='friendname'></div>
 </div>
-<div id='promotext'>Laat de wereld weten dat je er ook bij zal zijn en pas je status aan op ons <a href='https://www.facebook.com/events/269412919890552/' target='_blank'>Facebook-evenement</a>. Gebruik daarvoor onderstaande knoppen.</div>
+<div id='promotext'>Laat je vrienden weten dat je er ook bij zal zijn en pas je status aan op ons <a href='https://www.facebook.com/events/269412919890552/' target='_blank'>Facebook-evenement</a>. Gebruik daarvoor onderstaande knoppen.</div>
 <input type="radio" id="rsvp" name="rsvp" value="ik ga" onClick="registerWithFacebook(rsvp,'rsvp_event')"><span class="aanwezig">Ik ga!</span></input>
 <br /><input type="radio" id="rsvp" name="rsvp" value="misschien" onClick="registerWithFacebook(rsvp,'rsvp_event')"><span class="misschien">Misschien... </span></input>
 <br /><input type="radio" id="rsvp" name="rsvp" value="niet" onMouseOver="jump()"><span class="niet">Ik ga niet </span> <div class="niettekst">(gebruik deze optie enkel in geval van een geplande catastrofe zoals daar zijn: invasie door aliens, het einde van de wereld, vulkaanuitbarsting, uitbraak van de pest, etc.)</div></input>
