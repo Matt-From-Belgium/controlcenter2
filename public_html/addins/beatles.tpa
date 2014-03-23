@@ -74,7 +74,7 @@ Het beatlesconcert wordt 3 keer uitgevoerd:
             En deze wijze beslissing zul je je niet beklagen! Maar ons motto is: Hoe meer zielen hoe meer vreugde!
             <p>Klik op onderstaande knop en nodig je vrienden uit!
             <div id='inviteButton'>
-            <a href='javascript:inviteFriend()'>Nodig je vrienden uit!</a>
+            <center><a href='javascript:inviteFriend()'><img src='/images/fbinvite.png' align=center></a></center>
             </div>
         </div>
     </div>  
