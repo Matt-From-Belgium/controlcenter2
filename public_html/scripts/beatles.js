@@ -62,7 +62,7 @@ function showFriends(e)
         var userID = facebookStatus.userID;
     }
     
-    FB.api('269412919890552/attending?fields=picture.width(100).height(100).type(square),first_name,id','GET',function(response){
+    FB.api('269412919890552/attending?fields=picture.type(square).height(100).width(100),first_name,id&limit=100','GET',function(response){
         //We krijgen een array terug met de gegevens die we nodig hebben
         if(!response || response.error){
             alert('Er heeft zich een fout voorgedaan. Probeer later opnieuw...');
@@ -90,7 +90,7 @@ function showFriends(e)
                     var friendstext = document.getElementById('friendstext');
                     friendstext.innerHTML='Waarom geen vrienden meenemen? Deze Facebookvrienden hebben aangegeven dat ze aanwezig zullen zijn! Spreek samen af en maak van ons concert een leuke groepsactiviteit!';
 
-                    
+                    var userIsAttending = false;
 
                     for(i=0;i<response.data.length;i++)
                     {
@@ -115,6 +115,12 @@ function showFriends(e)
                             friendsdiv.appendChild(friend);
                         }
                         
+                        //We kijken ook of we de gebruiker zelf vinden
+                        if(response.data[i].id===userID)
+                        {
+                            //ok, deze persoon heeft zich opgegeven
+                            rsvpOk();
+                        }
                     //We zoeken nu ook nog even de gegevens van de actieve gebruiker op
                     FB.api('/me?fields=picture.width(100).height(100).type(square),first_name', 'GET', function(userdata){
                         
@@ -145,6 +151,12 @@ function showFriends(e)
     });
 }
 
+function rsvpOk()
+{
+    document.getElementById('whenGoing').style.display='block';
+    document.getElementById('whenNotGoing').style.display='none';
+}
+
 function rsvp()
 {
     var rsvpElements = document.getElementsByName('rsvp');
@@ -161,8 +173,8 @@ function rsvp()
     
     if(rsvpValue==='ik ga')
     {
-        FB.api('269412919890552/attending','POST',function(){
-            alert('genoteerd!');
+            FB.api('269412919890552/attending','POST',function(){
+            rsvpOk();
         });
     }
     
@@ -177,4 +189,12 @@ function rsvp()
 function jump()
 {
     this.style.visibility = 'hidden';
+}
+
+function inviteFriend()
+{
+  FB.ui({
+  method: 'send',
+  link: 'http://www.projectkoorchantage.be',
+});
 }

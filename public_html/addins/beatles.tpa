@@ -40,7 +40,7 @@ Het beatlesconcert wordt 3 keer uitgevoerd:
     De ticketverkoop start op 01 juni 2014 om 9u. Bij ons vorige concert waren alle zitjes na 3 weken verkocht, <b>wees er dus snel bij!</b></li>
     <h3>Hoe bestellen?</h3>
     Van zodra de ticketverkoop start kan je deze bestellen via onze website of telefonisch. Meer info volgt binnenkort.
-    <p />Tickets kosten <b>10,00 EUR</b>
+    <p />Tickets kosten <b>10,00 EUR</b>. De plaatsen zijn niet genummerd!
 </section>
 </section>
 <section class='block'>
@@ -53,22 +53,29 @@ Het beatlesconcert wordt 3 keer uitgevoerd:
 <a href='javascript:registerWithFacebook(showFriends)'><img src='/images/fbconnect.png'></a>
 </div>
 <div id='fbfunctioncontainer'>
+    <div id='friendsthatgo'>
 
-<div id='friendsthatgo'>
-    
-</div>
+    </div>
 <div id="enjij">
-<h1>En jij?</h1>
-<div id='userdiv'><img src='' id='userpic' class='friendimg'>
-<div id='username' class='friendname'></div>
-</div>
-<div id='promotext'>Laat je vrienden weten dat je er ook bij zal zijn en pas je status aan op ons <a href='https://www.facebook.com/events/269412919890552/' target='_blank'>Facebook-evenement</a>. Gebruik daarvoor onderstaande knoppen.</div>
-<input type="radio" id="rsvp" name="rsvp" value="ik ga" onClick="registerWithFacebook(rsvp,'rsvp_event')"><span class="aanwezig">Ik ga!</span></input>
-<br /><input type="radio" id="rsvp" name="rsvp" value="misschien" onClick="registerWithFacebook(rsvp,'rsvp_event')"><span class="misschien">Misschien... </span></input>
-<br /><input type="radio" id="rsvp" name="rsvp" value="niet" onMouseOver="jump()"><span class="niet">Ik ga niet </span> <div class="niettekst">(gebruik deze optie enkel in geval van een geplande catastrofe zoals daar zijn: invasie door aliens, het einde van de wereld, vulkaanuitbarsting, uitbraak van de pest, etc.)</div></input>
-<form>
-
-</form>
+    <h1>En jij?</h1>
+    <div id='userdiv'>
+        <img src='' id='userpic' class='friendimg'>
+            <div id='username' class='friendname'></div>
+    </div>
+    <div id='whenNotGoing'>
+        <div id='promotext'>Laat je vrienden weten dat je er ook bij zal zijn en pas je status aan op ons <a href='https://www.facebook.com/events/269412919890552/' target='_blank'>Facebook-evenement</a>. Gebruik daarvoor onderstaande knoppen.</div>
+        <input type="radio" id="rsvp" name="rsvp" value="ik ga" onClick="registerWithFacebook(rsvp,'rsvp_event')"><span class="aanwezig">Ik ga!</span></input>
+        <br /><input type="radio" id="rsvp" name="rsvp" value="misschien" onClick="registerWithFacebook(rsvp,'rsvp_event')"><span class="misschien">Misschien... </span></input>
+        <br /><input type="radio" id="rsvp" name="rsvp" value="niet" onMouseOver="jump()"><span class="niet">Ik ga niet </span> <div class="niettekst">(gebruik deze optie enkel in geval van een geplande catastrofe zoals daar zijn: invasie door aliens, het einde van de wereld, vulkaanuitbarsting, uitbraak van de pest, etc.)</div></input>
+    </div>
+    <div id='whenGoing'>
+        <div id='promotext'><img src='/images/check_mark_green.png'> <h1>Jij zal erbij zijn!</h1></div>
+        En deze wijze beslissing zul je je niet beklagen! Maar ons motto is: Hoe meer zielen hoe meer vreugde!
+        <p>Klik op onderstaande knop en nodig je vrienden uit!
+        <div id='inviteButton'>
+        <a href='javascript:inviteFriend()'>Nodig je vrienden uit!</a>
+        </div>
+    </div>
 </div>
 </section>
 

@@ -6,6 +6,5 @@ $html->LoadAddin('/addins/beatles.tpa');
 $html->loadScript('/modules/fotoalbum/presentation/showalbum.js');
 $html->loadScript('/scripts/beatles.js');
 $html->loadScript('/core/presentation/usermanagement/accounts/fbRegister.js');
-$html->loadCSS('/templates/chantage/css/beatles.css');
 $html->PrintHTML();
 ?>
