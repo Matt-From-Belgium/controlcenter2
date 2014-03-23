@@ -118,3 +118,39 @@ b {
 }
 
 /* BEATLES */
+.beatleskolom {
+    float: none;
+    width: 100%;
+}
+
+#ticketcountdown {
+    font-size: 3em;   
+}
+
+#friendsthatgo {
+    float: none;
+    width: 100%;
+    
+}
+
+#enjij {
+    float: none;
+    width: 80%;
+    height: auto;
+}
+
+.friendimg {
+    width: 150px;
+}
+
+.friendname {
+    font-size: 1.5em;
+}
+
+#userpic {
+    width: 7em;
+}
+
+#whenGoing,#whenNotGoing {
+    font-size: 2em;
+}

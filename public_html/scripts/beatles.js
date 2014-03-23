@@ -143,6 +143,12 @@ function showFriends(e)
                    
                         
                     }
+                    
+                        //We hebben nu een container met floated elements, dit gaat voor layout problemen zorgen
+                        var clearFix = document.createElement('div');
+                        clearFix.style.clear = 'both';
+                        
+                        friendsdiv.appendChild(clearFix);
                 }
             });
             
