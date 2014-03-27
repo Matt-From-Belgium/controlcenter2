@@ -278,10 +278,10 @@ header{
     
     h1 {
         margin-top: 0.2em;
-        font-family: 'fathernelson';
-        font-size: 2em;
-        color:#6B5B4B;
-        font-weight: normal;
+        font-family: 'Open Sans';
+        font-size: 1.7em;
+        color:#357d82;
+        font-weight: 300;
         font-style: normal;
         letter-spacing: 2px;
         margin-bottom: 0.2em;
@@ -289,12 +289,12 @@ header{
     
     h2 {
         margin-top: 0.2em;
-        font-family: 'colaboratelightregular';
-        font-size: 1.5em;
+        font-family: 'Open Sans';
+        font-size: 1.3em;
         color:#6B5B4B;
-        font-weight: normal;
+        font-weight: 300;
         font-style: normal;
-        letter-spacing: 2px;
+        letter-spacing: 0px;
         margin-bottom: 0.2em;      
     }
     
@@ -486,7 +486,7 @@ hr {
     display: block;
     width: 100%;
     background-color:#CCCCCC;
-    height: 0.10em;
+    height: 0.00em;
     border: 0;
     margin-top: 1em;
 }
@@ -639,3 +639,69 @@ input[type='radio'] {
     display: inline;
     font-size: 1em;
 }
+
+#top5 {
+    float:left;
+    width: 50%;
+    
+    
+}
+
+.beatlesChart {
+    font-size: 1.3em;
+    margin-bottom: 0.5em;
+    margin-left: 0.5em;
+    font-weight:  100;
+}
+
+.beatlesChart h1 {
+    display: inline;
+    font-size: 0.8em;
+    color: #FFFFFF;
+    background-color: #B39F85;
+    margin: 0em;
+    padding-left: 1.5em;
+}
+
+#vote {
+    float: right;
+    width: 50%;
+}
+
+#vote input[type='text']
+{
+    font-size: 2em;
+    color: #666666;
+    border-color: #B39F85;
+    border-style: solid;
+    border-width: 0.07em;
+    border-radius: 0.3em;
+    padding-left: 0.5em;
+}
+
+#vote input[type='text']:hover
+{
+    border-color: #357d82;
+}
+
+#beatlesSongs {
+    position: relative;
+    background-color: #EEEEEE;
+    width: 30em;
+    border-color: #B39F85;
+    border-width: 0.07em;
+    border-style: solid;
+}
+
+.beatlesSong{
+    font-size: 1.7em;
+    padding-left: 0.7em;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+}
+
+.beatlesSong:hover{
+    background-color: #357d82;
+    color: #FFFFFF;
+}
+

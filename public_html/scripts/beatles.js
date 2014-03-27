@@ -49,6 +49,18 @@ function updateTicketTimer()
 
 }
 
+function getPosition(element) {
+    var xPosition = 0;
+    var yPosition = 0;
+  
+    while(element) {
+        xPosition += (element.offsetLeft - element.scrollLeft + element.clientLeft);
+        yPosition += (element.offsetTop - element.scrollTop + element.clientTop);
+        element = element.offsetParent;
+    }
+    return { x: xPosition, y: yPosition };
+}
+
 function showFriends(e)
 {    
     //Wie is de gebruiker?
@@ -203,4 +215,171 @@ function inviteFriend()
   method: 'send',
   link: 'http://www.projectkoorchantage.be',
 });
+}
+
+function getPosition(element) {
+    var body = document.body,
+        win = document.defaultView,
+        docElem = document.documentElement,
+        box = document.createElement('div');
+    box.style.paddingLeft = box.style.width = "1px";
+    body.appendChild(box);
+    var isBoxModel = box.offsetWidth == 2;
+    body.removeChild(box);
+    box = element.getBoundingClientRect();
+    var clientTop  = docElem.clientTop  || body.clientTop  || 0,
+        clientLeft = docElem.clientLeft || body.clientLeft || 0,
+        scrollTop  = win.pageYOffset || isBoxModel && docElem.scrollTop  || body.scrollTop,
+        scrollLeft = win.pageXOffset || isBoxModel && docElem.scrollLeft || body.scrollLeft;
+    return {
+        y : box.top  + scrollTop  - clientTop,
+        x: box.left + scrollLeft - clientLeft};
+}
+
+var beatlesSongID = null;
+
+function searchSongs(element)
+{
+    //Van zodra er getypt wordt moet de stemknop gedisabled worden tot een keuze is gemaakt
+    //De genomen keuze moet ook weg zijn
+    document.getElementById('beatlesVote').disabled=true;
+    beatlesSongID=null;
+    
+    var beatlesSongs = document.getElementById('beatlesSongs');
+    
+    if(beatlesSongs===null)
+    {
+        //We moeten het element nog aanmaken
+        var beatlesSongs = document.createElement('div');
+        beatlesSongs.id='beatlesSongs';
+
+        var elementPosition = getPosition(element);
+
+        var body = document.getElementsByTagName('body')[0];
+
+        var top = elementPosition.y + element.offsetHeight+10;
+
+        beatlesSongs.style.top = top+'px';
+        beatlesSongs.style.left = elementPosition.x+10+'px';
+        beatlesSongs.style.zIndex = '1000';
+
+        body.insertBefore(beatlesSongs,body.firstChild);
+    }
+    
+    var searchString = element.value;
+    
+    if(searchString.length>0)
+    {
+        
+        
+
+        
+        
+        beatlesSongs.style.position='absolute';
+        
+        
+        beatlesSongs.innerHTML='';
+
+
+            //Als er meer dan 3 karakters werden ingevoerd zoeken we
+            var ajax = new ajaxTransaction;
+            ajax.destination = '/scripts/beatlesajax.php';
+            ajax.phpfunction = 'ajaxSearchBeatlesSong';
+
+            ajax.addData('searchtext',searchString);
+
+            ajax.onComplete = function(){
+                var beatlesSongs = document.getElementById('beatlesSongs');
+                
+                if(ajax.result)
+                {
+                    //ER zijn resultaten
+                    //Eerst het resultaatvenster weer leeg maken
+                    beatlesSongs.innerHTML='';
+                
+                    for(i=0;i<ajax.result.length;i++)
+                    {
+                        var foundSong = document.createElement('div');
+                        foundSong.classList.add('beatlesSong');
+                        foundSong.id=ajax.result[i].id;
+                        foundSong.title=ajax.result[i].title;
+                        
+                        
+                        
+
+                        var songTitle = document.createElement('div');
+                        var audioElement = document.createElement('audio');
+                        var sourceElement = document.createElement('source');
+
+                        sourceElement.src = ajax.result[i].previewurl;
+
+                        songTitle.innerHTML = ajax.result[i].title;
+
+                        foundSong.appendChild(songTitle);
+                        foundSong.onmouseover = function(){
+                            var audiotag = this.getElementsByTagName('audio')[0];
+                            audiotag.play();
+                        };
+
+                        foundSong.onmouseout = function(){
+                            //We willen de audio stoppen maar als een keuze werd gemaakt mag het nummer verder
+                            //spelen
+                            if(beatlesSongID===null)
+                            {
+                                var audiotag = this.getElementsByTagName('audio')[0];
+                                audiotag.pause();
+                                audiotag.load();
+                            }
+                        };
+                        
+                        foundSong.onmousedown = function(){
+                            beatlesSongID=this.id;
+                            document.getElementById('beatlesVote').disabled=false;
+                            element.value = this.title;
+                            beatlesSongs.style.display='none';
+                        };
+
+                        audioElement.appendChild(sourceElement);
+                        
+
+                        foundSong.appendChild(audioElement);
+
+                        beatlesSongs.appendChild(foundSong);
+                    }
+                    
+                    beatlesSongs.style.display='block';
+                }
+                else
+                {
+                    beatlesSongs.style.display='none';
+                }
+            };
+
+            ajax.ExecuteRequest();
+        }
+        else
+        {
+            //Er is geen zoektekst => resultaatgebied verbergen
+            beatlesSongs.style.display='none';
+            
+        }
+}
+
+function hideSearchBox()
+{
+    //Dit event wordt getriggerd na de onmousedown, dus als een keuze werd gemaakt kunnen we dit
+    //hier detecteren
+    
+    if(beatlesSongID===null)
+    {
+        //Er werd geen keuze gemaakt
+        //Het zoekveld moet gewist worden en het resultaatsvenster verborgen
+        var beatlesSongs = document.getElementById('beatlesSongs');
+        
+        if(beatlesSongs)
+        {
+            beatlesSongs.style.display='none';
+            document.getElementById('searchtext').value='';
+        }
+    }
 }

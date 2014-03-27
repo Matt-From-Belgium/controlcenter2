@@ -22,11 +22,11 @@ Het beatlesconcert wordt 3 keer uitgevoerd:
 </section>
 <section class="beatleskolom">
     <h1>Waar?</h1>
-    <div id='kruispuntlogo'>
-    <img src='/images/beatles/kruispuntlogo.png'>
-    </div>
     De concerten gaan door in cultureel centrum Het Kruispunt in Diksmuide.
     <h3>Adres</h3>
+    <div id='kruispuntlogo'>
+    <img src='/images/beatles/kruispuntlogo.png' width=200>
+    </div>
     Maria Doolaeghestraat 2b
     <br />8600 Diksmuide
     <h3><a href='https://www.google.be/maps?q=maria+doolaeghestraat+2b+diksmuide&hl=en&sll=51.031252,2.865372&sspn=0.001439,0.004123&t=m&hnear=Maria+Doolaeghestraat+2,+8600+Diksmuide&z=16' target='_blank'>Google Maps</a></h3>
@@ -79,6 +79,24 @@ Het beatlesconcert wordt 3 keer uitgevoerd:
         </div>
     </div>  
 </div>
+</section>
+<section class='block'>
+<h1>Wat is jouw favoriete Beatles-hit?</h1>
+    <div id="top5">
+    <h2>De huidige top 5</h2>
+        <div class='beatlesChart'><h1>1</h1> Let it be</div>
+        <div class='beatlesChart'><h1>2</h1> Hey Jude</div>
+        <div class='beatlesChart'><h1>3</h1> Blackbird</div>
+        <div class='beatlesChart'><h1>4</h1> Penny Lane</div>
+        <div class='beatlesChart'><h1>5</h1> Back in the USSR</div>
+
+    </div>
+    <div id="vote">
+        <h2>Maak je keuze</h2>
+        <input type='text' id='searchtext'  onkeyup="javascript:searchSongs(this)" onblur="javascript: hideSearchBox()" autocomplete="off"><br />
+        <input type='checkbox' id='shareOnFB'>Deel mijn keuze op Facebook <br />
+        <input type='submit' value='Stem!' id='beatlesVote' name='beatlesVote' disabled>
+    </div>
 </section>
 
 
