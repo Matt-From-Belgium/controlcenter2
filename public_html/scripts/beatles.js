@@ -237,13 +237,42 @@ function getPosition(element) {
 }
 
 var beatlesSongID = null;
+var beatlesItunesID=null;
+
+function searchSongsWait(element)
+{
+    //Om te voorkomen dat er in sneltempo zoekopdrachten zijn bouwen we een delay in
+    var value = element.value.length;
+    
+    setTimeout(function(){
+        var value2 = document.getElementById('searchtext').value.length;
+        
+        
+        if(value===value2)
+        {
+            
+            searchSongs(element);
+        }
+        else
+        {
+            
+        }
+        
+    },500);
+}
 
 function searchSongs(element)
 {
+    
     //Van zodra er getypt wordt moet de stemknop gedisabled worden tot een keuze is gemaakt
     //De genomen keuze moet ook weg zijn
-    document.getElementById('beatlesVote').disabled=true;
+    var voteButton = document.getElementById('beatlesVote');
+    voteButton.disabled=true;
+    voteButton.classList.add('voteDisabled');
+    voteButton.classList.remove('voteEnabled');
+    
     beatlesSongID=null;
+    beatlesItunesID=null;
     
     var beatlesSongs = document.getElementById('beatlesSongs');
     
@@ -260,7 +289,7 @@ function searchSongs(element)
         var top = elementPosition.y + element.offsetHeight+10;
 
         beatlesSongs.style.top = top+'px';
-        beatlesSongs.style.left = elementPosition.x+10+'px';
+        beatlesSongs.style.left = elementPosition.x+'px';
         beatlesSongs.style.zIndex = '1000';
 
         body.insertBefore(beatlesSongs,body.firstChild);
@@ -270,10 +299,7 @@ function searchSongs(element)
     
     if(searchString.length>0)
     {
-        
-        
-
-        
+     
         
         beatlesSongs.style.position='absolute';
         
@@ -281,7 +307,7 @@ function searchSongs(element)
         beatlesSongs.innerHTML='';
 
 
-            //Als er meer dan 3 karakters werden ingevoerd zoeken we
+            
             var ajax = new ajaxTransaction;
             ajax.destination = '/scripts/beatlesajax.php';
             ajax.phpfunction = 'ajaxSearchBeatlesSong';
@@ -302,23 +328,28 @@ function searchSongs(element)
                         var foundSong = document.createElement('div');
                         foundSong.classList.add('beatlesSong');
                         foundSong.id=ajax.result[i].id;
+                        foundSong.itunesID = ajax.result[i].itunesID;
                         foundSong.title=ajax.result[i].title;
+                        foundSong.audio=document.createElement('audio');
                         
-                        
-                        
+                        foundSong.audio.setAttribute('preload','auto');
 
                         var songTitle = document.createElement('div');
-                        var audioElement = document.createElement('audio');
+                        //var audioElement = document.createElement('audio');
                         var sourceElement = document.createElement('source');
 
                         sourceElement.src = ajax.result[i].previewurl;
+                        foundSong.audio.appendChild(sourceElement);
+                        
 
                         songTitle.innerHTML = ajax.result[i].title;
 
                         foundSong.appendChild(songTitle);
                         foundSong.onmouseover = function(){
-                            var audiotag = this.getElementsByTagName('audio')[0];
-                            audiotag.play();
+                            /*var audiotag = this.getElementsByTagName('audio')[0];
+                            audiotag.play();*/
+                            
+                            this.audio.play();
                         };
 
                         foundSong.onmouseout = function(){
@@ -326,23 +357,34 @@ function searchSongs(element)
                             //spelen
                             if(beatlesSongID===null)
                             {
-                                var audiotag = this.getElementsByTagName('audio')[0];
+                                /*var audiotag = this.getElementsByTagName('audio')[0];
                                 audiotag.pause();
-                                audiotag.load();
+                                audiotag.load();*/
+                                
+                                this.audio.pause();
+                                this.audio.load();
                             }
                         };
                         
                         foundSong.onmousedown = function(){
+                            //De id van het databaseitem wordt bijgehouden
+                            //Als het over een nieuw nummer gaat is deze id -1
+                            //Op die manier weten we dat we de iTunesID moeten gebruiken
                             beatlesSongID=this.id;
-                            document.getElementById('beatlesVote').disabled=false;
+                            beatlesItunesID = this.itunesID;
+                            
+                            var voteButton = document.getElementById('beatlesVote');
+                            voteButton.disabled=false;
+                            voteButton.classList.add('voteEnabled');
+                            voteButton.classList.remove('voteDisabled');
                             element.value = this.title;
                             beatlesSongs.style.display='none';
                         };
 
-                        audioElement.appendChild(sourceElement);
+                        
                         
 
-                        foundSong.appendChild(audioElement);
+                        foundSong.appendChild(foundSong.audio);
 
                         beatlesSongs.appendChild(foundSong);
                     }
@@ -382,4 +424,87 @@ function hideSearchBox()
             document.getElementById('searchtext').value='';
         }
     }
+}
+
+function beatlesVote()
+{
+    if(beatlesSongID)
+    {
+        //Er is een keuze gemaakt uit de databank
+        var ajax = new ajaxTransaction();
+        
+        ajax.destination = '/scripts/beatlesajax.php';
+        ajax.phpfunction = 'ajaxVoteForSong';
+         
+        var loader = document.getElementById('loader');
+        loader.style.visibility = 'visible';
+        
+        if(beatlesSongID> -1)
+        {
+            //De gebruiker koos een nummer uit de databank
+            ajax.addData('songid',beatlesSongID);
+        }
+        else
+        {
+            //De gebruiker koos een niet gekend nummer uit de iTunes DB
+            ajax.addData('itunesid',beatlesItunesID);
+        }
+        ajax.onComplete=function(){
+           if(ajax.successIndicator)
+           {
+               loader.style.visibility = 'hidden';
+               refreshTop5();
+           }
+        };
+        
+        ajax.ExecuteRequest();
+    }
+}
+
+function refreshTop5()
+{
+    //We tonen de loader
+           var top5 = document.getElementById('top5') ;
+           top5.innerHTML='';
+           var loadIndicator = document.createElement('div');
+           var loadImage = document.createElement('img');
+           loadImage.src = '/images/groteloader.gif';
+           loadImage.style.marginLeft='auto';
+           loadImage.style.marginRight='auto';
+           loadIndicator.appendChild(loadImage);
+           top5.appendChild(loadIndicator);
+    
+    var ajax = new ajaxTransaction;
+    ajax.destination = '/scripts/beatlesajax.php';
+    ajax.phpfunction = 'ajaxTop5';
+    
+    ajax.onComplete=function(){
+        if(ajax.successIndicator)
+        {
+           var top5 = document.getElementById('top5') ;
+           
+           top5.innerHTML='';
+           
+           for(i=0;i<ajax.result.length;i++)
+           {
+               var newElement = document.createElement('div');
+               newElement.classList.add('beatlesChart');
+               
+               var number = i+1;
+               
+               newElement.innerHTML='<h1>'+number+'</h1>&nbsp;'+ajax.result[i].title;
+               
+               top5.appendChild(newElement);
+               
+               
+           }
+           
+        }
+        
+        
+    };
+    
+    
+    
+    ajax.ExecuteRequest();
 }

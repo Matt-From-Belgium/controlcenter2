@@ -12,6 +12,7 @@ class beatlesSong
     private $songtitle;
     private $previewurl;
     private $id;
+    private $itunesID;
     
     
     ###public vars
@@ -40,5 +41,14 @@ class beatlesSong
         return $this->previewurl;
     }
     
+    public function getITunesID()
+    {
+        return $this->itunesID;
+    }
+    
+    public function setITunesID($id)
+    {
+        $this->itunesID=$id;
+    }
     ###Private methods
 }

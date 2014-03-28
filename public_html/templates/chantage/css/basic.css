@@ -640,7 +640,7 @@ input[type='radio'] {
     font-size: 1em;
 }
 
-#top5 {
+#top5Container {
     float:left;
     width: 50%;
     
@@ -691,6 +691,8 @@ input[type='radio'] {
     border-color: #B39F85;
     border-width: 0.07em;
     border-style: solid;
+    max-height: 9em;
+    overflow-y:auto;
 }
 
 .beatlesSong{
@@ -705,3 +707,39 @@ input[type='radio'] {
     color: #FFFFFF;
 }
 
+.voteDisabled
+{
+    background-color:  #CCCCCC;
+    font-size: 1.2em;
+    color: #666666;
+    border-style: solid;
+    border-color: #666666;
+    border-radius: 0.2em;
+    margin-top: 0.5em;
+}
+
+.voteEnabled
+{
+    background-color:  #6b5b4b;
+    font-size: 1.2em;
+    color: #FFFFFF;
+    border-style: solid;
+    border-color: #000000;
+    border-radius: 0.2em;
+    margin-top: 0.5em;
+}
+
+#vote input[type='checkbox'] {
+    margin-top: 1em;
+    
+}
+
+.voteEnabled:hover {
+    background-color: #357d82;
+}
+
+#loader {
+    display: inline;
+    margin-left: 0.5em;
+    visibility: hidden;
+}
