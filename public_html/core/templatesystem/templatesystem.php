@@ -291,69 +291,6 @@ class htmlpage
             
             return $html;
         }
-	
-        private function addScripts()
-        {
-            if(is_array($this->scripts))
-            {
-                $html = '<head>';
-                foreach($this->scripts as $value)
-                {
-                    $newhtml = "<script src='$value' ></script>";
-                    $html = $html.$newhtml;
-                }
-                
-                return $html;
-            }
-          
-            
-        }
-        
-        private function addMetaData($matches)
-        {
-           ###Hiermee voegen we de META tags toe. Er zijn 2 mogelijkheden:
-           # -> We gebruiken de standaard meta-waarden uit de databank
-           # -> We gebruiken de gegevens die in $this->customMeta
-
-           if(!is_array($this->customMeta))
-           {
-                $metadata = getSiteMeta();
-                $fbappid = getFacebookAppID();
-
-
-                ###We creëren eerst de gewone meta tags
-                $metahtml[] = "<meta name=description content='$metadata[description]' />";
-
-                ###nu de Facebook meta
-                $metahtml[] = "<meta property='fb:app_id' content='$fbappid' />";
-                $metahtml[] = "<meta property='og:type' content='website' />";
-                $metahtml[] = "<meta property='og:url'  content='$metadata[url]'/>";
-                $metahtml[] = "<meta property='og:title' content='$metadata[title]' />";
-                $metahtml[] = "<meta property='og:description' content='$metadata[description]' />";
-                $metahtml[] = "<meta property='og:image' content='$metadata[image]' />";
-            
-            $html = '<head>';
-            
-            foreach($metahtml as $value)
-            {
-                $html = $html.$value;
-            }
-           }
-           else
-           {
-               ###CustomMeta heeft waarde => we genereren de meta op basis daarvan
-               $html = '<head>';
-               
-               foreach($this->customMeta as $value)
-               {
-                   $newmeta= "<meta property='$value[property]' content='$value[content]'/> ";
-                   $html = $html.$newmeta;
-                   
-               }
-           }
-           
-            return $html;
-        }
         
         private function addFacebookAPI($matches)
         {
