@@ -252,12 +252,12 @@ class htmlpage
                      $metahtml[] = "<meta name=description content='$metadata[description]' />";
 
                      ###nu de Facebook meta
-                     $metahtml[] = "<meta property='fb:app_id' content='$fbappid' />";
-                     $metahtml[] = "<meta property='og:type' content='website' />";
-                     $metahtml[] = "<meta property='og:url'  content='$metadata[url]'/>";
-                     $metahtml[] = "<meta property='og:title' content='$metadata[title]' />";
-                     $metahtml[] = "<meta property='og:description' content='$metadata[description]' />";
-                     $metahtml[] = "<meta property='og:image' content='$metadata[image]' />";
+                     $metahtml[] = "<meta property='fb:app_id' content=\"$fbappid\" />";
+                     $metahtml[] = "<meta property='og:type' content=\"website\" />";
+                     $metahtml[] = "<meta property='og:url'  content=\"$metadata[url]\"/>";
+                     $metahtml[] = "<meta property='og:title' content=\"$metadata[title]\" />";
+                     $metahtml[] = "<meta property='og:description' content=\"$metadata[description]\" />";
+                     $metahtml[] = "<meta property='og:image' content=\"$metadata[image]\" />";
 
 
 
