@@ -272,7 +272,7 @@ class htmlpage
 
                     foreach($this->customMeta as $value)
                     {
-                        $newmeta= "<meta property='$value[property]' content='$value[content]'/> ";
+                        $newmeta= "<meta property='$value[property]' content=\"$value[content]\"/> ";
                         $html = $html.$newmeta . PHP_EOL;
 
                     }
