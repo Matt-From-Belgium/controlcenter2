@@ -118,7 +118,12 @@ function registerWithFacebook(onCompleteFunction,manualPermissions,onFailFunctio
                            }
                            else
                            {
-                               //Niet alle toegangen zijn goedgekeurd, het heeft geen zin om verder te gaan
+                               //Niet alle toegangen zijn goedgekeurd, het heeft geen zin om verder te gaan.
+                               //MAAR: er kunnen gedeeltelijke toegangen zijn die nuttig zijn voor andere functies op
+                               //dezelfde pagina => toch refreshen
+                               
+                               refreshFacebookLoginStatus();
+                               
                                //Als onFailFunction in gevuld is wordt deze uitgevoerd, anders gebeurt er niks
                                if(onFailFunction)
                                {
