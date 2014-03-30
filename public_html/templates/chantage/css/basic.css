@@ -663,7 +663,7 @@ input[type='radio'] {
     padding-left: 1.5em;
 }
 
-#vote {
+#vote, #afterVote {
     float: right;
     width: 50%;
 }
@@ -742,4 +742,8 @@ input[type='radio'] {
     display: inline;
     margin-left: 0.5em;
     visibility: hidden;
+}
+
+#afterVote {
+    display: none;
 }

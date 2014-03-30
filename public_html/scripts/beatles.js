@@ -5,6 +5,7 @@
  */
 document.addEventListener('fbSDKLoaded',showFriendsOnLoad,false);
 
+
 window.setInterval(function(){updateTicketTimer();},1000);
 
 function showFriendsOnLoad(e)
@@ -13,6 +14,20 @@ function showFriendsOnLoad(e)
     {
         showFriends(e);
     }
+}
+
+function enableShareBox(e)
+{
+    
+    
+    
+    registerWithFacebook(function(){
+        alert('ok');
+        document.getElementById('shareOnFB').checked=true;
+    },'publish_actions');
+    
+    e.preventDefault;
+    return false;
 }
 
 
@@ -453,6 +468,11 @@ function beatlesVote()
            if(ajax.successIndicator)
            {
                loader.style.visibility = 'hidden';
+               
+               //We verbergen het stemformulier en tonen de bedanking
+               document.getElementById('vote').style.display='none';
+               document.getElementById('afterVote').style.display='block';
+               
                refreshTop5();
            }
         };

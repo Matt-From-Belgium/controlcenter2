@@ -91,8 +91,12 @@ Het beatlesconcert wordt 3 keer uitgevoerd:
     <div id="vote">
         <h2>Maak je keuze</h2>
         <input type='text' id='searchtext'  onkeyup="javascript:searchSongsWait(this)" onblur="javascript: hideSearchBox()" autocomplete="off"><br />
-        <input type='checkbox' id='shareOnFB'>Deel mijn keuze op Facebook <br />
+        <input type='checkbox' onClick='enableShareBox(event)' id='shareOnFB' name='shareOnFB'>Deel mijn keuze op Facebook <br />
         <input type='submit' value='Stem!' onClick='javascript:beatlesVote()' class='voteDisabled' id='beatlesVote' name='beatlesVote' disabled><div id='loader'><img src='/images/ajax-loader.gif'></div>
+    </div>
+    <div id='afterVote'>
+        <h2>Bedankt voor je stem</h2>
+        We hebben je keuze geregistreerd.  Jammer genoeg kan je maar één keer stemmen. CHANTage brengt op 26,27 en 28 september een Beatles-concert dat je niet snel zal vergeten. Misschien staat jouw keuze ook op het programma. Hou dus een plaatsje vrij in je agenda!
     </div>
 </section>
 
