@@ -35,9 +35,11 @@ function enableShareBoxOnLoad(e)
 
 function enableShareBox(e)
 {
-    
-    
-    
+    //enkel als de checkbox aangevinkt wordt mag er ingegrepen worden op het browsergedrag
+    if(document.getElementById('shareOnFB').checked===true)
+    {
+        
+        
     registerWithFacebook(function(){
         //Gebruiker geeft toegang
         document.getElementById('shareOnFB').checked=true;
@@ -48,6 +50,7 @@ function enableShareBox(e)
     
     e.preventDefault;
     return false;
+    }
 }
 
 
