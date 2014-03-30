@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 document.addEventListener('fbSDKLoaded',showFriendsOnLoad,false);
+document.addEventListener('fbSDKLoaded',enableShareBoxOnLoad,false);
 
 
 window.setInterval(function(){updateTicketTimer();},1000);
@@ -16,15 +17,34 @@ function showFriendsOnLoad(e)
     }
 }
 
+function enableShareBoxOnLoad(e)
+{
+    if(e.detail.status==='connected'){
+        //Er is verbinding maar kunnen we acties publiceren?
+        if(e.detail.grantedPermissions.indexOf('publish_actions')>=0)
+        {
+            //Toegang is ok => checkbox standaard aanvinken
+            document.getElementById('shareOnFB').checked=true;
+        }
+        else
+        {
+            document.getElementById('shareOnFB').checked=false;
+        }
+    }
+}
+
 function enableShareBox(e)
 {
     
     
     
     registerWithFacebook(function(){
-        alert('ok');
+        //Gebruiker geeft toegang
         document.getElementById('shareOnFB').checked=true;
-    },'publish_actions');
+    },'publish_actions',function(){
+        //Gebruiker geeft geen toegang
+        document.getElementById('shareOnFB').checked=false;
+    });
     
     e.preventDefault;
     return false;
