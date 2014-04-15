@@ -57,6 +57,11 @@ function ajaxVoteForSong()
     beatlesVote($votedId);
     
     $response = new ajaxResponse('ok');
+    $response->addField('id');
+    
+    $responsedata['id']=$votedId;
+    $response->addData($responsedata);
+    
     return $response->getXML();
 }
 

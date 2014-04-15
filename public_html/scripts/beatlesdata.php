@@ -66,6 +66,31 @@ function data_searchBeatlesSong($string)
     return $results;
 }
 
+function data_getBeatlesSongById($id)
+{
+        $db = new DataConnection();
+    
+        $query = "SELECT id,title,previewurl from beatlespoll WHERE id=@id";
+
+        $db->setQuery($query);
+        $db->setAttribute('id', $id);
+        $db->ExecuteQuery();
+
+        $results = array();
+
+        if($db->GetNumRows()>0)
+        {    
+            #Er zijn resultaten gevonden in onze databank
+            foreach($db->GetResultArray() as $value)
+            {
+                $newSong = new beatlesSong($value['title'], $value['previewurl'], $value['id']);
+                $results[] = $newSong;
+            }
+        }
+
+        return $results[0];
+}
+
 function data_voteForSong($id)
 {
     $query = 'UPDATE beatlespoll SET beatlespoll.votes = beatlespoll.votes+1 WHERE beatlespoll.id=@id';

@@ -43,6 +43,7 @@ function enableShareBox(e)
     registerWithFacebook(function(){
         //Gebruiker geeft toegang
         document.getElementById('shareOnFB').checked=true;
+        document.location.href='#beatlesvote';
     },'publish_actions',function(){
         //Gebruiker geeft geen toegang
         document.getElementById('shareOnFB').checked=false;
@@ -251,7 +252,7 @@ function inviteFriend()
 {
   FB.ui({
   method: 'send',
-  link: 'http://www.projectkoorchantage.be',
+  link: 'http://www.projectkoorchantage.be/beatles.php',
 });
 }
 
@@ -276,6 +277,7 @@ function getPosition(element) {
 
 var beatlesSongID = null;
 var beatlesItunesID=null;
+var beatlesSelectedSong=null;
 
 function searchSongsWait(element)
 {
@@ -311,6 +313,8 @@ function searchSongs(element)
     
     beatlesSongID=null;
     beatlesItunesID=null;
+    beatlesSelectedSong=null;
+    
     
     var beatlesSongs = document.getElementById('beatlesSongs');
     
@@ -363,6 +367,8 @@ function searchSongs(element)
                 
                     for(i=0;i<ajax.result.length;i++)
                     {
+                        
+                        
                         var foundSong = document.createElement('div');
                         foundSong.classList.add('beatlesSong');
                         foundSong.id=ajax.result[i].id;
@@ -410,6 +416,7 @@ function searchSongs(element)
                             //Op die manier weten we dat we de iTunesID moeten gebruiken
                             beatlesSongID=this.id;
                             beatlesItunesID = this.itunesID;
+                            beatlesSelectedSong= this;
                             
                             var voteButton = document.getElementById('beatlesVote');
                             voteButton.disabled=false;
@@ -490,13 +497,45 @@ function beatlesVote()
         ajax.onComplete=function(){
            if(ajax.successIndicator)
            {
-               loader.style.visibility = 'hidden';
+               //We krijgen het id van het gekozen nummer terug
+               //Wanneer we uit iTunes catalogus gekozen hebben krijgen we het nieuw gecreëerde id
+               var votedId = ajax.result[0].id;
                
-               //We verbergen het stemformulier en tonen de bedanking
-               document.getElementById('vote').style.display='none';
-               document.getElementById('afterVote').style.display='block';
+               
+               
+               
                
                refreshTop5();
+               
+               //We delen de song
+               if(facebookStatus.authStatus==='connected')
+               {
+                   if(document.getElementById('shareOnFB').checked===true)
+                   {
+                       var apiPath = '/me/' + facebookStatus.appNamespace+':vote_for';
+                       var songPath = 'http://www.projectkoorchantage.be/beatles.php?id='+votedId;
+                       
+                       FB.api(apiPath,'post',
+                       {
+                           song: songPath,
+                           'fb:explicitly_shared': 'true'
+                       },
+                       function(response){
+                                //We verbergen het stemformulier en tonen de bedanking
+                                document.getElementById('vote').style.display='none';
+                                document.getElementById('afterVote').style.display='block';
+                                loader.style.visibility = 'hidden';
+                           ;}
+                        );
+                   }
+                   else
+                   {
+                       //We verbergen het stemformulier en tonen de bedanking
+                                document.getElementById('vote').style.display='none';
+                                document.getElementById('afterVote').style.display='block';
+                                loader.style.visibility = 'hidden';
+                   }
+               }
            }
         };
         
@@ -536,8 +575,47 @@ function refreshTop5()
                var number = i+1;
                
                newElement.innerHTML='<h1>'+number+'</h1>&nbsp;'+ajax.result[i].title;
+               newElement.audio = document.createElement('audio');
+               newElement.audio.setAttribute('preload','auto');
+               var sourceElement = document.createElement('source');
+               sourceElement.src= ajax.result[i].previewurl;
+               
+               newElement.audio.appendChild(sourceElement);
+               newElement.appendChild(newElement.audio);
+               
+               newElement.id=ajax.result[i].id;
+               newElement.itunesID = ajax.result[i].itunesID;
+               newElement.title=ajax.result[i].title;
+               
+               newElement.onmouseover=function(){
+                 this.audio.play();  
+               };
+               
+               newElement.onmouseout = function(){
+                   this.audio.pause();
+                   this.audio.load();
+               };
+               
+               newElement.onmousedown = function() {
+                            //De id van het databaseitem wordt bijgehouden
+                            //Als het over een nieuw nummer gaat is deze id -1
+                            //Op die manier weten we dat we de iTunesID moeten gebruiken
+                            beatlesSongID=this.id;
+                            beatlesItunesID = this.itunesID;
+                            beatlesSelectedSong= this;
+                            
+                            var element = document.getElementById('searchtext');
+                            
+                            var voteButton = document.getElementById('beatlesVote');
+                            voteButton.disabled=false;
+                            voteButton.classList.add('voteEnabled');
+                            voteButton.classList.remove('voteDisabled');
+                            element.value = this.title;
+                            
+               };
                
                top5.appendChild(newElement);
+               
                
                
            }

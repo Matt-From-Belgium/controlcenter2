@@ -82,6 +82,7 @@ Het beatlesconcert wordt 3 keer uitgevoerd:
 </section>
 <section class='block'>
 <h1>Wat is jouw favoriete Beatles-hit?</h1>
+<a id='beatlesvote'></a>
     <div id="top5Container">
     <h2>De huidige top 5</h2>
         <div id='top5'>
@@ -91,7 +92,7 @@ Het beatlesconcert wordt 3 keer uitgevoerd:
     <div id="vote">
         <h2>Maak je keuze</h2>
         <input type='text' id='searchtext'  onkeyup="javascript:searchSongsWait(this)" onblur="javascript: hideSearchBox()" autocomplete="off"><br />
-        <input type='checkbox' onClick='enableShareBox(event)' id='shareOnFB' name='shareOnFB'>Deel mijn keuze op Facebook <br />
+        <div id='deelopfb'><input type='checkbox' onClick='enableShareBox(event)' id='shareOnFB' name='shareOnFB'>&nbsp;<img src='/images/fb_klein.png'>&nbsp;Deel mijn keuze op Facebook <br /></div>
         <input type='submit' value='Stem!' onClick='javascript:beatlesVote()' class='voteDisabled' id='beatlesVote' name='beatlesVote' disabled><div id='loader'><img src='/images/ajax-loader.gif'></div>
     </div>
     <div id='afterVote'>

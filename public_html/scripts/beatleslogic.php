@@ -27,6 +27,11 @@ function searchBeatlesSong($searchstring)
     }
 }
 
+function searchBeatlesSongById($id)
+{
+    return data_getBeatlesSongById($id);
+}
+
 function beatlesVote($id)
 {
     data_voteForSong($id);

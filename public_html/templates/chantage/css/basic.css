@@ -747,3 +747,19 @@ input[type='radio'] {
 #afterVote {
     display: none;
 }
+
+#deelopfb {
+    margin-top: 0.5em;
+    font-size: 1.3em;
+    font-weight: 500;
+    vertical-align: middle;
+}
+
+#deelopfb img {
+    vertical-align: middle;
+}
+
+#shareOnFB {
+    height: 1.5em;
+    width: 1.5em;
+}
