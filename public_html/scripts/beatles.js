@@ -259,7 +259,7 @@ function inviteFriend()
 function inviteFriendMobile()
 {
     alert('ok');
-    var url = 'https://www.facebook.com/dialog/feed?app_id='+'518339518198298'+'&display=popup&link=http://alpha.projectkoorchantage.be/beatles.php&redirect_uri=http://alpha.projectkoorchantage.be/beatles.php';
+    var url = 'https://www.facebook.com/dialog/feed?app_id='+'518339518198298'+'&display=popup&link=http://www.projectkoorchantage.be/beatles.php&redirect_uri=http://www.projectkoorchantage.be/beatles.php';
     document.location.href=url;
 }
 
