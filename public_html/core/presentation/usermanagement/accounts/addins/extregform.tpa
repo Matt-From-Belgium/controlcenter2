@@ -1,5 +1,5 @@
 <script type="text/javascript" SRC="/core/presentation/ajax/ajaxtransaction.js"></script>
-<script language='javascript' src='/core/presentation/usermanagement/accounts/fbRegister.js'></script>
+<script language='javascript' src='/core/presentation/usermanagement/accounts/fbRegister.final.js'></script>
 <H1 id="userformheader"><!CC LANG [LANG_CREATE_NEW_ACCOUNT]></H1>
 <!CC IFSET [errorlist]>
 <UL id="uservalidator" class="errorbox">
