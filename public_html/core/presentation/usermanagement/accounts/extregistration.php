@@ -3,6 +3,7 @@ require_once $_SERVER['DOCUMENT_ROOT']."/core/entity/exception.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/core/templatesystem/templatesystem.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/core/logic/usermanagement/userfunctions.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/core/logic/parameters.php";
+require_once $_SERVER['DOCUMENT_ROOT'].'/core/presentation/general/commonfunctions.php';
 
 ###Enkel wanneer CORE_USER_EXT_REGISTRATION gelijk is aan 1 mag registratie mogelijk zijn
 if(getSelfRegisterStatus())
@@ -112,6 +113,6 @@ if(getSelfRegisterStatus())
 }
 else
 {
-	echo "registration disabled";
+	showMessage(LANG_ERROR_EXTREG_DISABLED_HEADER, LANG_ERROR_EXTREG_DISABLED_MESSAGE);
 }
 ?>

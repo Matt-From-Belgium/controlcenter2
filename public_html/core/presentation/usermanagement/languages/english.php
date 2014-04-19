@@ -40,6 +40,9 @@ define('LANG_ERROR_NEWPASSWORD_REQUIRED',"Your new password must differ from the
 define('LANG_ERROR_NEWPASS_EMPTY',"You must provide a new password");
 define('LANG_ERROR_PASSWORD_INCORRECT',"The current password you supplied is incorrect");
 define('LANG_ERROR_FACEBOOK_DUPLICATE_ID',"We already have an account linked to your Facebook account");
+define('LANG_ERROR_EXTREG_DISABLED_HEADER',"Account creation disabled");
+define('LANG_ERROR_EXTREG_DISABLED_MESSAGE',"It is not allowed to create an account. Please contact the administrator");
+
 
 
 #OTHER MESSAGES

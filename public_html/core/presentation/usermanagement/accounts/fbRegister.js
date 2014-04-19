@@ -1,4 +1,4 @@
-function registerWithFacebook(onCompleteFunction,manualPermissions)
+function registerWithFacebook(onCompleteFunction,manualPermissions,onFailFunction)
 {  
     
     if(facebookStatus.sdkLoaded)
@@ -54,7 +54,7 @@ function registerWithFacebook(onCompleteFunction,manualPermissions)
                 }
                 else
                  {
-                     refreshFacebookLoginStatus();
+                     //refreshFacebookLoginStatus();
                      onCompleteFunction();
 
                      //We halen de gegevens op van de gebruiker en werken facebookStatus bij
@@ -70,7 +70,7 @@ function registerWithFacebook(onCompleteFunction,manualPermissions)
                    if(response.authResponse)
                    {
                        
-                       //Gebruiker heeft de toegang verleend
+                       //Gebruiker heeft de toegang verleend (of toch op zijn minst basistoegang)
                        //We kunnen dus beginnen met gegevens ophalen
                        //MAAR: facebookStatus heeft hier geen waarde omdat de gebruiker onload nog niet
                        //verbonden was met onze app.
@@ -118,8 +118,24 @@ function registerWithFacebook(onCompleteFunction,manualPermissions)
                            }
                            else
                            {
-                               //Niet alle toegangen zijn goedgekeurd, het heeft geen zin om verder te gaan
-                               console.log('not all necessary permissions have been granted');
+                               //Niet alle toegangen zijn goedgekeurd, het heeft geen zin om verder te gaan.
+                               //MAAR: er kunnen gedeeltelijke toegangen zijn die nuttig zijn voor andere functies op
+                               //dezelfde pagina => toch refreshen
+                               
+                               refreshFacebookLoginStatus();
+                               
+                               //Als onFailFunction in gevuld is wordt deze uitgevoerd, anders gebeurt er niks
+                               if(onFailFunction)
+                               {
+                                   if(typeof onFailFunction!= 'function')
+                                   {
+                                       throw 'onCompleteFunction is not an actual function';
+                                   }
+                                   else
+                                   {
+                                       onFailFunction();
+                                   }
+                               }
                            }
                        });
                        /*
@@ -136,6 +152,21 @@ function registerWithFacebook(onCompleteFunction,manualPermissions)
                                 
                             }                       
                          */
+                   }
+                   else
+                   {
+                       //De gebruiker heeft de basistoegang niet verleend, dus de rest ook niet => onFailFunction uitvoeren als die gedefinieerd is
+                       if(onFailFunction)
+                               {
+                                   if(typeof onFailFunction!= 'function')
+                                   {
+                                       throw 'onCompleteFunction is not an actual function';
+                                   }
+                                   else
+                                   {
+                                       onFailFunction();
+                                   }
+                               }
                    }
                  }, {scope: scope});
            /*  }*/
@@ -159,6 +190,9 @@ function getFacebookUserDetails()
         
         document.getElementById('firstname').readOnly = true;
         document.getElementById('firstname').value = response.first_name;
+        
+        document.getElementById('lastname').readOnly = true;
+        document.getElementById('lastname').value = response.last_name;
         
         blockPasswordFields();
 
