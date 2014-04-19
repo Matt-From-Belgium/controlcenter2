@@ -6,7 +6,7 @@ $html = new htmlpage('frontend');
 $html->LoadAddin('/addins/beatles.tpa');
 $html->loadScript('/modules/fotoalbum/presentation/showalbum.js');
 $html->loadScript('/scripts/beatles.final.js');
-$html->loadScript('/core/presentation/usermanagement/accounts/fbRegister.js');
+$html->loadScript('/core/presentation/usermanagement/accounts/fbRegister.final.js');
 
 if(isset($_COOKIE['beatlesvoted']))
 {
