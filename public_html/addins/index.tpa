@@ -7,7 +7,7 @@
                 
             </div>
             <div class="block" id="indexbanner">
-                <h1>ons volgend project</h1>
+                <h1>Ons volgend project</h1>
                     <img src='/images/index/indexbanner.png'>
 <h2>The Beatles</h2>
 <h3>26, 27 en 28 september 2014</h3>
@@ -15,7 +15,7 @@
 Wie kent ze niet? De Beatles zijn de grondleggers van de hedendaagse popmuziek. Iedereen kan wel een nummer van deze legendarische groep meezingen. En toch... zo heeft u hen nog nooit gehoord! CHANTage brengt u een mix van hun meest gekende nummers in een uniek arrangement.
 <p>Het concert wordt gedirigeerd door Geert De Deygere. Het koor wordt begeleid door pianist Jürgen Degryse, maar gaat ook de a capella toer op.</p>
  
-Meer info volgt...
+<a href='/beatles.php'>Meer info</a>
             </div>
 </div>
 <div id='rightcol'>

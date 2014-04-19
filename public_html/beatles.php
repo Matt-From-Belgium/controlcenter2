@@ -5,8 +5,21 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/scripts/beatleslogic.php';
 $html = new htmlpage('frontend');
 $html->LoadAddin('/addins/beatles.tpa');
 $html->loadScript('/modules/fotoalbum/presentation/showalbum.js');
-$html->loadScript('/scripts/beatles.js');
+$html->loadScript('/scripts/beatles.final.js');
 $html->loadScript('/core/presentation/usermanagement/accounts/fbRegister.js');
+
+if(isset($_COOKIE['beatlesvoted']))
+{
+    $html->setVariable('votedcookie', 1);
+    
+    ###Er is gestemd, we tonen de keuze van de gebruiker
+    $votedsong = searchBeatlesSongById($_COOKIE['beatlesvoted']);
+    $html->setVariable('votedTitle', $votedsong->getTitle());
+}
+else
+{
+   $html->setVariable((votedcookieno), 1);
+}
 
 if(!isset($_GET['id']))
 {
@@ -21,7 +34,8 @@ else
     ###ER is een id gezet, dus dit is een link van iemand die via FB zijn keuze heeft gedeeld
     $selectedsong = searchBeatlesSongById($_GET['id']);
     
-    $html->addCustomMeta('og:type', song);
+    $html->addCustomMeta('og:type', 'music.song');
+    $html->addCustomMeta('og:locale', 'nl_NL');
     $html->addCustomMeta('og:url', "http://www.projectkoorchantage.be/beatles.php?id=".$selectedsong->getID());
     $html->addCustomMeta('og:title',"Mijn favoriete Beatles-hit: ".$selectedsong->getTitle());
     $html->addCustomMeta('og:image', 'http://www.projectkoorchantage.be/images/beatles/beatlesFB.png');
@@ -29,4 +43,6 @@ else
 
 }
 $html->PrintHTML();
+
+
 ?>

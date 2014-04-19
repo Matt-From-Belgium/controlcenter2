@@ -62,6 +62,9 @@ function ajaxVoteForSong()
     $responsedata['id']=$votedId;
     $response->addData($responsedata);
     
+    ###Met een cookie kunnen we zorgen dat er niet opneiuw gestemd wordt
+    setcookie('beatlesvoted',$votedId,time()+60*60*24*30*2,'/');
+    
     return $response->getXML();
 }
 

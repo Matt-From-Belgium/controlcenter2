@@ -256,6 +256,13 @@ function inviteFriend()
 });
 }
 
+function inviteFriendMobile()
+{
+    alert('ok');
+    var url = 'https://www.facebook.com/dialog/feed?app_id='+'518339518198298'+'&display=popup&link=http://alpha.projectkoorchantage.be/beatles.php&redirect_uri=http://alpha.projectkoorchantage.be/beatles.php';
+    document.location.href=url;
+}
+
 function getPosition(element) {
     var body = document.body,
         win = document.defaultView,
@@ -501,12 +508,6 @@ function beatlesVote()
                //Wanneer we uit iTunes catalogus gekozen hebben krijgen we het nieuw gecreëerde id
                var votedId = ajax.result[0].id;
                
-               
-               
-               
-               
-               refreshTop5();
-               
                //We delen de song
                if(facebookStatus.authStatus==='connected')
                {
@@ -525,6 +526,7 @@ function beatlesVote()
                                 document.getElementById('vote').style.display='none';
                                 document.getElementById('afterVote').style.display='block';
                                 loader.style.visibility = 'hidden';
+                                refreshTop5();
                            ;}
                         );
                    }
@@ -534,6 +536,7 @@ function beatlesVote()
                                 document.getElementById('vote').style.display='none';
                                 document.getElementById('afterVote').style.display='block';
                                 loader.style.visibility = 'hidden';
+                                refreshTop5();
                    }
                }
            }

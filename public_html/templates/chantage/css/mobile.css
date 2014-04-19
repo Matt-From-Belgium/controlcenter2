@@ -98,6 +98,10 @@ h1 {
     font-size: 5em;
 }
 
+h2 {
+    font-size:2.5em;
+}
+
 .block {
     width: 90%;
     margin-left: 2em;
@@ -153,4 +157,38 @@ b {
 
 #whenGoing,#whenNotGoing {
     font-size: 2em;
+}
+
+#top5Container {
+    float: none;
+    width: 100%;
+}
+
+#vote, #afterVote {
+    float: none;
+    width: 100%;
+}
+
+.beatlesChart {
+    font-size: 2em;
+}
+
+.beatlesChart h1{
+    font-size: 1em;
+}
+
+.beatlesSong {
+    font-size: 2em;
+}
+
+#fbconnectImage {
+    width: 80%;
+}
+
+#inviteButtonMobile {
+    display: block;
+}
+
+#inviteButton {
+    display: none;
 }

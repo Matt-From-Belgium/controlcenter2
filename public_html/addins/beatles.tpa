@@ -30,7 +30,7 @@ Het beatlesconcert wordt 3 keer uitgevoerd:
     Maria Doolaeghestraat 2b
     <br />8600 Diksmuide
     <h3><a href='https://www.google.be/maps?q=maria+doolaeghestraat+2b+diksmuide&hl=en&sll=51.031252,2.865372&sspn=0.001439,0.004123&t=m&hnear=Maria+Doolaeghestraat+2,+8600+Diksmuide&z=16' target='_blank'>Google Maps</a></h3>
-    <img src='/images/beatles/kruispunt.png'width='100%'>
+    <center><img src='/images/beatles/kruispunt.png'width='85%'></center>
 </section>
 <section class="beatleskolom">
     <h1>Tickets</h1>
@@ -51,7 +51,7 @@ Het beatlesconcert wordt 3 keer uitgevoerd:
 <h1>Geen zin om alleen te gaan? Hoeft ook niet!</h1>
 <div id='friendstext' class='friendstext'>Waarom geen vrienden meenemen? Klik <a href='javascript:registerWithFacebook(showFriends)'>hier</a> en bekijk wie van je Facebookvrienden ook aanwezig zal zijn! Spreek samen af en maak van ons concert een leuke groepsactiviteit!</div>
 <div id='fbloginbutton'>
-<a href='javascript:registerWithFacebook(showFriends)'><img src='/images/fbconnect.png'></a>
+<a href='javascript:registerWithFacebook(showFriends)'><img src='/images/fbconnect.png' id='fbconnectImage'></a>
 </div>
 <div id='fbfunctioncontainer'>
     <div id='friendsthatgo'>
@@ -74,7 +74,10 @@ Het beatlesconcert wordt 3 keer uitgevoerd:
             En deze wijze beslissing zul je je niet beklagen! Maar ons motto is: Hoe meer zielen hoe meer vreugde!
             <p>Klik op onderstaande knop en nodig je vrienden uit!
             <div id='inviteButton'>
-            <center><a href='javascript:inviteFriend()'><img src='/images/fbinvite.png' align=center></a></center>
+            <center><a href='javascript:inviteFriend()'><img src='/images/fbinvite.png' align=center width=80%></a></center>
+            </div>
+            <div id='inviteButtonMobile'>
+                        <center><a href='https://www.facebook.com/dialog/feed?app_id=219035668268270&display=popup&link=http://www.projectkoorchantage.be/beatles.php&redirect_uri=http://www.projectkoorchantage.be/beatles.php'><img src='/images/fbinvite.png' align=center width=80%></a></center>
             </div>
         </div>
     </div>  
@@ -89,6 +92,7 @@ Het beatlesconcert wordt 3 keer uitgevoerd:
         </div>
     </div>
     <script>refreshTop5();</script>
+    <!CC IFSET [votedcookieno]>
     <div id="vote">
         <h2>Maak je keuze</h2>
         <input type='text' id='searchtext'  onkeyup="javascript:searchSongsWait(this)" onblur="javascript: hideSearchBox()" autocomplete="off"><br />
@@ -97,8 +101,16 @@ Het beatlesconcert wordt 3 keer uitgevoerd:
     </div>
     <div id='afterVote'>
         <h2>Bedankt voor je stem</h2>
-        We hebben je keuze geregistreerd.  Jammer genoeg kan je maar één keer stemmen. CHANTage brengt op 26,27 en 28 september een Beatles-concert dat je niet snel zal vergeten. Misschien staat jouw keuze ook op het programma. Hou dus een plaatsje vrij in je agenda!
+        We hebben je keuze geregistreerd.  Jammer genoeg kan je maar één keer stemmen. <p>CHANTage brengt op <b>26,27 en 28 september een Beatles-concert</b> dat je niet snel zal vergeten. Misschien staat jouw keuze ook op het programma. Hou dus een plaatsje vrij in je agenda!
     </div>
+    <!CC END IFSET [votedcookieno]>
+    <!CC IFSET [votedcookie]>
+        <div id='afterVoteReload'>
+            <h2>Bedankt voor je stem</h2>
+            <h3>Jouw favoriete Beatles-hit: <!CC VAR [votedTitle]></h3>
+            We hebben je keuze geregistreerd.  Jammer genoeg kan je maar één keer stemmen. <p>CHANTage brengt op <b>26,27 en 28 september een Beatles-concert</b> dat je niet snel zal vergeten. Misschien staat jouw keuze ook op het programma. Hou dus een plaatsje vrij in je agenda!
+        </div>
+    <!CC END IFSET [votedcookie]>
 </section>
 
 
