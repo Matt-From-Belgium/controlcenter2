@@ -21,6 +21,12 @@ try
 	{
 		$html = new htmlpage("frontend");
 		$html->LoadAddin('/modules/ticketserver/bestel.tpa');
+                $html->loadScript('/core/presentation/ajax/ajaxtransaction.js');
+                $html->loadCSS('/modules/ticketserver/tickets.css');
+                $html->loadCSS('/modules/ticketserver/postcodes/postcodeselector.css');
+                $html->setVariable("eventname",  getEventName());
+                $html->setVariable("ticketprijs", getEventPrice());
+                $html->setVariable('telefoonnr',  getTelephoneNR());
 		$html->setVariable("errorlist",$errormessages);
 		$html->setVariable("naam",$_POST['naam']);
 		$html->setVariable("email",$_POST['email']);

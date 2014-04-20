@@ -2969,4 +2969,8 @@ INSERT INTO `postcodes` (`id`, `postcode`, `gemeente`) VALUES
 
 INSERT INTO `parameters` (`id`, `name`, `value`, `overridable`) VALUES (NULL, 'TICKETS_SECMAIL', 'matthiasba@linux.be', '0');
 INSERT INTO `parameters` (`id`, `name`, `value`, `overridable`) VALUES (NULL, 'TICKETS_HERINNERING', '5', '0');
-INSERT INTO `parameters` (`id`, `name`, `value`, `overridable`) VALUES (NULL, 'TICKETS_ANNULATIE', '5', b'0');
+INSERT INTO `parameters` (`id`, `name`, `value`, `overridable`) VALUES (NULL, 'TICKETS_ANNULATIE', '5', '0');
+INSERT INTO `parameters` (`id`, `name`, `value`, `overridable`) VALUES (NULL, 'TICKETS_EVENT_NAME', 'Demo-evenement', '0');
+INSERT INTO `parameters` (`id`, `name`, `value`, `overridable`) VALUES (NULL, 'TICKETS_PRIJS', '10', '0');
+
+

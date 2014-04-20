@@ -1,11 +1,12 @@
+<script>
+var ticketprijs = <!CC VAR [ticketprijs]>;
+</script>
 <div id="inhoud">
-<link href="/modules/ticketserver/tickets.css" rel="stylesheet" type="text/css" />
-<link href="/modules/ticketserver/postcodes/postcodeselector.css" rel="stylesheet" type="text/css" />
+
 
 <h1>Reservatie</h1>
-Via deze pagina kan u tickets bestellen voor 'EQUUS'. U kan ook telefonisch reserveren op 051/501616<br />
-De Ticketprijs bedraagt <FONT COLOR="#FF6600">8 EUR per ticket</font>
-<p><b>Speciaal voor verenigingen is er een groepstarief vanaf 15 personen. Voor reservaties van 15 of meer tickets moet u contact opnemen met het secretariaat. Dan kunnen wij nagaan of u in aanmerking komt voor dit tarief.</b>
+Via deze pagina kan u tickets bestellen voor '<!CC VAR [eventname]>'. U kan ook telefonisch reserveren op <!CC VAR [telefoonnr]><br />
+De Ticketprijs bedraagt <FONT COLOR="#FF6600"><!CC VAR [ticketprijs]> EUR per ticket</font>
 <p>Van zodra u uw reservatie heeft doorgegeven ontvangt u via E-mail een bevestiging van uw reservatie. In deze mail vindt u ook het rekeningnummer waarop u kan storten. De tickets liggen op de avond van de voorstelling klaar aan de kassa.<br />
 <b>Uw reservatie is pas definitief van zodra wij de betaling ontvangen hebben</b><br />
 <div id="bestelform">
@@ -23,7 +24,7 @@ De Ticketprijs bedraagt <FONT COLOR="#FF6600">8 EUR per ticket</font>
 <br /><label for="email">E-mailadres</label><input type="text" name="email" id="email" SIZE=30 VALUE="<!CC VAR [email]>">
 <br /><label for="adres">Adres (straat + nr)</label><input type="text" name="straat" id="straat" VALUE="<!CC VAR [straat]>" SIZE=20>&nbsp;&nbsp;<input type="text" name="nummer" id="nummer" VALUE="<!CC VAR [huisnummer]>" SIZE=5>
 <input type="hidden" name="gemeente" id="gemeente" VALUE="<!CC VAR [gemeente]>" />
-<br /><label for="postcode">Postcode</label><input type="text" VALUE="<!CC VAR [postcode]>" SIZE=4 MAXLENGTH=4 onClick='javascript:veldLeegmaken(this)' onBlur="Javascript:checkGemeente()" onkeyup="javascript:haalPostcodes(this.value)" name="postcode" id="postcode">&nbsp;&nbsp;<input type="hidden" name="gemeentenaamveld" id="gemeentenaamveld" value="<!CC VAR [gemeentenaamveld]>"><span id="gemeentenaam"><!CC VAR [gemeentenaam]></span>
+<br /><label for="postcode">Postcode</label><input type="text" autocomplete='off' VALUE="<!CC VAR [postcode]>" SIZE=4 MAXLENGTH=4 onClick='javascript:veldLeegmaken(this)' onBlur="Javascript:checkGemeente()" onkeyup="javascript:haalPostcodes(this.value)" name="postcode" id="postcode">&nbsp;&nbsp;<input type="hidden" name="gemeentenaamveld" id="gemeentenaamveld" value="<!CC VAR [gemeentenaamveld]>"><span id="gemeentenaam"><!CC VAR [gemeentenaam]></span>
 
 <img src="/modules/ticketserver/reservatiegegevens.png">
 <br /><label for="aantaltickets">Aantal tickets</label><input type="text" name="aantal" id="aantal" SIZE="2" MAXLENGTH="2" value="<!CC VAR [aantal]>" onkeypress="return isNumberKey(event)" onKeyUp="berekenKost()">&nbsp;&nbsp;Totale kostprijs:&nbsp;<b><span id="kostprijs"></span>&nbsp;EUR</b>

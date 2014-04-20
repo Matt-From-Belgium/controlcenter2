@@ -29,7 +29,7 @@ function berekenKost()
 	
 	if(aantalkaarten<15)
 	{
-	var kostprijs = aantalkaarten*8;
+	var kostprijs = aantalkaarten*ticketprijs;
 	var kostprijs = new Number(kostprijs);
 	}
 	else

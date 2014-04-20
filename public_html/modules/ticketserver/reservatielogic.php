@@ -170,4 +170,29 @@ function getVoorstellingen()
 {
 	return data_getVoorstellingen();
 }
+
+function getEventName()
+{
+    $eventname = dataaccess_GetParameter('TICKETS_EVENT_NAME');
+    return $eventname->getValue();
+}
+
+function getEventPrice()
+{
+    $eventprice = dataaccess_GetParameter('TICKETS_PRIJS');
+    return $eventprice->getValue();
+}
+
+function getTelephoneNR()
+{
+    $telefoonnr = dataaccess_GetParameter('TICKETS_TELEFOONNR');
+    return $telefoonnr->getValue();
+            
+}
+
+function getZaalAdres()
+{
+    $zaaladres = dataaccess_GetParameter('TICKETS_ZAALADRES');
+    return $zaaladres->getValue();
+}
 ?>
