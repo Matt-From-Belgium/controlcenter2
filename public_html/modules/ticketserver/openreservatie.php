@@ -99,7 +99,7 @@ else
 			}
 	
 			###Totaal te betalen uitrekenen
-			$totaal = 8*$reservatie->getAantalTickets();
+			$totaal = getEventPrice()*$reservatie->getAantalTickets();
 			$html->setVariable('totaal',$totaal.' EUR');
 			
 			$html->setVariable('status',$reservatie->getStatus());

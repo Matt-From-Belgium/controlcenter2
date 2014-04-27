@@ -48,8 +48,11 @@ if($aantalherinneringen>0)
 		$mailnaarklant->setVariable('familienaam',$naam);
 		$mailnaarklant->setVariable('dagenvoorherinnering',$herinnering);
 		$mailnaarklant->setVariable('dagenvoorannulatie',$annulatie);
+                $mailnaarklant->setVariable('eventname', getEventName());
+                $mailnaarklant->setVariable('bankaccount', getBankAccount());
+                
 	
-		$prijs = $aantal * 8;
+		$prijs = $aantal * getEventPrice();
 	
 		$mailnaarklant->setVariable('prijs',$prijs);
 		$mailnaarklant->setVariable('reservatienummer',$id);

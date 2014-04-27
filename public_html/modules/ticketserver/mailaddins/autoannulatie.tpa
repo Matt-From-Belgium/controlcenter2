@@ -1,16 +1,16 @@
 <br/>Beste heer/mevrouw <!CC VAR [familienaam]>,
-<p><!CC VAR [aantaldagen]> dagen geleden hebben wij van u een reservatie ontvangen met volgende gegevens. Wij hebben, ondanks onze herinnering, nog steeds geen betaling ontvangen voor deze reservatie. Om ervoor te zorgen dat zoveel mogelijk mensen de kans krijgen om de voorstelling bij te wonen heeft ons systeem deze reservatie automatisch geannuleerd.
+<p><!CC VAR [aantaldagen]> dagen geleden hebben wij van u een reservatie ontvangen met volgende gegevens. Wij hebben, ondanks onze herinnering, nog steeds geen betaling ontvangen voor deze reservatie. Om ervoor te zorgen dat zoveel mogelijk mensen de kans krijgen om een concert bij te wonen heeft ons systeem deze reservatie automatisch geannuleerd.
 <p>
 <font face="Arial, Helvetica, sans-serif" color="#333333">
 <center><table border=0 cellspacing=0 cellpadding=0 width=450>
 <tr><td>Reservatienummer:</td><td><b><!CC VAR [reservatienummer]></b></td></tr>
-<tr><td>Voorstelling: </td><td><b>EQUUS</b></td></tr>
+<tr><td>Concert: </td><td><b><!CC VAR [eventname]></b></td></tr>
 <tr><td>Datum:</td><td><b><!CC VAR [datum]></b></td></tr>
 <tr><td>Aantal Tickets:</td><td><b><!CC VAR [aantal]></b></td></tr>
 </table></center>
 </font>
 <p>Indien u deze reservatie ondertussen betaald zou hebben mag u deze mail negeren. U zal dan alsnog een betalingsbevestiging ontvangen.
-<p>Indien u van mening bent dat deze annulatie onterecht werd uitgevoerd, kan u ons contacteren op secretariaat@detoverlantaarn.be
+<p>Indien u van mening bent dat deze annulatie onterecht werd uitgevoerd, kan u ons contacteren op <!CC VAR [adminmailadres]>
 <p>Met vriendelijke groeten,
-<p>Theater De Toverlantaarn
+<p>Projectkoor CHANTage
 <br />

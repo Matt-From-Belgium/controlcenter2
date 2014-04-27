@@ -7,7 +7,7 @@ var ticketprijs = <!CC VAR [ticketprijs]>;
 <h1>Reservatie</h1>
 Via deze pagina kan u tickets bestellen voor '<!CC VAR [eventname]>'. U kan ook telefonisch reserveren op <!CC VAR [telefoonnr]><br />
 De Ticketprijs bedraagt <FONT COLOR="#FF6600"><!CC VAR [ticketprijs]> EUR per ticket</font>
-<p>Van zodra u uw reservatie heeft doorgegeven ontvangt u via E-mail een bevestiging van uw reservatie. In deze mail vindt u ook het rekeningnummer waarop u kan storten. De tickets liggen op de avond van de voorstelling klaar aan de kassa.<br />
+<p>Van zodra u uw reservatie heeft doorgegeven ontvangt u via E-mail een bevestiging van uw reservatie. In deze mail vindt u ook het rekeningnummer waarop u kan storten. De tickets liggen op de avond van het concert klaar aan de kassa.<br />
 <b>Uw reservatie is pas definitief van zodra wij de betaling ontvangen hebben</b><br />
 <div id="bestelform">
 <p><form method='post'>
@@ -31,7 +31,7 @@ De Ticketprijs bedraagt <FONT COLOR="#FF6600"><!CC VAR [ticketprijs]> EUR per ti
 <SCRIPT TYPE="text/javascript">
 berekenKost();
 </SCRIPT>
-<br /><label for="voorstelling">Voorstelling</label><br />
+<br /><label for="voorstelling">Datum</label><br />
 <div id="voorstellingen">
 <!CC LOOP [voorstellingen]>
 	<div id='voorstelling' <!CC LVAR [disabledflag3]>><label for='voorstelling'>&nbsp;</label><input type='radio' name='voorstelling' value='<!CC LVAR [voorstellingsnummer]>' <!CC LVAR [selectedflag]> <!CC LVAR [disabledflag1]> onClick='javascript:veranderMarkering(this)' ><!CC LVAR [voorstellingstekst]> <!CC LVAR [disabledflag2]></input></div>
@@ -42,11 +42,10 @@ berekenKost();
 <select name="referral" id="referral">
 <option value="0" <!CC VAR [r0selectedflag]> >Selecteer wat past...</option>
 <option value="1" <!CC VAR [r1selectedflag]> >Ik zag een affiche</option>
-<option value="2" <!CC VAR [r1selectedflag]> >Ik zag een autosticker</option>
 <option value="4" <!CC VAR [r2selectedflag]> >Ik ontving een flyer</option>
 <option value="5" <!CC VAR [r3selectedflag]> >Via vrienden/familie</option>
 <option value="6" <!CC VAR [r4selectedflag]> >Via de krant</option>
-<option value="7" <!CC VAR [r5selectedflag]> >Via de website van De Toverlantaarn</option>
+<option value="7" <!CC VAR [r5selectedflag]> >Via de website van Projectkoor CHANTage</option>
 <option value="9" <!CC VAR [r5selectedflag]> >Via een andere website</option>
 <option value="10" <!CC VAR [r6selectedflag]> >Via Facebook</option>
 <option value="11" <!CC VAR [r5selectedflag]> >Via YouTube</option>

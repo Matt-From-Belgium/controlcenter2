@@ -27,14 +27,14 @@ function berekenKost()
 	
 	var aantalkaarten = document.getElementById('aantal').value;
 	
-	if(aantalkaarten<15)
+	if(aantalkaarten<10)
 	{
 	var kostprijs = aantalkaarten*ticketprijs;
 	var kostprijs = new Number(kostprijs);
 	}
 	else
 	{
-		alert('Vanaf 15 tickets komt u mogelijk in aanmerking voor groepskorting. Voor dergelijke reservaties moet u contact opnemen met ons secretariaat op het nummer 051/50 16 16 of 0473 44 13 16');
+		alert('Om praktische redenen kunnen bij online reservaties slechts 10 tickets tegelijkertijd gereserveerd worden. Gelieve deze reservatie telefonisch uit te voeren.');
 		document.getElementById('aantal').value=0;
 		kostprijs = new Number(0);
 	}

@@ -53,6 +53,8 @@ if($aantalannulaties>0)
 		$mailnaarklant->setVariable('aantaldagen',$totaalaantaldagen);
 		$mailnaarklant->setVariable('datum',getVoorstellingsTekst($voorstelling));
 		$mailnaarklant->setVariable('aantal',$aantal);
+                $mailnaarklant->setVariable('eventname', getEventName());
+                $mailnaarklant->setVariable('adminmailadres', getAdminmailadres());
 	
 		$prijs = $aantal * 8;
 	

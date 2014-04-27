@@ -30,7 +30,7 @@ function ValidateReservatie($postarray)
 	if(!is_array($errormessages))
 	{
 		###Totale prijs berekenen
-		$totaal = $reservatie->getAantalTickets() * 8;
+		$totaal = $reservatie->getAantalTickets() * getEventPrice();
 
 		###De functie ReservatieToevoegen schrijft de gegevens naar de databank en geeft het id terug.
 		require_once $_SERVER['DOCUMENT_ROOT'].'/modules/ticketserver/reservatiedata.php';
@@ -47,7 +47,7 @@ function ValidateReservatie($postarray)
 		$mailnaarsec = new Email("mail");
 		$mailnaarsec->setTo($secmail);
 		$mailnaarsec->setFrom($reservatie->getMailadres());
-		$mailnaarsec->setSubject("Reservatie vanop www.detoverlantaarn.be");
+		$mailnaarsec->setSubject("Nieuwe reservatie ontvangen");
 		$mailnaarsec->setVariable("reservatienummer",$reservatieid);
 		$mailnaarsec->setVariable("naam",$postarray['naam']);
 		$mailnaarsec->setVariable("voornaam",$reservatie->getVoornaam());
@@ -60,6 +60,7 @@ function ValidateReservatie($postarray)
 		
 		###Er moet een mail gestuurd worden naar de gebruiker
 		$mailnaargebruiker = new Email("mail");
+                $mailnaargebruiker->setSubject("Uw reservatie");
 		$mailnaargebruiker->setTo($postarray['email']);
 		$mailnaargebruiker->setFrom($secmail);
 		$mailnaargebruiker->setVariable("title","Reservatiebevestiging");
@@ -69,7 +70,10 @@ function ValidateReservatie($postarray)
 		$mailnaargebruiker->setVariable("aantal",$postarray['aantal']);
 		$mailnaargebruiker->setVariable("totaal",$totaal);
 		$mailnaargebruiker->setVariable("reservatienummer",$reservatieid);
-		$mailnaargebruiker->setSubject("Uw reservatie");
+		$mailnaargebruiker->setVariable('eventname', getEventName());
+                $mailnaargebruiker->setVariable('eventlocation', getZaalAdres());
+                $mailnaargebruiker->setVariable('bankaccount', getBankAccount());
+                
 		
 		###Aantal dagen voor herinneringophalen
 		$herinnering = getDagenVoorHerinnering();
@@ -99,24 +103,27 @@ function reservatieBetaald($reservatienummer)
 	$reservatie = openReservatie($reservatienummer);
 	$voorstellingstekst = getVoorstellingstekst($reservatie->getVoorstelling());
 	$secmail = getAdminmailadres();
-
+        
+        $mailnaargebruiker->setMessageAddin("/modules/ticketserver/mailaddins/betalingontvangen.tpa");
 	$mailnaargebruiker->setTo($reservatie->getMailadres());
 	$mailnaargebruiker->setFrom($secmail);
 	$mailnaargebruiker->setSubject('Uw reservatie - bevestiging van uw betaling');
-	$mailnaargebruiker->setVariable("title","Reservatiebevestiging");
+	
+        $mailnaargebruiker->setVariable("title","Reservatiebevestiging");
 	$mailnaargebruiker->setVariable("familienaam",$reservatie->getNaam());
 	$mailnaargebruiker->setVariable("voornaam",$reservatie->getVoornaam());
 	$mailnaargebruiker->setVariable("datum",$voorstellingstekst);
 	$mailnaargebruiker->setVariable("aantal",$reservatie->getAantalTickets());
 	$mailnaargebruiker->setVariable("reservatienummer",$reservatie->getId());
-	$mailnaargebruiker->setMessageAddin("/modules/ticketserver/mailaddins/betalingontvangen.tpa");
+	$mailnaargebruiker->setVariable('eventname',  getEventName());
+        $mailnaargebruiker->setVariable('eventlocation',  getZaalAdres());
+        
 	$mailnaargebruiker->Send();	
 }
 
 function reservatieAnnuleren($reservatienummer)
 {
 	require_once $_SERVER['DOCUMENT_ROOT'].'/modules/ticketserver/reservatiedata.php';
-	
 	
 	data_reservatieAnnuleren($reservatienummer);
 	
@@ -136,6 +143,9 @@ function reservatieAnnuleren($reservatienummer)
 	$mailnaargebruiker->setVariable("datum",$voorstellingstekst);
 	$mailnaargebruiker->setVariable("aantal",$reservatie->getAantalTickets());
 	$mailnaargebruiker->setVariable("reservatienummer",$reservatie->getId());
+        $mailnaargebruiker->setVariable("eventname",  getEventName());
+        $mailnaargebruiker->setVariable('adminmail', getAdminmailadres());
+        
 	$mailnaargebruiker->setMessageAddin("/modules/ticketserver/mailaddins/annulatie.tpa");
 	$mailnaargebruiker->Send();	
 }
@@ -194,5 +204,11 @@ function getZaalAdres()
 {
     $zaaladres = dataaccess_GetParameter('TICKETS_ZAALADRES');
     return $zaaladres->getValue();
+}
+
+function getBankAccount()
+{
+    $accountnr = dataaccess_GetParameter('TICKETS_BANKNR');
+    return $accountnr->getValue();
 }
 ?>
