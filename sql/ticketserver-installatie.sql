@@ -2967,10 +2967,13 @@ INSERT INTO `postcodes` (`id`, `postcode`, `gemeente`) VALUES
 (2902, 9991, 'ADEGEM'),
 (2903, 9992, 'MIDDELBURG');
 
-INSERT INTO `parameters` (`id`, `name`, `value`, `overridable`) VALUES (NULL, 'TICKETS_SECMAIL', 'matthiasba@linux.be', '0');
-INSERT INTO `parameters` (`id`, `name`, `value`, `overridable`) VALUES (NULL, 'TICKETS_HERINNERING', '5', '0');
-INSERT INTO `parameters` (`id`, `name`, `value`, `overridable`) VALUES (NULL, 'TICKETS_ANNULATIE', '5', '0');
-INSERT INTO `parameters` (`id`, `name`, `value`, `overridable`) VALUES (NULL, 'TICKETS_EVENT_NAME', 'Demo-evenement', '0');
-INSERT INTO `parameters` (`id`, `name`, `value`, `overridable`) VALUES (NULL, 'TICKETS_PRIJS', '10', '0');
-
-
+INSERT INTO `parameters` (`name`, `value`, `overridable`) VALUES
+('TICKETS_SECMAIL', 'matthiasba@linux.be', '1'),
+('TICKETS_HERINNERING', '5', '1'),
+('TICKETS_ANNULATIE', '5', '0'),
+('TICKETS_EVENT_NAME', 'Beatles-concert', '0'),
+('TICKETS_PRIJS', '10', '0'),
+('TICKETS_STARTDATE', '201304200900', '0'),
+('TICKETS_TELEFOONNR', '0495 23 11 69', '0'),
+('TICKETS_ZAALADRES', 'CC Het Kruispunt, Maria Doolaeghestraat 2b  8600 Diksmuide ', '0'),
+('TICKETS_BANKNR', 'BE00 0000 0000 0000', '0');

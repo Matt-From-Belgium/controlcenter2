@@ -211,4 +211,27 @@ function getBankAccount()
     $accountnr = dataaccess_GetParameter('TICKETS_BANKNR');
     return $accountnr->getValue();
 }
+
+function getTicketSaleStarted()
+{
+    $time_as_string = dataaccess_GetParameter('TICKETS_STARTDATE')->getValue();
+    
+    $timezone = new DateTimeZone('Europe/Brussels');
+
+    #We hebben de startdatum opgehaald en creëren nu een datetime object
+    $startdate = DateTime::createFromFormat('YmdGi', $time_as_string, $timezone);
+    
+    #We halen nu de systeemdatum op volgens onze tijdzone
+    $now = new DateTime('now', $timezone);
+    
+    if($now>$startdate)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 ?>
