@@ -65,6 +65,11 @@ function getAlbums()
       
 }
 
+function getAlbumObjects()
+{
+    return data_getAlbums();
+}
+
 function getAlbum($id)
 {
     if(is_int($id))
