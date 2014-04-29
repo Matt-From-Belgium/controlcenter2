@@ -15,7 +15,7 @@ function addAlbum()
         $response = new ajaxResponse('error');
         $response->addErrorMessage('albumnaam', 'U bent verplicht een albumnaam op te geven');
         
-        echo $response->getXML();
+        return $response->getXML();
     }
     else
     {
@@ -25,7 +25,7 @@ function addAlbum()
             $response = new ajaxResponse('error');
             $response->addErrorMessage('albumnaam', 'Er bestaat reeds een album met deze naam');
             
-            echo $response->getXML();
+            return $response->getXML();
             
         }
         else
@@ -36,7 +36,7 @@ function addAlbum()
             $id=data_albumToevoegen($newalbum);
             
             $response = new ajaxResponse('ok');
-            echo $response->getXML();
+            return $response->getXML();
         }
     }
 }
@@ -54,7 +54,7 @@ function getAlbums()
             {
                    $item = array();
                    $item['id'] = $fotoalbum->getID();
-                   $item['name']= $fotoalbum->getName();
+                   $item['name']= ucfirst($fotoalbum->getName());
 
                    $response->addData($item);
             }    
@@ -116,13 +116,51 @@ function addPhoto()
         
         #De databasefunctie geeft een gewijzigd object terug met de waarde id ingevuld
         #Deze wordt gebruikt als bestandsnaam
-        move_uploaded_file($_FILES['photopath']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/modules/fotoalbum/photos/'.$photo2->getId().'.'.$extension);
+        #Vroeger werd de file gewoon gekopieerd, maar nu willen we deze ook verkleinen
+        #Eventueel kan later nog een optie ingevoerd worden waarbij per album gekozen kan worden of afbeeldingen
+        #verkleind mogen worden
+        #move_uploaded_file($_FILES['photopath']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/modules/fotoalbum/photos/'.$photo2->getId().'.'.$extension);
+        
+        ###Origineel verkleinen tot max 1000 pixels breedte
+        switch($extension)
+        {
+            case 'jpg':
+              $source_image = imagecreatefromjpeg($_FILES['photopath']['tmp_name']);
+              $width = imagesx($source_image);
+              $height = imagesy($source_image);
+              
+              $desiredwidth= 1000;
+              
+              $desired_height = floor($height * ($desiredwidth/$width));
+              
+              $virtual_image = imagecreatetruecolor($desiredwidth, $desired_height);
+              
+              imagecopyresampled($virtual_image, $source_image, 0, 0, 0, 0, $desiredwidth, $desired_height, $width, $height);
+              imagejpeg($virtual_image,$_SERVER['DOCUMENT_ROOT'].'/modules/fotoalbum/photos/'.$photo2->getId().'.'.$extension,100);
+
+             break;
+         
+             case 'png':
+              $source_image = imagecreatefrompng($_FILES['photopath']['tmp_name']);
+              $width = imagesx($source_image);
+              $height = imagesy($source_image);
+              
+              $desiredwidth= 1000;
+              
+              $desired_height = floor($height * ($desiredwidth/$width));
+              
+              $virtual_image = imagecreatetruecolor($desiredwidth, $desired_height);
+              
+              imagecopyresampled($virtual_image, $source_image, 0, 0, 0, 0, $desiredwidth, $desired_height, $width, $height);
+              imagepng($virtual_image,$_SERVER['DOCUMENT_ROOT'].'/modules/fotoalbum/photos/'.$photo2->getId().'.'.$extension);              
+              break;
+        }
         
         ###thumbnail genereren en opslaan
         switch($extension)
         {
             case 'jpg':
-              $source_image = imagecreatefromjpeg($_SERVER['DOCUMENT_ROOT'].'/modules/fotoalbum/photos/'.$photo2->getId().'.'.$extension);
+              $source_image = imagecreatefromjpeg($_FILES['photopath']['tmp_name']);
               $width = imagesx($source_image);
               $height = imagesy($source_image);
               
@@ -138,7 +176,7 @@ function addPhoto()
              break;
          
              case 'png':
-              $source_image = imagecreatefrompng($_SERVER['DOCUMENT_ROOT'].'/modules/fotoalbum/photos/'.$photo2->getId().'.'.$extension);
+              $source_image = imagecreatefrompng($_FILES['photopath']['tmp_name']);
               $width = imagesx($source_image);
               $height = imagesy($source_image);
               
@@ -191,7 +229,7 @@ function changeDescription()
     
     ###Ajax functie: de waarden id en description komen door
     $id = intval($_POST['id']);
-    $description= $_POST['description'];
+    $description= $_POST['newdescription'];
     
     ###We halen eerst het oorspronkelijke object op
     $photoToChange = getPhotoById($id);
@@ -199,12 +237,13 @@ function changeDescription()
     ###We creëren nu een nieuw object met dezelfde gegevens, maar een andere beschrijving
     $editedPhoto= new photo($photoToChange->getAlbumId(),$photoToChange->getExtension(), $photoToChange->getId(), $description);
     
+    
     ###We sturen het nieuwe object naar de databank om het oude te vervangen
     editPhoto($editedPhoto);
     
     ###Hierna geven we bevestiging dat alles ok is
     $response = new ajaxResponse('ok');
-    $response->getXML();
+    return $response->getXML();
 }
 
 function getAlbumPhotos($id)
@@ -218,4 +257,37 @@ function getAlbumPhotos($id)
         throw new exception('$albumid must be an integer');
     }
 }
+
+function deletePhoto()
+{
+    checkPermission('fotoalbum', 'manage albums');
+    
+    ###Eerst halen we de foto op uit de databank
+    $photo = data_getPhotoById($_POST['id']);
+    
+    if($photo)
+    {
+        ###De foto is gevonden
+        ###Eerst verwijderen we de bijhorende bestanden
+        $pathToPhoto = $_SERVER['DOCUMENT_ROOT'].'/modules/fotoalbum/photos/'.$photo->getFilename();
+        $pathToThumb = $_SERVER['DOCUMENT_ROOT'].'/modules/fotoalbum/photos/'.$photo->getThumbFilename();
+        
+        unlink($pathToPhoto);
+        unlink($pathToThumb);
+        
+        ###Nu moet de foto verwijderd worden uit de databank
+        data_deletePhoto($photo);
+        
+        ##hierna moet een response gegeven worden
+        $response = new ajaxResponse('ok');
+        $response->getXML();
+    }
+    else
+    {
+        ###Er is geen foto met dat id
+        throw new Exception("Geen foto met id $id");
+    }
+    
+}
+
 ?>

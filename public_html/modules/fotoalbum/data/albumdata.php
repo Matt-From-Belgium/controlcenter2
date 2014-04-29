@@ -105,6 +105,35 @@ function data_getAlbum($id)
     }
 }
 
+function data_getAlbumByName($albumname)
+{
+    
+    if(isset($albumname))
+    {
+        $query = "SELECT albums.id FROM albums WHERE albums.name='@name'";
+        $db = new DataConnection();
+        $db->setQuery($query);
+        $db->setAttribute('name', $albumname);
+        $db->ExecuteQuery();
+        
+        if($db->GetNumRows()==1)
+        {
+            ###Het albumid is gevonden, nu gaan we het album ophalen
+            
+            return data_getAlbum(intval($db->GetScalar()));
+        }
+        else
+        {
+            throw new Exception('album $albumname does not exist');
+        }
+    }
+    else
+    {
+        throw new Exception('$albumname has no value');
+    }
+    
+}
+
 function data_addPhoto(photo $photo)
 {
     ###We voegen een rij toe in de tabel photo en vervangen de id in het object.
@@ -151,10 +180,17 @@ function data_getPhotoById($id)
     
     $db->ExecuteQuery();
     
-    $result = $db->GetResultArray();
+    if($db->GetNumRows()>0)
+    {
+        $result = $db->GetResultArray();
     
-    $photo = new photo($result[0]['album'],$result[0]['extension'],$result[0]['id'],$result[0]['description']);
-    return $photo;
+        $photo = new photo($result[0]['album'],$result[0]['extension'],$result[0]['id'],$result[0]['description']);
+        return $photo;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 function data_getAlbumPhotos($albumid)
@@ -172,22 +208,52 @@ function data_getAlbumPhotos($albumid)
         $result = $db->GetResultArray();
         $photos = Array();
         
-        foreach($result as $value)
+        if($db->GetNumRows()>0)
         {
-            $newphoto = new photo($value['album'],$value['extension'], $value['id'], $value['description']);
-            $photos[] = $newphoto;            
+            
+         foreach($result as $value)
+            {
+                $newphoto = new photo($value['album'],$value['extension'], $value['id'], $value['description']);
+                $photos[] = $newphoto;     
+                
+               
+                
+            }  
+             return $photos;
         }
+        else
+        {
+            return false;
+        }
+        
         
         ###Aan het einde van de rit geven we het array met objecten terug
         
         ###DEBUG
         /*print_r($photos);*/
         
-        return $photos;
+        
     }
     else
     {
         throw new exception('$albumid must be an integer');
     }
 }
+
+function data_deletePhoto($photo)
+{
+    if($photo instanceof photo)
+    {
+        $query = 'DELETE FROM photos where id=@id';
+        $db = new DataConnection();
+        $db->setQuery($query);
+        $db->setAttribute('id', $photo->getId());
+        $db->ExecuteQuery();
+    }
+    else
+    {
+        throw new Exception('$hoto moet instantie zijn van photo');
+    }
+}
+
 ?>
