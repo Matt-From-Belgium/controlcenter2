@@ -6,10 +6,33 @@
 <!CC END LOOP [errorlist]>
 </UL>
 <!CC END IFSET [errorlist]>
-
+<!CC IFSET [fbloginlink]>
+<h3><a href='<!CC VAR [fbloginlink]>'>Login met je Facebook-account</a></h3>
+<!CC END IFSET [fbloginlink]>
 <form method="post">
+
 <input type="hidden" name="d" value="<!CC VAR [d]>">
 <label for="u"><!CC LANG [LANG_USERNAME]></label><input type="text" name="u"><br />
 <label for="p"><!CC LANG [LANG_PASSWORD]></label><input type="password" name="p"><br />
 <input type="submit" name="submit" value="<!CC LANG [LANG_LOGIN]>">
 </form>
+<script>
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+
+function redirectAfterLogin()
+{
+    
+    var destination = getParameterByName('d');
+    window.location.assign(destination);
+}
+
+//Wanneer de gebruiker met facebook ingelogd wordt moeten we de pagina opnieuw proberen te laden
+document.addEventListener('userLoggedIn',redirectAfterLogin,false);
+
+</script>

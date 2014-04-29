@@ -4,6 +4,9 @@
 
 require_once $_SERVER['DOCUMENT_ROOT']."/core/logic/usermanagement/userfunctions.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/core/templatesystem/templatesystem.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/core/logic/parameters.php";
+
+
 
 ###Dit script gaat na of de aangeleverde parameters correct zijn
 ###Indien de logingegevens correct zijn worden de gebruikersgegevens opgehaald en opgeslagen in
@@ -28,9 +31,43 @@ if(isset($_POST['u']))
 ###Wanneer een gebruiker een pagina probeert te openen die beveiligd is terwijl hij/zij niet ingelogd is.
 if((!isset($_POST['u']))&&(!isset($_POST['p']))&&(!isset($_POST['d'])))
 {
-	###Het script wordt rechtstreeks ingeladen => loginpagina weergeven.
-	$html = new HTMLpage('frontend');
-	$html->LoadAddin('/core/presentation/usermanagement/accounts/addins/login.tpa');
+        ###Het script wordt rechtstreeks ingeladen => loginpagina weergeven.
+        $html = new HTMLpage('frontend');
+        $html->LoadAddin('/core/presentation/usermanagement/accounts/addins/login.tpa');
+
+    
+        ###We geven login links voor sociale netwerken een lege waarde, worden later opgevuld;
+        $fbloginlink = null;
+    
+        if(getFacebookLoginStatus())
+        {
+            require_once $_SERVER['DOCUMENT_ROOT'].'/core/social/facebook/php/facebook.php';
+            
+            ###Als Facebook login mogelijk is dan genereren we een login link 
+            $fbscope = getFacebookScope();
+            $config = array();
+
+            $config['appId'] = getFacebookAppID();
+            $config['secret'] = getFacebookSappId();
+            
+            ###Als er een bestemmingspagina werd meegegeven moet deze ook doorgegeven worden
+            
+            $redirect = 'http://'.$_SERVER['HTTP_HOST'].'/core/logic/usermanagement/fblogincallback.php?d='.$_GET['d'];
+            
+
+            $params = array(
+            'scope' => $fbscope,
+            'redirect_uri' => $redirect
+            );        
+
+            $facebook = new Facebook($config);
+
+            $fbloginlink = $facebook->getLoginUrl($params);
+            $html->setVariable('fbloginlink', $fbloginlink);
+        }
+        
+        
+    
 	
 	###Als het script rechtstreeks wordt geladen dan wordt de gebruiker gewoon terug naar de hoofdpagina geleid. Als een ander script
 	###doorverwijst naar deze pagina (bijvoorbeeld wanneer er moet ingelogd worden om een pagina te bekijken dan kan de waarde $_GET['d']

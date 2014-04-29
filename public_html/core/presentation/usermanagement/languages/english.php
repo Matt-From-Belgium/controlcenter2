@@ -39,6 +39,10 @@ define('LANG_ERROR_WRONGLOGIN',"Invalid username and/or password");
 define('LANG_ERROR_NEWPASSWORD_REQUIRED',"Your new password must differ from the previous one");
 define('LANG_ERROR_NEWPASS_EMPTY',"You must provide a new password");
 define('LANG_ERROR_PASSWORD_INCORRECT',"The current password you supplied is incorrect");
+define('LANG_ERROR_FACEBOOK_DUPLICATE_ID',"We already have an account linked to your Facebook account");
+define('LANG_ERROR_EXTREG_DISABLED_HEADER',"Account creation disabled");
+define('LANG_ERROR_EXTREG_DISABLED_MESSAGE',"It is not allowed to create an account. Please contact the administrator");
+
 
 
 #OTHER MESSAGES
@@ -123,7 +127,7 @@ define('LANG_COUNTRY_KM',"Comoros");
 define('LANG_COUNTRY_CG',"Congo");
 define('LANG_COUNTRY_CK',"Cook Islands");
 define('LANG_COUNTRY_CR',"Costa Rica");
-define('LANG_COUNTRY_CI',"Côte d'Ivoire");
+define('LANG_COUNTRY_CI',"Cï¿½te d'Ivoire");
 define('LANG_COUNTRY_HR',"Croatia");
 define('LANG_COUNTRY_CU',"Cuba");
 define('LANG_COUNTRY_CY',"Cyprus");
@@ -249,11 +253,11 @@ define('LANG_COUNTRY_PL',"Poland");
 define('LANG_COUNTRY_PT',"Portugal");
 define('LANG_COUNTRY_PR',"Puerto Rico");
 define('LANG_COUNTRY_QA',"Quatar");
-define('LANG_COUNTRY_RE',"Réunion");
+define('LANG_COUNTRY_RE',"Rï¿½union");
 define('LANG_COUNTRY_RO',"Romania");
 define('LANG_COUNTRY_RU',"Russian Federation");
 define('LANG_COUNTRY_RW',"Rwanda");
-define('LANG_COUNTRY_BL',"Saint Barthélemy");
+define('LANG_COUNTRY_BL',"Saint Barthï¿½lemy");
 define('LANG_COUNTRY_SH',"Saint Helena");
 define('LANG_COUNTRY_KN',"Saint Kitts and Nevis");
 define('LANG_COUNTRY_LC',"Lucia");
