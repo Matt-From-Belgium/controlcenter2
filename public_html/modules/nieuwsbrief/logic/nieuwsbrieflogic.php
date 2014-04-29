@@ -12,7 +12,6 @@ function abonneeToevoegen(abonnee $abonnee)
 	$errormessages = $validator->validateObject($abonnee);
 	if(count($errormessages)==0)
 	{
-		echo "alles ok";
 		
 		###We voegen de abonnee toe aan de databank
 		$nieuweabonnee = data_createAbonnee($abonnee);
