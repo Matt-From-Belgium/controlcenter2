@@ -66,6 +66,11 @@ h2 {
     margin-bottom: 0.25em;  
 }
 
+li h2 {
+    margin-top: 0;
+    display: inline;
+}
+
 h3 {
     font-size: 1em;
     color: #615F61;
