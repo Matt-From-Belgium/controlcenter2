@@ -13,6 +13,7 @@ De Ticketprijs bedraagt <FONT COLOR="#FF6600"><!CC VAR [ticketprijs]> EUR per ti
 <p><form method='post'>
 <!CC IFSET [errorlist]>
 <UL id="berichtvalidator" class="errorbox">
+<h2>Uw reservatie kon niet geregistreerd worden:</h2>
 <!CC LOOP [errorlist]>
 <li id='<!CC LVAR [fieldname]>'><!CC LVAR [message]></li>
 <!CC END LOOP [errorlist]>
