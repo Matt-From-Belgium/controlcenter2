@@ -1,0 +1,21 @@
+<h1>Rapport</h1>
+<h2>Samenvatting</h2>
+<table BORDER=1 CELLSPACING=0>
+<!CC LOOP [samenvatting]>
+<tr><td width= 150><!CC LVAR [status]></td><td><!CC LVAR [count]> tickets</td></tr>
+<!CC END LOOP [samenvatting]>
+</table>
+<h2>Overzicht definitieve reservaties</h2>
+<table BORDER=1 CELLSPACING=0>
+<tr><th>Reservatienummer</th><th>Naam</th><th>Voornaam</th><th>Aantal Tickets</th><th>Mailadres</th></tr>
+<!CC LOOP [definitief]>
+<tr><td><!CC LVAR [id]></td><td><!CC LVAR [naam]></td><td><!CC LVAR [voornaam]></td><td align='right'><!CC LVAR [aantal]> tickets</td><td><!CC LVAR [mail]></td></tr>
+<!CC END LOOP [definitief]>
+</table>
+<h2>Verdeling per gemeente</h2>
+<table BORDER=1 CELLSPACING=0>
+    <tr><th>gemeente</th><th>Aantal verkochte tickets</th></tr>
+    <!CC LOOP [gemeenten]>
+        <tr><td><!CC LVAR [gemeente]></td><td align='right'><!CC LVAR [count]> tickets</td></tr>
+    <!CC END LOOP [gemeenten]>
+</table>
