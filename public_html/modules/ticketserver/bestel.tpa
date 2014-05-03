@@ -57,3 +57,6 @@ berekenKost();
 </form>
 </div>
 </div>
+    <script>
+        createDiv();
+    </script>
