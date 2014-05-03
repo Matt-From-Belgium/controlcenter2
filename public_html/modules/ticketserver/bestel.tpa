@@ -39,7 +39,7 @@ berekenKost();
 <!CC END LOOP [voorstellingen]>
 </div>
 
-<br /><br /><label for="refer">Hoe hoorde u van onze voorstelling<?</label>
+<br /><br /><label for="refer">Hoe hoorde u van ons concert<?</label>
 <select name="referral" id="referral">
 <option value="0" <!CC VAR [r0selectedflag]> >Selecteer wat past...</option>
 <option value="1" <!CC VAR [r1selectedflag]> >Ik zag een affiche</option>
