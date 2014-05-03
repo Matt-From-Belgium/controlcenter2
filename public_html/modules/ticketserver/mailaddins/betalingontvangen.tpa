@@ -1,0 +1,19 @@
+<br/>Beste heer/mevrouw <!CC VAR [familienaam]>,
+<p>Wij hebben de betaling ontvangen voor onderstaande reservatie
+<p>
+<font face="Arial, Helvetica, sans-serif" color="#333333">
+<center><table border=0 cellspacing=0 cellpadding=0 width=450>
+<tr><td>Reservatienummer:</td><td><b><!CC VAR [reservatienummer]></b></td></tr>
+<tr><td>Concert: </td><td><b><!CC VAR [eventname]></b></td></tr>
+<tr><td>Locatie:</td><td><b><!CC VAR [eventlocation]></b></td></tr>
+<tr><td>Datum:</td><td><b><!CC VAR [datum]></b></td></tr>
+<tr><td>Aantal Tickets:</td><td><b><!CC VAR [aantal]></b></td></tr>
+</table></center>
+</font>
+<p>Uw reservatie is nu definitief. Uw tickets liggen de avond van uw keuze klaar aan de ingang.
+<p>Wij danken u voor uw interesse en wensen u alvast een aangename voorstelling,
+<p>Projectkoor CHANTage
+<br />
+<br />
+<i>Deze mail geldt niet als toegangsbewijs</i>
+<br />

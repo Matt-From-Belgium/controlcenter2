@@ -1,0 +1,59 @@
+<script>
+var ticketprijs = <!CC VAR [ticketprijs]>;
+</script>
+<div id="inhoud">
+
+
+<h1>Reservatie</h1>
+Via deze pagina kan u tickets bestellen voor '<!CC VAR [eventname]>'. U kan ook telefonisch reserveren op <!CC VAR [telefoonnr]><br />
+De Ticketprijs bedraagt <FONT COLOR="#FF6600"><!CC VAR [ticketprijs]> EUR per ticket</font>
+<p>Van zodra u uw reservatie heeft doorgegeven ontvangt u via E-mail een bevestiging van uw reservatie. In deze mail vindt u ook het rekeningnummer waarop u kan storten. De tickets liggen op de avond van het concert klaar aan de kassa.<br />
+<b>Uw reservatie is pas definitief van zodra wij de betaling ontvangen hebben</b><br />
+<div id="bestelform">
+<p><form method='post'>
+<!CC IFSET [errorlist]>
+<UL id="berichtvalidator" class="errorbox">
+<!CC LOOP [errorlist]>
+<li id='<!CC LVAR [fieldname]>'><!CC LVAR [message]></li>
+<!CC END LOOP [errorlist]>
+</UL>
+<!CC END IFSET [errorlist]>
+<img src="/modules/ticketserver/persoonlijkegegevens.png">
+<br /><label for="familienaam">Naam</label><input type="text" name="naam" id="naam" value="<!CC VAR [naam]>" SIZE=30>
+<br /><label for="voornaam">Voornaam</label><input type="text" name="voornaam" id="voornaam" SIZE=30 value="<!CC VAR [voornaam]>">
+<br /><label for="email">E-mailadres</label><input type="text" name="email" id="email" SIZE=30 VALUE="<!CC VAR [email]>">
+<br /><label for="adres">Adres (straat + nr)</label><input type="text" name="straat" id="straat" VALUE="<!CC VAR [straat]>" SIZE=20>&nbsp;&nbsp;<input type="text" name="nummer" id="nummer" VALUE="<!CC VAR [huisnummer]>" SIZE=5>
+<input type="hidden" name="gemeente" id="gemeente" VALUE="<!CC VAR [gemeente]>" />
+<br /><label for="postcode">Postcode</label><input type="text" autocomplete='off' VALUE="<!CC VAR [postcode]>" SIZE=4 MAXLENGTH=4 onClick='javascript:veldLeegmaken(this)' onBlur="Javascript:checkGemeente()" onkeyup="javascript:haalPostcodes(this.value)" name="postcode" id="postcode">&nbsp;&nbsp;<input type="hidden" name="gemeentenaamveld" id="gemeentenaamveld" value="<!CC VAR [gemeentenaamveld]>"><span id="gemeentenaam"><!CC VAR [gemeentenaam]></span>
+
+<img src="/modules/ticketserver/reservatiegegevens.png">
+<br /><label for="aantaltickets">Aantal tickets</label><input type="text" name="aantal" id="aantal" SIZE="2" MAXLENGTH="2" value="<!CC VAR [aantal]>" onkeypress="return isNumberKey(event)" onKeyUp="berekenKost()">&nbsp;&nbsp;Totale kostprijs:&nbsp;<b><span id="kostprijs"></span>&nbsp;EUR</b>
+<SCRIPT TYPE="text/javascript">
+berekenKost();
+</SCRIPT>
+<br /><label for="voorstelling">Datum</label><br />
+<div id="voorstellingen">
+<!CC LOOP [voorstellingen]>
+	<div id='voorstelling' <!CC LVAR [disabledflag3]>><label for='voorstelling'>&nbsp;</label><input type='radio' name='voorstelling' value='<!CC LVAR [voorstellingsnummer]>' <!CC LVAR [selectedflag]> <!CC LVAR [disabledflag1]> onClick='javascript:veranderMarkering(this)' ><!CC LVAR [voorstellingstekst]> <!CC LVAR [disabledflag2]></input></div>
+<!CC END LOOP [voorstellingen]>
+</div>
+
+<br /><br /><label for="refer">Hoe hoorde u van onze voorstelling<?</label>
+<select name="referral" id="referral">
+<option value="0" <!CC VAR [r0selectedflag]> >Selecteer wat past...</option>
+<option value="1" <!CC VAR [r1selectedflag]> >Ik zag een affiche</option>
+<option value="4" <!CC VAR [r2selectedflag]> >Ik ontving een flyer</option>
+<option value="5" <!CC VAR [r3selectedflag]> >Via vrienden/familie</option>
+<option value="6" <!CC VAR [r4selectedflag]> >Via de krant</option>
+<option value="7" <!CC VAR [r5selectedflag]> >Via de website van Projectkoor CHANTage</option>
+<option value="9" <!CC VAR [r5selectedflag]> >Via een andere website</option>
+<option value="10" <!CC VAR [r6selectedflag]> >Via Facebook</option>
+<option value="11" <!CC VAR [r5selectedflag]> >Via YouTube</option>
+<option value="13" <!CC VAR [r5selectedflag]> >Via Twitter</option>
+<option value="14">Andere</option>
+</select>
+<br /><label for="opmerkingen">Opmerkingen</label><textarea cols=30 rows=5 name="opmerkingen" id="opmerkingen"><!CC VAR [opmerkingen]></textarea>
+<p><input type="submit" name="submit" value="Reserveer mijn tickets"> <input type="reset" value="Begin opnieuw">
+</form>
+</div>
+</div>
