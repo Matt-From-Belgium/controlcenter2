@@ -26,8 +26,8 @@ De Ticketprijs bedraagt <FONT COLOR="#FF6600"><!CC VAR [ticketprijs]> EUR per ti
 <input type="hidden" name="gemeente" id="gemeente" VALUE="<!CC VAR [gemeente]>" />
 <br /><label for="postcode">Postcode</label><input type="text" autocomplete='off' VALUE="<!CC VAR [postcode]>" SIZE=4 MAXLENGTH=4 onClick='javascript:veldLeegmaken(this)' onBlur="Javascript:checkGemeente()" onkeyup="javascript:haalPostcodes(this.value)" name="postcode" id="postcode">&nbsp;&nbsp;<input type="hidden" name="gemeentenaamveld" id="gemeentenaamveld" value="<!CC VAR [gemeentenaamveld]>"><span id="gemeentenaam"><!CC VAR [gemeentenaam]></span>
 
-<img src="/modules/ticketserver/reservatiegegevens.png">
-<br /><label for="aantaltickets">Aantal tickets</label><input type="text" name="aantal" id="aantal" SIZE="2" MAXLENGTH="2" value="<!CC VAR [aantal]>" onkeypress="return isNumberKey(event)" onKeyUp="berekenKost()">&nbsp;&nbsp;Totale kostprijs:&nbsp;<b><span id="kostprijs"></span>&nbsp;EUR</b>
+<p><img src="/modules/ticketserver/reservatiegegevens.png">
+<br /><label for="aantaltickets">Aantal tickets</label><input type="text" autocomplete=off name="aantal" id="aantal" SIZE="2" MAXLENGTH="2" value="<!CC VAR [aantal]>" onkeypress="return isNumberKey(event)" onKeyUp="berekenKost()">&nbsp;&nbsp;Totale kostprijs:&nbsp;<b><span id="kostprijs"></span>&nbsp;EUR</b>
 <SCRIPT TYPE="text/javascript">
 berekenKost();
 </SCRIPT>
