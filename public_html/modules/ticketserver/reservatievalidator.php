@@ -71,7 +71,7 @@ class reservatievalidator extends validator
 				if($value >= 15)
 				{
 					$returnmessage['field']="aantal";
-					$returnmessage['message'] = "Vanaf 15 tickets komt u mogelijk in aanmerking voor het groepstarief. Om die reden moeten reservaties vanaf 15 kaarten telefonisch gebeuren via het nummer 051/501616. U kan ook mailen naar secretariaat@detoverlantaarn.be";
+					$returnmessage['message'] = "U kan maximaal 10 tickets bestellen per reservatie";
 					return $returnmessage;
 				}
 			}
@@ -83,7 +83,7 @@ class reservatievalidator extends validator
 		if($value=="")
 		{
 			$returnmessage['field']="voorstelling";
-			$returnmessage['message']="U moet een voorstelling kiezen";
+			$returnmessage['message']="U moet een datum kiezen";
 			return $returnmessage;
 		}
 	}
@@ -93,7 +93,7 @@ class reservatievalidator extends validator
 		if($value == 0)
 		{
 			$returnmessage['field']="referral";
-			$returnmessage['message']="Gelieve aan te duiden hoe u van deze voorstelling gehoord heeft";
+			$returnmessage['message']="Gelieve aan te duiden hoe u van dit evenement gehoord heeft";
 			return $returnmessage;
 		}
 	}
