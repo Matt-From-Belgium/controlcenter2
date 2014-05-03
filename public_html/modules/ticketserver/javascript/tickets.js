@@ -27,7 +27,7 @@ function berekenKost()
 	
 	var aantalkaarten = document.getElementById('aantal').value;
 	
-	if(aantalkaarten<10)
+	if(aantalkaarten<=10)
 	{
 	var kostprijs = aantalkaarten*ticketprijs;
 	var kostprijs = new Number(kostprijs);
