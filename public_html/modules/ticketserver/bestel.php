@@ -26,6 +26,9 @@ if(getTicketSaleStarted())
                     $html = new htmlpage("frontend");
                     $html->LoadAddin('/modules/ticketserver/bestel.tpa');
                     $html->loadScript('/core/presentation/ajax/ajaxtransaction.js');
+                    $html->loadScript('/modules/ticketserver/javascript/tickets.js');
+                    $html->loadScript('/modules/ticketserver/postcodes/postcodes.js');
+                    $html->loadScript('/core/logic/common.js');
                     $html->loadCSS('/modules/ticketserver/tickets.css');
                     $html->loadCSS('/modules/ticketserver/postcodes/postcodeselector.css');
                     $html->setVariable("eventname",  getEventName());
