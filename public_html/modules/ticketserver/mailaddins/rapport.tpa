@@ -2,7 +2,7 @@
 <h2>Samenvatting</h2>
 <table BORDER=1 CELLSPACING=0>
 <!CC LOOP [samenvatting]>
-<tr><td width= 150><!CC LVAR [status]></td><td><!CC LVAR [count]> tickets</td></tr>
+<tr><td width= 300><!CC LVAR [status]></td><td><!CC LVAR [count]> tickets</td></tr>
 <!CC END LOOP [samenvatting]>
 </table>
 <h2>Overzicht definitieve reservaties</h2>
