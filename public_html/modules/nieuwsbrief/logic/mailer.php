@@ -1,4 +1,8 @@
 <?php
+$directoryvanditscript = dirname(__FILE__);
+$directoryvanditscript = explode('/modules',$directoryvanditscript);
+$_SERVER['DOCUMENT_ROOT']=$directoryvanditscript[0];
+
 ###Cron: gaat na welke nieuwsbrieven nog moeten verstuurd worden en genereert en verstuurt de mails
 
 require_once $_SERVER['DOCUMENT_ROOT'].'/core/email/email.php';
@@ -11,6 +15,7 @@ $nieuwsbrieven = data_getNieuwsbrieven();
 ###Stap2: filteren welke nieuwsbrieven nog niet verstuurd werden
 $teversturen = array();
 
+echo "Versturen van nieuwsbrieven gestart<br>";
 
 foreach($nieuwsbrieven as $nieuwsbrief)
 {
@@ -28,6 +33,7 @@ foreach($teversturen as $nieuwsbrief)
     /*SELECT * from nieuwsbrieven LEFT JOIN nieuwsbriefabonnementen ON nieuwsbrieven.id = nieuwsbriefabonnementen.nieuwsbrief LEFT JOIN abonnementenlink ON nieuwsbriefabonnementen.abonnement = abonnementenlink.abonnement LEFT JOIN abonnees ON abonnees.id=abonnementenlink.abonnee WHERE nieuwsbrieven.id=1*/    
     if($abonnees = data_getNieuwsbriefAbonnees($nieuwsbrief))
     {
+            echo "Nieuwsbrief ".$nieuwsbrief->getTitel()." wordt verstuurd aan ". count($abonnees) . " abonnees";
             ###Nu moeten we de nieuwsbrief versturen naar iedere abonnee
             foreach($abonnees as $abonnee)
             {

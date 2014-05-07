@@ -313,11 +313,11 @@ input[type='button']:active,input[type='submit']:active, select:active
 
 #siteNews {
     height: 20em;
-    
+    background: url('/images/index-beeld.jpg');
+    background-size: cover;
     background-color: #90CA77;
     margin-left: -2em;
     padding-left: 2em;
-    
     width: 100%;
 }
 
@@ -325,17 +325,34 @@ input[type='button']:active,input[type='submit']:active, select:active
     display: block;
     width: 50%;
     height: 100%;
-    padding-top: 2.5em;
+    padding-top: 6em;
     margin-left: auto;
     margin-right: auto;
 }
 
 .newsItem h1{
-    color: #FFFFFF;
+    color: #615F61;
     margin: 0px;
     padding: 0px;
 }
 
 #mobileMenu {
     display: none;
+}
+
+.publicaties {
+    position: relative;
+    display: block;
+}
+
+.publicatie img {
+    float: left;
+    margin-right: 1.5em;
+    width: 9em;
+}
+
+
+
+.clearfix {
+    clear: both;
 }
