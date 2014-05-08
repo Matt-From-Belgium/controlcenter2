@@ -28,6 +28,7 @@ if(getTicketSaleStarted())
                     $html->loadScript('/core/presentation/ajax/ajaxtransaction.js');
                     $html->loadScript('/modules/ticketserver/javascript/tickets.js');
                     $html->loadScript('/modules/ticketserver/postcodes/postcodes.js');
+                    $html->loadScript('/core/presentation/usermanagement/accounts/fbRegister.final.js');
                     $html->loadScript('/core/logic/common.js');
                     $html->loadCSS('/modules/ticketserver/tickets.css');
                     $html->loadCSS('/modules/ticketserver/postcodes/postcodeselector.css');
