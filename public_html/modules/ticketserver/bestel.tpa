@@ -54,6 +54,7 @@ berekenKost();
 <option value="14">Andere</option>
 </select>
 <br /><label for="opmerkingen">Opmerkingen</label><textarea cols=30 rows=5 name="opmerkingen" id="opmerkingen"><!CC VAR [opmerkingen]></textarea>
+<div id='delenopFB'><input type='checkbox' onClick='enableShareBox(event)' id='shareOnFB' name='shareOnFB'><img src='/modules/ticketserver/images/fb_klein.png'> Delen op Facebook</div>
 <p><input type="submit" name="submit" value="Reserveer mijn tickets"> <input type="reset" value="Begin opnieuw">
 </form>
 </div>

@@ -1,3 +1,5 @@
+document.addEventListener('fbSDKLoaded',enableShareBoxOnLoad,false);
+
 // JavaScript Document
 function veranderMarkering(ditelement)
 {
@@ -53,4 +55,42 @@ function isNumberKey(evt)
 		{
         return true;
 		}
+}
+
+//Facebook functionaliteit
+function enableShareBoxOnLoad(e)
+{
+    if(e.detail.status==='connected'){
+        //Er is verbinding maar kunnen we acties publiceren?
+        if(e.detail.grantedPermissions.indexOf('publish_actions')>=0)
+        {
+            //Toegang is ok => checkbox standaard aanvinken
+            document.getElementById('shareOnFB').checked=true;
+        }
+        else
+        {
+            document.getElementById('shareOnFB').checked=false;
+        }
+    }
+}
+
+function enableShareBox(e)
+{
+    //enkel als de checkbox aangevinkt wordt mag er ingegrepen worden op het browsergedrag
+    if(document.getElementById('shareOnFB').checked===true)
+    {
+        
+        
+    registerWithFacebook(function(){
+        //Gebruiker geeft toegang
+        document.getElementById('shareOnFB').checked=true;
+        document.location.href='#beatlesvote';
+    },'publish_actions',function(){
+        //Gebruiker geeft geen toegang
+        document.getElementById('shareOnFB').checked=false;
+    });
+    
+    e.preventDefault;
+    return false;
+    }
 }
