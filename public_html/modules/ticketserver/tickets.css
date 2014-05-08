@@ -42,3 +42,24 @@ UL.errorbox {
 .uitverkocht {
 	color:#666666;
 }
+
+#delenopFB {
+    vertical-align: middle;
+    height: 3em;
+    width: 30em;
+    margin-top: 2em;
+    font-weight: 500;
+}
+
+#delenopFB img {
+    vertical-align: middle;
+}
+
+#delenopFB  input{
+    vertical-align: middle;
+}
+
+#shareOnFB {
+    height: 1.5em;
+    width: 1.5em;
+}
