@@ -12,13 +12,62 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/modules/ticketserver/reservatielogic.ph
 
 $db = new DataConnection();
 
-$querysamenvatting = "SELECT tickets.status,sum(tickets.aantal) as 'count' from tickets group by tickets.status";
-$db->setQuery($querysamenvatting);
+
+
+$queryvoorstellingen = "SELECT voorstellingen.id,voorstellingen.datumtijd from voorstellingen";
+$db->setQuery($queryvoorstellingen);
 $db->ExecuteQuery();
-$samenvattingsarray = $db->GetResultArray();
+
+$voorstellingsarray= array();
+$result = $db->GetResultArray();
+
+
+foreach($result as $value)
+{
+    $nieuwevoorstelling = array();
+    $nieuwevoorstelling['tekst']=$value['datumtijd'];
+    
+    $ticketsvoorstelling = "select tickets.status,sum(tickets.aantal) as 'count' from tickets where tickets.voorstelling=@voorstellingid GROUP BY tickets.status ";
+    $db2 = new DataConnection();
+    $db2->setQuery($ticketsvoorstelling);
+    $db2->setAttribute('voorstellingid', $value['id']);
+    $db2->ExecuteQuery();
+    
+    $voorstellingsinfo = $db2->GetResultArray();
+    
+    $statusoverzicht = array();
+    $statusoverzicht['Definitief']=0;
+    $statusoverzicht['Wacht op betaling'] =0;
+    $statusoverzicht['Wacht op betaling (herinnering verstuurd)'] = 0;
+    $statusoverzicht['Automatisch geannuleerd'] = 0;
+    $statusoverzicht['Manueel geannuleerd']=0;
+            
+    foreach($voorstellingsinfo as $info)
+    {
+        $statusoverzicht[$info['status']]= $info['count'];
+    }
+    
+    //Door het ENUM gebruik in de database moeten we hier knoeien om een correcte array te krijgen
+    //We hebben nu een array $statusoverzicht[status] maar we moeten een array krijgen met numerieke keys
+    //Daarom gaan we deze array nu doorlopen, op die manier worden de waarden in de juiste volgorde in de array geplaatst
+    
+    $aantalticketsoverzicht = array();
+    
+    foreach($statusoverzicht as $overzicht)
+    {
+        $nieuwevoorstelling['status'][]['aantal'] = $overzicht;
+    }
+    
+    print_r($nieuwevoorstelling);
+    
+    $voorstellingsarray[] = $nieuwevoorstelling;
+}
+
+
+
 
 ###Overzicht genereren van definitieve reservaties
-$queryDefinitieveReservaties = "select tickets.id,tickets.naam,tickets.voornaam,tickets.aantal,tickets.mail from tickets where tickets.status='Definitief'";
+$queryDefinitieveReservaties = "select tickets.id,voorstellingen.datumtijd,tickets.naam,tickets.voornaam,tickets.aantal,tickets.mail from tickets left join voorstellingen ON tickets.voorstelling = voorstellingen.id where tickets.status='Definitief' order by tickets.voorstelling";
 $db->setQuery($queryDefinitieveReservaties);
 $db->ExecuteQuery();
 
@@ -39,7 +88,7 @@ $rapport->setTo($secmail);
 $rapport->setMessageAddin('/modules/ticketserver/mailaddins/rapport.tpa');
 $rapport->setSubject('Rapport ticketverkoop');
 
-$rapport->setVariable('samenvatting', $samenvattingsarray);
+$rapport->setVariable('samenvatting', $voorstellingsarray);
 $rapport->setVariable('definitief', $definitievereservaties);
 $rapport->setVariable('gemeenten', $gemeenteverdeling);
 
