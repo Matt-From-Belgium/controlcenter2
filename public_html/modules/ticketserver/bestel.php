@@ -2,6 +2,7 @@
 require_once $_SERVER['DOCUMENT_ROOT']."/core/templatesystem/templatesystem.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/modules/ticketserver/reservatielogic.php";
 require_once $_SERVER['DOCUMENT_ROOT'].'/core/presentation/general/commonfunctions.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/core/social/facebook/php/facebook.php';
 
 if(getTicketSaleStarted())
 {
