@@ -2976,4 +2976,5 @@ INSERT INTO `parameters` (`name`, `value`, `overridable`) VALUES
 ('TICKETS_STARTDATE', '201304200900', '0'),
 ('TICKETS_TELEFOONNR', '0495 23 11 69', '0'),
 ('TICKETS_ZAALADRES', 'CC Het Kruispunt, Maria Doolaeghestraat 2b  8600 Diksmuide ', '0'),
+('TICKETS_FB_CONCERTURL', 'http://www.projectkoorchantage.be/beatles.php', '0'),
 ('TICKETS_BANKNR', 'BE00 0000 0000 0000', '0');
