@@ -6,9 +6,6 @@
 document.addEventListener('fbSDKLoaded',showFriendsOnLoad,false);
 document.addEventListener('fbSDKLoaded',enableShareBoxOnLoad,false);
 
-
-window.setInterval(function(){updateTicketTimer();},1000);
-
 function showFriendsOnLoad(e)
 {
     if(e.detail.status==="connected")
@@ -58,7 +55,7 @@ function enableShareBox(e)
 
 function updateTicketTimer()
 {
-    var endDate = new Date(2014, 5, 1, 10);
+    var endDate = new Date(2014, 5, 1, 9);
     //var endDate = new Date(2014,2,14,7,46);
     
     

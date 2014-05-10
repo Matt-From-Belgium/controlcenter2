@@ -192,3 +192,8 @@ b {
 #inviteButton {
     display: none;
 }
+
+#ticketcountdown h1,#ticketbutton h1 {
+    font-size: 3em;
+}
+

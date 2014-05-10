@@ -526,7 +526,7 @@ hr {
     font-size: 1.2em;
 }
 
-#ticketcountdown {
+#ticketcountdown,#ticketbutton {
     background:#b39f85;
     font-size: 1em;
     height: 3em;
@@ -535,12 +535,16 @@ hr {
     margin-bottom: 0.5em;
 }
 
-#ticketcountdown h1 {
+#ticketcountdown h1,#ticketbutton h1 {
     color:#ebe4da;
     font-size: 1.5em;
     margin-top: 0em;
 }
 
+#ticketbutton:hover {
+    background-color: #357d82;
+    cursor:  pointer;
+}
 .friendimg {
     border-radius: 4.7em;
     border-style: solid;
@@ -660,7 +664,8 @@ input[type='radio'] {
 
 #top5Container {
     float:left;
-    width: 50%;
+    width: 45%;
+    
     
     
 }
@@ -670,6 +675,10 @@ input[type='radio'] {
     margin-bottom: 0.5em;
     margin-left: 0.5em;
     font-weight:  100;
+}
+
+.beatlesChart:hover {
+    background-color: #ebe4da;
 }
 
 .beatlesChart h1 {

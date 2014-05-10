@@ -1,6 +1,8 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'].'/core/templatesystem/templatesystem.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/scripts/beatleslogic.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/modules/ticketserver/reservatielogic.php';
+
 
 
 $fbAppId = getFacebookAppID();
@@ -8,7 +10,15 @@ $fbNameSpace = getFacebookNameSpace();
 
 
 $html = new htmlpage('frontend');
-$html->LoadAddin('/addins/beatles.tpa');
+
+if(!getTicketSaleStarted())
+{
+    $html->LoadAddin('/addins/beatles.tpa');
+}
+else {
+    $html->loadAddin('/addins/beatles-fase2.tpa');
+}
+
 $html->loadScript('/modules/fotoalbum/presentation/showalbum.js');
 $html->loadScript('/scripts/beatles.final.js');
 $html->loadScript('/core/presentation/usermanagement/accounts/fbRegister.final.js');

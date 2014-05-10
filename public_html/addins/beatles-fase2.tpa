@@ -34,14 +34,14 @@ Het beatlesconcert wordt 3 keer uitgevoerd:
 </section>
 <section class="beatleskolom">
     <h1>Tickets</h1>
-    <div id='ticketcountdown'>
-    Ticketverkoop start binnen
-    <h1><div id='tickettimer'></div></h1>
+    
+    De ticketverkoop is nu officieel gestart! Hou er rekening mee dat de tickets razendsnel de deur uitvliegen. Op is op!
+    <p />Tickets kosten <b>10,00 EUR</b>. De plaatsen zijn niet genummerd!.
+    <div id='ticketbutton' onclick="window.location.href='/modules/ticketserver/bestel.php'">
+    Klik hier
+    <h1>Bestel je tickets</h1>
     </div>
-    De ticketverkoop start op 01 juni 2014 om 9u. Bij ons vorige concert waren alle zitjes na 3 weken verkocht, <b>wees er dus snel bij!</b></li>
-    <h3>Hoe bestellen?</h3>
-    Van zodra de ticketverkoop start kan je deze bestellen via onze website of telefonisch. Meer info volgt binnenkort.
-    <p />Tickets kosten <b>10,00 EUR</b>. De plaatsen zijn niet genummerd!
+    Tickets kunnen ook telefonisch besteld worden op het nummer 0495&nbsp;23&nbsp;11&nbsp;69 (enkel tussen 9u 's morgens en 18u 's avonds)
 </section>
 </section>
 <section class='block'>
@@ -112,6 +112,5 @@ Het beatlesconcert wordt 3 keer uitgevoerd:
         </div>
     <!CC END IFSET [votedcookie]>
 </section>
-<script>window.setInterval(function(){updateTicketTimer();},1000);</script>
 
 
