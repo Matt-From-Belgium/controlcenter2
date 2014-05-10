@@ -77,6 +77,29 @@ if(getTicketSaleStarted())
             }
             else
             {
+                    ###Alles ok, nakijken of we bericht op facebook moeten plaatsen
+                    if($_POST['shareOnFB'])
+                    {
+                        $config = array(
+                            'appId'=>  getFacebookAppID(),
+                            'secret'=> getFacebookSappId(),
+                            'allowSignedRequest'=> false
+                        );
+                        
+                        $facebook = new Facebook($config);
+                        $userid = $facebook->getUser();
+                        
+                        if($userid)
+                        {
+                            $response = $facebook->api('/me/'.getFacebookNameSpace().':buy_tickets_for','POST',
+                               array(
+                                   'concert'=> 'http://www.projectkoorchantage.be/beatles.php',
+                                   'fb:explicitly_shared'=>'true'
+                               )     
+                                    );
+                        }
+                    }
+                
                     #Wijziging: bevestigingspagina wordt apart php pagina om tracking mogelijk te maken
                     #showMessage('Reservatie ontvangen','Wij hebben uw reservatie ontvangen. U ontvangt in de komende minuten een bevestigingsmail met betalingsgegevens.');
                     header('location:/modules/ticketserver/confirmation.php');
