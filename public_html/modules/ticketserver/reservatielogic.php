@@ -234,4 +234,10 @@ function getTicketSaleStarted()
     }
 }
 
+function getFBConcertUrl()
+{
+    $url = dataaccess_GetParameter('TICKETS_FB_CONCERTURL');
+    return $url->getValue();
+}
+
 ?>

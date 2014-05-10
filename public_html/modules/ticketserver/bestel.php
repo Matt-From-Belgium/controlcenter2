@@ -88,12 +88,13 @@ if(getTicketSaleStarted())
                         
                         $facebook = new Facebook($config);
                         $userid = $facebook->getUser();
+                        $concerturl = getFBConcertUrl();
                         
                         if($userid)
                         {
                             $response = $facebook->api('/me/'.getFacebookNameSpace().':buy_tickets_for','POST',
                                array(
-                                   'concert'=> 'http://www.projectkoorchantage.be/beatles.php',
+                                   'concert'=> $concerturl,
                                    'fb:explicitly_shared'=>'true'
                                )     
                                     );
