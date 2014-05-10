@@ -2,6 +2,11 @@
 require_once $_SERVER['DOCUMENT_ROOT'].'/core/templatesystem/templatesystem.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/scripts/beatleslogic.php';
 
+
+$fbAppId = getFacebookAppID();
+$fbNameSpace = getFacebookNameSpace();
+
+
 $html = new htmlpage('frontend');
 $html->LoadAddin('/addins/beatles.tpa');
 $html->loadScript('/modules/fotoalbum/presentation/showalbum.js');
@@ -23,7 +28,9 @@ else
 
 if(!isset($_GET['id']))
 {
-$html->addCustomMeta('og:type', article);
+###Geen id gezet dus we moeten een concertobject aanmaken
+$html->addCustomMeta('og:type', $fbNameSpace.':concert');
+$html->addCustomMeta('fb:app_id', $fbAppId);
 $html->addCustomMeta('og:url', 'http://www.projectkoorchantage.be/beatles.php');
 $html->addCustomMeta('og:title','Projectkoor CHANTage brengt Beatles-concert');
 $html->addCustomMeta('og:image', 'http://www.projectkoorchantage.be/images/beatles/beatlesFB.png');

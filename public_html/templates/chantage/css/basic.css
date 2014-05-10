@@ -481,6 +481,15 @@ img.right {
     float: right;
 }
 
+/*TICKETSERVER*/
+.errorbox {
+    color: #FFFFFF;
+}
+
+.errorbox h2 {
+    color: #f1ae1e;
+}
+
 /*BEATLES*/
 #content {
    
