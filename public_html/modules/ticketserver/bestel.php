@@ -78,34 +78,42 @@ if(getTicketSaleStarted())
             }
             else
             {
-                    ###Alles ok, nakijken of we bericht op facebook moeten plaatsen
-                    if($_POST['shareOnFB'])
+                    try
                     {
-                        $config = array(
-                            'appId'=>  getFacebookAppID(),
-                            'secret'=> getFacebookSappId(),
-                            'allowSignedRequest'=> false
-                        );
-                        
-                        $facebook = new Facebook($config);
-                        $userid = $facebook->getUser();
-                        $concerturl = getFBConcertUrl();
-                        
-                        if($userid)
+                        ###Alles ok, nakijken of we bericht op facebook moeten plaatsen
+                        if($_POST['shareOnFB'])
                         {
-                            $response = $facebook->api('/me/'.getFacebookNameSpace().':buy_tickets_for','POST',
-                               array(
-                                   'concert'=> $concerturl,
-                                   'fb:explicitly_shared'=>'true'
-                               )     
-                                    );
+                            $config = array(
+                                'appId'=>  getFacebookAppID(),
+                                'secret'=> getFacebookSappId(),
+                                'allowSignedRequest'=> false
+                            );
+
+                            $facebook = new Facebook($config);
+                            $userid = $facebook->getUser();
+                            $concerturl = getFBConcertUrl();
+
+                            if($userid)
+                            {
+                                $response = $facebook->api('/me/'.getFacebookNameSpace().':buy_tickets_for','POST',
+                                   array(
+                                       'concert'=> $concerturl,
+                                       'fb:explicitly_shared'=>'true'
+                                   )     
+                                        );
+                            }
                         }
                     }
-                
+                    catch(Exception $ex)
+                    {
+                        ###Dit staat er gewoon om zelfs in geval van problemen de bevestiging te tonen.
+                        CC_Send_Error_report($ex);
+                    }
+                    
                     #Wijziging: bevestigingspagina wordt apart php pagina om tracking mogelijk te maken
                     #showMessage('Reservatie ontvangen','Wij hebben uw reservatie ontvangen. U ontvangt in de komende minuten een bevestigingsmail met betalingsgegevens.');
                     header('location:/modules/ticketserver/confirmation.php');
-
+                    
 
                     ###De input was correct, er moet enkel een bevestigingspagina worden weergegeven.
                     #$html = new htmlpage("frontend");
