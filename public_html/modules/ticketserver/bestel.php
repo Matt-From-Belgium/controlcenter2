@@ -95,7 +95,7 @@ if(getTicketSaleStarted())
 
                             if($userid)
                             {
-                                $response = $facebook->api('/me/'.getFacebookNameSpace().':buy_tickets_for','POST',
+                                $response = $facebook->api('/me/'.getFacebookNameSpace().':reserve_for','POST',
                                    array(
                                        'concert'=> $concerturl,
                                        'fb:explicitly_shared'=>'true'
