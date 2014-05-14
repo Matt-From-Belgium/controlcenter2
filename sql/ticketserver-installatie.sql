@@ -2969,6 +2969,7 @@ INSERT INTO `postcodes` (`id`, `postcode`, `gemeente`) VALUES
 
 INSERT INTO `parameters` (`name`, `value`, `overridable`) VALUES
 ('TICKETS_SECMAIL', 'matthiasba@linux.be', '1'),
+('TICKETS_REPORTMAIL', 'matthiasba@linux.be', '0'),
 ('TICKETS_HERINNERING', '5', '1'),
 ('TICKETS_ANNULATIE', '5', '0'),
 ('TICKETS_EVENT_NAME', 'Beatles-concert', '0'),
