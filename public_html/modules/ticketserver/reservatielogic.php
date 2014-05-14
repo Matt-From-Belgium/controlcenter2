@@ -166,6 +166,11 @@ function getAdminmailadres()
 	return dataaccess_getParameter('TICKETS_SECMAIL')->getValue();
 }
 
+function getReportingMailadres()
+{
+    return dataaccess_GetParameter('TICKETS_REPORTMAIL')->getValue();
+}
+
 function getDagenVoorHerinnering()
 {
 	return dataaccess_getParameter('TICKETS_HERINNERING')->getValue();

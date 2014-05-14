@@ -81,7 +81,7 @@ $db->ExecuteQuery();
 $gemeenteverdeling = $db->GetResultArray();
 
 ###Aan het einde van de rit versturen we het rapport
-$secmail = getAdminmailadres();
+$secmail = getReportingMailadres();
 
 $rapport = new Email('mail');
 $rapport->setTo($secmail);
