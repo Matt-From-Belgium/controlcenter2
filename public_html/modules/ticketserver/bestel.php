@@ -11,7 +11,7 @@ if(getTicketSaleStarted())
     try
     {
     ###Is dit de eerste keer dat de pagina wordt weergegeven?
-            if(isset($_POST['submit']))
+            if(isset($_POST['submitcheck']))
             {
                     $errormessages = ValidateReservatie($_POST);
 
@@ -22,7 +22,7 @@ if(getTicketSaleStarted())
 
             }
 
-            if((!isset($_POST['submit'])) or (is_array($errormessages)))
+            if((!isset($_POST['submitcheck'])) or (is_array($errormessages)))
             {
                     $html = new htmlpage("frontend");
                     $html->LoadAddin('/modules/ticketserver/bestel.tpa');

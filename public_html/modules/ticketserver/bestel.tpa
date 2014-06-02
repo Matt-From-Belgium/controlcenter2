@@ -1,6 +1,24 @@
 <script>
 var ticketprijs = <!CC VAR [ticketprijs]>;
+
+var alreadyClicked = false;
+
+function submitform()
+{
+	if(alreadyClicked)
+	{
+		alert('Eénmaal klikken is voldoende :-). Even geduld, we zijn je gegevens aan het noteren.');
+	}
+	else
+	{
+	alreadyClicked = true;
+        document.getElementById('bestelling').submit();
+	}
+        
+        
+}
 </script>
+
 <div id="inhoud">
 
 
@@ -10,7 +28,8 @@ De Ticketprijs bedraagt <FONT COLOR="#FF6600"><!CC VAR [ticketprijs]> EUR per ti
 <p>Van zodra u uw reservatie heeft doorgegeven ontvangt u via E-mail een bevestiging van uw reservatie. In deze mail vindt u ook het rekeningnummer waarop u kan storten. De tickets liggen op de avond van het concert klaar aan de kassa.<br />
 <b>Uw reservatie is pas definitief van zodra wij de betaling ontvangen hebben</b><br />
 <div id="bestelform">
-<p><form method='post'>
+<p><form id='bestelling' name='bestelling' method='post'>
+<input type='hidden' id='submitcheck' name='submitcheck' value='submit'>
 <!CC IFSET [errorlist]>
 <UL id="berichtvalidator" class="errorbox">
 <h2>Uw reservatie kon niet geregistreerd worden:</h2>
@@ -55,7 +74,7 @@ berekenKost();
 </select>
 <br /><label for="opmerkingen">Opmerkingen</label><textarea cols=30 rows=5 name="opmerkingen" id="opmerkingen"><!CC VAR [opmerkingen]></textarea>
 <div id='delenopFB'><input type='checkbox' onClick='enableShareBox(event)' id='shareOnFB' name='shareOnFB'><img src='/modules/ticketserver/images/fb_klein.png'> Delen op Facebook</div>
-<p><input type="submit" name="submit" value="Reserveer mijn tickets"> <input type="reset" value="Begin opnieuw">
+<p><input type="button" name="submitbutton" value="Reserveer mijn tickets" onClick='javascript:submitform()'> <input type="reset" value="Begin opnieuw">
 </form>
 </div>
 </div>
