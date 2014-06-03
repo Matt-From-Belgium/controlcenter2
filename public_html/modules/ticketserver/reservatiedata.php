@@ -57,7 +57,7 @@ function reservatieToevoegen($reservatie)
 {	
 	###De gegevens worden naar de database geschreven als backup en voor het nemen van statistieken
 	$db = new dataconnection();
-	$query = 'INSERT INTO tickets (datum,naam,voornaam,mail,straat,huisnummer,gemeente,aantal,voorstelling,referral) VALUES (CURDATE(),"@naam","@voornaam","@mail","@straat","@huisnummer","@gemeente",@aantal,@voorstelling,@referral)';
+	$query = 'INSERT INTO tickets (datum,naam,voornaam,mail,straat,huisnummer,gemeente,aantal,voorstelling,referral,opmerkingen) VALUES (CURDATE(),"@naam","@voornaam","@mail","@straat","@huisnummer","@gemeente",@aantal,@voorstelling,@referral,"@opmerkingen")';
 	$db->setQuery($query);
 	$db->setAttribute("naam",$reservatie->getNaam());
 	$db->setAttribute("voornaam",$reservatie->getVoornaam());
@@ -68,6 +68,7 @@ function reservatieToevoegen($reservatie)
 	$db->setAttribute("aantal",$reservatie->getAantalTickets());
 	$db->setAttribute("voorstelling",$reservatie->getVoorstelling());
 	$db->setAttribute("referral",$reservatie->getReferral());
+        $db->setAttribute("opmerkingen", $reservatie->getOpmerkingen());
 	$db->ExecuteQuery();
 		
 	###We willen de gebruiker een reservatienummer geven => we moeten dit ophalen
@@ -81,7 +82,7 @@ function data_openReservatie($reservatienummer)
 	require_once $_SERVER['DOCUMENT_ROOT'].'/core/entity/exception.php';
 	require_once $_SERVER['DOCUMENT_ROOT'].'/modules/ticketserver/reservatieclass.php';
 	
-	$query = 'SELECT tickets.id,tickets.datum,tickets.naam,tickets.voornaam,tickets.mail,tickets.aantal,tickets.voorstelling,tickets.status FROM tickets WHERE tickets.id=@reservatienummer';
+	$query = 'SELECT tickets.id,tickets.datum,tickets.naam,tickets.voornaam,tickets.mail,tickets.aantal,tickets.voorstelling,tickets.status,tickets.opmerkingen FROM tickets WHERE tickets.id=@reservatienummer';
 	
 	$db = new dataconnection();
 	$db->setQuery($query);
@@ -93,7 +94,7 @@ function data_openReservatie($reservatienummer)
 		###De functie geeft een verwacht resultaat
 		###We moeten nu een reservatieobject opbouwen
 		$result = $db->getResultArray();
-		list($id,$datum,$naam,$voornaam,$mail,$aantal,$voorstelling,$status) = $result[0];
+		list($id,$datum,$naam,$voornaam,$mail,$aantal,$voorstelling,$status,$opmerkingen) = $result[0];
 		
 		$reservatie = new reservatie($id);
 		$reservatie->setDatum($datum);
@@ -103,6 +104,7 @@ function data_openReservatie($reservatienummer)
 		$reservatie->setAantalTickets($aantal);
 		$reservatie->setVoorstelling($voorstelling);
 		$reservatie->setStatus($status);
+                $reservatie->setOpmerkingen($opmerkingen);
 		
 		return $reservatie;
 	}

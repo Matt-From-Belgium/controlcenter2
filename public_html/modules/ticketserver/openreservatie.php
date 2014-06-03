@@ -42,6 +42,7 @@ else
 			$html->setVariable('naam',$reservatie->getNaam());
 			$html->setVariable('voornaam',$reservatie->getVoornaam());
 			$html->setVariable('voorstelling',getVoorstellingstekst($reservatie->getVoorstelling()));
+                        $html->setVariable('opmerkingen', $reservatie->getOpmerkingen());
 			$html->setVariable('aantaltickets',$reservatie->getAantalTickets());
 		
 			###Op basis van de status moeten we bepalen welke knoppen er worden weergegeven	
