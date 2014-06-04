@@ -527,9 +527,10 @@ hr {
 }
 
 #ticketcountdown,#ticketbutton {
+    display: block;
     background:#b39f85;
     font-size: 1em;
-    height: 3em;
+    
     border-radius: 0.5em;
     text-align: center;
     margin-bottom: 0.5em;
