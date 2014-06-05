@@ -1,0 +1,200 @@
+
+d/* 
+    Document   : mobile.css
+    Created on : 1-nov-2013, 13:29:17
+    Author     : matthiasba
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+body {
+    width: 100%;
+    overflow:  hidden;
+    
+}
+
+nav {
+    min-width:  0;
+}
+
+#central-image {
+    height: 20em;
+    background-size: cover;
+    /*background-image: none;*/
+}
+
+#central-image-content {
+    height: 100%;
+    background-color: rgba(50,58,69,0.7);
+}
+
+#central-image-content ul {
+    display: none;
+}
+
+#central-image-content select {
+    float: right;
+    display: inline-block;
+    font-size: 3em;
+    margin-left: 2em;
+    margin-top: 5em;
+    
+    background-color: #524333;
+    font-family: 'denseregular';
+    color: #FFFFFF;
+    
+}
+
+header #header-content,nav,#content-box,#sponsors-content,#footer-center,#central-image{
+    width: 100%;
+}
+
+#diagonal-shell {
+    display:none;
+}
+
+#content {
+    margin-top : 2em;
+}
+
+#content-box {
+    min-width: 0;
+}
+
+#logo {
+    padding-top: 1em;
+}
+
+#logo img {
+    width: 15em;
+    
+}
+
+#rightcol {
+   display: none; 
+   width: 0%;
+}
+
+#leftcol {
+    width: 100%;
+    float: none;
+    
+}
+
+#orangeline {
+    display:none;
+    width: 100%;
+}
+
+#whiteline {
+    display:none;
+    width:100%;
+}
+
+#wieisbegonnen {
+    max-width: 100%;
+}
+
+h1 {
+    font-size: 5em;
+}
+
+h2 {
+    font-size:2.5em;
+}
+
+.block {
+    width: 90%;
+    margin-left: 2em;
+    font-size: 1.5em;
+}
+
+.block h1 {
+    font-size: 3em;
+}
+
+header {
+    display:none;
+}
+
+b {
+    font-weight: 400;
+    text-shadow: 0.5px 0.5px; 
+}
+
+/* BEATLES */
+.beatleskolom {
+    float: none;
+    width: 100%;
+}
+
+#ticketcountdown {
+    font-size: 3em;   
+}
+
+#friendsthatgo {
+    float: none;
+    width: 100%;
+    
+}
+
+#enjij {
+    float: none;
+    width: 80%;
+    height: auto;
+}
+
+.friendimg {
+    width: 150px;
+}
+
+.friendname {
+    font-size: 1.5em;
+}
+
+#userpic {
+    width: 7em;
+}
+
+#whenGoing,#whenNotGoing {
+    font-size: 2em;
+}
+
+#top5Container {
+    float: none;
+    width: 100%;
+}
+
+#vote, #afterVote {
+    float: none;
+    width: 100%;
+}
+
+.beatlesChart {
+    font-size: 2em;
+}
+
+.beatlesChart h1{
+    font-size: 1em;
+}
+
+.beatlesSong {
+    font-size: 2em;
+}
+
+#fbconnectImage {
+    width: 80%;
+}
+
+#inviteButtonMobile {
+    display: block;
+}
+
+#inviteButton {
+    display: none;
+}
+
+#ticketcountdown h1,#ticketbutton h1 {
+    font-size: 3em;
+}
+

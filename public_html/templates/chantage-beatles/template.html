@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/templates/chantage-beatles/css/basic.css">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/modules/fotoalbum/presentation/css/showphoto.css">
+        <!--<link rel="stylesheet" href="/templates/chantage-beatles/css/mobile.css">-->
+        <title>Projectkoor CHANTage</title>
+        <script src='/core/presentation/ajax/ajaxtransaction.js'></script>
+        <script src='/templates/chantage-beatles/beatlesHelper.js'></script>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+            
+        
+        <script type="text/javascript">
+
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-37221185-1']);
+            _gaq.push(['_trackPageview']);
+
+            (function() {
+              var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+              ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+              var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+
+
+            function changePage(selector) {
+                var selectedId = selector.selectedIndex;
+                var url = selector.options[selectedId].value;
+                
+                document.location.href=url;
+            }
+            
+            function checkMobile()
+            {
+                var check = false;
+                (function(a){if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino|android|ipad|playbook|silk/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0,4)))check = true;})(navigator.userAgent||navigator.vendor||window.opera);
+                return check; 
+            }
+            
+            
+            if(checkMobile())
+            {
+                var head  = document.getElementsByTagName('head')[0];
+                var link  = document.createElement('link');
+                link.id   = 'mobilecss';
+                link.rel  = 'stylesheet';
+                link.type = 'text/css';
+                link.href = '/templates/chantage-beatles/css/mobile.css';
+                link.media = 'all';
+                head.appendChild(link);
+               
+                
+            }
+            
+            
+            
+        </script>
+        
+    </head>
+    <body>
+        <header>
+            <section id="header-content">
+                <section id="header-left">
+                Projectkoor CHANTage - info@projectkoorchantage.be
+                </section>
+                <section id="header-right">
+                    <a href='https://www.facebook.com/koorchantage'><img src='/templates/chantage-beatles/assets/fb-logo.png'></a>
+                    <a href='https://twitter.com/koorchantage'><img src='/templates/chantage-beatles/assets/twitter-logo.png'></a>
+                    <a href='https://plus.google.com/u/0/b/106001403918641667283/106001403918641667283/posts'><img src='/templates/chantage-beatles/assets/gplus-logo.png'></a>
+                </section>
+            </section>
+        </header>
+        <section id="central-image">
+            <section id="central-image-content">
+                <nav>
+                    <div id="logo"><img src="/templates/chantage-beatles/assets/chantage-klein.png"></div>
+                    <form>
+                        <select onchange="changePage(this);">
+                            <option value="/index.php">Ga naar een andere pagina</option>
+                            <option value="/index.php">Startpagina</option>
+                            <option value="/beatles.php">The Beatles</option>
+                            <option value="/kerstconcert.php">Kerstconcert</option>
+                            <option value="/wieisbegonnen.php">Wie is begonnen?</option>
+                            <option value="/sponsors.php">Sponsors</option>
+                            <option value="/modules/audities/index.php">Audities</option>
+                            <option value="/contact.php">Contact</option>
+                        </select>
+                    </form>
+                    <ul>
+                        <a href='/index.php'><li>STARTPAGINA</li></a>
+                        <a href='/beatles.php'><li>THE BEATLES</li></a>
+                        <a href='/kerstconcert.php'><li>KERSTCONCERT</li></a>
+                        <a href='/wieisbegonnen.php'><li>WIE IS BEGONNEN?</li></a>
+                        <a href='/sponsors.php'><li>SPONSORS</li></a>
+                        <a href='/modules/audities/index.php'><li>AUDITIES</li></a>
+                        <a href='/contact.php'><li>CONTACT</li></a>
+                    </ul>
+                </nav>
+                <div id="beatlesContainer"  onMouseOut="javascript:clearBio()">
+                    <div id="beatlesBio" class="beatlesBioHidden">
+                        <div id="Paul" class="beatlesBioDiv">
+                            <img src="/templates/chantage-beatles/assets/paul.png">
+                            <h1>Paul McCartney</h1>
+                            <h2>
+                                Paul McCartney werd geboren op 18 juni 1942 ook te Liverpool.
+                                Hij groeide op bij zijn vader en moeder. Zijn vader speelde al jaren in een band en Paul leerde het basgitaarvak van zijn vader. In 1956 overleed zijn moeder aan kanker, maar toch sloot hij in hetzelfde jaar zich bij de band aan. Paul schreef samen met John alle liedjes van “The Beatles”.
+                                In 1970 probeerde hij “The Beatles” nieuw leven in te blazen, terwijl hij ook degene was, die in 1969 wilde stoppen. Zo begon hij in 1970 een rechtzaak tegen de anderen, maar verloor deze. Daarom begon hij met anderen een andere band, genaamd “The Wings”. Hij is nu nog steeds actief in deze band.
+                            </h2>
+                        </div>
+                        <div id="Ringo" class="beatlesBioDiv">
+                            <img src="/templates/chantage-beatles/assets/ringo.png">
+                            <h1>Ringo Starr</h1>
+                            <h2>
+                                Richard Starkey werd geboren op 7 juli 1940 ook te Liverpool.
+                                Ringo was in zijn jeugd lange tijd ziek geweest, waardoor hij op zijn achtiende een grote achterstand had met lezen en schrijven. Op een gegeven moment kocht zijn vader een drumstel voor hem, waarna Ringo bi j de band “The Rory Storm and The Hurricanes” begon. Op zijn 21e stopte hij, waarna “The Beatles” hem vroegen om bij hem te komen spelen. Hij was in het begin erg belangrijk voor “The Beatles”, maar dat verslapte steeds meer. Na een paar jaar voelde hij zich overbodig en stapte in 22 augustus 1968 de band, om na een paar dagen weer terug te keren.
+                            </h2>
+                        </div>
+                        <div id="George" class="beatlesBioDiv">
+                            <img src="/templates/chantage-beatles/assets/george.png">
+                            <h1>George Harrisson</h1>
+                            <h2>
+                                George Harrison werd geboren op 25 februari 1943 ook in Liverpool. Hij kwam uit een arbeiders gezin en is de jongste van de bandleden.
+    In 1956 kocht zijn moeder voor hem een gitaar en een jaar later kwam hij bij de band van John en Paul.
+    Toen de Beatles stopten was hij een gewaardeerd gitarist geworden. Terwijl George altijd op de achtergrond speelde, schreef hij ook een hoop liedjes, maar deze zijn nooit uitgebracht.
+                            </h2>
+                        </div>
+                            <div id="John" class="beatlesBioDiv">
+                                <img src="/templates/chantage-beatles/assets/john.png">
+                                <h1>John Lennon</h1>
+                                <h2>
+                                    John Winston Lennon werd geboren op 9 oktober 1940 in Liverpool. John werd kort na zijn geboorte in de steek gelaten door zijn moeder, waardoor hij door zijn tante Mimi verzorgd werd. Zijn vader ging door de oorlog de zee op, waarna er van hem niks meer is vernomen. Toen John 5 jaar was, mocht hij weer terug naar zijn moeder. Zij ontdekte dat John veel gevoel voor muziek had en leerde hem gitaar spelen. Totdat John op zeventien jarige leeftijd zijn moeder voorgoed verloor, omdat ze bij een auto ongeluk om het leven kwam.
+                                    <br /><br />In 1966 trouwde hij met Yoko Ono, waarna in 1975 zijn zoon Sean werd geboren. Op 8 december 1980 kwam er een einde aan zijn leven door een gestoorde fan, die voor zijn huis hem doodschoot.
+                                </h2>
+                            </div>
+                        </div>
+                        <div id="beatlesHeads">
+                            <div class="head" onmouseover="javascript:switchBeatle('George')">
+                                <img src="/templates/chantage-beatles/assets/beatleHead1.png">
+                            </div>
+                            <div class="head" onmouseover="javascript:switchBeatle('Paul')">
+                                <img src="/templates/chantage-beatles/assets/beatleHead2.png">
+                            </div>
+                            <div class="head" onmouseover="javascript:switchBeatle('Ringo')">
+                                <img src="/templates/chantage-beatles/assets/beatleHead3.png">
+                            </div>
+                            <div class="head"  onmouseover="javascript:switchBeatle('John')">
+                                <img src="/templates/chantage-beatles/assets/beatleHead4.png">
+                            </div>
+
+
+                        </div>
+                </div>
+            </section>
+        </section>
+        <div id="diagonal-shell">
+            <div id='diagonal'>
+                <div id="orangeline"></div>
+                <div id="whiteline"></div>
+            </div>
+        </div>
+        <section id="content">
+                  
+            <section id="content-box">
+                <PageContent>
+                
+            </section>
+        </section>
+        <section id="sponsors">
+            
+        </section>
+        <section id="footer">
+            <section id="footer-center">
+                &copy; Feitelijke vereniging Projectkoor CHANTage. Alle rechten voorbehouden - <a href='/statuten-24112012.pdf'>Statuten</a>
+            </section>
+        </section>
+    </body>
+</html>

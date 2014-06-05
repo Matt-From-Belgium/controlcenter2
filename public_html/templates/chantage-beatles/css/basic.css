@@ -1,0 +1,876 @@
+/* 
+    Document   : basic
+    Created on : 13-okt-2013, 14:53:23
+    Author     : matthiasba
+    Description:
+        Purpose of the stylesheet follows.
+*/
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+@font-face {
+    font-family: 'denseregular';
+    src: url('fonts/dense/dense-regular-webfont.eot');
+    src: url('fonts/dense/dense-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/dense/dense-regular-webfont.woff') format('woff'),
+         url('fonts/dense/dense-regular-webfont.ttf') format('truetype'),
+         url('fonts/dense/dense-regular-webfont.svg#denseregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'bebas_neueregular';
+    src: url('fonts/bebas/BebasNeue-webfont.eot');
+    src: url('fonts/bebas/BebasNeue-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/bebas/BebasNeue-webfont.woff') format('woff'),
+         url('fonts/bebas/BebasNeue-webfont.ttf') format('truetype'),
+         url('fonts/bebas/BebasNeue-webfont.svg#bebas_neueregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'colaboratelightregular';
+    src: url('fonts/colaborate/colaborate_light_dutch/ColabLig-webfont.eot');
+    src: url('fonts/colaborate/colaborate_light_dutch/ColabLig-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/colaborate/colaborate_light_dutch/ColabLig-webfont.woff') format('woff'),
+         url('fonts/colaborate/colaborate_light_dutch/ColabLig-webfont.ttf') format('truetype'),
+         url('fonts/colaborate/colaborate_light_dutch/ColabLig-webfont.svg#colaboratelightregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'cafebrewery';
+    src: url('fonts/cafebrewery/caf__brewery-webfont.eot');
+    src: url('fonts/cafebrewery/caf__brewery-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/cafebrewery/caf__brewery-webfont.woff') format('woff'),
+         url('fonts/cafebrewery/caf__brewery-webfont.ttf') format('truetype'),
+         url('fonts/cafebrewery/caf__brewery-webfont.svg#colaboratelightregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'fathernelson';
+    src: url('fonts/fathernelson/father_nelson_regular-webfont.eot');
+    src: url('fonts/fathernelson/father_nelson_regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/fathernelson/father_nelson_regular-webfont.woff') format('woff'),
+         url('fonts/fathernelson/father_nelson_regular-webfont.ttf') format('truetype'),
+         url('fonts/fathernelson/father_nelson_regular-webfont.svg#colaboratelightregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+body { 
+    display: block;
+    margin: 0em;
+    padding: 0em;
+    width: 100%;
+    
+        
+        margin-top: 0em;
+        margin-left: 0em;
+        margin-right: 0em;
+        font-family: 'colaboratelightregular';
+        font-weight: normal;
+        font-style: normal;
+        color: #555555;
+        
+        
+    }
+     
+
+
+header{
+    background-color: #323A45;
+    font-family: 'Open Sans';
+    color: #FFFFFF;
+    font-size: 0.7em;
+}
+
+    header #header-content{
+        width: 80%;
+        min-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 2em;
+        padding-top: 0.8em;
+    }
+        
+        header #header-left {
+            float: left;
+        }
+        
+        header #header-right {
+            float: right;
+        }
+        
+            #header-right img {
+                margin-left: 10px;
+            }
+            
+            
+
+#central-image {
+ position: relative;
+ height: 35.5em;
+ background-color: #f1ae1e;
+ //background-image: url('../assets/chantagefoto.png');
+ background-repeat: no-repeat;
+ background-position: top center;
+ //background-size: auto 100%;
+ background-size: cover;
+ 
+}
+
+    #central-image-content{
+       background-color: rgba(107,91,75,0.9);
+       height: 3em;
+    }
+
+        nav {
+           width: 80%;
+           min-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;           
+           color: #FFFFFF; 
+           height: 100%;
+
+        }
+        
+        
+            #logo {
+                position: absolute;
+                padding-top: 2.1em;
+            }
+            
+            #central-image-content select {
+                display: none;
+            }
+        
+            nav ul {
+               display: inline-block;
+               font-family: 'denseregular';
+               font-size: 1.6em;
+               letter-spacing: 2px;
+               list-style: none;
+               margin: 0px;
+               float: right;
+               height: 100%;
+            }
+            
+            nav li {
+                clear: both;
+                padding-top: 0.5em;
+                height: 1.3em;
+                display: inline-block;
+                padding-right: 6px;
+                padding-left: 6px;
+                margin-right: 2px;
+                
+                transition: background-color 0.2s, border 0.2s;
+                transition-timing-function: ease-out;
+
+            }
+            
+            nav li:hover{
+                background-color: rgba(255,255,255,0.4);
+                border-bottom: 0.2em solid #555555;
+                
+                transition: background-color 0.4s, border 0.2s;
+                transition-timing-function: ease-out;
+                
+            }
+            
+            nav li:active{
+                background-color: #f1ae1e;
+                color: #000000;
+                transition: none;
+            }
+            
+            nav a {
+                color:#FFFFFF;
+                text-decoration: none;
+            }
+            
+            nav a:hover {
+                 color:#FFFFFF;
+                text-decoration: none;               
+            }
+            
+            #beatlesBio {
+                position: absolute;
+                
+                height: 15em;
+                width: 30em;
+                background-color: #231f20;
+                border-radius: 1.5em;
+                overflow: hidden;
+                
+                
+                
+                //bottom: 12em;
+                right: 5em;
+                
+                /*-moz-transform: rotate(-2deg); 
+                -ms-transform: rotate(-2deg); 
+                -o-transform: rotate(-2deg); 
+                -webkit-transform: rotate(-2deg); 
+                transform: rotate(-2deg);*/
+                
+                transition: opacity 0.5s, bottom 0.5s;
+            }
+            .beatlesBioHidden{
+                opacity: 0;
+                bottom: 11em;
+            }
+            
+            .beatlesBioVisible{
+                opacity: 1;
+                bottom: 12em;
+            }
+            
+                .beatlesBioDiv{
+                    position: absolute;
+                    display: none;
+                    
+                }
+                
+                .beatlesBioDiv img {
+                    float:left;
+                    height: 15em;
+                    margin-right: 1em;
+                }
+                
+                .beatlesBioDiv h1 {
+                    display: inline-block;
+                    font-family: 'denseregular';
+                    font-size: 2.5em;
+                    margin-left: 1em;
+                    color: #f1ae1e;
+                }
+                
+                .beatlesBioDiv h2 {
+                    display: block;
+                    height: 13em;
+                    font-size: 1em;
+                    font-family: 'colaboratelightregular';
+                    overflow: scroll;
+                    color: #DDDDDD;
+                    
+                }
+        
+            #beatlesHeads {
+                position: absolute;
+                //background-color: #FFFFFF;
+                bottom: 0px;
+                right: 0px;
+                width: 50%;
+                height: 10.7em;
+                text-align: right;
+                vertical-align: bottom;
+                
+                -moz-transform: rotate(-2deg); 
+                -ms-transform: rotate(-2deg); 
+                -o-transform: rotate(-2deg); 
+                -webkit-transform: rotate(-2deg); 
+                transform: rotate(-2deg);
+                
+                overflow: hidden;
+                font-size: 1em;
+            }
+            
+            .head {
+                position: relative;
+                display: inline-block;
+                vertical-align: bottom;
+                top: 0.5em;
+                transition: top 0.3s;
+            }
+            
+            .head:hover {
+                top:0em;
+                transition: top 0.3s;
+            }
+            
+            .head img {
+                height: 8em;
+            }
+                
+#diagonal-shell {
+    position: relative;
+    top: -5em;
+    
+    height: 8em;
+    width: 100%;
+    overflow: hidden;
+}
+            
+    #diagonal {
+          -moz-transform: rotate(-2deg); 
+          -ms-transform: rotate(-2deg); 
+          -o-transform: rotate(-2deg); 
+          -webkit-transform: rotate(-2deg); 
+          transform: rotate(-2deg); 
+          position: relative;
+          top: 2.8em;
+    }
+
+
+        #orangeline {
+            display: block;
+            width: 105%;
+
+            background-color: #555555;
+            height: 1.5em;
+
+        }
+
+        #whiteline {
+            position: relative;
+            width: 105%;
+            top: -0.7em;
+            background-color: #FFFFFF;
+            height: 3em;
+            /*border: 1px solid;*/
+            -moz-transform: rotate(0.5deg); 
+            -ms-transform: rotate(0.5deg); 
+            -o-transform: rotate(0.5deg); 
+            -webkit-transform: rotate(0.5deg); 
+            transform: rotate(0.5deg);
+        }
+
+#content {
+    position: relative;
+    
+    margin-top: -7.5em;
+    
+}
+
+    #content-box{
+        /*height: 72em;*/
+        width: 80%;
+        min-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+        
+        
+    }
+
+    .block {
+        float: left;
+        margin-bottom: 1em;
+        margin-top: 0em;
+        margin-left: 0em;
+        margin-right: 0em;
+        font-family: 'colaboratelightregular';
+        font-weight: normal;
+        font-style: normal;
+        color: #666666;
+        font-size: 1.2em;
+        width: 100%;
+    }
+    
+    h1 {
+        margin-top: 0.2em;
+        font-family: 'Open Sans';
+        font-size: 1.7em;
+        color:#357d82;
+        font-weight: 300;
+        font-style: normal;
+        letter-spacing: 2px;
+        margin-bottom: 0.2em;
+    }
+    
+    h2 {
+        margin-top: 0.2em;
+        font-family: 'Open Sans';
+        font-size: 1.3em;
+        color:#6B5B4B;
+        font-weight: 300;
+        font-style: normal;
+        letter-spacing: 0px;
+        margin-bottom: 0.2em;      
+    }
+    
+    h3 {
+        margin-top: 0.2em;
+        font-family: 'Open Sans';
+        font-size: 1em;
+        color:#555555;
+        font-weight: 400;
+        font-style: normal;
+        letter-spacing: 0px;
+        margin-bottom: 0.2em;
+        
+    }
+    
+    .block img {
+        
+    }
+    
+
+    
+    #footer {
+        clear: both;
+        background-color: #444;
+        height: 2em;
+        
+    }
+    
+        #footer-center {
+            margin-left: auto;
+            margin-right: auto;
+            width: 1200px;
+            color: #FFFFFF;
+            font-family: 'Open Sans';    
+            font-size: 0.7em;
+            text-align:  center;
+        }
+  
+table {
+    
+    width: 100%;
+    background-color: #eee;
+}
+
+    th {
+        background-color: #323A45;
+        color: #FFFFFF;
+    }
+    
+    td {
+        text-align: center;
+    }
+
+
+
+a {
+    color: #e78a2d;
+}    
+
+a:hover{
+    color: #FC3333;
+}
+
+label {
+    display: inline-block;
+    width: 150px;
+    vertical-align: top;
+    font-weight: 600;
+}
+
+a img {
+    border: 0px;
+}
+
+#leftcol {
+   float:left; 
+   width: 100%;
+}
+
+#leftcol .block {
+    /*background-color: #00FF00;*/
+    
+}
+
+#rightcol {
+    
+    padding-left: 5%;
+    width: 20%;
+    float: left;
+}
+
+#rightcol .block {
+    /*background-color: #FF0000;*/
+    display: none;
+}
+
+#rightcol h1 {
+    font-size: 1em;
+}
+
+#rightcol img {
+    padding-bottom: 1em;
+}
+    
+
+#indexbanner img {
+    float: left;
+    margin-right: 1em;
+}
+
+#mobilefooter {
+    display: none;
+}
+
+.woordenboek {
+    margin-left: 2em;
+    font-size: 0.9em;
+}
+
+.errors {
+    background-color: #f1ae1e;
+    border-color: #FC3333;
+    border-width: 2px;
+    border-style: solid;
+    margin-bottom: 1em;
+}
+
+.nadruk, .nadruk-rood {
+    font-weight: 700;
+}
+
+#knoppen img {
+    cursor: pointer;
+}
+
+.nadruk-rood {
+    color: #FC3333;
+}
+
+#wieisbegonnen {
+    width:70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+img.left {
+    float: left;
+    margin-right: 1em;
+}
+
+img.right {
+    float: right;
+}
+
+#sponsors {
+    display: block;
+    clear: both;
+    background-color: #DDDDDD;
+    height: 5em;
+    border-top: 1px solid;
+    border-color: #BBBBBB;
+    
+}
+
+/*TICKETSERVER*/
+.errorbox {
+    color: #FFFFFF;
+}
+
+.errorbox h2 {
+    color: #f1ae1e;
+}
+
+/*BEATLES*/
+#content {
+   
+}
+
+.beatlesheader {
+    width: 100%;
+    text-align: center;
+}
+
+hr {
+    display: block;
+    width: 100%;
+    background-color:#CCCCCC;
+    height: 0.00em;
+    border: 0;
+    margin-top: 1em;
+}
+
+.beatleskolom {
+    width: 30%;
+    
+    margin-left: 1em;
+    margin-right: 1em;
+    float: left;
+}
+
+.beatleskolommen {
+    position: relative;
+    width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1em;
+    font-size: 1.2em;
+}
+
+#ticketcountdown,#ticketbutton {
+    display: block;
+    background:#b39f85;
+    font-size: 1em;
+    
+    border-radius: 0.5em;
+    text-align: center;
+    margin-bottom: 0.5em;
+}
+
+#ticketcountdown h1,#ticketbutton h1 {
+    color:#ebe4da;
+    font-size: 1.5em;
+    margin-top: 0em;
+}
+
+#ticketbutton:hover {
+    background-color: #357d82;
+    cursor:  pointer;
+}
+.friendimg {
+    border-radius: 4.7em;
+    border-style: solid;
+    border-width: 0.5em;
+    border-color: #6b5b4b;
+}
+
+.friendname {
+    text-align: center;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.friend {
+    float: left;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    margin-bottom: 0.2em;
+}
+
+.friendstext {
+    margin-bottom: 1em;
+}
+
+input[type='radio'] {
+    width: 1.2em;
+    height: 1.5em;
+}
+
+#kruispuntlogo {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#fbfunctioncontainer {
+    position: relative;
+    display: none;
+}
+
+#friendsthatgo {
+    float: left;
+    width: 75%;
+}
+
+#enjij {
+    float:left;
+    width: 20%;
+    height: 30em;
+    background-color:  #b39f85;
+    border-radius: 1em;
+    margin-left: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+    color: #000000;
+}
+
+#enjij h1 {
+    color: #ebe4da;
+}
+
+#enjij a {
+    color: #6b5b4b;
+}
+.aanwezig {
+    color:#1a5724;
+    font-size: 2em;
+}
+
+.misschien {
+    color:#824402;
+    font-size: 1.5em;
+}
+
+.niet {
+    color: maroon;
+}
+
+.niettekst {
+    color: #333333;
+    font-style:  italic;
+    font-size: 0.7em;
+    margin-left: 2.5em;
+}
+
+#userdiv {
+    text-align: center;
+}
+
+#fbloginbutton {
+    text-align: center;
+}
+
+#username {
+    margin-bottom: 1em;
+}
+
+#promotext {
+    margin-bottom: 1em;
+}
+
+#whenGoing {
+    display: none;
+}
+
+#whenGoing #promotext {
+    border: 1px #1a5724 solid;
+    background-color: #b5fe88;
+    padding: 0.5em;
+}
+
+#whenGoing #promotext h1 {
+    color: #1a5724;
+    font-family: 'colaboratelightregular';
+    display: inline;
+    font-size: 1em;
+}
+
+#top5Container {
+    float:left;
+    width: 45%;
+    
+    
+    
+}
+
+.beatlesChart {
+    font-size: 1.3em;
+    margin-bottom: 0.5em;
+    margin-left: 0.5em;
+    font-weight:  100;
+}
+
+.beatlesChart:hover {
+    background-color: #ebe4da;
+}
+
+.beatlesChart h1 {
+    display: inline;
+    font-size: 0.8em;
+    color: #FFFFFF;
+    background-color: #B39F85;
+    margin: 0em;
+    padding-left: 1.5em;
+}
+
+#vote, #afterVote {
+    float: right;
+    width: 50%;
+}
+
+#vote input[type='text']
+{
+    font-size: 2em;
+    color: #666666;
+    border-color: #B39F85;
+    border-style: solid;
+    border-width: 0.07em;
+    border-radius: 0.3em;
+    padding-left: 0.5em;
+}
+
+#vote input[type='text']:hover
+{
+    border-color: #357d82;
+}
+
+#beatlesSongs {
+    position: relative;
+    background-color: #EEEEEE;
+    width: 30em;
+    border-color: #B39F85;
+    border-width: 0.07em;
+    border-style: solid;
+    max-height: 9em;
+    overflow-y:auto;
+}
+
+.beatlesSong{
+    font-size: 1.7em;
+    padding-left: 0.7em;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+}
+
+.beatlesSong:hover{
+    background-color: #357d82;
+    color: #FFFFFF;
+}
+
+.voteDisabled
+{
+    background-color:  #CCCCCC;
+    font-size: 1.2em;
+    color: #666666;
+    border-style: solid;
+    border-color: #666666;
+    border-radius: 0.2em;
+    margin-top: 0.5em;
+}
+
+.voteEnabled
+{
+    background-color:  #6b5b4b;
+    font-size: 1.2em;
+    color: #FFFFFF;
+    border-style: solid;
+    border-color: #000000;
+    border-radius: 0.2em;
+    margin-top: 0.5em;
+}
+
+#vote input[type='checkbox'] {
+    margin-top: 1em;
+    
+}
+
+.voteEnabled:hover {
+    background-color: #357d82;
+}
+
+#loader {
+    display: inline;
+    margin-left: 0.5em;
+    visibility: hidden;
+}
+
+#afterVote {
+    display: none;
+}
+
+#deelopfb {
+    margin-top: 0.5em;
+    font-size: 1.3em;
+    font-weight: 500;
+    vertical-align: middle;
+}
+
+#deelopfb img {
+    vertical-align: middle;
+}
+
+#shareOnFB {
+    height: 1.5em;
+    width: 1.5em;
+}
+
+#inviteButtonMobile {
+    display: none;
+}

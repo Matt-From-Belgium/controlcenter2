@@ -314,29 +314,7 @@ header{
         
     }
     
-    #sponsors {
-        clear:both;
-        
-        display: block;
-        background-color: #CCCCCC;
-        font-family: 'colaboratelightregular';
-        color: #666;
-        padding-top: 0.3em;
-    }
-    
-        #sponsors-content {
-            
-            margin-left: auto;
-            margin-right: auto;
-            width: 80%;
-            min-width: 1200px;
-            
-        }
-        
-        #sponsors-content img {
-            vertical-align: middle;
-            margin-right: 1em;
-        }
+
     
     #footer {
         clear: both;
@@ -427,16 +405,6 @@ a img {
     margin-right: 1em;
 }
 
-.sponsors {
-    margin-bottom: 7em;
-
-}
-
-.sponsors img {
-    vertical-align: top;
-    margin-right: 1em;
-}
-
 #mobilefooter {
     display: none;
 }
@@ -479,6 +447,16 @@ img.left {
 
 img.right {
     float: right;
+}
+
+#sponsors {
+    display: block;
+    clear: both;
+    background-color: #DDDDDD;
+    height: 5em;
+    border-top: 1px solid;
+    border-color: #BBBBBB;
+    
 }
 
 /*TICKETSERVER*/
