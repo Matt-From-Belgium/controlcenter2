@@ -204,12 +204,33 @@ header{
                 text-decoration: none;               
             }
             
+            #beatlesLogo {
+                position: absolute;
+                right: 0.5em;
+                top: 5em;
+                padding-right: 25em;
+            }
+            
+            #rightside {
+                position: absolute;
+                width: 58%;
+                right: 0.5em;
+                bottom: 0em;
+                
+                height: 32em;
+                
+                
+               
+            }
+            
+           
+            
             #beatlesBio {
                 position: absolute;
                 
                 height: 15em;
                 width: 30em;
-                background-color: #231f20;
+                background-color: rgba(35,31,32,0.9);
                 border-radius: 1.5em;
                 overflow: hidden;
                 
@@ -258,7 +279,7 @@ header{
                 
                 .beatlesBioDiv h2 {
                     display: block;
-                    height: 13em;
+                    height: 12.2em;
                     font-size: 1em;
                     font-family: 'colaboratelightregular';
                     overflow: scroll;
@@ -271,7 +292,7 @@ header{
                 //background-color: #FFFFFF;
                 bottom: 0px;
                 right: 0px;
-                width: 50%;
+                width: 100%;
                 height: 10.7em;
                 text-align: right;
                 vertical-align: bottom;
@@ -554,11 +575,24 @@ img.right {
     display: block;
     clear: both;
     background-color: #DDDDDD;
-    height: 5em;
+    //height: 5em;
     border-top: 1px solid;
     border-color: #BBBBBB;
     
 }
+
+    #sponsors img {
+        width: 9%;
+        vertical-align: middle;
+        margin-top: 0.2em;
+        margin-bottom: 0.2em;
+    }
+    
+    #sponsors-content {
+        width: 70%;
+        margin-left: auto;
+        margin-right: auto;
+    }
 
 /*TICKETSERVER*/
 .errorbox {

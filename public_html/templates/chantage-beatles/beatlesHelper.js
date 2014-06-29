@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 
-
 function switchBeatle(member)
 {
     var beatlesBio = document.getElementById('beatlesBio');
@@ -27,11 +26,4 @@ function switchBeatle(member)
         }
     }
     
-}
-
-function clearBio()
-{
-    var beatlesBio = document.getElementById('beatlesBio');
-    beatlesBio.classList.remove('beatlesBioVisible');
-    beatlesBio.classList.add('beatlesBioHidden');
 }

@@ -1,30 +1,31 @@
 <link rel="stylesheet" href="/extracss/sponsors.css">
-<div class="block sponsors">
+<section class='block'>
     <h1>Sponsors</h1>
-                <a href='http://www.nationale-loterij.be/' target='_blank'><img src='/templates/chantage/assets/sponsor-lotto.png'></a>
+<div class="blocksponsors">    
+                <a href='http://www.nationale-loterij.be/NL/Spelen_en_Winnen/Krasspelen/WinForLife/' target='_blank'><img src='/templates/chantage-beatles/assets/sponsor-winforlife.png'></a>
                 <a href='http://www.goudengids.be/debofisc-cva-zarren-8610/' target='_blank'><img src='/templates/chantage/assets/sponsors/advertentie-debofisc-wit.png'></a>
                 <a href='http://www.automobilia.be/' target='_blank'><img src='/templates/chantage/assets/sponsors/Automobilia.png'></a>
                 <a href='http://www.sym3.be/sym3.aspx' target='_blank'><img src='/templates/chantage/assets/sponsors/sym3.png'></a>
-                <a href='http://www.danbredint.be/' target='_blank'><img src='/templates/chantage/assets/sponsors/danbred.png'></a>
-                <a href='http://www.goudengids.be/el-florido-zarren-8610/' target='_blank'><img src='/templates/chantage/assets/sponsors/elflorido.png'></a>
+                <a href='http://www.fabrieksverkoopdiksmuide.be/' target='_blank'><img src='/images/sponsors/coupe.png'></a>    
+                <br/><a href='http://www.danbredint.be/' target='_blank'><img src='/templates/chantage/assets/sponsors/danbred.png'></a>
                 <a href='http://www.diseno.be/' target='_blank'><img src='/templates/chantage/assets/sponsors/diseno.png'></a>
-                <a href='http://www.lartduvin.be/nl' target='_blank'><img src='/templates/chantage/assets/sponsors/lartduvin.png'></a>
-                <a href='http://tuinendewyse.be/' target='_blank'><img src='/templates/chantage/assets/sponsors/logo-tuinendewyse.png'></a>
+                <a href='http://www.lartduvin.be/nl' target='_blank'><img src='/templates/chantage/assets/sponsors/lartduvin.png'></a>                
                 <a href='http://www.mariaterengelen.be/' target='_blank'><img src='/templates/chantage/assets/sponsors/maria-ter-engelen.png'></a>
-
+                <a href='http://crelan.be/nl/ag-woumen'><img src='/images/sponsors/crelan.png'></a>
                 
 </div>
-<div class="block sponsors">
+<div class="blocksponsors">
+    <a href='http://tuinendewyse.be/' target='_blank'><img src='/images/sponsors/dewyse.png'></a>
     <a href='http://collegediksmuide.be/' target='_blank'><img src='/images/sponsors/college.png'></a>
-    <a href='http://www.salonssaintgermain.be/' target='_blank'><img src='/images/sponsors/stgermain.png'></a>    
-    <a href='http://crelan.be/nl/ag-woumen'><img src='/images/sponsors/crelan.png'></a>
-    <a href='http://www.fabrieksverkoopdiksmuide.be/' target='_blank'><img src='/images/sponsors/coupe.png'></a>    
+    <a href='http://vtidiksmuide.be/' target='_blank'><img src='/images/sponsors/vti.png'></a>
     <a href='http://www.cornelis-bvba.be/' target='_blank'><img src='/images/sponsors/cornelis.png'></a>
     <a href='http://www.kantoorvv.be/nl/index.php' target='_blank'><img src='/images/sponsors/venv.png'></a>
     <a href='http://www.vinckier-nv.be/en/' target='_blank'><img src='/images/sponsors/vinckier.png'></a>
     <a href='http://www.qsani.be' target='_blank'><img src='/images/sponsors/qsani.png'></a>
-    <a href='http://www.logghe-geert.be/' target='_blank'><img src='/images/sponsors/logghe.png'></a>
-    <a href='http://www.cityplug.be/nl/West-Vlaanderen-Belgische-Kust/HORK5TE7_Voeding_Brood-en-Banket-Filip.html' target='_blank'><img src='/images/sponsors/filip.png'></a>
-    <a href='http://www.meubelmakerijverlinde.be/' target='_blank'><img src='/images/sponsors/verlinde.png'></a>
+    <a href='http://www.logghe-geert.be/' target='_blank'><img src='/images/sponsors/logghe.png'></a>    
+    <a href='http://www.diksmuide.be' target='_blank'><img src='/images/sponsors/diksmuide.png'></a>
+    <a href='http://www.dezwarte.be' target='_blank'><img src='/images/sponsors/dezwarte.png'></a>
+    <a href='http://www.handelsgids.be/diksmuide/jaecques-rudi/' target='_blank'><img src='/templates/chantage-beatles/assets/sponsor-jaecques.png'></a>
     
 </div>
+</section>

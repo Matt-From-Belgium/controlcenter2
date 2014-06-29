@@ -15,6 +15,7 @@ body {
 
 nav {
     min-width:  0;
+    background-color: #F1AE1E;
 }
 
 #central-image {
@@ -25,7 +26,7 @@ nav {
 
 #central-image-content {
     height: 100%;
-    background-color: rgba(50,58,69,0.7);
+    //background-color: rgba(50,58,69,0.7);
 }
 
 #central-image-content ul {
@@ -198,3 +199,24 @@ b {
     font-size: 3em;
 }
 
+#beatlesHeads {
+    display: none;
+}
+
+#beatlesLogo {
+    left: 20em;
+    top: 4.5em;
+    width: 15em;
+    padding-right: 0em;
+}
+
+#beatlesLogo img {
+    width: 100%;
+}
+    .beatlesBioDiv, .beatlesBioHidden, .beatlesBioVisible {
+        display: none;
+    }
+    
+#rightside {
+    display: none;
+}
