@@ -1,3 +1,35 @@
+//ajaxTransactionList houdt alle transacties met de server bij zodat er acties uitgevoerd kunnen worden
+function ajaxTransactionList()
+{
+    //private variabelen
+    var innerTransactionList = new Array();
+    
+    //constructor
+    //private functies
+    
+    //publieke functies
+    this.addTransaction= function(transaction)
+    {
+        innerTransactionList.push(transaction);
+    };
+    
+    this.cancelGroup = function(transactionGroup,except)
+    {
+      //Deze functie annuleert alle transacties behalve de transactie die opgegeven wordt in except
+      
+      for(i=0;i<innerTransactionList.length;i++)
+      {
+          if((innerTransactionList[i].transactionGroup===transactionGroup)&&(innerTransactionList[i]!==except)&&(innerTransactionList[i].status>-1)&&(innerTransactionList[i].status<3))
+          {
+              innerTransactionList[i].cancelRequest();
+          }
+      }
+    };
+}
+
+var ajaxTransactionList = new ajaxTransactionList();
+
+//ajaxTransaction wordt gebruikt voor iedere ajax communicatie
 function ajaxTransaction(formElement)
 {
  //private variabelen
@@ -8,6 +40,15 @@ function ajaxTransaction(formElement)
   var progressindicator;
   //Revisie 1: waarden worden nu bijgehouden door een FormData object
   var formData = new FormData();
+  //Revisie 2: er wordt een statusvariabele gedefinieerd
+  //-1: geannuleerd
+  // 0: aangemaakt
+  // 1: verzonden
+  // 2: antwoord ontvangen
+  // 3: voltooid
+  //TODO: private zetten dit is enkel voor debug
+  that.status = 0;
+
  
  //publieke variabelen
   this.onComplete=null;
@@ -17,12 +58,18 @@ function ajaxTransaction(formElement)
   this.result = null;
   this.destination = null;
   this.phpfunction = null;
+  //Revisie 2: er wordt een groepsnaam voorzien zodat ajaxqueries van een bepaalde groep afgebroken kunnen
+  //worden
+  this.transactionGroup = null;
  
  //constructor functionaliteit
  if(formElement)
     {
     constructor(formElement);
     }
+ 
+ //we voegen onze transactie toe aan ajaxTransactionList
+ ajaxTransactionList.addTransaction(this);
  
  //private methods
  function constructor(formElement)
@@ -126,6 +173,18 @@ function ajaxTransaction(formElement)
 	 return xhr;
  }
  
+ function setStatus(newStatus)
+ {
+     //Als de status al -1 is mag er niks meer gewijzigd worde
+     //annulatie is onherroepelijk
+     if(that.status>-1)
+     {
+         //de request is niet gecancelled
+        that.status = newStatus;    
+     }
+     
+ }
+ 
  //public methods
  this.addData = function(name,value)
  {
@@ -160,6 +219,18 @@ function ajaxTransaction(formElement)
 	 }
  };
  
+ this.cancelRequest = function() 
+ {
+     //Deze functie verandert de status naar -1
+     //Dit heeft enkel zin als deze nog niet afgewerkt is
+     if(that.status<3)
+     {
+         setStatus(-1);
+         //alert('request cancelled');
+     }
+     //-1 is de flag zodat de onComplete niet meer uitgevoerd wordt.
+ };
+ 
  this.ExecuteRequest = function()
  {
 	 var request = getHTTPObject();
@@ -168,7 +239,8 @@ function ajaxTransaction(formElement)
 	 	if(request.readyState == 4)
 		{
 			if(request.status == 200)
-			{				
+			{	
+                                setStatus(2);
 				if(typeof that.onComplete != 'function')
 				{
 					//Er is geen functie gedefinieerd in onComplete => exception
@@ -184,139 +256,147 @@ function ajaxTransaction(formElement)
 					//De gegevens worden weggeschreven naar klassevariabelen waar ze evt met de onComplete functie kunnen worden opgehaald
 					//Aangezien onComplete pas hierna wordt uitgevoerd ben je hier wel zeker dat die variabelen een waarde hebben bij het
 					//uitvoeren van onComplete()
-					
-					//Eerst kijken we naar de inhoud van de resulttag
-					var xml = request.responseXML;
-                                        
-                                        //Eerst controleren we of er wel degelijk een resulttag terugkwam. Wanneer er server side een exception optreedt
-                                        //Kan het in bepaalde gevallen gebeuren dat deze in het antwoord gestuurd wordt.
-                                        if(xml)
-                                            {
-                                        
-                                                result = xml.getElementsByTagName('result')[0].firstChild.nodeValue;
+                                        //MAAR: we controleren of de request niet gecancelled is
+					if(that.status>-1)
+                                        {
+                                            //Eerst kijken we naar de inhoud van de resulttag
+                                            var xml = request.responseXML;
 
-                                                if(result == 'ok')
+                                            //Eerst controleren we of er wel degelijk een resulttag terugkwam. Wanneer er server side een exception optreedt
+                                            //Kan het in bepaalde gevallen gebeuren dat deze in het antwoord gestuurd wordt.
+                                            if(xml)
                                                 {
-                                                        //De server aanvaardt de request en stuurt mogelijk data terug
-                                                        that.successIndicator = true;
 
-                                                        //Nu moeten we nagaan of er data terugkeert
-                                                        var resultrows = xml.getElementsByTagName('datarow');
+                                                    result = xml.getElementsByTagName('result')[0].firstChild.nodeValue;
 
-                                                        if(resultrows.length>0)
-                                                        {
-                                                                //Er is datareturn
-                                                                //Eerst wordt het aantal rijen opgeslagen in public property resultLength
-                                                                that.resultLength = resultrows.length;
+                                                    if(result == 'ok')
+                                                    {
+                                                            //De server aanvaardt de request en stuurt mogelijk data terug
+                                                            that.successIndicator = true;
 
-                                                                //nu moet de data verwerkt worden en de resultaten in publieke properties opgeslagen worden
-                                                                //We creëren een custom object om de resultaatset mooi te structureren
-                                                                //Eerst moeten we nagaan welke velden er zijn
-                                                                var firstrow = resultrows[0];
-                                                                var fieldnames = new Array();
-                                                                for(i=0;i<firstrow.childNodes.length;i++)
-                                                                {
-                                                                        var fieldname = firstrow.childNodes[i].nodeName;
-                                                                        fieldnames.push(fieldname);
-                                                                }
+                                                            //Nu moeten we nagaan of er data terugkeert
+                                                            var resultrows = xml.getElementsByTagName('datarow');
 
-                                                                //Hier zullen we de code genereren voor de definitie van de public properties van onze custom class
-                                                                var code='';
+                                                            if(resultrows.length>0)
+                                                            {
+                                                                    //Er is datareturn
+                                                                    //Eerst wordt het aantal rijen opgeslagen in public property resultLength
+                                                                    that.resultLength = resultrows.length;
 
-                                                                        //We willen public properties definiëren voor iedere veldnaam
-                                                                        for(i=0;i<fieldnames.length;i++)
-                                                                        {
-                                                                                var nieuwecode = 'this.'+fieldnames[i]+'= null;' ;
-                                                                                code = code + nieuwecode;
-                                                                        }
+                                                                    //nu moet de data verwerkt worden en de resultaten in publieke properties opgeslagen worden
+                                                                    //We creëren een custom object om de resultaatset mooi te structureren
+                                                                    //Eerst moeten we nagaan welke velden er zijn
+                                                                    var firstrow = resultrows[0];
+                                                                    var fieldnames = new Array();
+                                                                    for(i=0;i<firstrow.childNodes.length;i++)
+                                                                    {
+                                                                            var fieldname = firstrow.childNodes[i].nodeName;
+                                                                            fieldnames.push(fieldname);
+                                                                    }
 
-                                                                code = ' resultSet = function () { ' + code + '}';
+                                                                    //Hier zullen we de code genereren voor de definitie van de public properties van onze custom class
+                                                                    var code='';
 
-                                                                //door de variabele code te evalueren krijgen we een custom class
-                                                                eval(code);
+                                                                            //We willen public properties definiëren voor iedere veldnaam
+                                                                            for(i=0;i<fieldnames.length;i++)
+                                                                            {
+                                                                                    var nieuwecode = 'this.'+fieldnames[i]+'= null;' ;
+                                                                                    code = code + nieuwecode;
+                                                                            }
 
-                                                                //nu moeten we voor ieder van onze resultaatrijen een instantie van resultset aanmaken
-                                                                //deze instanties moeten opgeslagen worden in een array
-                                                                var rows = new Array();
+                                                                    code = ' resultSet = function () { ' + code + '}';
 
-                                                                for(i=0;i<resultrows.length;i++)
-                                                                {
-                                                                        var instantie = new resultSet();
-                                                                        var toewijzingscode = '';
+                                                                    //door de variabele code te evalueren krijgen we een custom class
+                                                                    eval(code);
 
-                                                                        var huidigerij = resultrows[i];
+                                                                    //nu moeten we voor ieder van onze resultaatrijen een instantie van resultset aanmaken
+                                                                    //deze instanties moeten opgeslagen worden in een array
+                                                                    var rows = new Array();
 
-                                                                        for(x=0;x<fieldnames.length;x++)
-                                                                        {
-                                                                                //binnen de resultset moet de property de waarde van de row krijgen
-                                                                                if(huidigerij.getElementsByTagName(fieldnames[x])[0].firstChild)
-                                                                                {
-                                                                                        var fieldvalue = huidigerij.getElementsByTagName(fieldnames[x])[0].firstChild.nodeValue;
-                                                                                }
-                                                                                else
-                                                                                {
-                                                                                        var fieldvalue = null;
-                                                                                }									
-                                                                                var naam = fieldnames[x];
+                                                                    for(i=0;i<resultrows.length;i++)
+                                                                    {
+                                                                            var instantie = new resultSet();
+                                                                            var toewijzingscode = '';
 
-                                                                                toewijzingscode = toewijzingscode + 'instantie.' + naam + '="' + fieldvalue + '";';
+                                                                            var huidigerij = resultrows[i];
 
-                                                                        }
-                                                                        eval(toewijzingscode);
-                                                                        rows.push(instantie);
+                                                                            for(x=0;x<fieldnames.length;x++)
+                                                                            {
+                                                                                    //binnen de resultset moet de property de waarde van de row krijgen
+                                                                                    if(huidigerij.getElementsByTagName(fieldnames[x])[0].firstChild)
+                                                                                    {
+                                                                                            var fieldvalue = huidigerij.getElementsByTagName(fieldnames[x])[0].firstChild.nodeValue;
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                            var fieldvalue = null;
+                                                                                    }									
+                                                                                    var naam = fieldnames[x];
 
-                                                                        that.result = rows;
-                                                                }
+                                                                                    toewijzingscode = toewijzingscode + 'instantie.' + naam + '="' + fieldvalue + '";';
+
+                                                                            }
+                                                                            eval(toewijzingscode);
+                                                                            rows.push(instantie);
+
+                                                                            that.result = rows;
+                                                                    }
 
 
-                                                        }
-                                                        else
-                                                        {
-                                                                //Er is geen datareturn
-                                                        }
+                                                            }
+                                                            else
+                                                            {
+                                                                    //Er is geen datareturn
+                                                            }
 
-                                                }
-                                                else if(result == 'error')
-                                                {
-                                                        //De server weigert de request en geeft een foutboodschap terug
-                                                        that.successIndicator = false;
+                                                    }
+                                                    else if(result == 'error')
+                                                    {
+                                                            //De server weigert de request en geeft een foutboodschap terug
+                                                            that.successIndicator = false;
 
-                                                        //De foutboodschappen komen terug via een vaste XML structuur die dus geparsed kan worden
-                                                        var errortags = xml.getElementsByTagName("error");
-                                                        var errorlist = new Array();
+                                                            //De foutboodschappen komen terug via een vaste XML structuur die dus geparsed kan worden
+                                                            var errortags = xml.getElementsByTagName("error");
+                                                            var errorlist = new Array();
 
-                                                        for(i=0;i<errortags.length;i++)
-                                                        {							
-                                                                //class Error
-                                                                function Error(parameter,value)
-                                                                {
-                                                                        //publieke properties
-                                                                        this.parameter = parameter;
-                                                                        this.value = value;
-                                                                }
+                                                            for(i=0;i<errortags.length;i++)
+                                                            {							
+                                                                    //class Error
+                                                                    function Error(parameter,value)
+                                                                    {
+                                                                            //publieke properties
+                                                                            this.parameter = parameter;
+                                                                            this.value = value;
+                                                                    }
 
-                                                                newerror = new Error(errortags[i].getElementsByTagName('parameter')[0].firstChild.nodeValue,errortags[i].getElementsByTagName('message')[0].firstChild.nodeValue);							
+                                                                    newerror = new Error(errortags[i].getElementsByTagName('parameter')[0].firstChild.nodeValue,errortags[i].getElementsByTagName('message')[0].firstChild.nodeValue);							
 
-                                                                errorlist[i] = newerror;
-                                                        }
+                                                                    errorlist[i] = newerror;
+                                                            }
 
-                                                        that.errorList = errorlist;
+                                                            that.errorList = errorlist;
+                                                    }
+                                                    else
+                                                    {
+                                                            throw "onverwacht resultaat: resulttag heeft onverwachte waarde";
+                                                    }
+                                                    //De functie die op onComplete staat wordt uitgevoerd
+                                                    //Maar alleen als de request op dit moment nog niet gecancelled is
+                                                    if(that.status>-1)
+                                                    {
+                                                        that.onComplete(request);		
+                                                        setStatus(3);
+                                                    }
                                                 }
                                                 else
-                                                {
-                                                        throw "onverwacht resultaat: resulttag heeft onverwachte waarde";
-                                                }
-                                                //De functie die op onComplete staat wordt uitgevoerd
-                                                that.onComplete(request);					
-                                            }
-                                            else
-                                                {
-                                                    throw "onverwacht resultaat: resulttag ontbreekt. Response was: " + request.responseText;
-                                                }
+                                                    {
+                                                        throw "onverwacht resultaat: resulttag ontbreekt. Response was: " + request.responseText;
+                                                    }
+                                        }
 				}
 			}
 		}
-	 }
+	 };
 
 	 request.open("POST",connectionpoint,true);
 	 
@@ -329,6 +409,7 @@ function ajaxTransaction(formElement)
 	 }
 	 
 	 request.send(completePoststring());
+         setStatus(1);
  };
  
 }
