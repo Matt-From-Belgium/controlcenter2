@@ -151,7 +151,7 @@ class htmlpage
                  *                  */
                 
                 ###We vullen de head tag aan met javascripts en metadata
-                $patternhead = "/(?i)<\s*head\s*>/";
+                $patternhead = "/(?i)<\s*\/\s*head\s*>/";
                 $html = @preg_replace_callback($patternhead,array($this,'appendHeadTag'), $html, 1);
                 
                 
@@ -229,7 +229,7 @@ class htmlpage
         
         private function appendHeadTag($matches)
         {
-            $html = $matches[0];
+            
             
             ###javascripts toevoegen
             if(is_array($this->scripts))
@@ -289,6 +289,9 @@ class htmlpage
                     }
                 }
             
+            ###We plaatsen de eindtag terug
+            $html = $html.$matches[0];
+                
             return $html;
         }
         
