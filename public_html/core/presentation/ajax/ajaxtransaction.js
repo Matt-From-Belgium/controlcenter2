@@ -19,7 +19,7 @@ function ajaxTransactionList()
       
       for(i=0;i<innerTransactionList.length;i++)
       {
-          if((innerTransactionList[i].transactionGroup===transactionGroup)&&(innerTransactionList[i]!==except)&&(innerTransactionList[i].status>-1)&&(innerTransactionList[i].status<3))
+          if((innerTransactionList[i].getTransactionGroup()===transactionGroup)&&(innerTransactionList[i]!==except)&&(innerTransactionList[i].status>-1)&&(innerTransactionList[i].status<3))
           {
               innerTransactionList[i].cancelRequest();
           }
@@ -40,6 +40,7 @@ function ajaxTransaction(formElement)
   var progressindicator;
   //Revisie 1: waarden worden nu bijgehouden door een FormData object
   var formData = new FormData();
+  var transactionGroup = null;
   //Revisie 2: er wordt een statusvariabele gedefinieerd
   //-1: geannuleerd
   // 0: aangemaakt
@@ -60,7 +61,7 @@ function ajaxTransaction(formElement)
   this.phpfunction = null;
   //Revisie 2: er wordt een groepsnaam voorzien zodat ajaxqueries van een bepaalde groep afgebroken kunnen
   //worden
-  this.transactionGroup = null;
+  
  
  //constructor functionaliteit
  if(formElement)
@@ -91,6 +92,8 @@ function ajaxTransaction(formElement)
 
 
     }
+    
+   
  
  /*Revisie 1: data wordt beheerd door FormData
  function buildPostString()
@@ -185,7 +188,23 @@ function ajaxTransaction(formElement)
      
  }
  
+ 
  //public methods
+ 
+ this.setTransactionGroup = function (value)
+   {
+       //We annuleren de andere transacties van dezelfde groep
+       ajaxTransactionList.cancelGroup(value);
+       
+       //We geven transactionGroup een waarde
+       transactionGroup=value;
+   };
+   
+ this.getTransactionGroup = function()
+ {
+     return transactionGroup;
+ };
+   
  this.addData = function(name,value)
  {
 	/*names.push(name);
