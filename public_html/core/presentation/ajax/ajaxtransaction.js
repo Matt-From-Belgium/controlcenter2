@@ -19,7 +19,7 @@ function ajaxTransactionList()
       
       for(i=0;i<innerTransactionList.length;i++)
       {
-          if((innerTransactionList[i].getTransactionGroup()===transactionGroup)&&(innerTransactionList[i]!==except)&&(innerTransactionList[i].status>-1)&&(innerTransactionList[i].status<3))
+          if((innerTransactionList[i].getTransactionGroup()===transactionGroup)&&(innerTransactionList[i]!==except)&&(innerTransactionList[i].getStatus()>-1)&&(innerTransactionList[i].getStatus()<3))
           {
               innerTransactionList[i].cancelRequest();
           }
@@ -41,14 +41,13 @@ function ajaxTransaction(formElement)
   //Revisie 1: waarden worden nu bijgehouden door een FormData object
   var formData = new FormData();
   var transactionGroup = null;
+  var status = 0;
   //Revisie 2: er wordt een statusvariabele gedefinieerd
   //-1: geannuleerd
   // 0: aangemaakt
   // 1: verzonden
   // 2: antwoord ontvangen
   // 3: voltooid
-  //TODO: private zetten dit is enkel voor debug
-  that.status = 0;
 
  
  //publieke variabelen
@@ -180,16 +179,20 @@ function ajaxTransaction(formElement)
  {
      //Als de status al -1 is mag er niks meer gewijzigd worde
      //annulatie is onherroepelijk
-     if(that.status>-1)
+     if(status>-1)
      {
          //de request is niet gecancelled
-        that.status = newStatus;    
+        status = newStatus;    
      }
      
  }
  
  
  //public methods
+ this.getStatus= function()
+ {
+     return status;
+ };
  
  this.setTransactionGroup = function (value)
    {
@@ -276,7 +279,7 @@ function ajaxTransaction(formElement)
 					//Aangezien onComplete pas hierna wordt uitgevoerd ben je hier wel zeker dat die variabelen een waarde hebben bij het
 					//uitvoeren van onComplete()
                                         //MAAR: we controleren of de request niet gecancelled is
-					if(that.status>-1)
+					if(that.getStatus()>-1)
                                         {
                                             //Eerst kijken we naar de inhoud van de resulttag
                                             var xml = request.responseXML;
@@ -401,7 +404,7 @@ function ajaxTransaction(formElement)
                                                     }
                                                     //De functie die op onComplete staat wordt uitgevoerd
                                                     //Maar alleen als de request op dit moment nog niet gecancelled is
-                                                    if(that.status>-1)
+                                                    if(that.getStatus()>-1)
                                                     {
                                                         that.onComplete(request);		
                                                         setStatus(3);
