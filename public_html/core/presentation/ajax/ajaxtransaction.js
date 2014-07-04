@@ -245,7 +245,7 @@ function ajaxTransaction(formElement)
  {
      //Deze functie verandert de status naar -1
      //Dit heeft enkel zin als deze nog niet afgewerkt is
-     if(that.status<3)
+     if(status<3)
      {
          setStatus(-1);
          //alert('request cancelled');
