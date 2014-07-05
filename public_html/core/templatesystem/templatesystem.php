@@ -626,10 +626,40 @@ class htmlpage
             $this->scripts[] = $location;
         }
         
-        public function loadCSS($location)
+        public function loadCSS($pc,$phone=NULL,$tablet=NULL)
         {
+            ###TEMPLATESYSTEM R3: je kan kiezen welk CSS script je wil laten
+            #op basis van het platform waarmee de pagina geopend wordt
+            #- enkel de locatie van het pc script moet opgegeven worden in dat geval
+            #wordt het gebruikt voor alle platformen
+            #-als phone is opgegeven wordt dat gebruikt voor telefoons en tablets tenzij tablet
+            #ook gedefinieerd is
+            $detection = new Mobile_Detect();
+            $platform = "pc";
+            
+            if($detection->isTablet())
+            {
+                $platform = 'tablet';
+            }
+            else
+            {
+                if($detection->isMobile())
+                {
+                    $platform = 'phone';
+                }
+            }
+            
+            if(empty($phone))
+            {
+                $phone= $pc;
+            }
+            if(empty($tablet))
+            {
+                $tablet=$phone;
+            }
+            
             ###Hiermee kunnen CSS scripts per pagina geladen worden
-            $this->stylesheets[]= $location;
+            $this->stylesheets[]= $$platform;
         }
 	
 	public function PrintHTML()
