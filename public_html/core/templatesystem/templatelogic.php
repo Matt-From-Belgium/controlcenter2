@@ -33,4 +33,14 @@ function GetAddinHTML($path)
 {
 	return fileaccess_GetAddinHTML($path);
 }
+
+function setCookiesOk()
+{
+    require_once $_SERVER['DOCUMENT_ROOT'].'/core/entity/ajaxresponse.php';
+    setcookie("cookies","ok",time()+10*365*24*60*60,'/');
+    
+    $response = new ajaxResponse('ok');
+    return $response->getXML();
+}
+
 ?>

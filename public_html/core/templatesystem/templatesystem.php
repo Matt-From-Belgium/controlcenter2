@@ -34,6 +34,8 @@ class htmlpage
 			
 				#Nu moet de HTML van de templatefile worden opgehaald.
 				$this->html=gettemplatehtml($directory);
+                                
+                                              
 
 				/*#De taalconstanten worden opgehaald				
 				$this->LoadLanguageFiles();	
@@ -149,6 +151,17 @@ class htmlpage
                 $patternhead = "/(?i)<\s*head\s*>/";
                 $html =  @preg_replace_callback($patternhead,array($this,'addMetaData'), $html, 1);
                  *                  */
+
+               ###Is de gebruiker op de hoogte van het gebruik van cookies? Zo niet moet melding getoond worden
+               ###Aangezien hier potentieel een javascript geladen wordt moet deze boven de aanroeping van appendheadtag blijven 
+                if(!isset($_COOKIE['cookies']))
+                {
+                    $patternbody = "/(?i)<\s*body\s*[a-z0-9=\"\']*\s*>/";
+                    $html =  @preg_replace_callback($patternbody,array($this,'addCookiesNotification'), $html, 1);
+                }
+		
+		
+                
                 
                 ###We vullen de head tag aan met javascripts en metadata
                 $patternhead = "/(?i)<\s*\/\s*head\s*>/";
@@ -163,8 +176,8 @@ class htmlpage
                     $patternbody = "/(?i)<\s*body\s*[a-z0-9=\"\']*\s*>/";
                     $html =  @preg_replace_callback($patternbody,array($this,'addFacebookAPI'), $html, 1);
                 }
-		
-		return $html;
+                
+                return $html;
                  
                  
 	}
@@ -293,6 +306,23 @@ class htmlpage
             $html = $html.$matches[0];
                 
             return $html;
+        }
+        
+        private function addCookiesNotification($matches)
+        {
+            $this->loadScript('/core/templatesystem/setcookies.js');
+            
+            ###Body tag moet natuurlijk behouden blijven
+            $html = $matches[0];
+            $html = $html.'<div id="cookies">';
+            $html = $html.'<div>'.LANG_COOKIES_NOTIFICATION;
+            $html = $html.'<input type="button" value="'.LANG_COOKIES_SEND_BUTTON.'" onclick="javascript:setCookiesOk()">';
+            $html = $html.'</div></div>';
+            
+            
+            
+            return $html;
+            
         }
         
         private function addFacebookAPI($matches)
@@ -623,7 +653,9 @@ class htmlpage
         public function loadScript($location)
         {
             ###Hiermee kunnen javascripts per pagina geladen worden
-            $this->scripts[] = $location;
+
+                $this->scripts[] = $location;
+            
         }
         
         public function loadCSS($pc,$phone=NULL,$tablet=NULL)
@@ -665,6 +697,8 @@ class htmlpage
 	public function PrintHTML()
 	{
 		###Deze functie geeft de HTML terug aan de browser
+
+            
 		$this->html = $this->ParseTags($this->html);
 		
 		echo $this->html;
