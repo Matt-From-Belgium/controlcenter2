@@ -151,7 +151,7 @@ class htmlpage
                  *                  */
                 
                 ###We vullen de head tag aan met javascripts en metadata
-                $patternhead = "/(?i)<\s*head\s*>/";
+                $patternhead = "/(?i)<\s*\/\s*head\s*>/";
                 $html = @preg_replace_callback($patternhead,array($this,'appendHeadTag'), $html, 1);
                 
                 
@@ -229,7 +229,7 @@ class htmlpage
         
         private function appendHeadTag($matches)
         {
-            $html = $matches[0];
+            
             
             ###javascripts toevoegen
             if(is_array($this->scripts))
@@ -252,12 +252,12 @@ class htmlpage
                      $metahtml[] = "<meta name=description content='$metadata[description]' />";
 
                      ###nu de Facebook meta
-                     $metahtml[] = "<meta property='fb:app_id' content='$fbappid' />";
-                     $metahtml[] = "<meta property='og:type' content='website' />";
-                     $metahtml[] = "<meta property='og:url'  content='$metadata[url]'/>";
-                     $metahtml[] = "<meta property='og:title' content='$metadata[title]' />";
-                     $metahtml[] = "<meta property='og:description' content='$metadata[description]' />";
-                     $metahtml[] = "<meta property='og:image' content='$metadata[image]' />";
+                     $metahtml[] = "<meta property='fb:app_id' content=\"$fbappid\" />";
+                     $metahtml[] = "<meta property='og:type' content=\"website\" />";
+                     $metahtml[] = "<meta property='og:url'  content=\"$metadata[url]\"/>";
+                     $metahtml[] = "<meta property='og:title' content=\"$metadata[title]\" />";
+                     $metahtml[] = "<meta property='og:description' content=\"$metadata[description]\" />";
+                     $metahtml[] = "<meta property='og:image' content=\"$metadata[image]\" />";
 
 
 
@@ -272,7 +272,7 @@ class htmlpage
 
                     foreach($this->customMeta as $value)
                     {
-                        $newmeta= "<meta property='$value[property]' content='$value[content]'/> ";
+                        $newmeta= "<meta property='$value[property]' content=\"$value[content]\"/> ";
                         $html = $html.$newmeta . PHP_EOL;
 
                     }
@@ -289,69 +289,9 @@ class htmlpage
                     }
                 }
             
-            return $html;
-        }
-	
-        private function addScripts()
-        {
-            if(is_array($this->scripts))
-            {
-                $html = '<head>';
-                foreach($this->scripts as $value)
-                {
-                    $newhtml = "<script src='$value' ></script>";
-                    $html = $html.$newhtml;
-                }
+            ###We plaatsen de eindtag terug
+            $html = $html.$matches[0];
                 
-                return $html;
-            }
-          
-            
-        }
-        
-        private function addMetaData($matches)
-        {
-           ###Hiermee voegen we de META tags toe. Er zijn 2 mogelijkheden:
-           # -> We gebruiken de standaard meta-waarden uit de databank
-           # -> We gebruiken de gegevens die in $this->customMeta
-
-           if(!is_array($this->customMeta))
-           {
-                $metadata = getSiteMeta();
-                $fbappid = getFacebookAppID();
-
-
-                ###We creëren eerst de gewone meta tags
-                $metahtml[] = "<meta name=description content='$metadata[description]' />";
-
-                ###nu de Facebook meta
-                $metahtml[] = "<meta property='fb:app_id' content='$fbappid' />";
-                $metahtml[] = "<meta property='og:type' content='website' />";
-                $metahtml[] = "<meta property='og:url'  content='$metadata[url]'/>";
-                $metahtml[] = "<meta property='og:title' content='$metadata[title]' />";
-                $metahtml[] = "<meta property='og:description' content='$metadata[description]' />";
-                $metahtml[] = "<meta property='og:image' content='$metadata[image]' />";
-            
-            $html = '<head>';
-            
-            foreach($metahtml as $value)
-            {
-                $html = $html.$value;
-            }
-           }
-           else
-           {
-               ###CustomMeta heeft waarde => we genereren de meta op basis daarvan
-               $html = '<head>';
-               
-               foreach($this->customMeta as $value)
-               {
-                   $newmeta= "<meta property='$value[property]' content='$value[content]'/> ";
-                   $html = $html.$newmeta;
-                   
-               }
-           }
-           
             return $html;
         }
         
