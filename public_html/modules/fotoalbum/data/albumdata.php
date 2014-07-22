@@ -28,12 +28,13 @@ function data_albumExists($albumnaam)
 
 function data_albumToevoegen(fotoalbum $album)
 {
-    $query = "INSERT INTO albums (name) VALUES ('@albumnaam')";
+    $query = "INSERT INTO albums (name,description) VALUES ('@albumnaam','@description')";
     
     $db = new DataConnection();
     $db->setQuery($query);
     
     $db->setAttribute('albumnaam', $album->getName());
+    $db->setAttribute('description', $album->getDescription());
     
     $db->ExecuteQuery();
     
@@ -44,7 +45,7 @@ function data_albumToevoegen(fotoalbum $album)
 
 function data_getAlbums()
 {
-    $query = "SELECT albums.id,albums.name from albums";
+    $query = "SELECT albums.id,albums.name,albums.description from albums";
     
     $db = new DataConnection;
     $db->setQuery($query);
@@ -59,6 +60,7 @@ function data_getAlbums()
         foreach($result as $key=>$value)
         {
             $newFotoalbum = new fotoalbum($value['name'], $value['id']);
+            $newFotoalbum->setDescription($value['description']);
             $albumarray[] = $newFotoalbum;
         }
         
@@ -74,7 +76,7 @@ function data_getAlbum($id)
 {
     if(is_int($id))
     {
-            $query = "SELECT albums.id,albums.name from albums WHERE albums.id=@id";
+            $query = "SELECT albums.id,albums.name,albums.description from albums WHERE albums.id=@id";
     
             $db = new DataConnection;
             $db->setQuery($query);
@@ -90,7 +92,7 @@ function data_getAlbum($id)
                 $result = $resultarray[0];
                 
                 $fotoalbum = new fotoalbum($result['name'], $result['id']);
-                
+                $fotoalbum->setDescription($result['description']);
 
                 return $fotoalbum;
             }

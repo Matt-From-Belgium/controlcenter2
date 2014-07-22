@@ -52,3 +52,34 @@ img.editButtons {
     top: -8em;
     margin-bottom: -8em;
 }
+
+#newalbum {
+    background-color: #DDDDDD;
+    border-color: #666666;
+    border-width: 1px;
+    border-style:  dotted;
+    padding-left: 0.7em;
+    padding-right: 0.7em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+#newalbum h2 {
+    margin-top: 0.5em;
+}
+
+#newalbum #description {
+    
+    background-color: #FFFFFF;
+    border-color: #CCCCCC;
+    border-width: 1px;
+    border-style: solid;
+    padding: 0.5em;
+    margin-bottom: 0.5em;
+    
+}
+
+#newalbum #errorlist {
+    color: #FC3333;
+    margin-bottom: 0.5em;
+}
