@@ -95,11 +95,11 @@ class UserValidator extends Validator
 		}
 	}
         
-        public function ValidateFacebookID($id)
+        public function ValidateFacebookID($fbid,$id)
         {
-             if(!dataaccess_FacebookIdUnique($id))
+             if(!dataaccess_FacebookIdUnique($fbid,$id))
              {
-                 $returnmessage['fieldname'] = "facebiijud";
+                 $returnmessage['fieldname'] = "facebookid";
 		 $returnmessage['message'] = LANG_ERROR_FACEBOOK_DUPLICATE_ID;
 		 return $returnmessage;
              }
@@ -138,7 +138,7 @@ class UserValidator extends Validator
                             $errormessages[] = $this->ValidateMail($object->getMailadress(),$id);
                         
                             #We controleren ook of er nog geen gebruiker is met dit facebook-profiel
-                            $errormessages[] = $this->ValidateFacebookID($object->getFacebookID());
+                            $errormessages[] = $this->ValidateFacebookID($object->getFacebookID(),$id);
                             
                             
                         }
