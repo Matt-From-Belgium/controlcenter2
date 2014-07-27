@@ -16,4 +16,8 @@ define('LANG_ERROR_FILE',"File");
 define('LANG_ERROR_LINE',"Line");
 define('LANG_ERROR_ENV_VARS',"Environment variables");
 define('LANG_ERROR_TRACE',"Trace");
+
+###Cookies notification
+define('LANG_COOKIES_NOTIFICATION','This site uses cookies to enhance your user experience. By continuing you agree to the use of cookies.');
+define('LANG_COOKIES_SEND_BUTTON', 'Hide this message');
 ?>

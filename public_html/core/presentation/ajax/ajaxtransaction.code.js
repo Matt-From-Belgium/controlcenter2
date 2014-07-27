@@ -258,6 +258,11 @@ function ajaxTransaction(formElement)
 	 var request = getHTTPObject();
 	 request.onreadystatechange = function() 
 	 { 
+                if(progressindicator)
+                {
+                progressindicator.style.visibility='visible';
+                }
+					                
 	 	if(request.readyState == 4)
 		{
 			if(request.status == 200)
@@ -270,10 +275,7 @@ function ajaxTransaction(formElement)
 				}
 				else
 				{
-					if(progressindicator)
-					{
-					progressindicator.style.visibility='hidden';
-					}
+
 					
 					//De gegevens worden weggeschreven naar klassevariabelen waar ze evt met de onComplete functie kunnen worden opgehaald
 					//Aangezien onComplete pas hierna wordt uitgevoerd ben je hier wel zeker dat die variabelen een waarde hebben bij het
@@ -415,6 +417,11 @@ function ajaxTransaction(formElement)
                                                         throw "onverwacht resultaat: resulttag ontbreekt. Response was: " + request.responseText;
                                                     }
                                         }
+                                        
+                                        if(progressindicator)
+					{
+					progressindicator.style.visibility='hidden';
+					}
 				}
 			}
 		}
@@ -424,12 +431,7 @@ function ajaxTransaction(formElement)
 	 
 	//Lijn gedesactiveerd op aandraden van fora. Nu worden $_POST en $_FILE correct ingevuld. 
         /*request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");*/
-	 
-	 if(progressindicator)
-	 {
-	 progressindicator.style.visibility="visible";
-	 }
-	 
+	
 	 request.send(completePoststring());
          setStatus(1);
  };
