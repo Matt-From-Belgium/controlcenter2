@@ -693,6 +693,23 @@ class htmlpage
             ###Hiermee kunnen CSS scripts per pagina geladen worden
             $this->stylesheets[]= $$platform;
         }
+        
+        ###Templatesystem R3: enableAjax laadt automatisch ajaxtransaction.js
+        #Je zou dit ook met loadScript kunnen doen. Het verschil is hier dat bij debug het niet-geobfusceerde script
+        #geladen wordt. In de andere gevallen wordt de versleutelde versie geladen
+        public function enableAjax()
+        {
+            if(getDebugMode())
+            {
+                $path = '/core/presentation/ajax/ajaxtransaction.code.js';
+            }
+            else
+            {
+                $path = '/core/presentation/ajax/ajaxtransaction.js';
+            }
+            
+            $this->loadScript($path);
+        }
 	
 	public function PrintHTML()
 	{
