@@ -158,6 +158,9 @@ class htmlpage
                 {
                     $patternbody = "/(?i)<\s*body\s*[a-z0-9=\"\']*\s*>/";
                     $html =  @preg_replace_callback($patternbody,array($this,'addCookiesNotification'), $html, 1);
+                    
+                    ###BUGFIX: als cookies melding getoond wordt moet ajaxtransaction ook geladen worden
+                    $this->enableAjax();
                 }
 		
 		
