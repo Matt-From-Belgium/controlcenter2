@@ -698,16 +698,17 @@ function dataaccess_changePassword($userid,$newpassword)
 	$db->executeQuery();
 }
 
-function dataaccess_FacebookIdUnique($id)
+function dataaccess_FacebookIdUnique($fbid,$id)
 {
     ###Deze functie gaat na of een facebook ID al voorkomt in de tabel users
     #Anders zouden er verschillende controlcenter accounts aan één profiel gekoppeld 
     #kunnen worden
     
-    $query= "SELECT users.id FROM users WHERE users.facebookid='@id'";
+    $query= "SELECT users.id FROM users WHERE users.facebookid='@fbid' AND users.id<>@id";
     
     $db = new DataConnection;
     $db->setQuery($query);
+    $db->setAttribute('fbid', $fbid);
     $db->setAttribute('id', $id);
     $db->ExecuteQuery();
     
