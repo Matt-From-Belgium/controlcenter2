@@ -156,12 +156,31 @@ class htmlpage
                ###Aangezien hier potentieel een javascript geladen wordt moet deze boven de aanroeping van appendheadtag blijven 
                 if(!isset($_COOKIE['cookies']))
                 {
-                    $patternbody = "/(?i)<\s*body\s*[a-z0-9=\"\']*\s*>/";
-                    $html =  @preg_replace_callback($patternbody,array($this,'addCookiesNotification'), $html, 1);
-                    
+                    ###We laden de nodige javascripts
                     $this->loadScript('/core/templatesystem/setcookies.js');
                     ###BUGFIX: als cookies melding getoond wordt moet ajaxtransaction ook geladen worden
                     $this->enableAjax();
+                    
+                    ###Er zijn 2 mogelijkheden om de cookies notificatie weer te geven
+                    #Als er een een tag <!CC cookies> is opgenomen wordt die tag vervangen door de notificatie
+                    #Als die er niet is wordt de notificatie ingevoegd na de head tag. Normaal zal het laatste systeem 
+                    #voor de meeste gevallen werken maar in geval van fixed layers kan het nodig zijn om
+                    #die custom tag te gebruiken.
+                    $patterncookiescustom = "/(?i)<\s*!CC\s*cookies\s*>/";
+                    
+                    ###We kijken eerst of de custom tag werd gebruikt
+                    if(preg_match($patterncookiescustom, $html)==1)
+                    {
+                        ###Er is een match
+                        $html=@preg_replace_callback($patterncookiescustom,array($this,'addCookiesNotification'), $html, 1);
+                    }
+                    else
+                    {
+                    $patternbody = "/(?i)<\s*body\s*[a-z0-9=\"\']*\s*>/";
+                    $html =  @preg_replace_callback($patternbody,array($this,'addCookiesNotification'), $html, 1);
+                    
+                    
+                    }
                 }
 		
 		
