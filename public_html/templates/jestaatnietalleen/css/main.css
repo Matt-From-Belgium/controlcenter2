@@ -31,12 +31,13 @@ body {
     
     
     padding-left: 1em;
-    margin-bottom: 0.5em;
+    margin-bottom: 0em;
     
 }
 
 #cookies input {
     margin-left: 1em;
+    margin-bottom: 0.5em;
 }
 
 #cookies div {
@@ -44,7 +45,7 @@ body {
 }
 
 #siteShell.navBig {
-   padding-top: 15em;
+   padding-top: 17.7em;
    
    transition: padding-top ease-out 0.5s;
    -webkit-transition: padding-top ease-out 0.5s; /* Safari */
@@ -257,10 +258,9 @@ input[type='button']:active,input[type='submit']:active, select:active
 }
 
 .navBig #logo {
-    position: absolute;
+    position: relative;
     top: 1em;
     left: 0.4em;
-    
     transition: top 0.5s, opacity 1s;
     -webkit-transition: top 0.5s, opacity 1s;
 }
@@ -276,9 +276,10 @@ input[type='button']:active,input[type='submit']:active, select:active
 }
 
 .navSmall #logoSmall {
-    position: absolute;
+    position: relative;
     left: 0.4em;
-    top: 0.4em;
+    //top: 0.4em;
+    top: -2em;
     
    transition: top ease-out 0.5s;
     -webkit-transition: top ease-out 0.5s;
@@ -301,6 +302,7 @@ input[type='button']:active,input[type='submit']:active, select:active
     
     transition: top ease-out 0.5s;
     -webkit-transition: top ease-out 0.5s;
+    z-index: 1000;
 }
 
 .navSmall #navLinks {
