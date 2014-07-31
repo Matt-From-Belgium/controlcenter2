@@ -314,6 +314,7 @@ input[type='button']:active,input[type='submit']:active, select:active
     
     transition: top ease-out 0.5s;
     -webkit-transition: top ease-out 0.5s;
+    z-index: 1000;
 }
 
 #navLinks a {
