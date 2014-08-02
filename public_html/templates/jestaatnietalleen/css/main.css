@@ -42,6 +42,8 @@ body {
 
 #cookies div {
     margin-bottom: 0em;
+    text-align:  center;
+    font-weight:  bold;
 }
 
 #siteShell.navBig {
