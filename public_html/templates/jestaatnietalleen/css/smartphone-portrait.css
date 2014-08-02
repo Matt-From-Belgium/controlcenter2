@@ -15,10 +15,18 @@
     display: none;
 }
 
-.navBig #logoSmall {
-    position: absolute;
+.navBig #logoSmall{
+    position: relative;
     left: 0.4em;
     top: 0.4em;
+    width: 5em;
+}
+
+.navSmall #logoSmall {
+    position: relative;
+    left: 0.4em;
+    top: 0.4em;
+    width: 5em;;
 }
 
 #siteShell.navBig ,#siteShell.navSmall {
@@ -33,7 +41,7 @@
     margin-left: auto;
     margin-right: auto;
     padding: 0em;
-    height: 17em;
+    height: 19em;
 
     width: 20em;
     background: #FFFFFF;
@@ -50,6 +58,7 @@
     margin-right: 2em;
     height: 100%;
     vertical-align: middle;
+    z-index: 1000;
 }
 
 #mobileMenu a {
@@ -90,4 +99,21 @@ input[type='button'] {
 
 label {
     font-size: 2em;
+}
+
+
+#cookies div {
+    font-size: 2em;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 1em;
+}
+
+#cookies input {
+    display: block;
+    font-size: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0em;
 }
