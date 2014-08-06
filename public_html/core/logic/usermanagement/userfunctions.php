@@ -2,8 +2,9 @@
 require_once $_SERVER['DOCUMENT_ROOT']."/core/entity/user.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/core/entity/usergroup.php";
 
-
-session_start();
+//Beveiligingsverbetering
+//session_start();
+sec_session_start();
 
 function AddUserINT($inputarray)
 {
@@ -727,5 +728,42 @@ function changePassword($oldpassword,$newpassword1,$newpassword2)
 
 	###De array met foutmeldingen wordt teruggegeven naar de presentation-layer
 	return $errormessages;
+}
+
+function sec_session_start()
+{
+    require_once $_SERVER['DOCUMENT_ROOT'].'/core/logic/parameters.php';
+    
+    ###bron http://www.wikihow.com/Create-a-Secure-Login-Script-in-PHP-and-MySQL
+    $session_name = 'secure_session';   // Set a custom session name
+    
+    //Als deze uncommented is wordt de cookie enkel via SSL verstuurd
+    //TODO
+    //afhankelijk maken van een configuratieparameter die aangeeft of er SSL is
+    
+    if(getSSLenabled())
+    {
+        $secure = SECURE;
+    }
+    
+    // This stops JavaScript being able to access the session id.
+    $httponly = true;
+    // Forces sessions to only use cookies.
+    if (ini_set('session.use_only_cookies', 1) === FALSE) {
+        throw new Exception('php ini not correctly configured');
+        exit();
+    }
+    // Gets current cookies params.
+    $cookieParams = session_get_cookie_params();
+    session_set_cookie_params($cookieParams["lifetime"],
+        $cookieParams["path"], 
+        $cookieParams["domain"], 
+        $secure,
+        $httponly);
+    // Sets the session name to the one set above.
+    session_name($session_name);
+    session_start();            // Start the PHP session 
+    session_regenerate_id();    // regenerated the session, delete the old one. 
+
 }
 ?>
