@@ -27,5 +27,3 @@
 	</div>
 	<INPUT TYPE="submit" VALUE="<!CC LANG [LANG_SEND]>" NAME="submit"><INPUT TYPE="reset" VALUE="<!CC LANG [LANG_RESET]>">
 </FORM>
-<SCRIPT LANGUAGE="javascript" SRC="/core/logic/common.js"></SCRIPT>
-<SCRIPT LANGUAGE="javascript" SRC="/core/logic/usermanagement/uservalidation.js"></SCRIPT>
