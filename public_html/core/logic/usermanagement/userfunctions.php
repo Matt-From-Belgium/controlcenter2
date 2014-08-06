@@ -14,6 +14,7 @@ function AddUserINT($inputarray)
 	require_once $_SERVER['DOCUMENT_ROOT']."/core/dataaccess/usermanagement/userfunctions.php";
 	require_once $_SERVER['DOCUMENT_ROOT']."/core/entity/exception.php";
 	
+        
 	#De inputarray zal normaal de waarde krijgen van $_GET
 	#er moet een userobject gebouwd worden met deze gegevens en dat moet dan door de validator gehaald worden
 	$newuser = new user($inputarray['username']);
@@ -52,6 +53,8 @@ function AddUserINT($inputarray)
 		$errormessages[]=$passworderror;
 	}
 	
+        ###De wachtwoorden worden met elkaar vergeleken. Bij de server komen gehashte wachtwoorden binnen
+        ###maar als de waarden in het formulier gelijk zijn moeten de hashes overeenkomen
 	if(strtolower($inputarray['password']) !== strtolower($inputarray['password2']))
 	{
 		$newmessage['fieldname'] = "password2";

@@ -18,8 +18,14 @@ function dataaccess_AddUser($userobject,$password)
 		require_once $pathtoconfig."/salt.php";
 		
 		#De saltvariabele wordt toegevoegd aan het wachtwoord
+                #Het wachtwoord dat bij de server binnenkomt is gehasht.
+                #De salt wordt ook gehashed en de samenvoeging van beiden wordt nogmaals gehashed
+                $salt = hash('sha512', $salt);
 		$password = $salt.$password;
-		$password = md5($password);
+                
+		$password = hash('sha512',$password);
+                
+                echo $password;
 		
 		$db = new dataconnection;
 		$db->setQuery($query);

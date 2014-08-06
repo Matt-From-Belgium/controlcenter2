@@ -52,6 +52,8 @@ checkPermission('usermanagement','add users');
 			
                    }
 			$html->LoadAddin("/core/presentation/usermanagement/accounts/addins/intregform.tpa");
+                        $html->loadScript('/core/logic/usermanagement/hashpwd.js');
+                        $html->loadScript('/core/logic/usermanagement/hash.js');
 	
 			#De Addin intregform bevat een loop met als parameter de array countrylist
 			#deze moet dus gedefinieerd worden.
