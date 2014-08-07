@@ -24,8 +24,6 @@ function dataaccess_AddUser($userobject,$password)
 		$password = $salt.$password;
                 
 		$password = hash('sha512',$password);
-                
-                echo $password;
 		
 		$db = new dataconnection;
 		$db->setQuery($query);

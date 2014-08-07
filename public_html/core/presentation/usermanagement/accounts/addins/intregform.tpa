@@ -8,7 +8,7 @@
 <!CC END IFSET [errorlist]>
 <FORM method="post" enctype="application/x-www-form-urlencoded" id="userform">
 	<input type="hidden" id="userid" name="userid" value='<!CC var [userid]>'>
-        <input type="hidden" id="phash" name="phash">
+        <input type="hidden" id="phash" name="phash" value='<!CC var [phash]>'>
 	<label for="text"><!CC LANG [LANG_USERNAME]></LABEL><INPUT TYPE="text" id="username" name="username" MAXLENGTH="20" value="<!CC VAR [username]>"/><BR />
 <label for="mail"><!CC LANG [LANG_MAIL]></label><input type="text" id="mail" name="mail" MAXLENGTH="50" VALUE="<!CC VAR [mail]>" /><BR />
 <label for="firstname"><!CC LANG [LANG_FIRSTNAME]></LABEL><INPUT TYPE="text" id="firstname" name="firstname" MAXLENGTH="30" value="<!CC VAR [firstname]>"/><BR />
@@ -28,4 +28,9 @@
 	</div>
 	<INPUT TYPE="submit" VALUE="<!CC LANG [LANG_SEND]>" NAME="submit"><INPUT TYPE="reset" VALUE="<!CC LANG [LANG_RESET]>">
 </FORM>
-<script>activateHash();</script>
+<script>
+activateHash();
+document.getElementById('password').onfocus = function(){clearPasswordFields();};
+document.getElementById('password2').onfocus = function(){clearPasswordFields();};
+
+</script>

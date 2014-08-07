@@ -10,6 +10,9 @@ function activateHash()
     var form = document.getElementById('userform');
 
     form.onsubmit = function(){
+        //We kijken eerst of het wachtwoord niet al gehashed is door een vorige ingave
+        if(document.getElementById('phash').value>0)
+        {    
         //het formulier wordt doorgestuurd, we maken vooraf de hash aan
         var password1 = document.getElementById('password').value;
         var password2 = document.getElementById('password2').value;
@@ -21,5 +24,26 @@ function activateHash()
         password2 = null;
         
         alert('ok');
+        }
     };
+    
+    //We moeten nu wel zorgen dat wanneer de hash al berekend is dat de gebruiker deze niet kan wijzigen
+    //Wanneer er op het wachtwoordveld geklikt wordt moet alles blanco worden
+    document.getElementById('password').onfocus = function(){clearPasswordFields();};
+    document.getElementById('password2').onfocus = function(){clearPasswordFields();};
+
+}
+
+function clearPasswordFields()
+{
+    if(document.getElementById('phash').value<=0)
+    {
+        document.getElementById('password').value=null;
+        document.getElementById('password2').value=null;
+        
+        //Aangezien het om een nieuw wachtwoord gaat moet er gehashed worden
+        document.getElementById('phash').value=1;
+    }
+    
+
 }

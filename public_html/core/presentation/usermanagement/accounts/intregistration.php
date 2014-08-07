@@ -44,13 +44,38 @@ checkPermission('usermanagement','add users');
                    if(isset($_POST['submit']))
                    {
 			$html->setVariable("username",$_POST['username']);
-			$html->setVariable("password",$_POST['password']);
-			$html->setVariable("password2",$_POST['password2']);
+                        
+                        if($_POST['password'] !== 'cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e')
+                        {
+                            ###Als de waarde van het wachtwoord overeenkomst met de hash van null dan moet geen waarde teruggegeven worden
+                            $html->setVariable("password",$_POST['password']);
+                            $html->setVariable("password2",$_POST['password2']);
+                            
+                            ###Er moet dan niet meer opnieuw gehashed worden want dat is gebeurd bij eerste ingave
+                            $html->setVariable("phash",'0');
+                        }
+                        else
+                        {
+                            #Wanneer het veld niet ingevuld was moet het veld blanco zijn bij tweede presentatie aan de gebruiker
+                            #anders komt dat niet logisch over. Maar het wachtwoord dat dan ingevuld wordt moet wel opnieuw gehashed worden
+                            $html->setVariable("phash",'1');
+                        }
+                        
+                        
 			$html->setVariable("mail",$_POST['mail']);
 			$html->setVariable("firstname",$_POST['firstname']);
 			$html->setVariable("lastname",$_POST['lastname']);
+                        
+                        
 			
                    }
+                   else
+                   {
+                       #DE variabele phash is een indicator voor het javascript dat het wachtwoord niet
+                        #nog eens gehashed moet worden. Hier gaat het om eerste weergave => hashen is nodig
+                        $html->setVariable("phash",'1');
+                   }
+                   
 			$html->LoadAddin("/core/presentation/usermanagement/accounts/addins/intregform.tpa");
                         $html->loadScript('/core/logic/usermanagement/hashpwd.js');
                         $html->loadScript('/core/logic/usermanagement/hash.js');

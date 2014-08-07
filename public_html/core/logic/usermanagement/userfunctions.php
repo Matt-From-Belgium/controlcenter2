@@ -59,7 +59,7 @@ function AddUserINT($inputarray)
 	{
 		$newmessage['fieldname'] = "password2";
 		$newmessage['message'] = LANG_ERROR_PASSWORDMATCH;	
-		$errormessages [] = $newmessage;
+		$errormessages [] = $newmessage;               
 	}
 	
 	if(empty($errormessages))
