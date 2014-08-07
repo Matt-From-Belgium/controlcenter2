@@ -23,7 +23,7 @@ function activateHash()
         password1 = null;
         password2 = null;
         
-        alert('ok');
+        
         }
     };
     

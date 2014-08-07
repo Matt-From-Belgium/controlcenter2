@@ -121,9 +121,9 @@ function AddUserEXT($inputarray)
 		$errormessages[]=$passworderror;
 	}
 	
-	if(strtolower($inputarray['password']) !== strtolower($inputarray['password2']))
+	if(strtolower($inputarray['password1']) !== strtolower($inputarray['password2']))
 	{
-		$newmessage['fieldname'] = "password2";
+		$newmessage['fieldname'] = "passwordnomatch";
 		$newmessage['message'] = LANG_ERROR_PASSWORDMATCH;	
 		$errormessages [] = $newmessage;
 	}
