@@ -45,20 +45,23 @@ checkPermission('usermanagement','add users');
                    {
 			$html->setVariable("username",$_POST['username']);
                         
-                        if($_POST['password'] !== 'cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e')
+                        if($_POST['password1'] == 'cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e')
                         {
-                            ###Als de waarde van het wachtwoord overeenkomst met de hash van null dan moet geen waarde teruggegeven worden
-                            $html->setVariable("password",$_POST['password']);
-                            $html->setVariable("password2",$_POST['password2']);
-                            
-                            ###Er moet dan niet meer opnieuw gehashed worden want dat is gebeurd bij eerste ingave
-                            $html->setVariable("phash",'0');
+                            echo "ok";
+                            ###Er moet  opnieuw gehashed worden want er zal nieuwe ingave gebeuren
+                            $html->setVariable("phash",'1');
+                            $html->setVariable("password1","");
+                            $html->setVariable("password2","");
                         }
                         else
                         {
-                            #Wanneer het veld niet ingevuld was moet het veld blanco zijn bij tweede presentatie aan de gebruiker
-                            #anders komt dat niet logisch over. Maar het wachtwoord dat dan ingevuld wordt moet wel opnieuw gehashed worden
-                            $html->setVariable("phash",'1');
+                            ###Als de waarde van het wachtwoord niet overeenkomt met de hash van null dan moet een waarde teruggegeven worden
+                            $html->setVariable("password1",$_POST['password1']);
+                            $html->setVariable("password2",$_POST['password2']);
+                            #wachtwoord had een waarde dus deze wordt teruggegeven, ze moet niet opnieuw gehasht worden
+                            #Als de gebruiker de velden toch wil aanpassen zal het javascript hashing opnieuw activeren
+                            #als een hacker dat proces zou tegengaan maakt dat niet uit dan zal de account mogelijk onbruikbaar blijken
+                            $html->setVariable("phash",'0');
                         }
                         
                         

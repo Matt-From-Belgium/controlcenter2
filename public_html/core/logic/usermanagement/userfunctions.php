@@ -46,7 +46,7 @@ function AddUserINT($inputarray)
 	$errormessages = $validator->ValidateObject($newuser);
 	
 	##In het userobject is er geen ruimte voorzien voor het wachtwoord, maar ook dit moet gevalideerd worden
-	$passworderror = $validator->ValidateField("password",$inputarray['password'],-1,"array");
+	$passworderror = $validator->ValidateField("password",$inputarray['password1'],-1,"array");
 	
 	if(!empty($passworderror))
 	{
@@ -55,9 +55,9 @@ function AddUserINT($inputarray)
 	
         ###De wachtwoorden worden met elkaar vergeleken. Bij de server komen gehashte wachtwoorden binnen
         ###maar als de waarden in het formulier gelijk zijn moeten de hashes overeenkomen
-	if(strtolower($inputarray['password']) !== strtolower($inputarray['password2']))
+	if(strtolower($inputarray['password1']) !== strtolower($inputarray['password2']))
 	{
-		$newmessage['fieldname'] = "password2";
+		$newmessage['fieldname'] = "passwordnomatch";
 		$newmessage['message'] = LANG_ERROR_PASSWORDMATCH;	
 		$errormessages [] = $newmessage;               
 	}
@@ -65,7 +65,7 @@ function AddUserINT($inputarray)
 	if(empty($errormessages))
 	{
 		###Geen fouten => gebruiker toevoegen
-		dataaccess_Adduser($newuser,$inputarray['password']);
+		dataaccess_Adduser($newuser,$inputarray['password1']);
 	}
 
 	return $errormessages;

@@ -14,7 +14,7 @@
 <label for="firstname"><!CC LANG [LANG_FIRSTNAME]></LABEL><INPUT TYPE="text" id="firstname" name="firstname" MAXLENGTH="30" value="<!CC VAR [firstname]>"/><BR />
 	<label for="lastname"><!CC LANG [LANG_LASTNAME]></label><input type="text" id="lastname" name="lastname" maxlength="30" value="<!CC VAR [lastname]>" /><BR />
     
-    <label for="password"><!CC LANG [LANG_PASSWORD]></LABEL><INPUT TYPE="password" id="password" name="password" MAXLENGTH="20" value="<!CC VAR [password]>"/><BR />
+    <label for="password1"><!CC LANG [LANG_PASSWORD]></LABEL><INPUT TYPE="password" id="password1" name="password1" MAXLENGTH="20" value="<!CC VAR [password1]>"/><BR />
     <label for="password2"><!CC LANG [LANG_PASSWORD_CONFIRM]></label><INPUT TYPE="password" id="password2" name="password2" MAXLENGTH="20" value="<!CC VAR [password2]>"/><BR />
 	<label for="passwordchangerequired"><!CC LANG [LANG_PASSWORD_CHANGE_REQUIRED]></label><INPUT type="checkbox" name="passwordchangerequired" <!CC VAR [passwordchangerequired]> ><br />
 	
@@ -30,7 +30,7 @@
 </FORM>
 <script>
 activateHash();
-document.getElementById('password').onfocus = function(){clearPasswordFields();};
+document.getElementById('password1').onfocus = function(){clearPasswordFields();};
 document.getElementById('password2').onfocus = function(){clearPasswordFields();};
 
 </script>
