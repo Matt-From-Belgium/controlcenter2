@@ -114,7 +114,7 @@ function AddUserEXT($inputarray)
 	$errormessages = $validator->ValidateObject($newuser);
 	
 	##In het userobject is er geen ruimte voorzien voor het wachtwoord, maar ook dit moet gevalideerd worden
-	$passworderror = $validator->ValidateField("password",$inputarray['password'],-1,"array");
+	$passworderror = $validator->ValidateField("password",$inputarray['password1'],-1,"array");
 	
 	if(!empty($passworderror))
 	{
