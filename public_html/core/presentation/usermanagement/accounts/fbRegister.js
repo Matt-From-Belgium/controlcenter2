@@ -201,7 +201,7 @@ function getFacebookUserDetails()
 
 function blockPasswordFields()
 {
-        document.getElementById('password').disabled = true;
+        document.getElementById('password1').disabled = true;
         document.getElementById('password2').disabled = true;
         
         //aangezien er geen wachtwoord moet opgegeven worden moet er ook niet gehashed worden

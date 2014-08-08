@@ -66,7 +66,6 @@ if(getSelfRegisterStatus())
                         {
                             if($_POST['submit'])
                             {
-                                echo "ok";
                                 ###Als de waarde van het wachtwoord niet overeenkomt met de hash van null dan moet een waarde teruggegeven worden
                                 $html->setVariable("password1",$_POST['password1']);
                                 $html->setVariable("password2",$_POST['password2']);
@@ -127,7 +126,7 @@ if(getSelfRegisterStatus())
 			$html->LoadAddin("/core/presentation/usermanagement/accounts/addins/extregform.tpa");
                         $html->loadScript('/core/logic/usermanagement/hashpwd.js');
                         $html->loadScript('/core/logic/usermanagement/hash.js');
-
+                        $html->loadScript('/core/presentation/usermanagement/accounts/fbRegister.final.js');
 		
 			$html->PrintHTML();
 		}

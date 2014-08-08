@@ -247,6 +247,7 @@ function addUserEXT_FB($inputarray)
                 
                 ###Aangezien de gebruiker geen wachtwoord moet opgeven en we ook niet willen dat het wachtwoord achterhaald kan worden
                 ###plaatsen we een willekeurige waarde als wachtwoord
+                #We houden hier de encryptie op MD5 terwijl dit overal elders SHA512 geworden is.
                 $fictionalpass = md5(microtime());
             
 		$newuserid=dataaccess_Adduser($newuser,$fictionalpass);
