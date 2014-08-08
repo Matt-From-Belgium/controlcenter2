@@ -138,7 +138,7 @@ function AddUserEXT($inputarray)
 	if(empty($errormessages))
 	{
 		###Geen fouten => gebruiker toevoegen
-		$newuserid=dataaccess_Adduser($newuser,$inputarray['password']);
+		$newuserid=dataaccess_Adduser($newuser,$inputarray['password1']);
 		
 		###Afhankelijk van de activatieprocedure die is ingesteld moet er een mail gestuurd worden naar de gebruiker.
 		if(getUserActivationParameter())
@@ -358,7 +358,7 @@ function getUsergroups()
 function getUser($id)
 {
 	require_once $_SERVER['DOCUMENT_ROOT']."/core/dataaccess/usermanagement/userfunctions.php";
-	return dataaccess_getUser($id);
+	return dataaccess_getUser(intval($id));
 }
 
 function editUser($inputarray)
@@ -407,7 +407,7 @@ function editUser($inputarray)
 	$errormessages = $uservalidator->validateObject($editeduser);
 	
 	##Nu nog de passwordcontrole, password en password2 moeten gelijk zijn aan elkaar.
-	if($inputarray['password'] !== $inputarray['password2'])
+	if($inputarray['password1'] !== $inputarray['password2'])
 	{
 		$errormessage['field'] = "password2";
 		$errormessage['message'] = LANG_ERROR_PASSWORDMATCH;	
@@ -418,7 +418,7 @@ function editUser($inputarray)
 	if(empty($errormessages))
 	{
 		##Wijzigingen ok => gebruiker mag gewijzigd worden.
-		dataaccess_EditUser($editeduser,$_POST['password']);
+		dataaccess_EditUser($editeduser,$_POST['password1']);
 	}
 
 	return $errormessages;

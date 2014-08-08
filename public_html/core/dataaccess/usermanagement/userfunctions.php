@@ -13,17 +13,8 @@ function dataaccess_AddUser($userobject,$password)
 	{
 		#Eerst moet de query gedefinieerd worden
 		$query = "INSERT INTO users (username,facebookid,password,passwordchangerequired,userconfirmation,adminconfirmation,realname,realfirstname,mailadress) VALUES ('@username','@facebookid','@password','@passwordchangerequired','@userconfirmation','@adminconfirmation','@realname','@realfirstname','@mailadress')";
-		
-		include $_SERVER['DOCUMENT_ROOT']."/core/pathtoconfig.php";
-		require_once $pathtoconfig."/salt.php";
-		
-		#De saltvariabele wordt toegevoegd aan het wachtwoord
-                #Het wachtwoord dat bij de server binnenkomt is gehasht.
-                #De salt wordt ook gehashed en de samenvoeging van beiden wordt nogmaals gehashed
-                $salt = hash('sha512', $salt);
-		$password = $salt.$password;
-                
-		$password = hash('sha512',$password);
+
+		$password=encryptPWD($password);
 		
 		$db = new dataconnection;
 		$db->setQuery($query);
@@ -391,14 +382,11 @@ function dataaccess_EditUser($userobject,$password)
 	###eerst wordt gekekekn of $password een waarde bevat. Als dat niet het geval is dan wordt er niks aan
 	###het wachtwoord gewijzigd. Als er wel een waarde is wordt het wachtwoord gewijzigd.
 
+
+    
 	if(!empty($password))
 	{
-		include $_SERVER['DOCUMENT_ROOT']."/core/pathtoconfig.php";
-		require_once $pathtoconfig."/salt.php";
-		
-		#De saltvariabele wordt toegevoegd aan het wachtwoord
-		$password = $salt.$password;
-		$password = md5($password);
+		$password=encryptPWD($password);
 		
 		##Het nieuwe wachtwoord wordt naar de database geschreven.
 		$db = new dataconnection;
@@ -724,5 +712,22 @@ function dataaccess_FacebookIdUnique($fbid,$id)
     {
         return true;
     }
+}
+
+function encryptPWD($password)
+{
+    ###Dit is geen databasefunctie maar omdat adduser en edituser dezelfde encryptie moeten gebruiken centraliseren we die hier
+    		include $_SERVER['DOCUMENT_ROOT']."/core/pathtoconfig.php";
+                require_once $pathtoconfig."/salt.php";
+		
+		#De saltvariabele wordt toegevoegd aan het wachtwoord
+                #Het wachtwoord dat bij de server binnenkomt is gehasht.
+                #De salt wordt ook gehashed en de samenvoeging van beiden wordt nogmaals gehashed
+                $salt = hash('sha512', $salt);
+		$password = $salt.$password;
+                
+		$password = hash('sha512',$password);
+                
+                return $password;
 }
 ?>
