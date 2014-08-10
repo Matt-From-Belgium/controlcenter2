@@ -692,6 +692,9 @@ function changePassword($oldpassword,$newpassword1,$newpassword2)
 {
 	require_once $_SERVER['DOCUMENT_ROOT'].'/core/dataaccess/usermanagement/userfunctions.php';
 	
+        ##Dit is de SHA512 hash van niks
+        $emptyhash = 'cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e';
+        
 	if(($oldpassword == $newpassword1) and ($newpassword1 == $newpassword2) and ((!empty($oldpassword)) ||(!empty($newpassword1)) ||(!empty($newpassword2))))
 	{
 		$errormessage['field'] = "password1";
@@ -707,7 +710,7 @@ function changePassword($oldpassword,$newpassword1,$newpassword2)
 		$errormessages[]=$errormessage;
 	}
 	
-	if((empty($newpassword1)) || (empty($newpassword2)))
+	if(($newpassword1==$emptyhash) || ($newpassword2==$emptyhash))
 	{
 		$errormessage['field']= "password1";
 		$errormessage['message'] = LANG_ERROR_NEWPASS_EMPTY;
@@ -715,21 +718,24 @@ function changePassword($oldpassword,$newpassword1,$newpassword2)
 		$errormessages[] = $errormessage;
 	}
 
-	###De velden zijn ingevuld, nu moet gecontroleerd worden of het oude wachtwoord wel klopt
-	if(checkUserPassword($_SESSION['currentuser']->getUsername(),$oldpassword))
-	{
-		###Het oude wachtwoord klopt, we kunnen het wachtwoord wijzigen
-		dataaccess_changePassword($_SESSION['currentuser']->getId(),$newpassword1);
-	}
-	else
-	{
-		###Het oude wachtwoord klopt niet => error
-		$errormessage['field']="oldpassword";
-		$errormessage['message']=LANG_ERROR_PASSWORD_INCORRECT;
-		
-		$errormessages[] = $errormessage;
-	}
+        if(!is_array($errormessage))
+        {
+            ###De velden zijn ingevuld, nu moet gecontroleerd worden of het oude wachtwoord wel klopt
+            if(checkUserPassword($_SESSION['currentuser']->getUsername(),$oldpassword))
+            {
+                    ###Het oude wachtwoord klopt, we kunnen het wachtwoord wijzigen 
+                    dataaccess_changePassword($_SESSION['currentuser']->getId(),$newpassword1);
+            }
+            else
+            {
+                    ###Het oude wachtwoord klopt niet => error
+                    $errormessage['field']="oldpassword";
+                    $errormessage['message']=LANG_ERROR_PASSWORD_INCORRECT;
 
+                    $errormessages[] = $errormessage;
+            }
+        }
+            
 	###De array met foutmeldingen wordt teruggegeven naar de presentation-layer
 	return $errormessages;
 }

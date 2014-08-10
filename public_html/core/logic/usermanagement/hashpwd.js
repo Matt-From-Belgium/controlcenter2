@@ -4,6 +4,12 @@
  * and open the template in the editor.
  */
 
+function encryptPassword(password)
+{
+    var encrypted = hex_sha512(password);
+    return encrypted;
+}
+
 function activateHash()
 {
     //We zoeken het gebruikerformulier
@@ -17,8 +23,8 @@ function activateHash()
         var password1 = document.getElementById('password1').value;
         var password2 = document.getElementById('password2').value;
         
-        document.getElementById('password1').value = hex_sha512(password1);
-        document.getElementById('password2').value = hex_sha512(password2);
+        document.getElementById('password1').value = encryptPassword(password1);
+        document.getElementById('password2').value = encryptPassword(password2);
         
         password1 = null;
         password2 = null;
@@ -39,8 +45,22 @@ function hashLogin()
     //We halen het wachtwoord op
     var password = document.getElementById('p').value;
     
-    document.getElementById('p').value = hex_sha512(password);
+    document.getElementById('p').value = encryptPassword(password);
     
+}
+
+function hashPasswordChange()
+{
+            document.getElementById('passwordchange').onsubmit = function(){
+            var oldpass = document.getElementById('oldpassword').value;
+            var newpass1 = document.getElementById('newpassword1').value;
+            var newpass2 = document.getElementById('newpassword2').value;
+    
+            document.getElementById('oldpassword').value = encryptPassword(oldpass);
+            document.getElementById('newpassword1').value = encryptPassword(newpass1);
+            document.getElementById('newpassword2').value = encryptPassword(newpass2);
+    };
+
 }
 
 function clearPasswordFields()

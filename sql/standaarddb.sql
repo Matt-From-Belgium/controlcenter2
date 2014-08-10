@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 30, 2014 at 08:10 PM
+-- Generation Time: Aug 10, 2014 at 11:58 AM
 -- Server version: 5.5.38-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.3
 
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `parameters` (
   `overridable` bit(1) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `search_by_name` (`name`(20))
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
 
 --
 -- Dumping data for table `parameters`
@@ -87,16 +87,17 @@ INSERT INTO `parameters` (`id`, `name`, `value`, `overridable`) VALUES
 (005, 'CORE_USER_EXT_REGISTRATION', '0', b'0'),
 (006, 'CORE_NOACCESS_URL', '', b'0'),
 (007, 'CORE_SERVER_MAILADRESS', 'noreply@dragoneyehosting.be', b'0'),
-(008, 'CORE_DEBUG_MODE', '1', b'0'),
-(009, 'CORE_DEBUG_MAIL', 'matthiasba@linux.be', b'0'),
+(008, 'CORE_DEBUG_MODE', '0', b'0'),
+(009, 'CORE_DEBUG_MAIL', 'matthias.bauw@gmail.com', b'0'),
 (010, 'CORE_FB_LOGIN_ENABLED', '0', b'0'),
 (011, 'CORE_FB_APPID', '', b'0'),
 (012, 'CORE_FB_SAPPID', '', b'0'),
 (013, 'CORE_FB_SCOPE', 'email', b'0'),
-(014, 'CORE_SITE_NAME', 'testserver', b'0'),
+(014, 'CORE_SITE_NAME', 'CONTROLCENTER SERVER', b'0'),
 (015, 'CORE_FB_APP_NAMESPACE', '', b'0'),
 (016, 'SITE_META_TITLE', 'CONTROLCENTER SERVER', b'0'),
 (017, 'SITE_META_DESCRIPTION', 'Controlcenter testserver', b'0'),
+(022, 'CORE_SSL_ENABLED', '0', b'0'),
 (018, 'SITE_META_IMAGE', '', b'0'),
 (019, 'SITE_META_URL', '', b'0'),
 (020, 'CORE_RECAPTCHA_PUBLIC', '6LdR-eYSAAAAAEboUatksFIHeb6m4CvmTT1-7_5p ', b'0'),
@@ -235,7 +236,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `id` int(6) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `username` varchar(20) NOT NULL,
   `facebookid` varchar(20) DEFAULT NULL,
-  `password` varchar(32) NOT NULL,
+  `password` varchar(128) NOT NULL,
   `passwordchangerequired` enum('1','0') NOT NULL DEFAULT '0',
   `userconfirmation` enum('1','0') NOT NULL DEFAULT '0',
   `adminconfirmation` enum('1','0') NOT NULL DEFAULT '0',
@@ -246,14 +247,14 @@ CREATE TABLE IF NOT EXISTS `users` (
   `country` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `search_by_username` (`username`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=41 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=67 ;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `facebookid`, `password`, `passwordchangerequired`, `userconfirmation`, `adminconfirmation`, `realname`, `realfirstname`, `mailadress`, `website`, `country`) VALUES
-(000001, 'Admin', '', '71ea9c396816dc0db6571445abe2842f', '0', '1', '1', 'Bauw', 'Matthias', 'matthias@ittakestwo.be', '', 'BE');
+(000001, 'Matt', '', '90f214fc81d4dcc5d1b2d30c4ebae28e2bbaeba7043321a2dc34a2bc525cfde35b4d7dfbb9c9c7666265c7d228a51412a2873961780debe0d0fef83c08968f17', '0', '1', '1', 'Bauw', 'Matthias', 'matthias.bauw@gmail.com', NULL, NULL);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -670,15 +670,10 @@ function dataaccess_getPermissions()
 }
 
 function dataaccess_changePassword($userid,$newpassword)
-{
-	###De salt moet toegevoegd worden aan het nieuwe wachtwoord.
-	include $_SERVER['DOCUMENT_ROOT']."/core/pathtoconfig.php";
-	include $pathtoconfig."/salt.php";
-		
+{	
 	#De saltvariabele wordt toegevoegd aan het wachtwoord
-	$newpassword = $salt.$newpassword;
-	$newpassword = md5($newpassword);	
-	
+	$newpassword = encryptPWD($newpassword);
+       
 	###Het nieuwe wachtwoord wordt naar de database geschreven
 	$query = "UPDATE users SET users.password='@newpassword',users.passwordchangerequired=0 WHERE users.id='@userid'";
 	
@@ -717,12 +712,16 @@ function encryptPWD($password)
 {
     ###Dit is geen databasefunctie maar omdat adduser en edituser dezelfde encryptie moeten gebruiken centraliseren we die hier
     		include $_SERVER['DOCUMENT_ROOT']."/core/pathtoconfig.php";
-                require_once $pathtoconfig."/salt.php";
+                
+                ###Deze moet op include blijven staan! anders kan dit problemen geven als de salt in één call meerdere keren uitgevoerd wordt
+                #De salt wordt dan mogelijk meerdere keren gehasht
+                include $pathtoconfig."/salt.php";
 		
 		#De saltvariabele wordt toegevoegd aan het wachtwoord
                 #Het wachtwoord dat bij de server binnenkomt is gehasht.
                 #De salt wordt ook gehashed en de samenvoeging van beiden wordt nogmaals gehashed
                 $salt = hash('sha512', $salt);
+                
 		$password = $salt.$password;
                 
 		$password = hash('sha512',$password);

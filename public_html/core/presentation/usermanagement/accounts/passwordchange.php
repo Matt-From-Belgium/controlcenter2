@@ -36,7 +36,9 @@ if(isset($_SESSION['currentuser']))
 	{
 		$html = new htmlpage('backend');
 		$html->LoadAddin('/core/presentation/usermanagement/accounts/addins/changepassword.tpa');
-		
+                $html->loadScript('/core/logic/usermanagement/hashpwd.js');
+                $html->loadScript('/core/logic/usermanagement/hash.js');
+                
 		###Als de waarde $_GET['d'] gedefinieerd is dan komen we uit de inlogprocedure => bericht aan de gebruiker dat hij dit
 		###scherm krijgt omdat de administrator dat zo bepaald heeft.
 		if(isset($_GET['d']))
