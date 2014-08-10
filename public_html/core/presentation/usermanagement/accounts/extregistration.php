@@ -124,8 +124,8 @@ if(getSelfRegisterStatus())
                         
                         
 			$html->LoadAddin("/core/presentation/usermanagement/accounts/addins/extregform.tpa");
-                        $html->loadScript('/core/logic/usermanagement/hashpwd.js');
-                        $html->loadScript('/core/logic/usermanagement/hash.js');
+                        $html->loadScript('/core/logic/usermanagement/hashpwd.final.js');
+                        $html->loadScript('/core/logic/usermanagement/hash.final.js');
                         $html->loadScript('/core/presentation/usermanagement/accounts/fbRegister.final.js');
 		
 			$html->PrintHTML();

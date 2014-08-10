@@ -135,8 +135,8 @@ checkPermission('usermanagement','edit users');
 			}
 			
 				$html->setVariable("usergrouplist",$usergrouplist);	
-                                        $html->loadScript('/core/logic/usermanagement/hashpwd.js');
-                                        $html->loadScript('/core/logic/usermanagement/hash.js');
+                                        $html->loadScript('/core/logic/usermanagement/hashpwd.final.js');
+                                        $html->loadScript('/core/logic/usermanagement/hash.final.js');
 					$html->LoadAddin("/core/presentation/usermanagement/accounts/addins/edituser.tpa");
 					$html->printHTML();
 				
