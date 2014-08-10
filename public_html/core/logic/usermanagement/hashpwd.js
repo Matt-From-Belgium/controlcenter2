@@ -34,6 +34,15 @@ function activateHash()
 
 }
 
+function hashLogin()
+{
+    //We halen het wachtwoord op
+    var password = document.getElementById('p').value;
+    
+    document.getElementById('p').value = hex_sha512(password);
+    
+}
+
 function clearPasswordFields()
 {
     if(document.getElementById('phash').value<=0)

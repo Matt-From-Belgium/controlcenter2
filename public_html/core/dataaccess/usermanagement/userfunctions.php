@@ -487,11 +487,10 @@ function dataaccess_checkUserPassword($username,$password)
 	###Eerst nakijken of beide waarden werden opgegeven
 	if(isset($username) or isset($password))
 	{
-		###eerst moet er rekening gehouden worden met de saltvariabele die zich in de configuratie van de server
-		###bevindt
-		include $_SERVER['DOCUMENT_ROOT']."/core/pathtoconfig.php";
-		require_once $pathtoconfig."/salt.php";
-		$password = md5($salt.$password);
+		###We versleutelen het ingevoerde wachtwoord net zoals we het wachtwoord versleutelen bij
+                #creatie van gebruikers
+                $password = encryptPWD($password);
+                
 		###Opvragen van de gebruikers met gebruikersnaam $username en wachtwoord $password
 		$query = "SELECT users.id FROM users WHERE users.username='@username' AND users.password='@password'";
 		$db = new dataconnection();

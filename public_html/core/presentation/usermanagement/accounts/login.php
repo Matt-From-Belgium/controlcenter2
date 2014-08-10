@@ -34,7 +34,8 @@ if((!isset($_POST['u']))&&(!isset($_POST['p']))&&(!isset($_POST['d'])))
         ###Het script wordt rechtstreeks ingeladen => loginpagina weergeven.
         $html = new HTMLpage('frontend');
         $html->LoadAddin('/core/presentation/usermanagement/accounts/addins/login.tpa');
-
+        $html->loadScript('/core/logic/usermanagement/hash.js');
+        $html->loadScript('/core/logic/usermanagement/hashpwd.js');
     
         ###We geven login links voor sociale netwerken een lege waarde, worden later opgevuld;
         $fbloginlink = null;
@@ -97,6 +98,8 @@ else
 		###De loginprocedure is niet geslaagd, de gebruiker wordt naar de loginpagina gebracht.
 		$html = new HTMLpage('frontend');
 		$html->LoadAddin('/core/presentation/usermanagement/accounts/addins/login.tpa');
+                $html->loadScript('/core/logic/usermanagement/hash.js');
+                $html->loadScript('/core/logic/usermanagement/hashpwd.js');
 	
 		###De destination moet meegekopieerd worden zodat een gebruiker bij de 2e poging nog altijd doorgaat naar
 		###de bedoelde bestemmingspagina.
