@@ -727,18 +727,19 @@ function dataaccess_getPermissions()
 
 function dataaccess_changePassword($userid,$newpassword)
 {	
-        #we halen de gebruikerspecifieke salt op
-        $usersalt = dataaccess_getUserSalt($userid);
+        #we genereren een nieuwe usersalt
+        $usersalt = dataaccess_generateUserSalt();
     
 	#De saltvariabele wordt toegevoegd aan het wachtwoord
 	$newpassword = encryptPWD($newpassword,$usersalt);
        
 	###Het nieuwe wachtwoord wordt naar de database geschreven
-	$query = "UPDATE users SET users.password='@newpassword',users.passwordchangerequired=0 WHERE users.id='@userid'";
+	$query = "UPDATE users SET users.password='@newpassword',users.salt='@newsalt',users.passwordchangerequired=0 WHERE users.id='@userid'";
 	
 	$db = new dataconnection();
 	$db->setQuery($query);
 	$db->setAttribute("newpassword",$newpassword);
+        $db->setAttribute("newsalt", $usersalt);
 	$db->setAttribute("userid",$userid);
 	$db->executeQuery();
 }
