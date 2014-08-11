@@ -501,6 +501,10 @@ function Login($username,$password,$d)
 				###De gebruikersgegevens waren correct, en de account is volledig actief => de gebruiker mag ingelogd worden
 				$_SESSION['currentuser'] = $user;
 				
+                                ###We genereren de session hash om hijacking moeilijker te maken
+                                $hash = generateSessionHash();
+                                $_SESSION['loginstring']=$hash;
+                                
 				###Nu moet er gecontroleerd worden of de gebruiker zijn wachtwoord moet wijzigen. Als dat het geval is dan moet
 				###de gebruiker worden doorverwezen naar de pagina voor het wijzigen van zijn wachtwoord.
 				if($user->getPasswordChangeRequired()==1)
@@ -565,7 +569,9 @@ function Login_FB()
 			{
 				###De gebruikersgegevens waren correct, en de account is volledig actief => de gebruiker mag ingelogd worden
 				$_SESSION['currentuser'] = $user;
-				
+				###We genereren de session hash om hijacking moeilijker te maken
+                                $hash = generateSessionHash();
+                                $_SESSION['loginstring']=$hash;
 				
 			}
 			else
@@ -591,9 +597,15 @@ function checkPermission($module,$permission)
 	###Deze functie controleert of een gebruiker toegang heeft tot een bepaalde moduletask
 	
 	###Eerst wordt gekeken of er wel een gebruiker is ingelogd
-	if(isset($_SESSION['currentuser']))
+        #Bij het inloggen wordt een sessionhash gecreëerd. Deze wordt opgeslagen onder $_SESSION['loginstring']
+        #De hash kan herberekend worden. Zolang de gebruiker dezelfde browser op dezelfde pc gebruikt zal de hash
+        #gelijk blijven. Wanneer de sessie gekaapt wordt zal deze variabele wijzigen en wordt ingegrepen
+    
+        $sessionhash = generateSessionHash();
+    
+	if(isset($_SESSION['currentuser']) && ($sessionhash==$_SESSION['loginstring']))
 	{	
-		###De gebruiker is ingelogd. Nu moeten we dus controleren of de gebruikersnaam wel recht heeft om deze pagina te bekijken.
+		###De gebruiker is ingelogd en de hashcontrole is geslaagd. Nu moeten we dus controleren of de gebruikersnaam wel recht heeft om deze pagina te bekijken.
 		###Eerst halen we de lijst van gebruikergroepen op waar de gebruiker bij behoort.
 		###BUGFIX: de toegangsrechten van de gebruiker worden bij inloggen in de sessievariabele opgeslagen. Dat betekent dat
 		###Wanneer er tijdens de sessie iets verandert dat dat dan tot problemen leidt  => bij gebruik van checkpermission laden
@@ -668,6 +680,11 @@ function checkPermission($module,$permission)
 	{
 		###Geen gebruiker ingelogd => naar inlogpagina. De query d wordt meegegeven om ervoor te zorgen dat de gebruiker na het inloggen
 		###terug naar dezelfde pagina kan worden geleid.
+            
+                ###Ook als de sessionhash zou gewijzigd zijn (kaping?) wordt deze code uitgevoerd. Vandaar dat we hier
+                #Een eventueel bestaande sessie vernietigen.
+                logout();
+            
 		$d = $_SERVER['SCRIPT_NAME'];
 		
 		###Als de url een querystring bevat moet deze meegenomen worden
@@ -679,6 +696,26 @@ function checkPermission($module,$permission)
 		header("location: /core/presentation/usermanagement/accounts/login.php?d=$d");
 		exit;
 	}
+}
+
+function logout()
+{
+    // Unset all session values 
+    $_SESSION = array();
+ 
+    // get session parameters 
+    $params = session_get_cookie_params();
+ 
+    // Delete the actual cookie. 
+    setcookie(session_name(),
+            '', time() - 42000, 
+            $params["path"], 
+            $params["domain"], 
+            $params["secure"], 
+            $params["httponly"]);
+ 
+    // Destroy session 
+    session_destroy();
 }
 
 function getPermissions()
@@ -775,5 +812,21 @@ function sec_session_start()
     session_start();            // Start the PHP session 
     session_regenerate_id();    // regenerated the session, delete the old one. 
 
+}
+
+function generateSessionHash()
+{
+    if(isset($_SERVER['REMOTE_ADDR'])&&isset($_SERVER['HTTP_USER_AGENT']))
+    {
+        ###We hebben de nodige waarden
+        $tohash = $_SERVER['remote_addr'].$_SERVER['HTTP_USER_AGENT'];
+        $hash = hash('sha512',$tohash);
+        
+        return $hash;
+    }
+    else
+    {
+        throw new Exception('unable to create session hash');
+    }
 }
 ?>
