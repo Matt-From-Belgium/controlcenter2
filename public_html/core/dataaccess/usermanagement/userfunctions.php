@@ -16,7 +16,7 @@ function dataaccess_AddUser($userobject,$password)
 		$query = "INSERT INTO users (username,facebookid,password,salt,passwordchangerequired,userconfirmation,adminconfirmation,realname,realfirstname,mailadress) VALUES ('@username','@facebookid','@password','@salt','@passwordchangerequired','@userconfirmation','@adminconfirmation','@realname','@realfirstname','@mailadress')";
 
                 ###We genereren een userspecifiek salt
-                $usersalt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
+                $usersalt = dataaccess_generateUserSalt();
           
 		$password=encryptPWD($password,$usersalt);
 		
@@ -62,6 +62,12 @@ function dataaccess_AddUser($userobject,$password)
 	{
 		throw new Exception("dataaccess_AddUser only accepts a userobject as argument");
 	}
+}
+
+function dataaccess_generateUserSalt()
+{
+    $usersalt=hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
+    return $usersalt;
 }
 
 function dataaccess_getUserSalt($userid)

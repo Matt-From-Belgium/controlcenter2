@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 10, 2014 at 11:58 AM
+-- Generation Time: Aug 11, 2014 at 11:55 AM
 -- Server version: 5.5.38-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.3
 
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `modules` (
   `id` int(2) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `name` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `modules`
@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `parameters` (
 INSERT INTO `parameters` (`id`, `name`, `value`, `overridable`) VALUES
 (001, 'CORE_LANGUAGE', '1', b'1'),
 (002, 'CORE_USER_SELF_ACTIVATION', '1', b'0'),
-(003, 'CORE_USER_ADMIN_ACTIVATION', '1', b'0'),
+(003, 'CORE_USER_ADMIN_ACTIVATION', '0', b'0'),
 (004, 'CORE_USER_EXT_USERGROUP', '001', b'0'),
 (005, 'CORE_USER_EXT_REGISTRATION', '0', b'0'),
 (006, 'CORE_NOACCESS_URL', '', b'0'),
@@ -237,6 +237,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `username` varchar(20) NOT NULL,
   `facebookid` varchar(20) DEFAULT NULL,
   `password` varchar(128) NOT NULL,
+  `salt` varchar(128) NOT NULL,
   `passwordchangerequired` enum('1','0') NOT NULL DEFAULT '0',
   `userconfirmation` enum('1','0') NOT NULL DEFAULT '0',
   `adminconfirmation` enum('1','0') NOT NULL DEFAULT '0',
@@ -247,14 +248,14 @@ CREATE TABLE IF NOT EXISTS `users` (
   `country` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `search_by_username` (`username`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=67 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `facebookid`, `password`, `passwordchangerequired`, `userconfirmation`, `adminconfirmation`, `realname`, `realfirstname`, `mailadress`, `website`, `country`) VALUES
-(000001, 'Matt', '', '90f214fc81d4dcc5d1b2d30c4ebae28e2bbaeba7043321a2dc34a2bc525cfde35b4d7dfbb9c9c7666265c7d228a51412a2873961780debe0d0fef83c08968f17', '0', '1', '1', 'Bauw', 'Matthias', 'matthias.bauw@gmail.com', NULL, NULL);
+INSERT INTO `users` (`id`, `username`, `facebookid`, `password`, `salt`, `passwordchangerequired`, `userconfirmation`, `adminconfirmation`, `realname`, `realfirstname`, `mailadress`, `website`, `country`) VALUES
+(000001, 'Matt', '', '749bf5c2d40dc11a3efc0a824e67cbbb1e991e12b694961fd9b32501073a72b4af552c87ce72fe099cf5ea5e9ddcd917a743b47f00f7b8b63a87b455ea4695f6', 'b1098ed925b9b52f687f147e5ecc002c14fdfe9dcb31d98ed5b90bb919fc502c5663adf9645da93ceb20144008d027e025d3eedef23518904583c5c3719b512f', '0', '1', '1', 'Bauw', 'Matthias', 'matthias.bauw@gmail.com', NULL, NULL);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
