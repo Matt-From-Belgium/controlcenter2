@@ -1,6 +1,7 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT']."/core/entity/exception.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/core/logic/languages/languages.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/core/logic/usermanagement/userfunctions.php";
 
 ###Getlanguagefiles wordt buiten de klasse gezet om ervoor te zorgen dat de common functie showMessage() zijn werk kan doen.
 ###uiteindelijk moeten er toch altijd taalconstanten ingeladen worden als templatesystem wordt gebruikt. Daardoor maakt dit geen verschil.
@@ -25,7 +26,7 @@ class htmlpage
 ###CONSTRUCTOR FUNCTIONALITEIT
 	public function __construct($alias)
 	{	
-			#Bij het uitvoeren van de constructor wordt een alias opgegeven. De aliases zijn in de databases gedefinieerd.
+                        #Bij het uitvoeren van de constructor wordt een alias opgegeven. De aliases zijn in de databases gedefinieerd.
 			##STAP1: Nagaan of de alias bestaat en welke directory eraan gekoppeld is.
 			require_once $_SERVER['DOCUMENT_ROOT']."/core/templatesystem/templatelogic.php";
 			if($directory=AliasGetLinkeddir($alias))
@@ -733,5 +734,22 @@ class htmlpage
 		$this->html = $this->ParseTags($this->html);
 		return $this->html;
 	}
+        
+        public function forceSSL()
+        {
+            ###Wanneer SSL integratie actief is zal met deze functie de gebruiker op https uitkomen
+            #Wanneer een gebruiker inlogt komt hij/zij zowieso op https uit. Dit is dus puur voor pagina's
+            #zonder actieve gebruiker moeten versleuteld worden
+            if(getSSLenabled())
+            {
+                if (!isset($_SERVER['HTTPS']) || !$_SERVER['HTTPS']) { // if request is not secure, redirect to secure url
+                $url = 'https://' . $_SERVER['HTTP_HOST']
+                                  . $_SERVER['REQUEST_URI'];
+
+                header('Location: ' . $url);
+                exit;
+                }
+            }
+        }
 }
 ?>

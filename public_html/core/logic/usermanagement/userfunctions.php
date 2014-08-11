@@ -790,6 +790,15 @@ function sec_session_start()
     
     if(getSSLenabled())
     {
+        ###Er is SSL mogelijk dus moet de pagina geforceerd worden naar https. Cookies mogen enkel over SSL verstuurd worden
+        if (!isset($_SERVER['HTTPS']) || !$_SERVER['HTTPS']) { // if request is not secure, redirect to secure url
+                $url = 'https://' . $_SERVER['HTTP_HOST']
+                                  . $_SERVER['REQUEST_URI'];
+
+                header('Location: ' . $url);
+                exit;
+                }
+        
         $secure = SECURE;
     }
     

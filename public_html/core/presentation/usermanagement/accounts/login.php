@@ -33,6 +33,7 @@ if((!isset($_POST['u']))&&(!isset($_POST['p']))&&(!isset($_POST['d'])))
 {
         ###Het script wordt rechtstreeks ingeladen => loginpagina weergeven.
         $html = new HTMLpage('frontend');
+        $html->forceSSL();
         $html->LoadAddin('/core/presentation/usermanagement/accounts/addins/login.tpa');
         $html->loadScript('/core/logic/usermanagement/hash.final.js');
         $html->loadScript('/core/logic/usermanagement/hashpwd.final.js');
@@ -53,7 +54,16 @@ if((!isset($_POST['u']))&&(!isset($_POST['p']))&&(!isset($_POST['d'])))
             
             ###Als er een bestemmingspagina werd meegegeven moet deze ook doorgegeven worden
             
-            $redirect = 'http://'.$_SERVER['HTTP_HOST'].'/core/logic/usermanagement/fblogincallback.php?d='.$_GET['d'];
+            if(getSSLenabled())
+            {
+                $prefix = 'https://';
+            }
+            else
+            {
+                $prefix = 'http://';
+            }
+            
+            $redirect = $prefix.$_SERVER['HTTP_HOST'].'/core/logic/usermanagement/fblogincallback.php?d='.$_GET['d'];
             
 
             $params = array(
@@ -97,6 +107,7 @@ else
 	{
 		###De loginprocedure is niet geslaagd, de gebruiker wordt naar de loginpagina gebracht.
 		$html = new HTMLpage('frontend');
+                $html->forceSSL();
 		$html->LoadAddin('/core/presentation/usermanagement/accounts/addins/login.tpa');
                 $html->loadScript('/core/logic/usermanagement/hash.final.js');
                 $html->loadScript('/core/logic/usermanagement/hashpwd.final.js');
