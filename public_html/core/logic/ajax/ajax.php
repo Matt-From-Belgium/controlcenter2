@@ -70,8 +70,8 @@ if(isset($_POST['destination']) && isset($_POST['phpfunction']))
             
             ###We willen ook een foutrapport uitlokken dus gooien we nog een exception
             //throw new Exception("De combinatie ".$_POST[destination]." en ".$_POST['phpfunction']." komen niet voor op de whitelist");
-            $ex = new Exception('test');
-            //CC_Send_Error_report($ex);
+            $ex = new Exception("De combinatie ".$_POST[destination]." en ".$_POST['phpfunction']." komen niet voor op de whitelist");
+            CC_Send_Error_report($ex);
         }
 }
 else 
