@@ -74,6 +74,10 @@ class DataConnection
     ###Public methods
     public function setQuery($query)
     {
+        ###Soms wordt één object gebruikt voor meerdere queries => bij setQuery alles resetten
+        $this->queryResult=false;
+        $this->attributes=array();
+        
         $this->queryText = $query;
         
         ##ons formaat van query omzetten naar formaat met ? dat door mysqli begrepen wordt
@@ -208,14 +212,14 @@ class DataConnection
     }
 }
 
-/*//DEBUG
+//DEBUG
 $debug = new DataConnection;
-$debug->setQuery("SELECT parameters.id,parameters.name,parameters.value,parameters.overridable FROM parameters WHERE parameters.name='@searchstring'");
+$debug->setQuery("SELECT parameter.id,parameters.name,parameters.value,parameters.overridable FROM parameters WHERE parameters.name='@searchstring'");
 $debug->setAttribute('searchstring', 'CORE_SSL_ENABLED');
 $debug->ExecuteQuery();
 
 $result=$debug->GetResultArray();
 
-print_r($result);*/
+print_r($result);
 
  
