@@ -212,14 +212,14 @@ class DataConnection
     }
 }
 
-//DEBUG
+/*//DEBUG
 $debug = new DataConnection;
-$debug->setQuery("SELECT parameter.id,parameters.name,parameters.value,parameters.overridable FROM parameters WHERE parameters.name='@searchstring'");
+$debug->setQuery("SELECT parameters.id,parameters.name,parameters.value,parameters.overridable FROM parameters WHERE parameters.name='@searchstring'");
 $debug->setAttribute('searchstring', 'CORE_SSL_ENABLED');
 $debug->ExecuteQuery();
 
 $result=$debug->GetResultArray();
 
 print_r($result);
-
+*/
  
