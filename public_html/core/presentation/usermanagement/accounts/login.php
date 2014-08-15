@@ -97,8 +97,9 @@ if((!isset($_POST['u']))&&(!isset($_POST['p']))&&(!isset($_POST['d'])))
 }
 else
 {
+        $loginreturn=Login(strtolower($u),$p,$d);
 	###Er is logininformatie beschikbaar.
-	if(Login(strtolower($u),$p,$d))
+	if(!is_array($loginreturn))
 	{
 		###De loginprocedure is geslaagd, $_SESSION['currentuser'] is aangemaakt
 		header("Location: $d");
@@ -106,6 +107,7 @@ else
 	else
 	{
 		###De loginprocedure is niet geslaagd, de gebruiker wordt naar de loginpagina gebracht.
+                #De foutboodschap komt vanuit de logiclayer terug in een array.
 		$html = new HTMLpage('frontend');
                 $html->forceSSL();
 		$html->LoadAddin('/core/presentation/usermanagement/accounts/addins/login.tpa');
@@ -113,9 +115,8 @@ else
                 $html->loadScript('/core/logic/usermanagement/hashpwd.final.js');
 	
 		###De destination moet meegekopieerd worden zodat een gebruiker bij de 2e poging nog altijd doorgaat naar
-		###de bedoelde bestemmingspagina.
-		$errorlist[]['message'] = LANG_ERROR_WRONGLOGIN;
-		$html->setVariable("errorlist",$errorlist);
+		###de bedoelde bestemmingspagina
+		$html->setVariable("errorlist",$loginreturn);
 		$html->setVariable("d",$d);
 	
 		$html->printHTML();

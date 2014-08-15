@@ -36,6 +36,7 @@ define('LANG_ERROR_COUNTRY_EMPTY',"Er moet een land geselecteerd worden");
 define('LANG_ERROR_PASSWORDMATCH',"De wachtwoorden komen niet overeen");
 define('LANG_ERROR_MAILADRESS_EXISTS',"Er is al een gebruiker met dit mailadres");
 define('LANG_ERROR_WRONGLOGIN',"Gebruikersnaam en/of wachtwoord ongeldig");
+define('LANG_ERROR_TOOMANYATTEMPTS', "Account geblokkeerd: teveel pogingen");
 define('LANG_ERROR_NOACCESS_HEADER',"Geen toegang");
 define('LANG_ERROR_NOACCESS',"U heeft geen toegang tot deze pagina. Als u zich afvraagt waarom raden wij u aan een administrator te contacteren.");
 define('LANG_ERROR_NEWPASSWORD_REQUIRED',"Uw nieuwe wachtwoord mag niet hetzelfde zijn als het oude wachtwoord.");

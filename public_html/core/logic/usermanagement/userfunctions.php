@@ -482,70 +482,77 @@ function Login($username,$password,$d)
 	
         ###We controleren of de gebruiker niet meer dan 5 keer heeft proberen in te loggen in de laatse 2 uur
         #de functie geeft false terug als er teveel pogingen zijn
-        if(!dataaccess_toomanyattempts($username))
+        if(dataaccess_toomanyattempts($username))
         {
-            echo 'teveel pogingen';
+
+        
+            #we laten de DataAccess layer controleren of de gegevens kloppen
+            $id=dataaccess_checkUserPassword($username,$password);
+
+            if(!empty($id))
+            {
+                    ###De aangeleverde gegevens zijn correct
+                    ###We halen de gebruikersgegevens op in een userobject
+                    $user = getUser($id);
+
+                    ###1e CONTROLE: heeft de gebruiker zijn account geactiveerd
+                    ###Als activatie niet nodig is dan krijgt de gebruiker in de databank zowieso de waarde userconfirmation=1 mee
+                    if($user->getUserConfirmationStatus()==1)
+                    {
+                            ###Gebruiker heeft zichzelf geactiveerd of activatie is niet nodig. In ieder geval is er geen beletsel voor
+                            ###het verderzetten van de loginprocedure.
+
+                            ###2e CONTROLE: Moet de useraccount nog geactiveerd worden door een administrator?
+                            if($user->getAdminConfirmationStatus()==1)
+                            {
+                                    ###De gebruikersgegevens waren correct, en de account is volledig actief => de gebruiker mag ingelogd worden
+                                    $_SESSION['currentuser'] = $user;
+
+                                    ###We genereren de session hash om hijacking moeilijker te maken
+                                    $hash = generateSessionHash();
+                                    $_SESSION['loginstring']=$hash;
+
+                                    ###Nu moet er gecontroleerd worden of de gebruiker zijn wachtwoord moet wijzigen. Als dat het geval is dan moet
+                                    ###de gebruiker worden doorverwezen naar de pagina voor het wijzigen van zijn wachtwoord.
+                                    if($user->getPasswordChangeRequired()==1)
+                                    {
+                                            header("location: /core/presentation/usermanagement/accounts/passwordchange.php?d=$d");
+                                            exit();
+                                    }
+                            }
+                            else
+                            {
+                                    ###De gebruiker heeft zijn account wel geactiveerd maar de admin moet nog zijn/haar toestemming geven
+                                    require_once $_SERVER['DOCUMENT_ROOT']."/core/presentation/general/commonfunctions.php";
+                                    showMessage("Admin moet nog activeren","Uw account is nog niet bruikbaar. Een administrator zal uw gegevens nakijken en uw account activeren. Wij streven ernaar om alle accounts binnen de 24 uur te activeren");
+                                    exit();
+                            }
+                    }
+                    else
+                    {
+                            ###Gebruiker moet zijn account nog activeren => melding weergeven
+                            require_once $_SERVER['DOCUMENT_ROOT']."/core/presentation/general/commonfunctions.php";
+                            showMessage("Activatie nodig","Account nog niet geactiveerd");
+                            exit();
+                    }
+                    return $user;
+            }
+            else
+            {
+                    ###We registreren de gefaalde login om brute force logins tegen te gaan
+                    dataaccess_registerLoginAttempt($username);
+
+                    ###de parameters zijn niet correct => return false
+                    $errorlist[]['message'] = LANG_ERROR_WRONGLOGIN;
+                    return $errorlist;
+            }
         }
-        
-	#we laten de DataAccess layer controleren of de gegevens kloppen
-	$id=dataaccess_checkUserPassword($username,$password);
-        
-	if(!empty($id))
-	{
-		###De aangeleverde gegevens zijn correct
-		###We halen de gebruikersgegevens op in een userobject
-		$user = getUser($id);
-		
-		###1e CONTROLE: heeft de gebruiker zijn account geactiveerd
-		###Als activatie niet nodig is dan krijgt de gebruiker in de databank zowieso de waarde userconfirmation=1 mee
-		if($user->getUserConfirmationStatus()==1)
-		{
-			###Gebruiker heeft zichzelf geactiveerd of activatie is niet nodig. In ieder geval is er geen beletsel voor
-			###het verderzetten van de loginprocedure.
-			
-			###2e CONTROLE: Moet de useraccount nog geactiveerd worden door een administrator?
-			if($user->getAdminConfirmationStatus()==1)
-			{
-				###De gebruikersgegevens waren correct, en de account is volledig actief => de gebruiker mag ingelogd worden
-				$_SESSION['currentuser'] = $user;
-				
-                                ###We genereren de session hash om hijacking moeilijker te maken
-                                $hash = generateSessionHash();
-                                $_SESSION['loginstring']=$hash;
-                                
-				###Nu moet er gecontroleerd worden of de gebruiker zijn wachtwoord moet wijzigen. Als dat het geval is dan moet
-				###de gebruiker worden doorverwezen naar de pagina voor het wijzigen van zijn wachtwoord.
-				if($user->getPasswordChangeRequired()==1)
-				{
-					header("location: /core/presentation/usermanagement/accounts/passwordchange.php?d=$d");
-					exit();
-				}
-			}
-			else
-			{
-				###De gebruiker heeft zijn account wel geactiveerd maar de admin moet nog zijn/haar toestemming geven
-				require_once $_SERVER['DOCUMENT_ROOT']."/core/presentation/general/commonfunctions.php";
-				showMessage("Admin moet nog activeren","Uw account is nog niet bruikbaar. Een administrator zal uw gegevens nakijken en uw account activeren. Wij streven ernaar om alle accounts binnen de 24 uur te activeren");
-				exit();
-			}
-		}
-		else
-		{
-			###Gebruiker moet zijn account nog activeren => melding weergeven
-			require_once $_SERVER['DOCUMENT_ROOT']."/core/presentation/general/commonfunctions.php";
-			showMessage("Activatie nodig","Account nog niet geactiveerd");
-			exit();
-		}
-		return $user;
-	}
-	else
-	{
-                ###We registreren de gefaalde login om brute force logins tegen te gaan
-                dataaccess_registerLoginAttempt($username);
-            
-		###de parameters zijn niet correct => return false
-		return false;
-	}
+        else
+        {
+            ###Teveel proberen in te loggen met deze gebruiker => account geblokkeerd
+            $errorlist[]['message'] = LANG_ERROR_TOOMANYATTEMPTS;
+            return $errorlist;
+        }
 }
 
 function Login_FB()
