@@ -783,11 +783,7 @@ function sec_session_start()
     
     ###bron http://www.wikihow.com/Create-a-Secure-Login-Script-in-PHP-and-MySQL
     $session_name = 'secure_session';   // Set a custom session name
-    
-    //Als deze uncommented is wordt de cookie enkel via SSL verstuurd
-    //TODO
-    //afhankelijk maken van een configuratieparameter die aangeeft of er SSL is
-    
+       
     if(getSSLenabled())
     {
         ###Er is SSL mogelijk dus moet de pagina geforceerd worden naar https. Cookies mogen enkel over SSL verstuurd worden
@@ -799,6 +795,7 @@ function sec_session_start()
                 exit;
                 }
         
+        ###hierdoor worden  cookies enkel over beveiligde verbinding verstuurd
         $secure = SECURE;
     }
     
