@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 11, 2014 at 11:55 AM
+-- Generation Time: Aug 15, 2014 at 01:27 PM
 -- Server version: 5.5.38-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.3
 
@@ -19,6 +19,26 @@ SET time_zone = "+00:00";
 --
 -- Database: `controlcenter`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ajaxwhitelist`
+--
+
+CREATE TABLE IF NOT EXISTS `ajaxwhitelist` (
+  `id` int(6) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `file` varchar(500) NOT NULL,
+  `function` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `ajaxwhitelist`
+--
+
+INSERT INTO `ajaxwhitelist` (`id`, `file`, `function`) VALUES
+(000001, '/core/logic/usermanagement/fbLoginAjax.php', 'checkFBAccount');
 
 -- --------------------------------------------------------
 
@@ -51,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `modules` (
   `id` int(2) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `name` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `modules`
@@ -255,7 +275,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `facebookid`, `password`, `salt`, `passwordchangerequired`, `userconfirmation`, `adminconfirmation`, `realname`, `realfirstname`, `mailadress`, `website`, `country`) VALUES
-(000001, 'Matt', '', '749bf5c2d40dc11a3efc0a824e67cbbb1e991e12b694961fd9b32501073a72b4af552c87ce72fe099cf5ea5e9ddcd917a743b47f00f7b8b63a87b455ea4695f6', 'b1098ed925b9b52f687f147e5ecc002c14fdfe9dcb31d98ed5b90bb919fc502c5663adf9645da93ceb20144008d027e025d3eedef23518904583c5c3719b512f', '0', '1', '1', 'Bauw', 'Matthias', 'matthias.bauw@gmail.com', NULL, NULL);
+(000001, 'Matt', '', 'c469a4d67bcacc1f5e504f7ea5dbf9d01bd8f7474f150af51e55789fa46db6a663ec2c6863ba70bf8fd467fea9d902e5792f7dcc9f36d10d2580115f2a117e0d', 'a9ef9d9a4799b3d1e706e0a5d5a3637241bb7821252265f9f52889e95411d37b7f3f258b751512b35a78605a42d5743dfbb42f7871e25e0b04031d3cd2ab79ba', '', '1', '1', 'Bauw', 'Matthias', 'matthias.bauw@gmail.com', NULL, NULL);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
