@@ -768,6 +768,38 @@ function dataaccess_FacebookIdUnique($fbid,$id)
     }
 }
 
+function dataaccess_registerLoginAttempt($username)
+{
+    $db = new DataConnection;
+    $query = "INSERT INTO login_attempts (username) VALUES ('@username')";
+    $db->setQuery($query);
+    $db->setAttribute('username', $username);
+    $db->ExecuteQuery();
+}
+
+function dataaccess_toomanyattempts($username)
+{
+    #Deze functie controleert of er niet teveel pogingen waren met deze gebruikersnaam
+    $db = new DataConnection;
+    $query = "select count(username) from login_attempts WHERE login_attempts.username='@username' AND login_attempts.time>@begintime";
+    $db->setQuery($query);
+    ###We kijken naar login pogingen in de laatste 2 uren
+    $begintime = time() - (2*60*60);
+    $db->setAttribute('username', $username);
+    $db->setAttribute('begintime', $begintime);
+    $db->ExecuteQuery();
+    $amountofattempts= $db->GetScalar();
+    
+    if($amountofattempts>=5)
+    {
+        return FALSE;
+    }
+    else
+    {
+        return true;
+    }
+}
+
 function encryptPWD($password,$usersalt)
 {
     ###Dit is geen databasefunctie maar omdat adduser en edituser dezelfde encryptie moeten gebruiken centraliseren we die hier

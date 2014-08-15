@@ -132,7 +132,7 @@ class DataConnection
             else
             {
                 ###Query is niet geslaagd
-                throw new Exception('There was an error while executing the query '. $this->queryText . 'with attributearray' . print_r($this->attributes).' Mysql reported this error '.$this->mysqli->error, $this->mysqli->errno);
+                throw new Exception('There was an error while executing the query '. $this->queryText . 'with attributearray' . print_r($this->attributes,true).' Mysql reported this error '.$this->mysqli->error, $this->mysqli->errno);
             }
         
         }

@@ -10,3 +10,8 @@ CREATE TABLE IF NOT EXISTS `ajaxwhitelist` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
+CREATE TABLE login_attempts(
+	username varchar(20),
+	time timestamp default current_timestamp,
+	primary key(username,time)
+);

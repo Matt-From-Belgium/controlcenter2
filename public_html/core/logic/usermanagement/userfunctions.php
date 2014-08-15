@@ -480,8 +480,16 @@ function Login($username,$password,$d)
 	###Deze functie gaat na of de aangeleverde parameters kloppen
 	###Als dat het geval is wordt het userobject opgehaald en wordt er van dit object een sessievariabele gecre�erd.
 	
-	###Eerst laten we de DataAccess layer controleren of de gegevens kloppen
+        ###We controleren of de gebruiker niet meer dan 5 keer heeft proberen in te loggen in de laatse 2 uur
+        #de functie geeft false terug als er teveel pogingen zijn
+        if(!dataaccess_toomanyattempts($username))
+        {
+            echo 'teveel pogingen';
+        }
+        
+	#we laten de DataAccess layer controleren of de gegevens kloppen
 	$id=dataaccess_checkUserPassword($username,$password);
+        
 	if(!empty($id))
 	{
 		###De aangeleverde gegevens zijn correct
@@ -532,6 +540,9 @@ function Login($username,$password,$d)
 	}
 	else
 	{
+                ###We registreren de gefaalde login om brute force logins tegen te gaan
+                dataaccess_registerLoginAttempt($username);
+            
 		###de parameters zijn niet correct => return false
 		return false;
 	}
