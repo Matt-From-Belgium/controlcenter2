@@ -784,7 +784,15 @@ function dataaccess_toomanyattempts($username)
     $query = "select count(username) from login_attempts WHERE login_attempts.username='@username' AND login_attempts.time>@begintime";
     $db->setQuery($query);
     ###We kijken naar login pogingen in de laatste 2 uren
-    $begintime = time() - (2*60*60);
+    $begintime = new DateTime();
+    $twohours = new DateInterval('PT2H');
+    
+    $begintime->sub($twohours);
+    
+    ###We brengen het formaat naar hetzelfde als mysql
+    $begintime=date_format($begintime, 'Y-m-d H:i:s');
+    echo $begintime;
+    
     $db->setAttribute('username', $username);
     $db->setAttribute('begintime', $begintime);
     $db->ExecuteQuery();

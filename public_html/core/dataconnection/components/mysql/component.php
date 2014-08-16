@@ -51,21 +51,28 @@ class DataConnection
         ###Dit is een callbackfunctie (zie setQuery)
         ###Voor iedere match wordt deze functie uitgevoerd
             #$matches[0] = de volledige match
-            #$matches[1] = het datatype met de haakjes
-            #$matches[2] = het datatype zonderhaakjes
-            #$matches[3] = de naam van het attribuut
-            #Enkel 2 en 3 zijn interessant de rest is om het patroon te doen werken
+            #$matches[1] = beginquotes als die er zijn
+            #$matches[2] = het datatype met haakjes
+            #$matches[3] = het datatype zonder haakjes
+            #$matches[4] = de naam van het attribuut
+            #$matches[5] = eindquotes als die er zijn
+            #
+            #Enkel 3 en 4 zijn interessant de rest is om het patroon te doen werken
             
+            /*#DEBUG
+            print_r($matches);
+            */
+        
             ###Oude code definieert geen datatype => we nemen string als standaard
-            if(empty($matches [2]))
+            if(empty($matches [3]))
             {
-                $matches[2]='s';
+                $matches[3]='s';
             }
             
-            $this->attributes[strtolower($matches[3])]['datatype']=strtolower($matches[2]);
+            $this->attributes[strtolower($matches[4])]['datatype']=strtolower($matches[3]);
             
             ###We geven ook een lege value aan ieder veld, deze wordt later ingevuld
-            $this->attributes[strtolower($matches[3])]['value']=null;
+            $this->attributes[strtolower($matches[4])]['value']=null;
             
             $replacement = '?';
             return $replacement;
@@ -82,10 +89,9 @@ class DataConnection
         
         ##ons formaat van query omzetten naar formaat met ? dat door mysqli begrepen wordt
         ##Ook de haakjes rond de attributen moeten weg
-        $pattern = "/(?i)'?@(\((i|d|s|b)\))?([a-z0-9]*)'?/";
+        $pattern = "/(?i)('|\")?@(\((i|d|s|b)\))?([a-z0-9]*)('|\")?/";
         
         $query=preg_replace_callback($pattern,array($this,'replaceAttribute'), $query);
-        
         
         ###We geven de query door aan MySQLi
         $this->activeQuery=$this->mysqli->prepare($query);    

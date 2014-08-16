@@ -8,11 +8,11 @@ function dataaccess_checkWhiteList($file,$function)
     #enkel bestands- en functiecombinaties op die lijst kunnen gebruikt worden bij het javascript
     
     $db = new DataConnection();
-    $query='SELECT id from ajaxwhitelist WHERE file="@filename" and function="@function"';
+    $query='SELECT id from ajaxwhitelist WHERE file="@(s)filename" and function="@function"';
     
     $db->setQuery($query);
-    $db->setAttribute('filename',$file);
-    $db->setAttribute('function', $function);
+    $db->setAttribute('filename',strtolower($file));
+    $db->setAttribute('function', strtolower($function));
     
     $db->ExecuteQuery();
     
@@ -28,3 +28,9 @@ function dataaccess_checkWhiteList($file,$function)
     }
     
 }
+
+/*//DEBUG
+$result = dataaccess_checkWhiteList('/core/templatesystem/templatelogic.php', 'setCookiesOk');
+echo $result;
+*/
+ 
