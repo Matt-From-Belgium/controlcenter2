@@ -791,7 +791,6 @@ function dataaccess_toomanyattempts($username)
     
     ###We brengen het formaat naar hetzelfde als mysql
     $begintime=date_format($begintime, 'Y-m-d H:i:s');
-    echo $begintime;
     
     $db->setAttribute('username', $username);
     $db->setAttribute('begintime', $begintime);
