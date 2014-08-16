@@ -11,3 +11,10 @@ id int(5) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 extension varchar(4) NOT NULL,
 album int(3) NOT NULL,
 description VARCHAR(255));
+
+INSERT INTO  `gandalf`.`ajaxwhitelist` (`id` ,`file` ,`function`) VALUES (NULL ,  '/modules/fotoalbum/logic/albumlogic.php',  'addAlbum');
+INSERT INTO  `gandalf`.`ajaxwhitelist` (`id` ,`file` ,`function`) VALUES (NULL ,  '/modules/fotoalbum/logic/albumlogic.php',  'getAlbums');
+INSERT INTO  `gandalf`.`ajaxwhitelist` (`id` ,`file` ,`function`) VALUES (NULL ,  '/modules/fotoalbum/logic/albumlogic.php',  'addPhoto');
+INSERT INTO  `gandalf`.`ajaxwhitelist` (`id` ,`file` ,`function`) VALUES (NULL ,  '/modules/fotoalbum/logic/ajaxLogic.php',  'GetAlbumPhotosAjax');
+INSERT INTO  `gandalf`.`ajaxwhitelist` (`id` ,`file` ,`function`) VALUES (NULL ,  '/modules/fotoalbum/logic/albumlogic.php',  'changeDescription');
+INSERT INTO  `gandalf`.`ajaxwhitelist` (`id` ,`file` ,`function`) VALUES (NULL ,  '/modules/fotoalbum/logic/albumlogic.php',  'deletePhoto');
