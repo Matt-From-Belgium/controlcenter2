@@ -401,4 +401,10 @@ function getFacebookScopeAjax()
     $result->getXML();
     
 }
+
+function getSSLenabled()
+{
+    $parameter = dataaccess_GetParameter('CORE_SSL_ENABLED');
+    return $parameter->getValue();
+}
 ?>
