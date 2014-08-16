@@ -790,7 +790,7 @@ function dataaccess_toomanyattempts($username)
     $db->ExecuteQuery();
     $amountofattempts= $db->GetScalar();
     
-    if($amountofattempts>=5)
+    if($amountofattempts>=3)
     {
         return FALSE;
     }

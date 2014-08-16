@@ -15,3 +15,7 @@ CREATE TABLE login_attempts(
 	time timestamp default current_timestamp,
 	primary key(username,time)
 );
+
+INSERT INTO `ajaxwhitelist` (`id`, `file`, `function`) VALUES
+(000001, '/core/logic/usermanagement/fbLoginAjax.php', 'checkFBAccount'),
+(000002, '/core/templatesystem/templatelogic.php', 'setCookiesOk');
