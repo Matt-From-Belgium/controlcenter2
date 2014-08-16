@@ -1,206 +1,231 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT']."/core/entity/exception.php";
+
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+
 class DataConnection
 {
-#De connectieparameters moeten beveiligd binnen de instantie blijven
-Private $parameters;
-Private $connectionid;
-Private $result;
-Private $activequery;
-
-	public Function __construct()
-	{
-		#Ophalen van de verbindingsgegevens
+    Private $parameters;
+    Private $mysqli;
+    Private $activeQuery;
+    Private $queryResult=false;
+    Private $attributes=array();
+    Private $queryText;
+    
+    
+    public function __construct()
+    {
+                #Ophalen van de verbindingsgegevens
 		require_once $_SERVER['DOCUMENT_ROOT']."/core/fileaccess/database.php";
 		$this->parameters = GetDataBaseParameters();
-		$this->Connect();
-	}
-	
-	Private function Connect()
-	{
-		#Er wordt geprobeerd om verbinding te maken met de server. De functie mysql_connect
-		#geeft het linkid terug als er succesvol verbinding werd gemaakt. Wanneer er iets misloopt wordt
-		#false teruggegeven
-		$host = $this->parameters['host'];
+                
+                ###We maken het mysqli object
+                $this->mysqli = new mysqli();
+                
+                ###We verbinden met de database
+                $this->connect();
+                
+    }
+    
+    private function connect()
+    {
+        	$host = $this->parameters['host'];
 		$user = $this->parameters['user'];
 		$password = $this->parameters['password'];
 		$database = $this->parameters['database'];
-		
-		$link = @mysql_connect($host,$user,$password);
-		
-		if(!$link)
-		{
-			throw new Exception(mysql_error(),mysql_errno());
-		}
-		else
-		{
-		$this->connectionid=$link;
-		
-		#Selectie van de database
-		$success = mysql_select_db($this->parameters['database'],$this->connectionid);
-		
-		if(!$success)
-		{
-		throw new Exception("could not connect to database $this->parameters[database]",mysql_errno());
-		}
-		}
-	}
-	
-	Public function setQuery($query)
-	{
-		###Deze functie zorgt dat een query kan worden ingevoerd
-		$this->activequery = $query;
-	}
-        
-        #De query wordt al weergegeven bij foutboodschappen. Kan handig zijn voor debug
-        #Public function getQuery()
-        #{
-        #    return $this->activequery;
-        #}
-	
-	Public function setAttribute($attributename,$value)
-	{
-		###Deze functie zal de attributen in de Query (aangeduid met @) vervangen door de werkelijke waarde
-		###De aangeleverde waarde wordt eerst ontdaan van mogelijk schadelijke items.
-                ###DEZE LIJN IS GEDISABLED: zorgt voor meer problemen dan oplossingen
-		#$value = mysql_real_escape_string($value,$this->connectionid);
-            
-                ###Aanhalingstekens zijn een probleem => deze moeten ge-escaped worden
-                $value1=str_replace('"', '\"', $value);
-                $value2=  str_replace("'", "\'", $value1);
                 
-                $value = $value2;
-		###bugfix: om de like acties in mysql ook te doen werken moet er naast de aanhalingstekens rekening gehouden 
-		###met eventuele % tekens
-		$pattern= "/(?U)('|\")?(%)?@$attributename(%)?('|\")?(,|\s|\)|$)/";
-		
-		###We vervangen het patroon door $value. We moeten er wel voor zorgen dat als er aanhalingstekens rond @atribute stonden dat 
-		###die er blijven staan. Als er een komma of een spatie volgde op het attribuut moeten deze ook behouden blijven.
-		$queryafterreplacement = preg_replace($pattern,"\${1}\${2}$value\${3}\${4}\${5}",$this->activequery);
-	
-		#echo "<p>query: $this->activequery";
-		#echo "<br>attribute: $attributename";
-		#echo "<br>value: $value";
-		#echo "<br>".$queryafterreplacement;
+                $confirmation = $this->mysqli->real_connect($host, $user, $password, $database);
+                
+                if(!$confirmation)
+                {
+                    throw new Exception($this->mysqli->connect_error, $this->mysqli->connect_errno);
+                }
+    }
+    
+    private function replaceAttribute($matches)
+    {
+        ###Dit is een callbackfunctie (zie setQuery)
+        ###Voor iedere match wordt deze functie uitgevoerd
+            #$matches[0] = de volledige match
+            #$matches[1] = beginquotes als die er zijn
+            #$matches[2] = het datatype met haakjes
+            #$matches[3] = het datatype zonder haakjes
+            #$matches[4] = de naam van het attribuut
+            #$matches[5] = eindquotes als die er zijn
+            #
+            #Enkel 3 en 4 zijn interessant de rest is om het patroon te doen werken
+            
+            /*#DEBUG
+            print_r($matches);
+            */
+        
+            ###Oude code definieert geen datatype => we nemen string als standaard
+            if(empty($matches [3]))
+            {
+                $matches[3]='s';
+            }
+            
+            $this->attributes[strtolower($matches[4])]['datatype']=strtolower($matches[3]);
+            
+            ###We geven ook een lege value aan ieder veld, deze wordt later ingevuld
+            $this->attributes[strtolower($matches[4])]['value']=null;
+            
+            $replacement = '?';
+            return $replacement;
+    }
+    
+    ###Public methods
+    public function setQuery($query)
+    {
+        ###Soms wordt één object gebruikt voor meerdere queries => bij setQuery alles resetten
+        $this->queryResult=false;
+        $this->attributes=array();
+        
+        $this->queryText = $query;
+        
+        ##ons formaat van query omzetten naar formaat met ? dat door mysqli begrepen wordt
+        ##Ook de haakjes rond de attributen moeten weg
+        $pattern = "/(?i)('|\")?@(\((i|d|s|b)\))?([a-z0-9]*)('|\")?/";
+        
+        $query=preg_replace_callback($pattern,array($this,'replaceAttribute'), $query);
+        
+        ###We geven de query door aan MySQLi
+        $this->activeQuery=$this->mysqli->prepare($query);    
+        
+        ###Als hierna $this->activeQuery geen waarde heeft is er iets fout gelopen
+        if(!$this->activeQuery)
+        {
+            throw new Exception('Query syntax is not correct. MySQL reported this error: '.$this->mysqli->error.' while preparing this statement: '.$this->queryText, $this->mysqli->errno);
+        }
+    }
+    
+    public function ExecuteQuery()
+    {    
+        if($this->activeQuery)
+        {
+            $typestring = null;
+            $valuearray = array();
 
-		#BUGFIX: onderstaande code was uit de eerste versie van setAttribute waarbij het zoeken naar @attribute anders verliep
-		#$searchstring = "@".$attributename;
-		#$queryafterreplacement = str_ireplace($searchstring,$value,$this->activequery);
-		
-		###Als het attribuut niet werd gevonden dan is $queryafterreplacement=$this->activequery
-		###=> Exception
-		if($queryafterreplacement !== $this->activequery)
-		{
-			$this->activequery = $queryafterreplacement;
-		}
-		else
-		{
-			throw new Exception("The attribute '$attributename' was not found in the query '$this->activequery'");
-		}
-	}
-	
-	Public function ExecuteQuery()
-	{
-		if(!empty($this->activequery))
-		{
-			$result = @mysql_query($this->activequery,$this->connectionid);
-		
-			if(!$result)
-			{
-				#er is een fout opgetreden bij de uitvoer van de query.
-				#De query wordt gelogd
-				$extendedmessage = "MySQL reported an errormessage: \"".mysql_error($this->connectionid)."\" while executing query: \"".$this->activequery."\"";
+            foreach ($this->attributes as &$value)
+            {
+                $typestring = $typestring.$value['datatype'];
 
-				throw new Exception($extendedmessage);
-			}
-			else
-			{
-			$this->result = $result;
-			}
-		}
-		else
-		{
-			throw new Exception("You must set a query before you try to execute it...");
-		}
-	}
-	
-	Public function GetResultArray()
-	{
-		#Eerst kijken we of er wel degelijk al een query is uitgevoerd.
-		if(!empty($this->activequery))
-		{
-			#Er wordt gekeken of er wel rijen zijn om terug te geven.
-			if($this->GetNumRows()>0)
-			{
-				while($row=mysql_fetch_array($this->result))
-				{
-					#de rijen worden toegevoegd in aan de resultarray
-					$resultarray[]=	$row;
-				}	
-			
-				#de resultarray wordt teruggegeven
-				return $resultarray;
-			}
-			else
-			{
-			return false;
-			}
-		}
-		else
-		{
-		#Er is nog geen query uitgevoerd, er kan dus ook onmogelijk een resultaat worden terugegeven.
-		throw new Exception("You cannot get the result of a query when you haven't given me one...");
-		}
-	}
-	
-	Public function GetScalar()
-	{
-		if(!empty($this->activequery))
-		{
-			#Scalars worden alleen gebruikt wanneer er slechts 1 veld wordt teruggegeven.
-			#Er wordt in dit geval dan ook een controle uitgevoerd of er wel degelijk maar 1 veld is.
-			if ((mysql_num_fields($this->result) == 1) and ($this->getNumRows() == 1))
-			{
-				#Het eerste veld van de eerste rij moet worden weergegeven.
-				$row = mysql_fetch_row($this->result);
-				return $row[0];
-			}
-			else
-			{
-				throw new Exception("You executed a getScalar while the result is not a scalar. Query: $this->activequery");
-			}
-		}
-		else
-		{
-		throw new Exception("You cannot get the result of a query when you haven't given me one...");
-		}
-	}
-	
-	Public function GetNumRows()
-	{
-		if(!empty($this->activequery))
-		{
-			$numberofrows = mysql_num_rows($this->result);
-			return $numberofrows;
-		}
-		else
-		{
-		throw new Exception("You cannot get the result of a query when you haven't given me one...");
-		}
-	}
-	
-	Public function getLastId()
-	{
-		$nummer = mysql_insert_id($this->connectionid);
-		if($nummer==0)
-		{
-			#Het nummer is nul dus er werd geen insert uitgevoerd
-			throw new Exception("You tried to get the last insert id, but MySQL returned 0");
-		}
-		else
-		{
-			return $nummer;
-		}
-	}
+                $valuearray[]=&$value['value'];
+            }
+
+            $mergedarray[] = $typestring;
+            $mergedarray = array_merge($mergedarray,$valuearray);
+
+            ###Hier roepen we eigenlijk bind_param aan maar met de $mergedarray als argumenten
+            if(count($this->attributes)>0)
+            {
+                call_user_func_array(array($this->activeQuery,'bind_param'), $mergedarray);
+            }
+
+            ###We voeren de query uit
+            $confirmation=$this->activeQuery->execute();
+
+            if($confirmation)
+            {
+                ###Query is geslaagd
+                ###We halen het resultaat op
+                $this->queryResult = $this->activeQuery->get_result();
+            }
+            else
+            {
+                ###Query is niet geslaagd
+                throw new Exception('There was an error while executing the query '. $this->queryText . 'with attributearray' . print_r($this->attributes,true).' Mysql reported this error '.$this->mysqli->error, $this->mysqli->errno);
+            }
+        
+        }
+        else {
+              throw new Exception("Impossible to execute a query if you haven't set one");
+        }
+    }
+    
+    public function setAttribute($attributename,$value)
+    {
+        $attributename=strtolower($attributename);
+        
+        if($this->attributes[$attributename])
+        {
+            ###Het attribuut bestaat in de query
+            $this->attributes[$attributename]['value']=&$value;
+        }
+        else
+        {
+            ###Het attribuut is niet gevonden
+            throw new Exception("The attribute '$attributename' was not found in the query '$this->queryText'");
+        }
+       
+    }
+    
+    public function GetResultArray()
+    {
+        if($this->queryResult)
+        {
+        return $this->queryResult->fetch_all(MYSQLI_BOTH);
+        }
+        else
+        {
+            throw new Exception('you must first execute the query before getting the results');
+        }
+    }
+    
+    public function getRowAsObject()
+    {
+        ###deze functie geeft één rij terug als een object
+        if($this->queryResult)
+        {
+                
+                return $this->queryResult->fetch_object();
+        }
+        else
+        {
+            throw new Exception('you must first execute the query before getting the results');
+        }
+
+    }
+    
+    public function getScalar()
+    {
+        ###bij scalar willen we enkel het eerste veld van de eerste rij krijgen.
+        ###Eerst controleren we of het wel degelijk om een scalar gaat
+        if(($this->queryResult->num_rows==1) && ($this->queryResult->field_count==1))
+        {
+            ###Het gaat effectief om een scalar, we geven de waarde terug.
+            $row = $this->queryResult->fetch_row();
+            return $row[0];
+        }
+        else
+        {
+            throw new Exception('You tried getting the result with getScalar, but the result is not a scalar');
+        }
+    }
+    
+    public function GetNumRows()
+    {
+        return $this->activeQuery->affected_rows;
+    }
+    
+    public function getLastId()
+    {
+        return $this->activeQuery->insert_id;
+    }
 }
-?>
+
+/*//DEBUG
+$debug = new DataConnection;
+$debug->setQuery("SELECT parameters.id,parameters.name,parameters.value,parameters.overridable FROM parameters WHERE parameters.name='@searchstring'");
+$debug->setAttribute('searchstring', 'CORE_SSL_ENABLED');
+$debug->ExecuteQuery();
+
+$result=$debug->GetResultArray();
+
+print_r($result);
+*/
+ 

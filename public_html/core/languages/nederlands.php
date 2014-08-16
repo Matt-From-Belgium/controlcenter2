@@ -16,4 +16,8 @@ define('LANG_ERROR_FILE',"Bestand");
 define('LANG_ERROR_LINE',"Lijn");
 define('LANG_ERROR_ENV_VARS',"Omgevingsvariabelen");
 define('LANG_ERROR_TRACE',"Trace");
+
+###Cookies notification
+define('LANG_COOKIES_NOTIFICATION','Deze site maakt gebruik van cookies om uw gebruikerservaring te verbeteren. Door verder te gaan gaat u akkoord met het gebruik van cookies voor deze site.');
+define('LANG_COOKIES_SEND_BUTTON', 'Verberg deze melding');
 ?>

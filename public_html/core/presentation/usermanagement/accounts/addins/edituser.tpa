@@ -8,9 +8,10 @@
 <!CC END IFSET [errorlist]>
 <FORM method="post" enctype="application/x-www-form-urlencoded" id="userform">
 	<input type="hidden" id="userid" name="userid" value='<!CC var [userid]>'>
+        <input type="hidden" id="phash" name="phash" value='<!CC var [phash]>'>
 	<label for="text"><!CC LANG [LANG_USERNAME]></LABEL><INPUT TYPE="text" id="username" name="username" MAXLENGTH="20" value="<!CC VAR [username]>" DISABLED/><BR />
     <label for="mail"><!CC LANG [LANG_MAIL]></label><input type="text" id="mail" name="mail" MAXLENGTH="50" VALUE="<!CC VAR [mail]>" /><BR />
-    <label for="password"><!CC LANG [LANG_PASSWORD]></LABEL><INPUT TYPE="password" id="password" name="password" MAXLENGTH="20" value="<!CC VAR [password]>"/><BR />
+    <label for="password"><!CC LANG [LANG_PASSWORD]></LABEL><INPUT TYPE="password" id="password1" name="password1" MAXLENGTH="20" value="<!CC VAR [password1]>"/><BR />
     <label for="password2"><!CC LANG [LANG_PASSWORD_CONFIRM]></label><INPUT TYPE="password" id="password2" name="password2" MAXLENGTH="20" value="<!CC VAR [password2]>"/><BR />
 	<label for="passwordchangerequired"><!CC LANG [LANG_PASSWORD_CHANGE_REQUIRED]></label><INPUT type="checkbox" name="passwordchangerequired" <!CC VAR [passwordchangerequired]>><br />
 	<HR>
@@ -26,5 +27,9 @@
 	</div>
 	<INPUT TYPE="submit" VALUE="<!CC LANG [LANG_SEND]>" NAME="submit"><INPUT TYPE="reset" VALUE="<!CC LANG [LANG_RESET]>">
 </FORM>
-<SCRIPT LANGUAGE="javascript" SRC="/core/logic/common.js"></SCRIPT>
-<SCRIPT LANGUAGE="javascript" SRC="/core/logic/usermanagement/uservalidation.js"></SCRIPT>
+<script>
+activateHash();
+document.getElementById('password1').onfocus = function(){clearPasswordFields();};
+document.getElementById('password2').onfocus = function(){clearPasswordFields();};
+
+</script>

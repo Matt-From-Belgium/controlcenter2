@@ -1,5 +1,5 @@
 <script type="text/javascript" SRC="/core/presentation/ajax/ajaxtransaction.js"></script>
-<script language='javascript' src='/core/presentation/usermanagement/accounts/fbRegister.final.js'></script>
+
 <H1 id="userformheader"><!CC LANG [LANG_CREATE_NEW_ACCOUNT]></H1>
 <!CC IFSET [errorlist]>
 <UL id="uservalidator" class="errorbox">
@@ -13,32 +13,27 @@
 <!CC END IFSET [fbintegration]>
 <FORM method="post" enctype="application/x-www-form-urlencoded" id="userform">
 	<input type="hidden" id="userid" name="userid" value='<!CC var [userid]>'>
+        <input type="hidden" id="phash" name="phash" value='<!CC var [phash]>'>
         <input type="hidden" id="facebookid" name="facebookid" value="<!CC var [facebookid]>">
 	<label for="text"><!CC LANG [LANG_USERNAME]></LABEL><INPUT TYPE="text" id="username" name="username" MAXLENGTH="20" value="<!CC VAR [username]>"/><BR />
     <label for="mail"><!CC LANG [LANG_MAIL]></label><input type="text" id="mail" name="mail" MAXLENGTH="50" VALUE="<!CC VAR [mail]>" /><BR />
 <label for="firstname"><!CC LANG [LANG_FIRSTNAME]></LABEL><INPUT TYPE="text" id="firstname" name="firstname" MAXLENGTH="30" value="<!CC VAR [firstname]>"/><BR />
 	<label for="lastname"><!CC LANG [LANG_LASTNAME]></label><input type="text" id="lastname" name="lastname" maxlength="30" value="<!CC VAR [lastname]>" /><BR />
-    <label for="password"><!CC LANG [LANG_PASSWORD]></LABEL><INPUT TYPE="password" id="password" name="password" MAXLENGTH="20" value="<!CC VAR [password]>"/><BR />
+    <label for="password"><!CC LANG [LANG_PASSWORD]></LABEL><INPUT TYPE="password" id="password1" name="password1" MAXLENGTH="20" value="<!CC VAR [password1]>"/><BR />
     <label for="password2"><!CC LANG [LANG_PASSWORD_CONFIRM]></label><INPUT TYPE="password" id="password2" name="password2" MAXLENGTH="20" value="<!CC VAR [password2]>"/><BR />
 	
 	
 	
 	<INPUT TYPE="submit" VALUE="<!CC LANG [LANG_SEND]>" NAME="submit"><INPUT TYPE="reset" VALUE="<!CC LANG [LANG_RESET]>">
 </FORM>
-<SCRIPT LANGUAGE="javascript" SRC="/core/logic/common.js"></SCRIPT>
-<SCRIPT LANGUAGE="javascript" SRC="/core/logic/usermanagement/uservalidation.js"></SCRIPT>
+
+
 
 <script>
-
-document.addEventListener('fbSDKLoaded',autoFB,false);
-
-function autoFB()
-{
-    if(document.getElementById('facebookid').value)
-    {
-        document.getElementById('password').disabled = true;
-        document.getElementById('password2').disabled = true;
-    }
-}
+activateHash();
+document.getElementById('password1').onfocus = function(){clearPasswordFields();};
+document.getElementById('password2').onfocus = function(){clearPasswordFields();};
 
 </script>
+
+
