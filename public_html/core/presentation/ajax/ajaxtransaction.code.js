@@ -362,6 +362,9 @@ function ajaxTransaction(formElement)
                                                                                     fieldvalue = encodeURIComponent(fieldvalue);
                                                                                     
                                                                                     toewijzingscode = toewijzingscode + 'instantie.' + naam + '="' + fieldvalue + '";';
+                                                                                    
+                                                                                    //BUGFIX: we willen dat de waarde bij teruggave nog steeds de speciale karakters bevat
+                                                                                    toewijzingscode = toewijzingscode + 'instantie.' + naam + '=' + 'decodeURIComponent(instantie.' + naam + ');';
 
                                                                             }
                                                                             eval(toewijzingscode);
