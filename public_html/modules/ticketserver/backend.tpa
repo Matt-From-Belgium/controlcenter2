@@ -6,7 +6,7 @@
 <FORM METHOD='post' ACTION ='wijzigstatus.php'>
 <center><table>
 <!CC LOOP [voorstellingen]>
-<tr><td><!CC LVAR [voorstellingstekst]></td><td><input type='radio' name='voorstelling[<!CC LVAR [voorstellingsnummer]>]' VALUE='N' <!CC LVAR [beschikbaarflag]>>Tickets beschikbaar<input type='radio' name='voorstelling[<!CC LVAR [voorstellingsnummer]>]' VALUE='T' <!CC LVAR [telefonischflag]>>Enkel telefonisch</td><td><input type='radio' name='voorstelling[<!CC LVAR [voorstellingsnummer]>]' VALUE='J' <!CC LVAR [volzetflag]>>Volzet</td></tr>
+<tr><td><!CC LVAR [voorstellingstekst]></td><td><input type='radio' name='voorstelling[<!CC LVAR [voorstellingsnummer]>]' VALUE='N' <!CC LVAR [beschikbaarflag]>>Tickets beschikbaar</td><td><input type='radio' name='voorstelling[<!CC LVAR [voorstellingsnummer]>]' VALUE='T' <!CC LVAR [telefonischflag]>>Enkel telefonisch</td><td><input type='radio' name='voorstelling[<!CC LVAR [voorstellingsnummer]>]' VALUE='J' <!CC LVAR [volzetflag]>>Volzet</td></tr>
 <!CC END LOOP [voorstellingen]>
 <tr><td colspan=3>
 <center><input type="submit" VALUE="Wijzigingen bewaren"><input type="reset" VALUE="Annuleren"></center>
