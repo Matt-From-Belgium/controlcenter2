@@ -55,7 +55,7 @@ if(getTicketSaleStarted())
                     ###die moeten aangepast worden
                     foreach($voorstellingen as $key=>$voorstelling)
                     {
-                            ###Nagaan of de voorstelling actief is
+                            /*###Nagaan of de voorstelling actief is
                             if($voorstelling['voorstellingsnummer']==$_POST['voorstelling'])
                             {
                                     $voorstellingen[$key]['selectedflag']="checked";
@@ -66,7 +66,25 @@ if(getTicketSaleStarted())
                                     $voorstellingen[$key]['disabledflag1']="DISABLED";
                                     $voorstellingen[$key]['disabledflag2']="<font color='#FF0000'>(UITVERKOCHT)</font>";
                                     $voorstellingen[$key]['disabledflag3']="class='uitverkocht'";
-                            }
+                            }*/
+                        switch($voorstelling['volzet'])
+                        {
+                            case 'J':
+                                ###voorstelling is volzet
+                                    $voorstellingen[$key]['disabledflag1']="DISABLED";
+                                    $voorstellingen[$key]['disabledflag2']="<font color='#FF0000'>(UITVERKOCHT)</font>";
+                                    $voorstellingen[$key]['disabledflag3']="class='uitverkocht'";
+                                    break;
+                            case 'T':
+                                ###Enkel nog telefonisch
+                                    $telefoonnr = getTelephoneNR();
+                                    $voorstellingen[$key]['disabledflag1']="DISABLED";
+                                    $voorstellingen[$key]['disabledflag2']="<font color='#FF9933'>(LAATSTE TICKETS: BEL $telefoonnr)</font>";
+                                    $voorstellingen[$key]['disabledflag3']="class='uitverkocht'";
+                                    break;
+                            
+                                
+                        }
                     }
 
 

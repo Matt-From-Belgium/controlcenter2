@@ -25,7 +25,29 @@ function ValidateReservatie($postarray)
 	
 	###Nu moet het object gevalideerd worden
 	$errormessages = $reservatievalidator->validateObject($reservatie);
+        
+        ###Bijkomende validatie: de voorstelling mag niet uitverkocht zijn
+        $voorstellingen = getVoorstellingen();
+        
+        $volzet = false;
+        
+        foreach($voorstellingen as $value)
+        {
+            if($value['voorstellingsnummer']==$reservatie->getVoorstelling())
+            {
+                if($value['volzet']!=='N')
+                {
+                    $volzet = true;
+                }
+            }
+        }
 	
+        if($volzet)
+        {
+            $errormessages[]['field']='voorstelling';
+            $errormessages[]['message']='Voorstelling is uitverkocht';
+        }
+        
 	###Als de validatie geslaagd is is $errormessages leeg
 	if(!is_array($errormessages))
 	{
