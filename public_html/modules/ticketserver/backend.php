@@ -14,7 +14,24 @@ $voorstellingen = getVoorstellingen();
 
 foreach($voorstellingen as $key=>$value)
 {
-	if($value['volzet']=='N')
+    ###Update: er zijn nu 3 statussen: Y,N en T (enkel nog telefonisch)
+    switch($value['volzet'])
+    {
+        case 'J':
+            $voorstellingen[$key]['volzetflag']='CHECKED';
+            break;
+        case 'N':
+            $voorstellingen[$key]['beschikbaarflag']='CHECKED';
+            break;
+        case 'T':
+            $voorstellingen[$key]['telefonischflag']='CHECKED';
+            break;
+        default:
+            throw new Exception('volzet moet Y,N of T zijn');
+          
+            
+    }
+	/*if($value['volzet']=='N')
 	{
 
 		$voorstellingen[$key]['beschikbaarflag']='CHECKED';
@@ -22,7 +39,7 @@ foreach($voorstellingen as $key=>$value)
 	else
 	{
 		$voorstellingen[$key]['volzetflag']='CHECKED';
-	}
+	}*/
 }
 
 $html->setVariable('voorstellingen',$voorstellingen);
