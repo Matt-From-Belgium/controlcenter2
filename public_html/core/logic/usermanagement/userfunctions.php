@@ -610,10 +610,13 @@ function Login_FB()
 	}
 }
 
-function checkPermission($module,$permission)
+function checkPermission($module,$permission,$returnBoolean=false)
 {
 	###Deze functie controleert of een gebruiker toegang heeft tot een bepaalde moduletask
-	
+
+        ###REVISIE: als $returnBoolean op true wordt gezet zal er niet geredirect worden
+        ###De functie geeft dan enkel true of false terug
+    
 	###Eerst wordt gekeken of er wel een gebruiker is ingelogd
         #Bij het inloggen wordt een sessionhash gecreëerd. Deze wordt opgeslagen onder $_SESSION['loginstring']
         #De hash kan herberekend worden. Zolang de gebruiker dezelfde browser op dezelfde pc gebruikt zal de hash
@@ -677,21 +680,39 @@ function checkPermission($module,$permission)
 			require_once $_SERVER['DOCUMENT_ROOT']."/core/logic/parameters.php";
 			$url=getNoAccessURL();
 			
-			###Als de eigenaar van de server de waarde CORE_NOACCESS_URL heeft ingesteld wordt die pagina weergegeven.
-			###Wanneer dit niet het geval is wordt er gebruk gemaakt van showMessage.
-			if(empty($url))
-			{
-				require_once $_SERVER['DOCUMENT_ROOT']."/core/presentation/general/commonfunctions.php";
-				showMessage(LANG_ERROR_NOACCESS_HEADER,LANG_ERROR_NOACCESS,'/',LANG_GOTOINDEX);
-				exit;
-			}
-			else
-			{
-				###De gebruiker wordt naar de pagina doorverwezen en de uitvoering wordt gestopt.
-				header("location: $url");
-				exit;
-			}
+                        ###Standaard staat returnBoolean op false en zal er automatisch doorverwezen worden
+                        #Als de waarde manueel op true is gezet bij aanroep van de functie krijgen we een boolean
+                        if(!$returnBoolean)
+                        {
+                            ###Als de eigenaar van de server de waarde CORE_NOACCESS_URL heeft ingesteld wordt die pagina weergegeven.
+                            ###Wanneer dit niet het geval is wordt er gebruk gemaakt van showMessage.
+                            if(empty($url))
+                            {
+                                    require_once $_SERVER['DOCUMENT_ROOT']."/core/presentation/general/commonfunctions.php";
+                                    showMessage(LANG_ERROR_NOACCESS_HEADER,LANG_ERROR_NOACCESS,'/',LANG_GOTOINDEX);
+                                    exit;
+                            }
+                            else
+                            {
+                                    ###De gebruiker wordt naar de pagina doorverwezen en de uitvoering wordt gestopt.
+                                    header("location: $url");
+                                    exit;
+                            }
+                        }
+                        else
+                        {
+                            return false;
+                        }
 		}
+                else
+                {
+                    ###De gebruiker heeft de nodige toegang
+                    ###als $returnboolean true is geven we true terug anders doen we niks
+                    if($returnBoolean)
+                    {
+                        return true;
+                    }
+                }
 
 	}
 	else
@@ -711,8 +732,15 @@ function checkPermission($module,$permission)
 			$d=$d.'?'.$_SERVER['QUERY_STRING'];
 		}
 		
-		header("location: /core/presentation/usermanagement/accounts/login.php?d=$d");
-		exit;
+                if(!$returnBoolean)
+                {
+                    header("location: /core/presentation/usermanagement/accounts/login.php?d=$d");
+                    exit;
+                }
+                else
+                {
+                    return false;
+                }
 	}
 }
 

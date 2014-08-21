@@ -21,41 +21,73 @@ class htmlpage
         private $scripts;
         private $stylesheets;
         private $customMeta;
-
+        private $maintenanceEnabled;
 	
 ###CONSTRUCTOR FUNCTIONALITEIT
 	public function __construct($alias)
 	{	
-                        #Bij het uitvoeren van de constructor wordt een alias opgegeven. De aliases zijn in de databases gedefinieerd.
-			##STAP1: Nagaan of de alias bestaat en welke directory eraan gekoppeld is.
-			require_once $_SERVER['DOCUMENT_ROOT']."/core/templatesystem/templatelogic.php";
-			if($directory=AliasGetLinkeddir($alias))
-			{
-				$directory = $_SERVER['DOCUMENT_ROOT']."/templates/".$directory;
-			
-				#Nu moet de HTML van de templatefile worden opgehaald.
-				$this->html=gettemplatehtml($directory);
-                                
-                                              
+                  ###Templatesystem R4: eerst kijken we of maintenancemode aan ligt
+                  $this->maintenanceEnabled = getMaintenanceEnabled();
+                  
+                  if($this->maintenanceEnabled)
+                  {
+                     ###Onderhoudsmodus is actief => we forceren $alias naar maintenance
+                     ###TENZIJ: we op de loginpagina zitten, want we willen bepaalde gebruikers wel toelaten tot de site
+                     ###zodat deze getest kan worden voordat ze terug in productie gaat
+                      
+                        if(!stripos($_SERVER['SCRIPT_FILENAME'], 'login.php'))
+                        {      
+                            ###we zitten niet op de login pagina
+                            ###We moeten dus de onderhoudspagina forceren
+                            ###Tenzij de gebruiker die ingelogd is de toegang login during interruption heeft
+                            if(!checkPermission(NULL, 'login during interruption', TRUE))
+                            {
+                                $alias = 'maintenance';
+                            }
+                            else
+                            {
+                                ###De gebruiker heeft wel toegang omdat hij/zij de toegang 'login during interruption' heeft
+                                $this->maintenanceEnabled=FALSE;
+                            }
+                        }
+                        else
+                        {
+                            ###We zijn wel in maintenance mode maar dit is login pagina
+                            $this->maintenanceEnabled=false;
+                        }
 
-				/*#De taalconstanten worden opgehaald				
-				$this->LoadLanguageFiles();	
-				*/
-                                
-                                /*De alias is verwerkt, nu moeten we kijken welke standaardwaarde $this->enableFacebookAPI moet krijgen*/
-                                 if(getFacebookLoginStatus())
-                                 {
-                                     $this->enableFacebookAPI=true;
-                                 }
-                                 else
-                                 {
-                                     $this->enableFacebookAPI=false;
-                                 }
-			}
-			else
-			{
-				throw new Exception("You tried to call an alias '$alias'. The request failed because the alias does not exist");
-			}
+                  }
+                            #Bij het uitvoeren van de constructor wordt een alias opgegeven. De aliases zijn in de databases gedefinieerd.
+                            ##STAP1: Nagaan of de alias bestaat en welke directory eraan gekoppeld is.
+                            require_once $_SERVER['DOCUMENT_ROOT']."/core/templatesystem/templatelogic.php";
+                            if($directory=AliasGetLinkeddir($alias))
+                            {
+                                    $directory = $_SERVER['DOCUMENT_ROOT']."/templates/".$directory;
+
+                                    #Nu moet de HTML van de templatefile worden opgehaald.
+                                    $this->html=gettemplatehtml($directory);
+
+
+
+                                    /*#De taalconstanten worden opgehaald				
+                                    $this->LoadLanguageFiles();	
+                                    */
+
+                                    /*De alias is verwerkt, nu moeten we kijken welke standaardwaarde $this->enableFacebookAPI moet krijgen*/
+                                     if(getFacebookLoginStatus())
+                                     {
+                                         $this->enableFacebookAPI=true;
+                                     }
+                                     else
+                                     {
+                                         $this->enableFacebookAPI=false;
+                                     }
+                            }
+                            else
+                            {
+                                    throw new Exception("You tried to call an alias '$alias'. The request failed because the alias does not exist");
+                            }
+                            
 	}
 	
 	private function LoadLanguageFiles()
@@ -739,9 +771,14 @@ class htmlpage
 	{
 		###Deze functie geeft de HTML terug aan de browser
 
-            
-		$this->html = $this->ParseTags($this->html);
-		
+                ###Deze functie zet alle logica in werking om tags te vervangen
+                ###Als maintenance mode actief is moet dit niet gebeuren
+                if(!$this->maintenanceEnabled)
+                {
+                    $this->html = $this->ParseTags($this->html);
+                }
+ 
+
 		echo $this->html;
 	}
 	
