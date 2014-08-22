@@ -22,12 +22,19 @@ class htmlpage
         private $stylesheets;
         private $customMeta;
         private $maintenanceEnabled;
+        private $forEmail;
 	
 ###CONSTRUCTOR FUNCTIONALITEIT
-	public function __construct($alias)
+	public function __construct($alias,$forEmail=false)
 	{	
                   ###Templatesystem R4: eerst kijken we of maintenancemode aan ligt
                   $this->maintenanceEnabled = getMaintenanceEnabled();
+                  
+                  ###Templatsystem R4: als $forEmail=true dan worden een aantal acties niet uitgevoerd
+                  # - geen scripts
+                  # - geen facebookintegratie
+                  # - geen cookie melding
+                 $this->forEmail=$forEmail;
                   
                   if($this->maintenanceEnabled)
                   {
@@ -187,7 +194,8 @@ class htmlpage
 
                ###Is de gebruiker op de hoogte van het gebruik van cookies? Zo niet moet melding getoond worden
                ###Aangezien hier potentieel een javascript geladen wordt moet deze boven de aanroeping van appendheadtag blijven 
-                if(!isset($_COOKIE['cookies']))
+               ###TEMPLATESYSTEM R4: als forEmail geactiveerd is mogen geen meldingen voor cookies getoond worden
+                if((!isset($_COOKIE['cookies']))&&(!$this->forEmail))
                 {
                     ###We laden de nodige javascripts
                     $this->loadScript('/core/templatesystem/setcookies.js');
@@ -217,21 +225,24 @@ class htmlpage
                 }
 		
 		
-                
-                
-                ###We vullen de head tag aan met javascripts en metadata
-                $patternhead = "/(?i)<\s*\/\s*head\s*>/";
-                $html = @preg_replace_callback($patternhead,array($this,'appendHeadTag'), $html, 1);
-                
-                
-                ###Facebook integratie: Nu de HTML compleet is voegen we indien nodig de Facebook Javascript api toe
-                ###We doen dat net na de body tag. Maar... enkel wanneer $this->enableFacebookAPI = true (zie commentaar bovenaan)
-                if($this->enableFacebookAPI)
+                ###TEMPLATESYSTEM R4: facebookintegratie en scripts werken niet als forEmail actief is.
+                if(!$this->forEmail)
                 {
-                    ###bugfix: rekening houden met mogelijke onLoad
-                    $patternbody = "/(?i)<\s*body\s*[a-z0-9=\"\']*\s*>/";
-                    $html =  @preg_replace_callback($patternbody,array($this,'addFacebookAPI'), $html, 1);
+                    ###We vullen de head tag aan met javascripts en metadata
+                    $patternhead = "/(?i)<\s*\/\s*head\s*>/";
+                    $html = @preg_replace_callback($patternhead,array($this,'appendHeadTag'), $html, 1);
+
+
+                    ###Facebook integratie: Nu de HTML compleet is voegen we indien nodig de Facebook Javascript api toe
+                    ###We doen dat net na de body tag. Maar... enkel wanneer $this->enableFacebookAPI = true (zie commentaar bovenaan)
+                    if($this->enableFacebookAPI)
+                    {
+                        ###bugfix: rekening houden met mogelijke onLoad
+                        $patternbody = "/(?i)<\s*body\s*[a-z0-9=\"\']*\s*>/";
+                        $html =  @preg_replace_callback($patternbody,array($this,'addFacebookAPI'), $html, 1);
+                    }
                 }
+                
                 
                 return $html;
                  
