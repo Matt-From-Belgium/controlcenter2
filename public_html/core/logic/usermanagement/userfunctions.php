@@ -2,8 +2,9 @@
 require_once $_SERVER['DOCUMENT_ROOT']."/core/entity/user.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/core/entity/usergroup.php";
 
-
-session_start();
+//Beveiligingsverbetering
+//session_start();
+sec_session_start();
 
 function AddUserINT($inputarray)
 {
@@ -13,6 +14,7 @@ function AddUserINT($inputarray)
 	require_once $_SERVER['DOCUMENT_ROOT']."/core/dataaccess/usermanagement/userfunctions.php";
 	require_once $_SERVER['DOCUMENT_ROOT']."/core/entity/exception.php";
 	
+        
 	#De inputarray zal normaal de waarde krijgen van $_GET
 	#er moet een userobject gebouwd worden met deze gegevens en dat moet dan door de validator gehaald worden
 	$newuser = new user($inputarray['username']);
@@ -44,24 +46,26 @@ function AddUserINT($inputarray)
 	$errormessages = $validator->ValidateObject($newuser);
 	
 	##In het userobject is er geen ruimte voorzien voor het wachtwoord, maar ook dit moet gevalideerd worden
-	$passworderror = $validator->ValidateField("password",$inputarray['password'],-1,"array");
+	$passworderror = $validator->ValidateField("password",$inputarray['password1'],-1,"array");
 	
 	if(!empty($passworderror))
 	{
 		$errormessages[]=$passworderror;
 	}
 	
-	if(strtolower($inputarray['password']) !== strtolower($inputarray['password2']))
+        ###De wachtwoorden worden met elkaar vergeleken. Bij de server komen gehashte wachtwoorden binnen
+        ###maar als de waarden in het formulier gelijk zijn moeten de hashes overeenkomen
+	if(strtolower($inputarray['password1']) !== strtolower($inputarray['password2']))
 	{
-		$newmessage['fieldname'] = "password2";
+		$newmessage['fieldname'] = "passwordnomatch";
 		$newmessage['message'] = LANG_ERROR_PASSWORDMATCH;	
-		$errormessages [] = $newmessage;
+		$errormessages [] = $newmessage;               
 	}
 	
 	if(empty($errormessages))
 	{
 		###Geen fouten => gebruiker toevoegen
-		dataaccess_Adduser($newuser,$inputarray['password']);
+		dataaccess_Adduser($newuser,$inputarray['password1']);
 	}
 
 	return $errormessages;
@@ -110,16 +114,16 @@ function AddUserEXT($inputarray)
 	$errormessages = $validator->ValidateObject($newuser);
 	
 	##In het userobject is er geen ruimte voorzien voor het wachtwoord, maar ook dit moet gevalideerd worden
-	$passworderror = $validator->ValidateField("password",$inputarray['password'],-1,"array");
+	$passworderror = $validator->ValidateField("password",$inputarray['password1'],-1,"array");
 	
 	if(!empty($passworderror))
 	{
 		$errormessages[]=$passworderror;
 	}
 	
-	if(strtolower($inputarray['password']) !== strtolower($inputarray['password2']))
+	if(strtolower($inputarray['password1']) !== strtolower($inputarray['password2']))
 	{
-		$newmessage['fieldname'] = "password2";
+		$newmessage['fieldname'] = "passwordnomatch";
 		$newmessage['message'] = LANG_ERROR_PASSWORDMATCH;	
 		$errormessages [] = $newmessage;
 	}
@@ -134,7 +138,7 @@ function AddUserEXT($inputarray)
 	if(empty($errormessages))
 	{
 		###Geen fouten => gebruiker toevoegen
-		$newuserid=dataaccess_Adduser($newuser,$inputarray['password']);
+		$newuserid=dataaccess_Adduser($newuser,$inputarray['password1']);
 		
 		###Afhankelijk van de activatieprocedure die is ingesteld moet er een mail gestuurd worden naar de gebruiker.
 		if(getUserActivationParameter())
@@ -243,6 +247,7 @@ function addUserEXT_FB($inputarray)
                 
                 ###Aangezien de gebruiker geen wachtwoord moet opgeven en we ook niet willen dat het wachtwoord achterhaald kan worden
                 ###plaatsen we een willekeurige waarde als wachtwoord
+                #We houden hier de encryptie op MD5 terwijl dit overal elders SHA512 geworden is.
                 $fictionalpass = md5(microtime());
             
 		$newuserid=dataaccess_Adduser($newuser,$fictionalpass);
@@ -353,7 +358,7 @@ function getUsergroups()
 function getUser($id)
 {
 	require_once $_SERVER['DOCUMENT_ROOT']."/core/dataaccess/usermanagement/userfunctions.php";
-	return dataaccess_getUser($id);
+	return dataaccess_getUser(intval($id));
 }
 
 function editUser($inputarray)
@@ -402,7 +407,7 @@ function editUser($inputarray)
 	$errormessages = $uservalidator->validateObject($editeduser);
 	
 	##Nu nog de passwordcontrole, password en password2 moeten gelijk zijn aan elkaar.
-	if($inputarray['password'] !== $inputarray['password2'])
+	if($inputarray['password1'] !== $inputarray['password2'])
 	{
 		$errormessage['field'] = "password2";
 		$errormessage['message'] = LANG_ERROR_PASSWORDMATCH;	
@@ -413,7 +418,7 @@ function editUser($inputarray)
 	if(empty($errormessages))
 	{
 		##Wijzigingen ok => gebruiker mag gewijzigd worden.
-		dataaccess_EditUser($editeduser,$_POST['password']);
+		dataaccess_EditUser($editeduser,$_POST['password1']);
 	}
 
 	return $errormessages;
@@ -475,57 +480,79 @@ function Login($username,$password,$d)
 	###Deze functie gaat na of de aangeleverde parameters kloppen
 	###Als dat het geval is wordt het userobject opgehaald en wordt er van dit object een sessievariabele gecre�erd.
 	
-	###Eerst laten we de DataAccess layer controleren of de gegevens kloppen
-	$id=dataaccess_checkUserPassword($username,$password);
-	if(!empty($id))
-	{
-		###De aangeleverde gegevens zijn correct
-		###We halen de gebruikersgegevens op in een userobject
-		$user = getUser($id);
-		
-		###1e CONTROLE: heeft de gebruiker zijn account geactiveerd
-		###Als activatie niet nodig is dan krijgt de gebruiker in de databank zowieso de waarde userconfirmation=1 mee
-		if($user->getUserConfirmationStatus()==1)
-		{
-			###Gebruiker heeft zichzelf geactiveerd of activatie is niet nodig. In ieder geval is er geen beletsel voor
-			###het verderzetten van de loginprocedure.
-			
-			###2e CONTROLE: Moet de useraccount nog geactiveerd worden door een administrator?
-			if($user->getAdminConfirmationStatus()==1)
-			{
-				###De gebruikersgegevens waren correct, en de account is volledig actief => de gebruiker mag ingelogd worden
-				$_SESSION['currentuser'] = $user;
-				
-				###Nu moet er gecontroleerd worden of de gebruiker zijn wachtwoord moet wijzigen. Als dat het geval is dan moet
-				###de gebruiker worden doorverwezen naar de pagina voor het wijzigen van zijn wachtwoord.
-				if($user->getPasswordChangeRequired()==1)
-				{
-					header("location: /core/presentation/usermanagement/accounts/passwordchange.php?d=$d");
-					exit();
-				}
-			}
-			else
-			{
-				###De gebruiker heeft zijn account wel geactiveerd maar de admin moet nog zijn/haar toestemming geven
-				require_once $_SERVER['DOCUMENT_ROOT']."/core/presentation/general/commonfunctions.php";
-				showMessage("Admin moet nog activeren","Uw account is nog niet bruikbaar. Een administrator zal uw gegevens nakijken en uw account activeren. Wij streven ernaar om alle accounts binnen de 24 uur te activeren");
-				exit();
-			}
-		}
-		else
-		{
-			###Gebruiker moet zijn account nog activeren => melding weergeven
-			require_once $_SERVER['DOCUMENT_ROOT']."/core/presentation/general/commonfunctions.php";
-			showMessage("Activatie nodig","Account nog niet geactiveerd");
-			exit();
-		}
-		return $user;
-	}
-	else
-	{
-		###de parameters zijn niet correct => return false
-		return false;
-	}
+        ###We controleren of de gebruiker niet meer dan 5 keer heeft proberen in te loggen in de laatse 2 uur
+        #de functie geeft false terug als er teveel pogingen zijn
+        if(dataaccess_toomanyattempts($username))
+        {
+
+        
+            #we laten de DataAccess layer controleren of de gegevens kloppen
+            $id=dataaccess_checkUserPassword($username,$password);
+
+            if(!empty($id))
+            {
+                    ###De aangeleverde gegevens zijn correct
+                    ###We halen de gebruikersgegevens op in een userobject
+                    $user = getUser($id);
+
+                    ###1e CONTROLE: heeft de gebruiker zijn account geactiveerd
+                    ###Als activatie niet nodig is dan krijgt de gebruiker in de databank zowieso de waarde userconfirmation=1 mee
+                    if($user->getUserConfirmationStatus()==1)
+                    {
+                            ###Gebruiker heeft zichzelf geactiveerd of activatie is niet nodig. In ieder geval is er geen beletsel voor
+                            ###het verderzetten van de loginprocedure.
+
+                            ###2e CONTROLE: Moet de useraccount nog geactiveerd worden door een administrator?
+                            if($user->getAdminConfirmationStatus()==1)
+                            {
+                                    ###De gebruikersgegevens waren correct, en de account is volledig actief => de gebruiker mag ingelogd worden
+                                    $_SESSION['currentuser'] = $user;
+
+                                    ###We genereren de session hash om hijacking moeilijker te maken
+                                    $hash = generateSessionHash();
+                                    $_SESSION['loginstring']=$hash;
+
+                                    ###Nu moet er gecontroleerd worden of de gebruiker zijn wachtwoord moet wijzigen. Als dat het geval is dan moet
+                                    ###de gebruiker worden doorverwezen naar de pagina voor het wijzigen van zijn wachtwoord.
+                                    if($user->getPasswordChangeRequired()==1)
+                                    {
+                                            header("location: /core/presentation/usermanagement/accounts/passwordchange.php?d=$d");
+                                            exit();
+                                    }
+                            }
+                            else
+                            {
+                                    ###De gebruiker heeft zijn account wel geactiveerd maar de admin moet nog zijn/haar toestemming geven
+                                    require_once $_SERVER['DOCUMENT_ROOT']."/core/presentation/general/commonfunctions.php";
+                                    showMessage("Admin moet nog activeren","Uw account is nog niet bruikbaar. Een administrator zal uw gegevens nakijken en uw account activeren. Wij streven ernaar om alle accounts binnen de 24 uur te activeren");
+                                    exit();
+                            }
+                    }
+                    else
+                    {
+                            ###Gebruiker moet zijn account nog activeren => melding weergeven
+                            require_once $_SERVER['DOCUMENT_ROOT']."/core/presentation/general/commonfunctions.php";
+                            showMessage("Activatie nodig","Account nog niet geactiveerd");
+                            exit();
+                    }
+                    return $user;
+            }
+            else
+            {
+                    ###We registreren de gefaalde login om brute force logins tegen te gaan
+                    dataaccess_registerLoginAttempt($username);
+
+                    ###de parameters zijn niet correct => return false
+                    $errorlist[]['message'] = LANG_ERROR_WRONGLOGIN;
+                    return $errorlist;
+            }
+        }
+        else
+        {
+            ###Teveel proberen in te loggen met deze gebruiker => account geblokkeerd
+            $errorlist[]['message'] = LANG_ERROR_TOOMANYATTEMPTS;
+            return $errorlist;
+        }
 }
 
 function Login_FB()
@@ -560,7 +587,9 @@ function Login_FB()
 			{
 				###De gebruikersgegevens waren correct, en de account is volledig actief => de gebruiker mag ingelogd worden
 				$_SESSION['currentuser'] = $user;
-				
+				###We genereren de session hash om hijacking moeilijker te maken
+                                $hash = generateSessionHash();
+                                $_SESSION['loginstring']=$hash;
 				
 			}
 			else
@@ -581,14 +610,23 @@ function Login_FB()
 	}
 }
 
-function checkPermission($module,$permission)
+function checkPermission($module,$permission,$returnBoolean=false)
 {
 	###Deze functie controleert of een gebruiker toegang heeft tot een bepaalde moduletask
-	
+
+        ###REVISIE: als $returnBoolean op true wordt gezet zal er niet geredirect worden
+        ###De functie geeft dan enkel true of false terug
+    
 	###Eerst wordt gekeken of er wel een gebruiker is ingelogd
-	if(isset($_SESSION['currentuser']))
+        #Bij het inloggen wordt een sessionhash gecreëerd. Deze wordt opgeslagen onder $_SESSION['loginstring']
+        #De hash kan herberekend worden. Zolang de gebruiker dezelfde browser op dezelfde pc gebruikt zal de hash
+        #gelijk blijven. Wanneer de sessie gekaapt wordt zal deze variabele wijzigen en wordt ingegrepen
+    
+        $sessionhash = generateSessionHash();
+    
+	if(isset($_SESSION['currentuser']) && ($sessionhash==$_SESSION['loginstring']))
 	{	
-		###De gebruiker is ingelogd. Nu moeten we dus controleren of de gebruikersnaam wel recht heeft om deze pagina te bekijken.
+		###De gebruiker is ingelogd en de hashcontrole is geslaagd. Nu moeten we dus controleren of de gebruikersnaam wel recht heeft om deze pagina te bekijken.
 		###Eerst halen we de lijst van gebruikergroepen op waar de gebruiker bij behoort.
 		###BUGFIX: de toegangsrechten van de gebruiker worden bij inloggen in de sessievariabele opgeslagen. Dat betekent dat
 		###Wanneer er tijdens de sessie iets verandert dat dat dan tot problemen leidt  => bij gebruik van checkpermission laden
@@ -642,27 +680,50 @@ function checkPermission($module,$permission)
 			require_once $_SERVER['DOCUMENT_ROOT']."/core/logic/parameters.php";
 			$url=getNoAccessURL();
 			
-			###Als de eigenaar van de server de waarde CORE_NOACCESS_URL heeft ingesteld wordt die pagina weergegeven.
-			###Wanneer dit niet het geval is wordt er gebruk gemaakt van showMessage.
-			if(empty($url))
-			{
-				require_once $_SERVER['DOCUMENT_ROOT']."/core/presentation/general/commonfunctions.php";
-				showMessage(LANG_ERROR_NOACCESS_HEADER,LANG_ERROR_NOACCESS,'/',LANG_GOTOINDEX);
-				exit;
-			}
-			else
-			{
-				###De gebruiker wordt naar de pagina doorverwezen en de uitvoering wordt gestopt.
-				header("location: $url");
-				exit;
-			}
+                        ###Standaard staat returnBoolean op false en zal er automatisch doorverwezen worden
+                        #Als de waarde manueel op true is gezet bij aanroep van de functie krijgen we een boolean
+                        if(!$returnBoolean)
+                        {
+                            ###Als de eigenaar van de server de waarde CORE_NOACCESS_URL heeft ingesteld wordt die pagina weergegeven.
+                            ###Wanneer dit niet het geval is wordt er gebruk gemaakt van showMessage.
+                            if(empty($url))
+                            {
+                                    require_once $_SERVER['DOCUMENT_ROOT']."/core/presentation/general/commonfunctions.php";
+                                    showMessage(LANG_ERROR_NOACCESS_HEADER,LANG_ERROR_NOACCESS,'/',LANG_GOTOINDEX);
+                                    exit;
+                            }
+                            else
+                            {
+                                    ###De gebruiker wordt naar de pagina doorverwezen en de uitvoering wordt gestopt.
+                                    header("location: $url");
+                                    exit;
+                            }
+                        }
+                        else
+                        {
+                            return false;
+                        }
 		}
+                else
+                {
+                    ###De gebruiker heeft de nodige toegang
+                    ###als $returnboolean true is geven we true terug anders doen we niks
+                    if($returnBoolean)
+                    {
+                        return true;
+                    }
+                }
 
 	}
 	else
 	{
 		###Geen gebruiker ingelogd => naar inlogpagina. De query d wordt meegegeven om ervoor te zorgen dat de gebruiker na het inloggen
 		###terug naar dezelfde pagina kan worden geleid.
+            
+                ###Ook als de sessionhash zou gewijzigd zijn (kaping?) wordt deze code uitgevoerd. Vandaar dat we hier
+                #Een eventueel bestaande sessie vernietigen.
+                logout();
+            
 		$d = $_SERVER['SCRIPT_NAME'];
 		
 		###Als de url een querystring bevat moet deze meegenomen worden
@@ -671,9 +732,36 @@ function checkPermission($module,$permission)
 			$d=$d.'?'.$_SERVER['QUERY_STRING'];
 		}
 		
-		header("location: /core/presentation/usermanagement/accounts/login.php?d=$d");
-		exit;
+                if(!$returnBoolean)
+                {
+                    header("location: /core/presentation/usermanagement/accounts/login.php?d=$d");
+                    exit;
+                }
+                else
+                {
+                    return false;
+                }
 	}
+}
+
+function logout()
+{
+    // Unset all session values 
+    $_SESSION = array();
+ 
+    // get session parameters 
+    $params = session_get_cookie_params();
+ 
+    // Delete the actual cookie. 
+    setcookie(session_name(),
+            '', time() - 42000, 
+            $params["path"], 
+            $params["domain"], 
+            $params["secure"], 
+            $params["httponly"]);
+ 
+    // Destroy session 
+    session_destroy();
 }
 
 function getPermissions()
@@ -687,6 +775,9 @@ function changePassword($oldpassword,$newpassword1,$newpassword2)
 {
 	require_once $_SERVER['DOCUMENT_ROOT'].'/core/dataaccess/usermanagement/userfunctions.php';
 	
+        ##Dit is de SHA512 hash van niks
+        $emptyhash = 'cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e';
+        
 	if(($oldpassword == $newpassword1) and ($newpassword1 == $newpassword2) and ((!empty($oldpassword)) ||(!empty($newpassword1)) ||(!empty($newpassword2))))
 	{
 		$errormessage['field'] = "password1";
@@ -702,7 +793,7 @@ function changePassword($oldpassword,$newpassword1,$newpassword2)
 		$errormessages[]=$errormessage;
 	}
 	
-	if((empty($newpassword1)) || (empty($newpassword2)))
+	if(($newpassword1==$emptyhash) || ($newpassword2==$emptyhash))
 	{
 		$errormessage['field']= "password1";
 		$errormessage['message'] = LANG_ERROR_NEWPASS_EMPTY;
@@ -710,22 +801,84 @@ function changePassword($oldpassword,$newpassword1,$newpassword2)
 		$errormessages[] = $errormessage;
 	}
 
-	###De velden zijn ingevuld, nu moet gecontroleerd worden of het oude wachtwoord wel klopt
-	if(checkUserPassword($_SESSION['currentuser']->getUsername(),$oldpassword))
-	{
-		###Het oude wachtwoord klopt, we kunnen het wachtwoord wijzigen
-		dataaccess_changePassword($_SESSION['currentuser']->getId(),$newpassword1);
-	}
-	else
-	{
-		###Het oude wachtwoord klopt niet => error
-		$errormessage['field']="oldpassword";
-		$errormessage['message']=LANG_ERROR_PASSWORD_INCORRECT;
-		
-		$errormessages[] = $errormessage;
-	}
+        if(!is_array($errormessage))
+        {
+            ###De velden zijn ingevuld, nu moet gecontroleerd worden of het oude wachtwoord wel klopt
+            if(checkUserPassword($_SESSION['currentuser']->getUsername(),$oldpassword))
+            {
+                    ###Het oude wachtwoord klopt, we kunnen het wachtwoord wijzigen 
+                    dataaccess_changePassword($_SESSION['currentuser']->getId(),$newpassword1);
+            }
+            else
+            {
+                    ###Het oude wachtwoord klopt niet => error
+                    $errormessage['field']="oldpassword";
+                    $errormessage['message']=LANG_ERROR_PASSWORD_INCORRECT;
 
+                    $errormessages[] = $errormessage;
+            }
+        }
+            
 	###De array met foutmeldingen wordt teruggegeven naar de presentation-layer
 	return $errormessages;
+}
+
+function sec_session_start()
+{
+    require_once $_SERVER['DOCUMENT_ROOT'].'/core/logic/parameters.php';
+    
+    ###bron http://www.wikihow.com/Create-a-Secure-Login-Script-in-PHP-and-MySQL
+    $session_name = 'secure_session';   // Set a custom session name
+       
+    if(getSSLenabled())
+    {
+        ###Er is SSL mogelijk dus moet de pagina geforceerd worden naar https. Cookies mogen enkel over SSL verstuurd worden
+        if (!isset($_SERVER['HTTPS']) || !$_SERVER['HTTPS']) { // if request is not secure, redirect to secure url
+                $url = 'https://' . $_SERVER['HTTP_HOST']
+                                  . $_SERVER['REQUEST_URI'];
+
+                header('Location: ' . $url);
+                exit;
+                }
+        
+        ###hierdoor worden  cookies enkel over beveiligde verbinding verstuurd
+        $secure = SECURE;
+    }
+    
+    // This stops JavaScript being able to access the session id.
+    $httponly = true;
+    // Forces sessions to only use cookies.
+    if (ini_set('session.use_only_cookies', 1) === FALSE) {
+        throw new Exception('php ini not correctly configured');
+        exit();
+    }
+    // Gets current cookies params.
+    $cookieParams = session_get_cookie_params();
+    session_set_cookie_params($cookieParams["lifetime"],
+        $cookieParams["path"], 
+        $cookieParams["domain"], 
+        $secure,
+        $httponly);
+    // Sets the session name to the one set above.
+    session_name($session_name);
+    session_start();            // Start the PHP session 
+    session_regenerate_id();    // regenerated the session, delete the old one. 
+
+}
+
+function generateSessionHash()
+{
+    if(isset($_SERVER['REMOTE_ADDR'])&&isset($_SERVER['HTTP_USER_AGENT']))
+    {
+        ###We hebben de nodige waarden
+        $tohash = $_SERVER['remote_addr'].$_SERVER['HTTP_USER_AGENT'];
+        $hash = hash('sha512',$tohash);
+        
+        return $hash;
+    }
+    else
+    {
+        throw new Exception('unable to create session hash');
+    }
 }
 ?>

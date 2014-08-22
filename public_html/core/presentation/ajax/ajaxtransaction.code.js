@@ -356,8 +356,15 @@ function ajaxTransaction(formElement)
                                                                                             var fieldvalue = null;
                                                                                     }									
                                                                                     var naam = fieldnames[x];
-
+                                                                                    
+                                                                                    //BUGFIX: als we html terugkrijgen met CSS dan loopt de javascript vast door de ;
+                                                                                    //Door encodeURIComponent lossen we dit op
+                                                                                    fieldvalue = encodeURIComponent(fieldvalue);
+                                                                                    
                                                                                     toewijzingscode = toewijzingscode + 'instantie.' + naam + '="' + fieldvalue + '";';
+                                                                                    
+                                                                                    //BUGFIX: we willen dat de waarde bij teruggave nog steeds de speciale karakters bevat
+                                                                                    toewijzingscode = toewijzingscode + 'instantie.' + naam + '=' + 'decodeURIComponent(instantie.' + naam + ');';
 
                                                                             }
                                                                             eval(toewijzingscode);

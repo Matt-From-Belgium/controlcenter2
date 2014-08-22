@@ -36,6 +36,7 @@ define('LANG_ERROR_COUNTRY_EMPTY',"Please select a country");
 define('LANG_ERROR_PASSWORDMATCH',"Passwords don't match");
 define('LANG_ERROR_MAILADRESS_EXISTS',"There already is a user with that mailadress");
 define('LANG_ERROR_WRONGLOGIN',"Invalid username and/or password");
+define('LANG_ERROR_TOOMANYATTEMPTS', "Account blocked: too many attempts");
 define('LANG_ERROR_NEWPASSWORD_REQUIRED',"Your new password must differ from the previous one");
 define('LANG_ERROR_NEWPASS_EMPTY',"You must provide a new password");
 define('LANG_ERROR_PASSWORD_INCORRECT',"The current password you supplied is incorrect");

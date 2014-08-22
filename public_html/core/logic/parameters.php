@@ -401,4 +401,25 @@ function getFacebookScopeAjax()
     $result->getXML();
     
 }
+
+function getSSLenabled()
+{
+    $parameter = dataaccess_GetParameter('CORE_SSL_ENABLED');
+    return $parameter->getValue();
+}
+
+function getMaintenanceEnabled()
+{
+    ###Deze functie gaat na of de site in onderhoudsmodus staat
+    $parameter = dataaccess_GetParameter('CORE_MAINTENANCE_MODE');
+    
+    if($parameter->getValue()==1)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 ?>
