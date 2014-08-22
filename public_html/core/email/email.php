@@ -54,7 +54,7 @@ class Email
 	
 	function Send()
 	{
-		$html = new htmlpage($this->templatealias);
+		$html = new htmlpage($this->templatealias,TRUE);
 		
 		###Er wordt nagegaan of er een addin werd gedefinieerd, als dat niet het geval is wordt de tekst van $this->message
 		#ingevoegd in de mail.
