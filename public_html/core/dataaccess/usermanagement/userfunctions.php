@@ -393,7 +393,7 @@ function dataaccess_getUser($userid)
 
 			$result = $db->getResultArray();
 
-			if(is_array($result))
+			if($db->GetNumRows()>0)
 			{
 
 				foreach($result as $rownumber=>$rowvalue)
