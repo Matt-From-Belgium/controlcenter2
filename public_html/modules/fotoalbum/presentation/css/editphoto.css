@@ -68,7 +68,7 @@ img.editButtons {
     margin-top: 0.5em;
 }
 
-#newalbum #description {
+#newalbum #description, #descriptionfield {
     
     background-color: #FFFFFF;
     border-color: #CCCCCC;

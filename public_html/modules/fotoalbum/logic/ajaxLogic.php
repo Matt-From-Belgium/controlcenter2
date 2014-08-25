@@ -52,4 +52,39 @@ function GetAlbumPhotosAjax()
     
     return $result->getXML();
 }
+
+function albumBeschrijvingWijzigenAjax()
+{
+    if($_POST['id'] && $_POST['nieuwebeschrijving'])
+    {
+        ###De nodige waarden zijn er
+        #Eerst halen we het oorspronkelijk album op
+        $albumid= intval($_POST['id']);
+        
+        $album = data_getAlbum($albumid);
+        
+        if($album)
+        {
+            ###Album gevonden
+            $album->setDescription($_POST['nieuwebeschrijving']);
+            
+            ###We schrijven het gewijzigde album naar de database
+            data_albumWijzigen($album);
+            $response = new ajaxResponse('ok');
+            return $response->getXML();
+        }
+        else
+        {
+            $response = new ajaxResponse('error');
+            $response->addErrorMessage('id', 'id bestaat niet');
+            return $response->getXML();
+        }
+    }
+    else
+    {
+        $response = new ajaxResponse('error');
+        $response->addErrorMessage('nieuwebeschrijving', 'Er moet een id en beschrijving gegeven worden');
+        return $response->getXML();
+    }
+}
 ?>

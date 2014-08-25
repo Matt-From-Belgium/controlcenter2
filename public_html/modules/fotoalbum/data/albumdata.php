@@ -43,6 +43,20 @@ function data_albumToevoegen(fotoalbum $album)
     return $result;
 }
 
+function data_albumWijzigen(fotoalbum $album)
+{
+    $query = "UPDATE albums SET name='@name',description='@description' WHERE id=@id";
+    
+    $db = new DataConnection();
+    $db->setQuery($query);
+    
+    $db->setAttribute('name', $album->getName());
+    $db->setAttribute('description', $album->getDescription());
+    $db->setAttribute('id', $album->getId());
+    
+    $db->ExecuteQuery();
+}
+
 function data_getAlbums()
 {
     $query = "SELECT albums.id,albums.name,albums.description from albums";

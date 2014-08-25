@@ -18,3 +18,4 @@ INSERT INTO  `gandalf`.`ajaxwhitelist` (`id` ,`file` ,`function`) VALUES (NULL ,
 INSERT INTO  `gandalf`.`ajaxwhitelist` (`id` ,`file` ,`function`) VALUES (NULL ,  '/modules/fotoalbum/logic/ajaxLogic.php',  'GetAlbumPhotosAjax');
 INSERT INTO  `gandalf`.`ajaxwhitelist` (`id` ,`file` ,`function`) VALUES (NULL ,  '/modules/fotoalbum/logic/albumlogic.php',  'changeDescription');
 INSERT INTO  `gandalf`.`ajaxwhitelist` (`id` ,`file` ,`function`) VALUES (NULL ,  '/modules/fotoalbum/logic/albumlogic.php',  'deletePhoto');
+INSERT INTO  `gandalf`.`ajaxwhitelist` (`id` ,`file` ,`function`) VALUES (NULL ,  '/modules/fotoalbum/logic/ajaxLogic.php',  'albumBeschrijvingWijzigenAjax');
