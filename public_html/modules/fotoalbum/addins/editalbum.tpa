@@ -2,6 +2,9 @@
 <link href="/modules/fotoalbum/presentation/css/showphoto.css" rel="stylesheet" type="text/css" />
 <link href="/modules/fotoalbum/presentation/css/editphoto.css" rel="stylesheet" type="text/css" />
 <h1>Wijzig album '<!CC VAR [albumname]>'</h1>
+<h2>Beschrijving</h2>
+<div id='descriptionfield' contenteditable='true'><!CC VAR [albumHTML]></div>
+<input type='button' value='Bewaren' onClick='javascript:wijzigBeschrijving()'><span id='wijzigBeschrijvingStatus'></span>
 <h2>Huidige inhoud</h2>
 <div id='fotoeditor'>
 </div>
