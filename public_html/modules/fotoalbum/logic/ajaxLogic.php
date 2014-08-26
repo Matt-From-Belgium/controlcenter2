@@ -55,6 +55,8 @@ function GetAlbumPhotosAjax()
 
 function albumBeschrijvingWijzigenAjax()
 {
+    checkpermission('fotoalbum','manage albums');
+    
     if($_POST['id'] && $_POST['nieuwebeschrijving'])
     {
         ###De nodige waarden zijn er
