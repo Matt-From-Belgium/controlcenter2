@@ -47,7 +47,8 @@ body {
     position: relative;
     display: block;
     background-color: rgba(10,10,10,0.8);
-    width: 70em;
+    //width: 70em;
+    width: 60%;
     min-height: 1em;
     margin-top: 3em;
     margin-left: auto;
