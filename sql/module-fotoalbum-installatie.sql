@@ -12,10 +12,10 @@ extension varchar(4) NOT NULL,
 album int(3) NOT NULL,
 description VARCHAR(255));
 
-INSERT INTO  `gandalf`.`ajaxwhitelist` (`id` ,`file` ,`function`) VALUES (NULL ,  '/modules/fotoalbum/logic/albumlogic.php',  'addAlbum');
-INSERT INTO  `gandalf`.`ajaxwhitelist` (`id` ,`file` ,`function`) VALUES (NULL ,  '/modules/fotoalbum/logic/albumlogic.php',  'getAlbums');
-INSERT INTO  `gandalf`.`ajaxwhitelist` (`id` ,`file` ,`function`) VALUES (NULL ,  '/modules/fotoalbum/logic/albumlogic.php',  'addPhoto');
-INSERT INTO  `gandalf`.`ajaxwhitelist` (`id` ,`file` ,`function`) VALUES (NULL ,  '/modules/fotoalbum/logic/ajaxLogic.php',  'GetAlbumPhotosAjax');
-INSERT INTO  `gandalf`.`ajaxwhitelist` (`id` ,`file` ,`function`) VALUES (NULL ,  '/modules/fotoalbum/logic/albumlogic.php',  'changeDescription');
-INSERT INTO  `gandalf`.`ajaxwhitelist` (`id` ,`file` ,`function`) VALUES (NULL ,  '/modules/fotoalbum/logic/albumlogic.php',  'deletePhoto');
-INSERT INTO  `gandalf`.`ajaxwhitelist` (`id` ,`file` ,`function`) VALUES (NULL ,  '/modules/fotoalbum/logic/ajaxLogic.php',  'albumBeschrijvingWijzigenAjax');
+INSERT INTO  `ajaxwhitelist` (`id` ,`file` ,`function`) VALUES (NULL ,  '/modules/fotoalbum/logic/albumlogic.php',  'addAlbum');
+INSERT INTO  `ajaxwhitelist` (`id` ,`file` ,`function`) VALUES (NULL ,  '/modules/fotoalbum/logic/albumlogic.php',  'getAlbums');
+INSERT INTO  `ajaxwhitelist` (`id` ,`file` ,`function`) VALUES (NULL ,  '/modules/fotoalbum/logic/albumlogic.php',  'addPhoto');
+INSERT INTO  `ajaxwhitelist` (`id` ,`file` ,`function`) VALUES (NULL ,  '/modules/fotoalbum/logic/ajaxLogic.php',  'GetAlbumPhotosAjax');
+INSERT INTO  `ajaxwhitelist` (`id` ,`file` ,`function`) VALUES (NULL ,  '/modules/fotoalbum/logic/albumlogic.php',  'changeDescription');
+INSERT INTO  `ajaxwhitelist` (`id` ,`file` ,`function`) VALUES (NULL ,  '/modules/fotoalbum/logic/albumlogic.php',  'deletePhoto');
+INSERT INTO  `ajaxwhitelist` (`id` ,`file` ,`function`) VALUES (NULL ,  '/modules/fotoalbum/logic/ajaxLogic.php',  'albumBeschrijvingWijzigenAjax');

@@ -6,7 +6,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/modules/nieuwsbrief/logic/nieuwsbrieflo
 $promotext = getNewsPromoText();
 
 
-$html = new htmlpage('backend');
+$html = new htmlpage('frontend');
 $html->LoadAddin('/pages/addins/nieuwsbrieven.tpa');
 $html->setVariable('promotext', $promotext);
 $html->PrintHTML();
