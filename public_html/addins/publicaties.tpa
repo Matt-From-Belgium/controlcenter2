@@ -1,4 +1,7 @@
 <h1>Publicaties</h1>
+<div class="selector">
+Weergavemodus:<form><input type='radio' name='view' id='view' value='all' CHECKED onchange='javascript:togglView(this.value)'>Alles tonen &nbsp; <input type='radio' name='view' id='view' value='popular' onchange='javascript:togglView(this.value)'>Enkel meest populaire items
+</div>
 <div class="publicatie">
     <img src='/images/publicaties/wieisenwatdoetacv.jpg'>
     <h2>Wie is en wat doet het ACV?</h2>
@@ -13,7 +16,7 @@
     <a href='http://www.acv-online.be/Images/BTUW-fiche%20TRADE%20UNIONS%202013_tcm9-282591.pdf'>Downloaden</a>
     <div class='clearfix'></div>
 </div>
-<div class="publicatie">
+<div class="publicatie popular">
     <img src='/images/publicaties/haaleruit.jpg'>
     <h2>Haal eruit wat er in zit. Wegwijs in de ACV-dienstverlening </h2>
     <h3>Deze brochure zet alle voordelen van het ACV-lidmaatschap op een rijtje. </h3>
@@ -63,7 +66,7 @@ verworven competenties. De uitgave wordt uitgebreid met informatie over de oplei
     <a href='http://www.acv-online.be/Images/Brochure%20Opleiding%20voor%20werknemers%202013-2014_tcm9-297523.pdf'>Downloaden</a>
     <div class='clearfix'></div>
 </div>
-<div class="publicatie">
+<div class="publicatie popular">
     <img src='/images/publicaties/uitzendkracht.jpg'>
     <h2>Informatiebrochure voor uitzendkrachten</h2>
     <h3>Om uitzendkrachten meer en beter te informeren over hun rechten, verdeelt het ACV in de komende dagen en weken de nieuwste editie van de brochure “Gids voor uitzendkrachten 2013, 20 vragen, 20 antwoorden”.
@@ -91,14 +94,14 @@ De brochure bevat ook de laatste nieuwe wetgeving met betrekking tot uitzendarbe
     <a href='http://www.acv-online.be/Images/Goed%20om%20weten%20jan%202012_tcm9-274096.pdf'>Downloaden</a>
     <div class='clearfix'></div>
 </div>
-<div class="publicatie">
+<div class="publicatie popular">
     <img src='/images/publicaties/tijdkrediet.jpg'>
     <h2>Tijdkrediet en landingsbanen in de privésector </h2>
     <h3>Deze brochure geeft uitgebreide informatie over tijdkrediet en landingsbanen in de privésector, de Vlaamse aanmoedigingspremies en de thematische verloven. Versie: september 2013. </h3>
     <a href='http://www.acv-online.be/Images/Tijdkrediet-2013-2014_tcm9-287635.pdf'>Downloaden</a>
     <div class='clearfix'></div>
 </div>
-<div class="publicatie">
+<div class="publicatie popular">
     <img src='/images/publicaties/zwangerschap.jpg'>
     <h2>Arbeid en zwangerschap</h2>
     <h3>Deze brochure informeert toekomstige mama’s en papa’s over hun rechten en plichten voor en kort na de bevalling.</h3>
