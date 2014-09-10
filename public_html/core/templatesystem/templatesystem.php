@@ -36,7 +36,7 @@ class htmlpage
                   # - geen cookie melding
                  $this->forEmail=$forEmail;
                   
-                  if($this->maintenanceEnabled)
+                  if($this->maintenanceEnabled && !$this->forEmail)
                   {
                      ###Onderhoudsmodus is actief => we forceren $alias naar maintenance
                      ###TENZIJ: we op de loginpagina zitten, want we willen bepaalde gebruikers wel toelaten tot de site
