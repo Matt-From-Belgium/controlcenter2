@@ -297,9 +297,9 @@ input[type='button']:active,input[type='submit']:active, select:active
 
 .navBig #navLinks {
     position: relative;
-    top: 7.2em;
-    left: 15em;
-    font-size: 1.7em;
+    top: 7.8em;
+    left: 15.5em;
+    font-size: 1.6em;
     margin: 0px;
     
     transition: top ease-out 0.5s;
@@ -310,8 +310,8 @@ input[type='button']:active,input[type='submit']:active, select:active
 .navSmall #navLinks {
     position: relative;
     top: 0.2em;
-    left: 15em;
-    font-size: 1.7em;
+    left: 15.5em;
+    font-size: 1.6em;
     margin: 0px;
     
     transition: top ease-out 0.5s;
