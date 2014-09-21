@@ -11,13 +11,15 @@ $fbNameSpace = getFacebookNameSpace();
 
 $html = new htmlpage('frontend');
 
-if(!getTicketSaleStarted())
+/*if(!getTicketSaleStarted())
 {
     $html->LoadAddin('/addins/beatles.tpa');
 }
 else {
     $html->loadAddin('/addins/beatles-fase2.tpa');
-}
+}*/
+
+$html->loadAddin('/addins/beatles.tpa');
 
 $html->loadScript('/modules/fotoalbum/presentation/showalbum.js');
 $html->loadScript('/scripts/beatles.final.js');

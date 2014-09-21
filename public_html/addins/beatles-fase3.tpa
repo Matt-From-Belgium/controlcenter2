@@ -39,7 +39,11 @@ Het beatlesconcert wordt 3 keer uitgevoerd:
     
     De ticketverkoop is nu officieel gestart! Hou er rekening mee dat de tickets razendsnel de deur uitvliegen. Op is op!
     <p />Tickets kosten <b>10,00 EUR</b>. De plaatsen zijn niet genummerd!.
-    Tickets kunnen <b>enkel nog telefonisch</b> besteld worden op het nummer 0495&nbsp;23&nbsp;11&nbsp;69 (tussen 9u 's morgens en 18u 's avonds)
+    <div id='ticketbutton' onclick="window.location.href='/modules/ticketserver/bestel.php'">
+    Klik hier
+    <h1>Bestel je tickets</h1>
+    </div>
+    Tickets kunnen ook telefonisch besteld worden op het nummer 0495&nbsp;23&nbsp;11&nbsp;69 (enkel tussen 9u 's morgens en 18u 's avonds)
 </section>
 </section>
 <section class='block'>
