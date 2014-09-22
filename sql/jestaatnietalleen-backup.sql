@@ -2,10 +2,10 @@
 -- version 4.0.10deb1
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Aug 15, 2014 at 01:38 PM
--- Server version: 5.5.38-0ubuntu0.14.04.1
--- PHP Version: 5.5.9-1ubuntu4.3
+-- Machine: localhost
+-- Genereertijd: 22 sep 2014 om 17:35
+-- Serverversie: 5.5.38-0ubuntu0.14.04.1
+-- PHP-versie: 5.5.9-1ubuntu4.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `jestaatnietalleen`
+-- Databank: `jestaatnietalleen`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `abonnees`
+-- Tabelstructuur voor tabel `abonnees`
 --
 
 CREATE TABLE IF NOT EXISTS `abonnees` (
@@ -34,40 +34,24 @@ CREATE TABLE IF NOT EXISTS `abonnees` (
   `confirmed` enum('Y','N') NOT NULL DEFAULT 'N',
   `secretkey` char(32) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-
---
--- Dumping data for table `abonnees`
---
-
-INSERT INTO `abonnees` (`id`, `voornaam`, `familienaam`, `mailadres`, `confirmed`, `secretkey`) VALUES
-(1, 'Matthias', 'Bauw', 'matthiasba@linux.be', 'Y', '419afd4b717cbf0b797293974d1ed91b');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `abonnementen`
+-- Tabelstructuur voor tabel `abonnementen`
 --
 
 CREATE TABLE IF NOT EXISTS `abonnementen` (
   `id` int(2) NOT NULL AUTO_INCREMENT,
   `naam` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
-
---
--- Dumping data for table `abonnementen`
---
-
-INSERT INTO `abonnementen` (`id`, `naam`) VALUES
-(3, 'Veurne-Diksmuide'),
-(4, 'Ieper'),
-(5, 'Brugge');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `abonnementenlink`
+-- Tabelstructuur voor tabel `abonnementenlink`
 --
 
 CREATE TABLE IF NOT EXISTS `abonnementenlink` (
@@ -76,37 +60,51 @@ CREATE TABLE IF NOT EXISTS `abonnementenlink` (
   PRIMARY KEY (`abonnement`,`abonnee`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `abonnementenlink`
+-- Tabelstructuur voor tabel `ajaxwhitelist`
 --
 
-INSERT INTO `abonnementenlink` (`abonnement`, `abonnee`) VALUES
-(3, 1),
-(5, 1);
+CREATE TABLE IF NOT EXISTS `ajaxwhitelist` (
+  `id` int(6) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `file` varchar(500) NOT NULL,
+  `function` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+
+--
+-- Gegevens worden uitgevoerd voor tabel `ajaxwhitelist`
+--
+
+INSERT INTO `ajaxwhitelist` (`id`, `file`, `function`) VALUES
+(000001, '/core/logic/usermanagement/fbLoginAjax.php', 'checkFBAccount'),
+(000002, '/core/templatesystem/templatelogic.php', 'setCookiesOk'),
+(000005, '/modules/fotoalbum/logic/albumlogic.php', 'addAlbum'),
+(000006, '/modules/fotoalbum/logic/albumlogic.php', 'getAlbums'),
+(000007, '/modules/fotoalbum/logic/albumlogic.php', 'addPhoto'),
+(000008, '/modules/fotoalbum/logic/ajaxLogic.php', 'GetAlbumPhotosAjax'),
+(000009, '/modules/fotoalbum/logic/albumlogic.php', 'changeDescription'),
+(000010, '/modules/fotoalbum/logic/albumlogic.php', 'deletePhoto'),
+(000011, '/modules/fotoalbum/logic/ajaxLogic.php', 'albumBeschrijvingWijzigenAjax');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `albums`
+-- Tabelstructuur voor tabel `albums`
 --
 
 CREATE TABLE IF NOT EXISTS `albums` (
   `id` int(3) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
+  `description` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-
---
--- Dumping data for table `albums`
---
-
-INSERT INTO `albums` (`id`, `name`) VALUES
-(1, 'test');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `languages`
+-- Tabelstructuur voor tabel `languages`
 --
 
 CREATE TABLE IF NOT EXISTS `languages` (
@@ -117,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `languages` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- Dumping data for table `languages`
+-- Gegevens worden uitgevoerd voor tabel `languages`
 --
 
 INSERT INTO `languages` (`id`, `name`) VALUES
@@ -127,7 +125,32 @@ INSERT INTO `languages` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `modules`
+-- Tabelstructuur voor tabel `login_attempts`
+--
+
+CREATE TABLE IF NOT EXISTS `login_attempts` (
+  `username` varchar(20) NOT NULL DEFAULT '',
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`username`,`time`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Gegevens worden uitgevoerd voor tabel `login_attempts`
+--
+
+INSERT INTO `login_attempts` (`username`, `time`) VALUES
+('', '2014-09-09 19:40:57'),
+('admin', '2014-09-01 11:44:21'),
+('admin', '2014-09-01 11:44:30'),
+('admin', '2014-09-01 11:44:34'),
+('jestaatnietalleen', '2014-09-05 14:00:54'),
+('jestaatnietalleen', '2014-09-05 14:01:16'),
+('matt', '2014-09-15 09:50:42');
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `modules`
 --
 
 CREATE TABLE IF NOT EXISTS `modules` (
@@ -137,7 +160,7 @@ CREATE TABLE IF NOT EXISTS `modules` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
--- Dumping data for table `modules`
+-- Gegevens worden uitgevoerd voor tabel `modules`
 --
 
 INSERT INTO `modules` (`id`, `name`) VALUES
@@ -148,7 +171,7 @@ INSERT INTO `modules` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `nieuwsbriefabonnementen`
+-- Tabelstructuur voor tabel `nieuwsbriefabonnementen`
 --
 
 CREATE TABLE IF NOT EXISTS `nieuwsbriefabonnementen` (
@@ -157,18 +180,10 @@ CREATE TABLE IF NOT EXISTS `nieuwsbriefabonnementen` (
   PRIMARY KEY (`nieuwsbrief`,`abonnement`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `nieuwsbriefabonnementen`
---
-
-INSERT INTO `nieuwsbriefabonnementen` (`nieuwsbrief`, `abonnement`) VALUES
-(1, 5),
-(2, 5);
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `nieuwsbrieven`
+-- Tabelstructuur voor tabel `nieuwsbrieven`
 --
 
 CREATE TABLE IF NOT EXISTS `nieuwsbrieven` (
@@ -179,20 +194,12 @@ CREATE TABLE IF NOT EXISTS `nieuwsbrieven` (
   `titel` varchar(50) NOT NULL,
   `verstuurd` enum('Y','N') DEFAULT 'N',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Dumping data for table `nieuwsbrieven`
---
-
-INSERT INTO `nieuwsbrieven` (`id`, `timestamp`, `maand`, `jaar`, `titel`, `verstuurd`) VALUES
-(1, '2014-04-29 18:12:16', 4, 2014, 'Maandelijkse nieuwsbrief', 'Y'),
-(2, '2014-04-29 18:14:07', 5, 2014, 'Test2', 'Y');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `parameters`
+-- Tabelstructuur voor tabel `parameters`
 --
 
 CREATE TABLE IF NOT EXISTS `parameters` (
@@ -202,10 +209,10 @@ CREATE TABLE IF NOT EXISTS `parameters` (
   `overridable` bit(1) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `search_by_name` (`name`(20))
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
 
 --
--- Dumping data for table `parameters`
+-- Gegevens worden uitgevoerd voor tabel `parameters`
 --
 
 INSERT INTO `parameters` (`id`, `name`, `value`, `overridable`) VALUES
@@ -215,7 +222,7 @@ INSERT INTO `parameters` (`id`, `name`, `value`, `overridable`) VALUES
 (004, 'CORE_USER_EXT_USERGROUP', '001', b'0'),
 (005, 'CORE_USER_EXT_REGISTRATION', '0', b'0'),
 (006, 'CORE_NOACCESS_URL', '', b'0'),
-(007, 'CORE_SERVER_MAILADRESS', 'noreply@dragoneyehosting.be', b'0'),
+(007, 'CORE_SERVER_MAILADRESS', 'info@jestaatnietalleen.be', b'0'),
 (008, 'CORE_DEBUG_MODE', '1', b'0'),
 (009, 'CORE_DEBUG_MAIL', 'matthias.bauw@gmail.com', b'0'),
 (010, 'CORE_FB_LOGIN_ENABLED', '0', b'0'),
@@ -230,12 +237,14 @@ INSERT INTO `parameters` (`id`, `name`, `value`, `overridable`) VALUES
 (019, 'SITE_META_URL', '', b'0'),
 (020, 'CORE_RECAPTCHA_PUBLIC', '6LdR-eYSAAAAAEboUatksFIHeb6m4CvmTT1-7_5p ', b'0'),
 (021, 'CORE_RECAPTCHA_PRIVATE', '6LdR-eYSAAAAAM2V3SNVOLmiFEQJOz6TrgWBNfu3 ', b'0'),
-(023, 'NIEUWSBRIEF_PROMOTEXT', 'Schrijf je in voor de nieuwsbrief en kom alles te over je rechten en plichten als KMO-werknemer. Bovendien ontvang je alle gegevens over de acties die we organiseren in onze regio.', b'1');
+(023, 'NIEUWSBRIEF_PROMOTEXT', 'Schrijf je in voor de nieuwsbrief en kom alles te over je rechten en plichten als KMO-werknemer. Bovendien ontvang je alle gegevens over de acties die we organiseren in onze regio.', b'1'),
+(024, 'CORE_MAINTENANCE_MODE', '1', b'0'),
+(025, 'CORE_SSL_ENABLED', '0', b'1');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `permissions`
+-- Tabelstructuur voor tabel `permissions`
 --
 
 CREATE TABLE IF NOT EXISTS `permissions` (
@@ -246,7 +255,7 @@ CREATE TABLE IF NOT EXISTS `permissions` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
--- Dumping data for table `permissions`
+-- Gegevens worden uitgevoerd voor tabel `permissions`
 --
 
 INSERT INTO `permissions` (`id`, `module`, `name`) VALUES
@@ -264,7 +273,7 @@ INSERT INTO `permissions` (`id`, `module`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `photos`
+-- Tabelstructuur voor tabel `photos`
 --
 
 CREATE TABLE IF NOT EXISTS `photos` (
@@ -273,27 +282,28 @@ CREATE TABLE IF NOT EXISTS `photos` (
   `album` int(3) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
--- Dumping data for table `photos`
+-- Gegevens worden uitgevoerd voor tabel `photos`
 --
 
 INSERT INTO `photos` (`id`, `extension`, `album`, `description`) VALUES
-(1, 'png', 1, ''),
-(2, 'png', 1, ''),
-(3, 'png', 1, ''),
-(4, 'png', 1, ''),
-(5, 'png', 1, ''),
-(6, 'png', 1, ''),
-(7, 'png', 1, ''),
-(8, 'png', 1, ''),
-(9, 'png', 1, '');
+(10, 'jpg', 2, ''),
+(11, 'jpg', 2, ''),
+(12, 'jpg', 2, ''),
+(13, 'jpg', 2, ''),
+(15, 'jpg', 2, ''),
+(16, 'jpg', 2, ''),
+(17, 'jpg', 2, ''),
+(18, 'jpg', 2, ''),
+(19, 'jpg', 3, ''),
+(20, 'jpg', 3, '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `templatealiases`
+-- Tabelstructuur voor tabel `templatealiases`
 --
 
 CREATE TABLE IF NOT EXISTS `templatealiases` (
@@ -304,21 +314,22 @@ CREATE TABLE IF NOT EXISTS `templatealiases` (
   `tablet_directory` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `search_by_name` (`name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
--- Dumping data for table `templatealiases`
+-- Gegevens worden uitgevoerd voor tabel `templatealiases`
 --
 
 INSERT INTO `templatealiases` (`id`, `name`, `pc_directory`, `phone_directory`, `tablet_directory`) VALUES
-(01, 'frontend', 'jestaatnietalleen', NULL, NULL),
+(01, 'frontend', 'jestaatnietalleen', 'jestaatnietalleen-mobile', NULL),
 (02, 'backend', 'jestaatnietalleen', NULL, NULL),
-(03, 'mail', 'mail', NULL, NULL);
+(03, 'mail', 'jestaatnietalleen-mail2', NULL, NULL),
+(04, 'maintenance', 'binnenkort', NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usergroupmembers`
+-- Tabelstructuur voor tabel `usergroupmembers`
 --
 
 CREATE TABLE IF NOT EXISTS `usergroupmembers` (
@@ -328,17 +339,23 @@ CREATE TABLE IF NOT EXISTS `usergroupmembers` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `usergroupmembers`
+-- Gegevens worden uitgevoerd voor tabel `usergroupmembers`
 --
 
 INSERT INTO `usergroupmembers` (`user`, `usergroup`) VALUES
 (000001, 001),
-(000001, 002);
+(000001, 002),
+(000042, 002),
+(000042, 003),
+(000043, 002),
+(000043, 003),
+(000044, 002),
+(000044, 003);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usergrouppermissions`
+-- Tabelstructuur voor tabel `usergrouppermissions`
 --
 
 CREATE TABLE IF NOT EXISTS `usergrouppermissions` (
@@ -348,7 +365,7 @@ CREATE TABLE IF NOT EXISTS `usergrouppermissions` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `usergrouppermissions`
+-- Gegevens worden uitgevoerd voor tabel `usergrouppermissions`
 --
 
 INSERT INTO `usergrouppermissions` (`usergroup`, `moduletask`) VALUES
@@ -362,12 +379,14 @@ INSERT INTO `usergrouppermissions` (`usergroup`, `moduletask`) VALUES
 (002, 00007),
 (002, 00008),
 (002, 00009),
-(002, 00011);
+(002, 00011),
+(002, 00012),
+(003, 00005);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usergroups`
+-- Tabelstructuur voor tabel `usergroups`
 --
 
 CREATE TABLE IF NOT EXISTS `usergroups` (
@@ -375,20 +394,21 @@ CREATE TABLE IF NOT EXISTS `usergroups` (
   `name` varchar(25) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `search_by_groupname` (`name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
--- Dumping data for table `usergroups`
+-- Gegevens worden uitgevoerd voor tabel `usergroups`
 --
 
 INSERT INTO `usergroups` (`id`, `name`) VALUES
 (001, 'administrators'),
-(002, 'redactie');
+(002, 'redactie'),
+(003, 'testers');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `userpermissions`
+-- Tabelstructuur voor tabel `userpermissions`
 --
 
 CREATE TABLE IF NOT EXISTS `userpermissions` (
@@ -400,14 +420,15 @@ CREATE TABLE IF NOT EXISTS `userpermissions` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Tabelstructuur voor tabel `users`
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(6) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `username` varchar(20) NOT NULL,
   `facebookid` varchar(20) DEFAULT NULL,
-  `password` varchar(32) NOT NULL,
+  `password` varchar(128) NOT NULL,
+  `salt` varchar(128) NOT NULL,
   `passwordchangerequired` enum('1','0') NOT NULL DEFAULT '0',
   `userconfirmation` enum('1','0') NOT NULL DEFAULT '0',
   `adminconfirmation` enum('1','0') NOT NULL DEFAULT '0',
@@ -418,14 +439,17 @@ CREATE TABLE IF NOT EXISTS `users` (
   `country` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `search_by_username` (`username`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=41 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=45 ;
 
 --
--- Dumping data for table `users`
+-- Gegevens worden uitgevoerd voor tabel `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `facebookid`, `password`, `passwordchangerequired`, `userconfirmation`, `adminconfirmation`, `realname`, `realfirstname`, `mailadress`, `website`, `country`) VALUES
-(000001, 'Admin', '', '71ea9c396816dc0db6571445abe2842f', '0', '1', '1', 'Bauw', 'Matthias', 'matthias@ittakestwo.be', '', 'BE');
+INSERT INTO `users` (`id`, `username`, `facebookid`, `password`, `salt`, `passwordchangerequired`, `userconfirmation`, `adminconfirmation`, `realname`, `realfirstname`, `mailadress`, `website`, `country`) VALUES
+(000001, 'Matt', '', 'b03561292506d42a9b45217b6e27e6dec9afd2a787b6c49b503f296728d085affc395b9c517b9ec2aaf8bf3535cf79e372a89705c4714d7f28d0fa8a147211fd', 'dc4f4e55dee83cad9345fc8e3f2131b18a00bece7cf09593141deead9235ed9a169a5da7b324719eb9240a029e7c172490e9714bf20f5f204d8bbd2b1ef3e9ce', '0', '1', '1', 'Bauw', 'Matthias', 'matthias.bauw@gmail.com', NULL, NULL),
+(000042, 'peter', '', '1ebeb25315efa1b87866f032e7883918cc94c863db6e08235ed8897570a65424571bd915f5f518af6cd2ab6e0a58534b36383cfd806d6f03f76e7c8b14af43af', '5e1c7b21cc54f765cbfea297c7038aaaf2e7ad00e7db27342dc507a920ac1f50faf7afe8e76b981cc0f8c45056cd2af36ab4509d4e6f742462406712d6263085', '1', '1', '1', 'Debaenst', 'Peter', 'peter.debaenst@acv-csc.be', NULL, NULL),
+(000043, 'petur', '', '7ceb7baedb1b122b7928adb5534aabf9884de70efd626d07fac6a6b6aa2561640b1c095a815839868d0c03b867dc6984a55931cad663a7e3da6a516d8168c292', 'aa42f5a582985d6b00d9bcc698973da87ab42d89f32024c74be6b1ce9b837d685a7189a72219ad5462adf98de9db507f754589c96ea9c026adaa0cfcf8eb4949', '1', '1', '1', 'Edvardsson', 'Pétur', 'petur.edvardsson@acv-csc.be', NULL, NULL),
+(000044, 'geert', '', 'f004fb70861bbd5e943641aa690c70d4274f32eff1a4f8365a91bbc734c13687142c7792bee54fc768f36e7b9579d9adc7de1449bf9b679b8d6d3e6b59c4024d', 'a1f7be6538b6e118aa3bccd767cda99991185f5d329cc3d3579686f89328c14f6f4406a069d067925f5159db7aad25fe9dc599d1485e9fcdd2b1247f8e05a98a', '1', '1', '1', 'Delbaere', 'Geert', 'geert.delbaere@acv-csc.be', NULL, NULL);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
