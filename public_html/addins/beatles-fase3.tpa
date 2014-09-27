@@ -46,6 +46,11 @@ Het beatlesconcert wordt 3 keer uitgevoerd:
 <hr>
 </section>
 <section class='block'>
+    <h1>Wat vond u er van?</h1>
+    Laat een berichtje achter met uw ervaringen
+    <center><div class="fb-comments" data-href="http://www.projectkoorchantage.be/beatles.php" data-width="1100" data-numposts="5" data-colorscheme="light"></div></center>
+</section>
+<section class='block'>
 <h1>Geen zin om alleen te gaan? Hoeft ook niet!</h1>
 <div id='friendstext' class='friendstext'>Waarom geen vrienden meenemen? Klik <a href='javascript:registerWithFacebook(showFriends)'>hier</a> en bekijk wie van je Facebookvrienden ook aanwezig zal zijn! Spreek samen af en maak van ons concert een leuke groepsactiviteit!</div>
 <div id='fbloginbutton'>

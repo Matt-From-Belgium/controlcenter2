@@ -19,12 +19,12 @@ function submitform()
 <h1>Gezocht: zangers/zangeressen</h1>
 <span class="nadruk">CHANTage is op zoek naar:
 <ul>
-    <li>één alt/mezzo (alt 1)</li>
-    <li>één tenor (tenor 1)</li>
-    <li>één tenor/bariton (tenor 2)</li>
-    <li>één bas (bas 2)</li>
+    <!--<li>één alt/mezzo (alt 1)</li>-->
+    <li>twee tenoren</li>
+    <li>twee baritons/bassen</li>
+    <!--<li>één bas (bas 2)</li>-->
 </ul></span>
-<p>Kan je goed zingen en heb je zin in een uitdaging? Je hebt er altijd al van gedroomd om in groep 4 tot 8-stemmig te zingen ? Ben je tussen 18 en 55 jaar oud? Dan zit je goed want CHANTage zoekt nieuwe zangers/zangeressen voor haar volgende project: The Beatles!
+<p>Kan je goed zingen en heb je zin in een uitdaging? Je hebt er altijd al van gedroomd om in groep 4 tot 8-stemmig te zingen ? Ben je tussen 18 en 55 jaar oud? Dan zit je goed want CHANTage zoekt nieuwe zangers/zangeressen voor haar volgende project!
 We zetten de voornaamste elementen van ons concept op een rijtje:
 <p><ul>
 <li><span id="nadruk">We pinnen ons niet vast op &eacute;&eacute;n genre</span>: ieder project heeft een thema dat kan vari&euml;ren van musical over jazz naar klassiek. Vandaar 'projectkoor'.</li>
@@ -35,7 +35,7 @@ We zetten de voornaamste elementen van ons concept op een rijtje:
 <li>We streven naar <span id="nadruk">kwaliteit</span>: We willen net dat ietsje meer. Daarom werken wij ook met audities. Zo garanderen we een kwalitatief hoogstaand koor en kunnen we ook peilen naar je motivatie.</li>
 </ul>
 
-<p>Om dit concept uit te werken organiseren wij audities op 25 januari 2014 in de namiddag. Ben je ge&#239;nteresseerd? Vul dan onderstaand formulier in en we sturen je alle auditie-info en het volledige auditiepakket door. 
+<p>Wij organiseren audities op 20 december om 14u. De audities gaan door in woonzorgcentrum Maria Ter Engelen in Klerken (dorpsstraat 4 8650 Klerken). Ben je ge&#239;nteresseerd? Vul dan onderstaand formulier in en we sturen je alle auditie-info en het volledige auditiepakket door. 
 
 <p>Hopelijk tot binnenkort?
 
@@ -61,8 +61,9 @@ Helaas, niet alle velden werden correct ingevuld:
 <label>E-mailadres:</label><input type="text" SIZE='40' name="mail" /><br/>
 <label>Stemgroep:</label><select name="stemgroep"><option value="0" label="Selecteer je stemgroep">
     <!--<option value="1"size='30'>Sopraan</option>-->
-    <option value="2">Mezzo</option>
-    <option value="3">Alt</option><option VALUE="4">Tenor</option>
+    <!--<option value="2">Mezzo</option>-->
+    <!--<option value="3">Alt</option>-->
+    <option VALUE="4">Tenor</option>
     <option value="5">Bariton</option>
     <option value="6">Bas</option>
 </select><br/>
@@ -70,7 +71,7 @@ Helaas, niet alle velden werden correct ingevuld:
 
 </div>
 <div id='knoppen'>
-<img src='/modules/audities/ikgaervoor.png' onClick="javascript:submitform()" class="ikgaervoor"/>&nbsp;&nbsp;<img src='/modules/audities/neeschrik.png' onClick="javascript:document.location.href='http://nl.barbie.com/'" class="ikgaervoor" />
+<input type='button' onClick='javascript:submitform()' value='Stuur mij de nodige info'>
 </div>
 <p>Nodig je vrienden uit! <div class="fb-share-button" data-href="http://www.projectkoorchantage.be/modules/audities/index.php" data-type="button_count"></div>
 <div id="vraagofprobleem">Heb je een vraag/probleem ivm het gebruik van deze website? contacteer <a href="mailto:info@projectkoorchantage.be">info@projectkoorchantage.be</a></div>
