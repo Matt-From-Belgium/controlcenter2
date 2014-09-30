@@ -40,7 +40,7 @@ if(getAuditiepakketStatus())
                 ###Specifieke META voor audities
                 $html->addCustomMeta('og:url', 'http://www.projectkoorchantage.be/modules/audities/index.php');
                 $html->addCustomMeta('og:title','Projectkoor CHANTage organiseert audities');
-                $html->addCustomMeta('og:image', 'http://www.projectkoorchantage.be/images/chantage-fb.png');
+                $html->addCustomMeta('og:image', 'http://www.projectkoorchantage.be/images/auditiesfb.png');
                 $html->addCustomMeta('og:description',"Kan je goed zingen en heb je zin in een uitdaging? Je hebt er altijd al van gedroomd om in groep 4 tot 8-stemmig te zingen ? Ben je tussen 18 en 55 jaar oud? Dan zit je goed want CHANTage zoekt nieuwe zangers/zangeressen voor haar volgende project.");
 
                 $html->PrintHTML();

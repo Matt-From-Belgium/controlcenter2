@@ -45,7 +45,17 @@ Het beatlesconcert wordt 3 keer uitgevoerd:
 <section class='block'>
 <hr>
 </section>
+<section class="block">
+    <h1>Foto's</h1>
+    <a id='foto'></a>
+    <div id='beatlesalbum'>
+    </div>
+    <script>
+        var test = new photoViewer('the beatles','beatlesalbum');
+    </script>
+</section>
 <section class='block'>
+    <a name='beatlescomment'></a>
     <h1>Wat vond u er van?</h1>
     Laat een berichtje achter met uw ervaringen
     <center><div class="fb-comments" data-href="http://www.projectkoorchantage.be/beatles.php" data-width="1100" data-numposts="5" data-colorscheme="light"></div></center>

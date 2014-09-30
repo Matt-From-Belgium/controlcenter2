@@ -1,0 +1,6 @@
+<section class='block'>
+    <a name='beatlescomment'></a>
+    <h1>Wat vond u er van?</h1>
+    Laat een berichtje achter met uw ervaringen
+    <center><div class="fb-comments" data-href="http://www.projectkoorchantage.be/beatles.php" data-width="100%" data-numposts="5" data-colorscheme="light"></div></center>
+</section>
