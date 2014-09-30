@@ -1,0 +1,71 @@
+/* 
+    Document   : showphoto
+    Created on : 6-nov-2013, 21:31:01
+    Author     : matthiasba
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+    
+}
+
+body {
+    margin: 0px;
+}
+
+.viewer {
+    width: 1000px;
+    border: 1px #000000 solid;
+}
+
+.imagePreview {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    width: 150px;
+    height: 100px;
+}
+
+.imagePreview img {
+    
+    width: 150px;
+}
+
+#displayContainer {
+    position: fixed;
+    top: 0em;
+    bottom: 0em;
+   
+    width: 100%;
+    height: 100%;
+    background-color: rgba(20,20,20,0.7);
+    vertical-align:  middle;
+    z-index: 5000;
+    
+}
+
+#photoDisplayer,#photoDisplayer.portraitMode {
+    position: relative;
+    text-align:  center;
+}
+
+
+
+#photo {
+    position: relative;
+    max-width: 90%;
+    max-height: 1000px;
+}
+
+#controls {
+    position: fixed;
+    background-color: #000000;
+    bottom: 0px;
+    width: 100%;
+}
+
+#controls img {
+    height: 100px;
+}
