@@ -1,14 +1,16 @@
 <div class="block">
 <h1>Contact</h1>
-<h2>Via sociale netwerken</h2>
+<h2>Via Facebook</h2>
 <a href='#'><img src='/images/contact/facebook.png'></a>
-<a href='#'><img src='/images/contact/twitter.png'></a>
-<a href='#'><img src='/images/contact/gp.png'></a>
+<!--<a href='#'><img src='/images/contact/twitter.png'></a>
+<a href='#'><img src='/images/contact/gp.png'></a>-->
 </h2>
 <br /><br />
 <h2>Via mail</h2>
 <a href='mailto:info@jestaatnietalleen.be'>info@jestaatnietalleen.be</a>
 <br /><br />
+<h2>KMO-foon</h2>
+tel: 051 505050
 <h2>Via de post</h2>
 jestaatnietalleen.be
 <br />Sporkijnstraat 10
