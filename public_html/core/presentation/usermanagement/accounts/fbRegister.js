@@ -177,7 +177,7 @@ function registerWithFacebook(onCompleteFunction,manualPermissions,onFailFunctio
                                    }
                                }
                    }
-                 }, {scope: scope});
+                 }, {scope: scope, /*Vanaf api v2.0 moet dit erbij om meerdere keren dezelfde permission te kunnen vragen, het werkt zelfs bij eerste poging => we gebruiken het altijd*/auth_type: 'rerequest'});
            /*  }*/
        }
     }
