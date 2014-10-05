@@ -347,6 +347,10 @@ input[type='button']:active,input[type='submit']:active, select:active
     width: 100%;
 }
 
+#siteNews:hover {
+    cursor:  pointer;
+}
+
 .newsItem {
     display: block;
     width: 50%;

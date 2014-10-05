@@ -22,6 +22,10 @@ We bieden nieuwsbrieven aan per regio. Wanneer u zich abonneert kan u één of m
 <div class="block">
 Niet brandend actueel, maar wel belangrijk om weten. Wanneer kunt u tijdkrediet nemen, wat te doen wanneer u een arbeidsongeval krijgt, enz. We proberen in iedere editie van de nieuwsbrief wat algemene info mee te geven die in specifieke situaties van pas kan komen.
 </div>
+    <h4>Archief</h4>
+<div class='block'>
+Bekijk de vorige nieuwsbrieven <a href='/modules/nieuwsbrief/presentation/shownieuwsbrieven.php'>hier</a>
+</div>
 <div class='green'>
 <!CC addin '/modules/nieuwsbrief/addins/subscribeform.tpa'>
 </div>
