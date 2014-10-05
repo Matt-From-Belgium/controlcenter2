@@ -232,7 +232,8 @@ function getFacebookJavaCode()
               channelUrl : channel, // Channel file for x-domain comms
               status     : true,                                 // Check Facebook Login status
               cookie     : true,                                 //Share session with PHP
-              xfbml      : true                                  // Look for social plugins on the page
+              xfbml      : true,                                  // Look for social plugins on the page
+              version    : 'v2.0'
             });
             
             // Additional initialization code such as adding Event Listeners goes here                 
@@ -261,12 +262,20 @@ function getFacebookJavaCode()
                         FB.api('/me/permissions','get',function(response)
                         {
                            //We zetten het JSON object in response.data[0] om in een array
-                           var grantedPermissions = response.data[0];
+                           var grantedPermissions = response.data;
                            var grantedPermissionsArray = new Array();
                            
-                           for(var key in grantedPermissions)
+                           for(i=0;i<grantedPermissions.length;i++)
                            {
-                               grantedPermissionsArray.push(key);
+                               //vanaf api v2 zit er ook een statusveld in de permission
+                               //Voor toegestane permissions staat dit op granted
+                               //Nog geen permissions gezien die iets anders hebben...
+                               var grantedPermission= grantedPermissions[i];
+                               if(grantedPermission.status==='granted')
+                               {
+                                    //alert(grantedPermission.permission);
+                                    grantedPermissionsArray.push(grantedPermission.permission);
+                               }
                            }
                            
                            //We zijn, klaar.
@@ -370,7 +379,7 @@ function getFacebookJavaCode()
              var js, fjs = d.getElementsByTagName(s)[0];
              if (d.getElementById(id)) {return;}
              js = d.createElement(s); js.id = id;
-             js.src = \"//connect.facebook.net/en_US/all.js\";
+             js.src = \"//connect.facebook.com/en_US/sdk.js\";
              fjs.parentNode.insertBefore(js, fjs);
            }(document, 'script', 'facebook-jssdk'));
            

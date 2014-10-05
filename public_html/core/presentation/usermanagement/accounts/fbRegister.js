@@ -63,6 +63,7 @@ function registerWithFacebook(onCompleteFunction,manualPermissions,onFailFunctio
         }
         else
         {
+                
                 //Eén of meerdere toegangsrechten zijn niet toegekend => we moeten de login
                 //flow opstarten
         
@@ -80,14 +81,22 @@ function registerWithFacebook(onCompleteFunction,manualPermissions,onFailFunctio
                        var desiredPermissionArray = scope.split(',');
                        //We vragen een overzicht van de toegestande permissions
                        FB.api('/me/permissions','get',function(response){
-                           var grantedPermissions=response.data[0];
+                           var grantedPermissions=response.data;
                            
                            
                            var grantedPermissionsArray = new Array();
-                           //Facebook geeft een JSON object terug met de permissions
-                           for(var key in grantedPermissions)
+                           
+                           for(i=0;i<grantedPermissions.length;i++)
                            {
-                               grantedPermissionsArray.push(key);
+                               //vanaf api v2 zit er ook een statusveld in de permission
+                               //Voor toegestane permissions staat dit op granted
+                               //Nog geen permissions gezien die iets anders hebben...
+                               var grantedPermission= grantedPermissions[i];
+                               if(grantedPermission.status==='granted')
+                               {
+                                    //alert(grantedPermission.permission);
+                                    grantedPermissionsArray.push(grantedPermission.permission);
+                               }
                            }
                            
                            var allPermissionsGranted = true;
