@@ -233,7 +233,7 @@ function getFacebookJavaCode()
               status     : true,                                 // Check Facebook Login status
               cookie     : true,                                 //Share session with PHP
               xfbml      : true,                                  // Look for social plugins on the page
-              version    : 'v2.0'
+              version    : 'v2.1'
             });
             
             // Additional initialization code such as adding Event Listeners goes here                 
