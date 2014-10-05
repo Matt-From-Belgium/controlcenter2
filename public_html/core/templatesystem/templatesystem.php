@@ -228,19 +228,25 @@ class htmlpage
                 ###TEMPLATESYSTEM R4: facebookintegratie en scripts werken niet als forEmail actief is.
                 if(!$this->forEmail)
                 {
-                    ###We vullen de head tag aan met javascripts en metadata
-                    $patternhead = "/(?i)<\s*\/\s*head\s*>/";
-                    $html = @preg_replace_callback($patternhead,array($this,'appendHeadTag'), $html, 1);
-
-
+                    
                     ###Facebook integratie: Nu de HTML compleet is voegen we indien nodig de Facebook Javascript api toe
                     ###We doen dat net na de body tag. Maar... enkel wanneer $this->enableFacebookAPI = true (zie commentaar bovenaan)
                     if($this->enableFacebookAPI)
                     {
                         ###bugfix: rekening houden met mogelijke onLoad
                         $patternbody = "/(?i)<\s*body\s*[a-z0-9=\"\']*\s*>/";
-                        $html =  @preg_replace_callback($patternbody,array($this,'addFacebookAPI'), $html, 1);
+                        
+                        #Vanaf nu kan facebook api ingeladen worden via loadscripts
+                        $this->loadScript('/core/social/facebook/javascript/initFB.php');
+                        
+                        ##$html =  @preg_replace_callback($patternbody,array($this,'addFacebookAPI'), $html, 1);
                     }
+                    
+                    ###We vullen de head tag aan met javascripts en metadata
+                    $patternhead = "/(?i)<\s*\/\s*head\s*>/";
+                    $html = @preg_replace_callback($patternhead,array($this,'appendHeadTag'), $html, 1);
+
+
                 }
                 
                 

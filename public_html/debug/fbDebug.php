@@ -8,8 +8,6 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/core/templatesystem/templatesystem.php'
  */
 
 $html = new htmlpage('frontend');
-$html->enableAjax();
-$html->setFacebookIntegration(true);
 $html->LoadAddin('/debug/fbDebug.tpa');
 $html->loadScript('/core/presentation/usermanagement/accounts/fbRegister.js');
 $html->PrintHTML();
