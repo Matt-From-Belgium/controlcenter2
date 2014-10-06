@@ -81,7 +81,7 @@ class htmlpage
                                     */
 
                                     /*De alias is verwerkt, nu moeten we kijken welke standaardwaarde $this->enableFacebookAPI moet krijgen*/
-                                     if(getFacebookLoginStatus())
+                                     if(getFacebookLoadApiStatus())
                                      {
                                          $this->enableFacebookAPI=true;
                                      }
@@ -234,12 +234,18 @@ class htmlpage
                     if($this->enableFacebookAPI)
                     {
                         ###bugfix: rekening houden met mogelijke onLoad
-                        $patternbody = "/(?i)<\s*body\s*[a-z0-9=\"\']*\s*>/";
+                        #$patternbody = "/(?i)<\s*body\s*[a-z0-9=\"\']*\s*>/";
                         
                         #Vanaf nu kan facebook api ingeladen worden via loadscripts
                         $this->loadScript('/core/social/facebook/javascript/initFB.php');
                         
                         ##$html =  @preg_replace_callback($patternbody,array($this,'addFacebookAPI'), $html, 1);
+                    }
+                    
+                    ###Als CORE_FB_LOGIN_ENABLED gelijk is aan 1 dan moet ook ajaxtransaction overal ingeladen worden
+                    if(getFacebookLoginStatus())
+                    {
+                        $this->enableAjax();
                     }
                     
                     ###We vullen de head tag aan met javascripts en metadata

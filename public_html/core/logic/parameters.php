@@ -158,6 +158,21 @@ function getFacebookLoginStatus()
     }
 }
 
+function getFacebookLoadApiStatus()
+{
+    ###Geeft aan of de API standaard moet ingeladen worden op alle pagina's
+    $fbapistatus = dataaccess_GetParameter('CORE_FB_LOAD_API');
+    
+    if($fbapistatus->getValue()==1)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 function getFacebookAppID()
 {
     ###Deze functie haalt de publieke facebook appid op
