@@ -1,5 +1,5 @@
 <div id="siteNews">
-            <div id="item1" class="newsItem">
+            <div id="item1" class="newsItem" onClick="javascript:window.location.href='/pages/nieuwsbrieven.php'">
                 <h1>Blijf op de hoogte</h1>
                 <h1 class="nadruk">Schrijf je in voor de nieuwsbrief</h1>
             </div>
