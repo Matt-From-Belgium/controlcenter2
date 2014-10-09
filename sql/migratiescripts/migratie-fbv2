@@ -1,0 +1,12 @@
+INSERT INTO  `parameters` (
+`id` ,
+`name` ,
+`value` ,
+`overridable`
+)
+VALUES (
+NULL ,  'CORE_FB_LOAD_API',  '1', '0'
+);
+
+INSERT INTO `parameters` (`id`, `name`, `value`, `overridable`) VALUES (NULL, 'CORE_FB_PAGEID', '', '0');
+INSERT INTO `parameters` (`id`, `name`, `value`, `overridable`) VALUES (NULL, 'CORE_FB_PAGETOKEN', '', '0');
