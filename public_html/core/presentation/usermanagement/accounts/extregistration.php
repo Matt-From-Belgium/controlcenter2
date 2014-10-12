@@ -37,7 +37,6 @@ if(getSelfRegisterStatus())
 		#wanneer er input met fouten is.
 		if((!isset($_POST['submit'])) or ((is_array($errors))))
 		{
-                        require_once $_SERVER['DOCUMENT_ROOT'].'/core/social/facebook/php/facebook.php';
                     
 			$html = new htmlpage("frontend");
 		
@@ -93,7 +92,31 @@ if(getSelfRegisterStatus())
                         #Echter, manueel ingevulde waarden hebben voorrang
                         if(getFacebookLoginStatus() and (($_GET['fb']==1) or (isset($_POST['facebookid']))))
                         {
-                            $config = array();
+                            require_once $_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php';
+                            Facebook\FacebookSession::setDefaultApplication(getFacebookAppID(), getFacebookSappId());
+                            
+                            $token = $_GET['t'];
+                            $session = new Facebook\FacebookSession($token);
+                            
+                            $user_profile = (new Facebook\FacebookRequest($session, 'GET', '/me'))->execute()->getGraphObject(Facebook\GraphUser::className());
+                            
+                            if($user_profile)
+                            {
+                                $html->setVariable('facebookid',$user_profile->getId());
+                                $html->setVariable('firstname',$user_profile->getFirstName());
+                                $html->setVariable('lastname',$user_profile->getLastName());
+                                
+                                if(!isset($_POST['username']))
+                                {
+                                    $html->setVariable("username",$user_profile->getFirstName().' '.$user_profile->getLastName());
+                                }
+
+                                if(!isset($_POST['mail']))
+                                {
+                                   $html->setVariable('mail', $user_profile->getProperty('email'));
+                                }
+                            }
+                            /*$config = array();
 
                             $config['appId'] = getFacebookAppID();
                             $config['secret'] = getFacebookSappId();
@@ -119,7 +142,7 @@ if(getSelfRegisterStatus())
                                     }
                                     
                                     
-                            }
+                            }*/
                         }
                         
                         

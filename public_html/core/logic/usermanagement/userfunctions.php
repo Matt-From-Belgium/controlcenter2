@@ -555,24 +555,58 @@ function Login($username,$password,$d)
         }
 }
 
-function Login_FB()
+function Login_FB($session)
 {
 	require_once $_SERVER['DOCUMENT_ROOT']."/core/dataaccess/usermanagement/userfunctions.php";
-        require_once $_SERVER['DOCUMENT_ROOT']."/core/social/facebook/php/facebook.php";
+        require_once $_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php';
 	
-        ###Deze functie haalt het facebook ID van de ingelogde gebruiker op en kijkt of er een gebruikers
-        ###account aan gekoppeld is
-        ###Eerst kijken of er een Facebook sessie is
-        $config = array();
-
-        $config['appId'] = getFacebookAppID();
-        $config['secret'] = getFacebookSappId();
-
-        $facebook = new Facebook($config);
-
-        $fbUser = $facebook->getUser();
         
+        ###We kijken of we een geldige sessie hebben kunnen maken
+        if($session->validate(getFacebookAppID(), getFacebookSappId()))
+        {
+            
+            ###We hebben een geldige verbinding met het Facebook-platform
+            ###We halen gebruikersid op
+            $user_profile = (new Facebook\FacebookRequest($session, 'GET', '/me'))->execute()->getGraphObject(Facebook\GraphUser::className());
+            
+            $userid = $user_profile->getId();
+            
+            ###We gaan nu checken of het facebook id ergens voorkomt in onze databank
+            ###Eerst laten we de DataAccess layer controleren of de gegevens kloppen
+            $id=  dataaccess_checkUserFacebookId($userid);
+            
+            if(!empty($id))
+            {
+                ###De aangeleverde gegevens zijn correct
+		###We halen de gebruikersgegevens op in een userobject
+		$user = getUser($id);
+		
+                ###CONTROLE: Moet de useraccount nog geactiveerd worden door een administrator?
+                if($user->getAdminConfirmationStatus()==1)
+                {
+                        ###De gebruikersgegevens waren correct, en de account is volledig actief => de gebruiker mag ingelogd worden
+                        $_SESSION['currentuser'] = $user;
+                        ###We genereren de session hash om hijacking moeilijker te maken
+                        $hash = generateSessionHash();
+                        $_SESSION['loginstring']=$hash;
 
+                }
+                else
+                {
+                        ###De gebruiker heeft zijn account wel geactiveerd maar de admin moet nog zijn/haar toestemming geven
+                        ###Errorcode 2
+                        return '2';
+                }
+            }
+            else
+            {
+                ###de parameters zijn niet correct => return false
+                ###Errorcode 1: geen fb account gelinkt aan een gebruikersaccount
+		return '1';
+            }
+        }
+
+        /*
 	###Eerst laten we de DataAccess layer controleren of de gegevens kloppen
 	$id=  dataaccess_checkUserFacebookId($fbUser);
 	if(!empty($id))
@@ -608,6 +642,8 @@ function Login_FB()
                 ###Errorcode 1: geen fb account gelinkt aan een gebruikersaccount
 		return '1';
 	}
+         * 
+         */
 }
 
 function checkPermission($module,$permission,$returnBoolean=false)
