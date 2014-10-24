@@ -190,7 +190,7 @@ function addUserEXT_FB($inputarray)
         {
             ###Wel Facebook account, voornaam en achternaam uit profiel halen
             #Voornaam en familienaam komen uit het facebookprofiel
-                            require_once($_SERVER['DOCUMENT_ROOT'].'/core/social/facebook/php/facebook.php');
+                            /*require_once($_SERVER['DOCUMENT_ROOT'].'/core/social/facebook/php/facebook.php');
                             
                             $fbappid = getFacebookAppID();
                             $fbsappid = getFacebookSappId();
@@ -204,8 +204,26 @@ function addUserEXT_FB($inputarray)
                             
                             $profile=$facebook->api('/me','get');
                             $newuser->setRealFirstname($profile['first_name']);
-                            $newuser->setRealname($profile['last_name']);
-        }
+                            $newuser->setRealname($profile['last_name']);*/
+            
+            ###Facebookaccount, voornaam en achternaam uit profiel halen
+                ###We komen naar dit script vanuit de redirect url op Facebook
+                require $_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php';
+                Facebook\FacebookSession::setDefaultApplication(getFacebookAppID(), getFacebookSappId());
+                
+                $helper = new Facebook\FacebookJavaScriptLoginHelper();
+                
+                ###We halen de javascript sessie op
+                $session = $helper->getSession();
+                    
+                $user_profile = (new Facebook\FacebookRequest(
+                $session, 'GET', '/me'
+              ))->execute()->getGraphObject(Facebook\GraphUser::className());
+                
+                $newuser->setRealFirstname($user_profile->getFirstName());
+                $newuser->setRealname($user_profile->getLastName());
+                $newuser->setFacebookID($user_profile->getId());
+        }   
 
                                     
 	###Het gaat om een extern gecre�erde gebruiker => nakijken of er activatie nodig is

@@ -43,13 +43,15 @@ if(getSelfRegisterStatus())
 			$html->setVariable("errorlist",$errors);
 
                         ###De variabele fbintegration zal ervoor zorgen dat de link voor facebooklogin zichtbaar is
-                        if(getFacebookLoginStatus())
+                        ###maar als $_GET['fb']=1 dan komt de gebruiker uit het inlogscherm en werd er al gekozen voor login met facebook
+                        ###We moeten de link dan niet nog eens tonen, dat schept verwarring
+                        if(getFacebookLoginStatus() && !isset($_GET['fb']))
                         {
                         $html->setVariable('fbintegration', true);
                         }             
 
                         
-
+                        $html->setVariable('serversideFB', 'trie');
                         $html->setVariable("userid",-1);
 			$html->setVariable("username",$_POST['username']);
 
@@ -156,11 +158,13 @@ if(getSelfRegisterStatus())
 		else
 		{
 			###De input was correct, er moet enkel een bevestigingspagina worden weergegeven.
-			$html = new htmlpage("backend");
+			/*$html = new htmlpage("backend");
 			$html->LoadAddin("/core/presentation/general/addins/message.tpa");
 			$html->setVariable("messagetitle",LANG_USER_ADDED_TITLE);
 			$html->setVariable("message",LANG_USER_ADDED);
 			$html->PrintHTML();
+                        */
+                        showMessage(LANG_USER_ADDED_TITLE,LANG_USER_ADDED,$_GET['d'],'Test');
 		}
 }
 else

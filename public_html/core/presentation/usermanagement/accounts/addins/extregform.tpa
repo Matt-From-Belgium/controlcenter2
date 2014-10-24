@@ -34,6 +34,10 @@ activateHash();
 document.getElementById('password1').onfocus = function(){clearPasswordFields();};
 document.getElementById('password2').onfocus = function(){clearPasswordFields();};
 
+<!CC IFSET [serversideFB]>
+blockPasswordFields();
+<!CC END IFSET [serversideFB]>
+
 </script>
 
 
