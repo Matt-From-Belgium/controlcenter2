@@ -40,7 +40,15 @@ function linkPage()
                         //Paginaselectie ok, nu moet het id naar de server gestuurd worden zodat een longterm token
                         //gegenereerd kan worden.
                         var ajax = new ajaxTransaction();
+                        ajax.destination = '/core/logic/sociallink/linkfunctions.php';
+                        ajax.phpfunction = 'generatePageToken';
+                        ajax.addData('pageid',that.data.id);
                         
+                        ajax.onComplete = function(){
+                            alert('ok');
+                        };
+                        
+                        ajax.ExecuteRequest();
                     };
                 };
                 
