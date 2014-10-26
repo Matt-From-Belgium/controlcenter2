@@ -28,7 +28,24 @@ if(getSelfRegisterStatus())
                     }
                     else
                     {
-                        $errors = addUserEXT_FB($_POST);
+                        ###We gaan proberen om de account via facebook te creëren
+                        ###We hebben eerst een FB sessie nodig.
+                        ###Ofwel komt die uit javascript, ofwel is er een token meegeleverd vanuit redirect
+                        require $_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php';
+                        Facebook\FacebookSession::setDefaultApplication(getFacebookAppID(), getFacebookSappId());
+
+                        if(!isset($_GET['t']))
+                        {
+                            $helper = new Facebook\FacebookJavaScriptLoginHelper();
+
+                            ###We halen de javascript sessie op
+                            $session = $helper->getSession();
+                        }
+                        else {
+                            $session = new Facebook\FacebookSession($_GET['t']);
+                        }
+                        
+                        $errors = addUserEXT_FB($_POST,$session);
                     }
                     
 		}
@@ -45,13 +62,16 @@ if(getSelfRegisterStatus())
                         ###De variabele fbintegration zal ervoor zorgen dat de link voor facebooklogin zichtbaar is
                         ###maar als $_GET['fb']=1 dan komt de gebruiker uit het inlogscherm en werd er al gekozen voor login met facebook
                         ###We moeten de link dan niet nog eens tonen, dat schept verwarring
-                        if(getFacebookLoginStatus() && !isset($_GET['fb']))
+                        if((getFacebookLoginStatus() && !isset($_GET['fb'])) )
                         {
                         $html->setVariable('fbintegration', true);
                         }             
 
+                        if(isset($_GET['t']) || isset($_POST['facebookid']))
+                        {
+                            $html->setVariable('serversideFB', 'trie');
+                        }
                         
-                        $html->setVariable('serversideFB', 'trie');
                         $html->setVariable("userid",-1);
 			$html->setVariable("username",$_POST['username']);
 
@@ -94,11 +114,25 @@ if(getSelfRegisterStatus())
                         #Echter, manueel ingevulde waarden hebben voorrang
                         if(getFacebookLoginStatus() and (($_GET['fb']==1) or (isset($_POST['facebookid']))))
                         {
+                            
+                            ###Als dit 2e invoer is zal er door de eerdere code al een facebooksessie zijn 
+                            
+                            
                             require_once $_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php';
                             Facebook\FacebookSession::setDefaultApplication(getFacebookAppID(), getFacebookSappId());
                             
-                            $token = $_GET['t'];
-                            $session = new Facebook\FacebookSession($token);
+                            
+                                if(isset($_GET['t']))
+                                {
+                                    $token = $_GET['t'];
+                                    $session = new Facebook\FacebookSession($token);
+                                }
+                                else
+                                {
+                                    /*$helper = new Facebook\FacebookJavaScriptLoginHelper();
+                                    $session = $helper->getSession();*/
+                                }
+                            
                             
                             $user_profile = (new Facebook\FacebookRequest($session, 'GET', '/me'))->execute()->getGraphObject(Facebook\GraphUser::className());
                             
@@ -164,7 +198,14 @@ if(getSelfRegisterStatus())
 			$html->setVariable("message",LANG_USER_ADDED);
 			$html->PrintHTML();
                         */
-                        showMessage(LANG_USER_ADDED_TITLE,LANG_USER_ADDED,$_GET['d'],'Test');
+                        if(isset($_GET['d']))
+                        {
+                            showMessage(LANG_USER_ADDED_TITLE,LANG_USER_ADDED,$_GET['d'],'Test');
+                        }
+                        else
+                        {
+                            showMessage(LANG_USER_ADDED_TITLE,LANG_USER_ADDED);
+                        }
 		}
 }
 else

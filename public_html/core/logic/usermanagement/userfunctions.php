@@ -166,7 +166,7 @@ function AddUserEXT($inputarray)
 	return $errormessages;
 }
 
-function addUserEXT_FB($inputarray)
+function addUserEXT_FB($inputarray,$session)
 {
     	##Deze functie handelt de externe aanmaak van een gebruikersaccount via Facebook af
 	require_once $_SERVER['DOCUMENT_ROOT']."/core/entity/user.php";
@@ -188,34 +188,10 @@ function addUserEXT_FB($inputarray)
         }
 	else
         {
-            ###Wel Facebook account, voornaam en achternaam uit profiel halen
-            #Voornaam en familienaam komen uit het facebookprofiel
-                            /*require_once($_SERVER['DOCUMENT_ROOT'].'/core/social/facebook/php/facebook.php');
-                            
-                            $fbappid = getFacebookAppID();
-                            $fbsappid = getFacebookSappId();
-                            
-                            $config = array();
-                            $config['appId']=$fbappid;
-                            $config['secret']=$fbsappid;
-                            $config['fileUpload']=false;
-                            
-                            $facebook = new Facebook($config);
-                            
-                            $profile=$facebook->api('/me','get');
-                            $newuser->setRealFirstname($profile['first_name']);
-                            $newuser->setRealname($profile['last_name']);*/
+           
             
             ###Facebookaccount, voornaam en achternaam uit profiel halen
-                ###We komen naar dit script vanuit de redirect url op Facebook
-                require $_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php';
-                Facebook\FacebookSession::setDefaultApplication(getFacebookAppID(), getFacebookSappId());
-                
-                $helper = new Facebook\FacebookJavaScriptLoginHelper();
-                
-                ###We halen de javascript sessie op
-                $session = $helper->getSession();
-                    
+            ###We gebruiken de sessie die in de functie wordt doorgegeven
                 $user_profile = (new Facebook\FacebookRequest(
                 $session, 'GET', '/me'
               ))->execute()->getGraphObject(Facebook\GraphUser::className());
