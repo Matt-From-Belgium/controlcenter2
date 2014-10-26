@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a896a44e2dd11ced19abf6acb346339c",
+    "hash": "bfefe3a8251e4632983ea478887ee20b",
     "packages": [
         {
             "name": "facebook/php-sdk-v4",
@@ -54,6 +54,53 @@
                 "sdk"
             ],
             "time": "2014-08-25 18:58:37"
+        },
+        {
+            "name": "recaptcha-lib/recaptcha",
+            "version": "v0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/adrianorsouza/reCAPTCHA-lib.git",
+                "reference": "3de1b5e47905a835846d8073b9233ce1083a989b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/adrianorsouza/reCAPTCHA-lib/zipball/3de1b5e47905a835846d8073b9233ce1083a989b",
+                "reference": "3de1b5e47905a835846d8073b9233ce1083a989b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpdocumentor/phpdocumentor": "2.*",
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "ReCaptcha": "lib"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Adriano Rosa",
+                    "email": "dev@adrianorosa.com",
+                    "homepage": "http://adrianorosa.com"
+                }
+            ],
+            "description": "PHP Library for reCAPTCHA Google's API",
+            "homepage": "https://github.com/adrianorsouza/reCAPTCHA-lib",
+            "keywords": [
+                "captcha",
+                "recapcha-lib",
+                "recaptcha"
+            ],
+            "time": "2014-06-10 00:51:37"
         }
     ],
     "packages-dev": [],
