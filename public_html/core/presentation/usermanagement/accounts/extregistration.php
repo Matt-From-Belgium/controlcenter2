@@ -198,13 +198,30 @@ if(getSelfRegisterStatus())
 			$html->setVariable("message",LANG_USER_ADDED);
 			$html->PrintHTML();
                         */
+                    
+                        ###We moeten de gebruiker nu informeren of wat er verder moet gebeuren
+                        ###In een aantal gevallen moet de gebruiker zijn/haar account bevestigen
+                        ###In een aantal gevallen moet de admin goedkeuren.
+                    
+                        $message = LANG_USER_EXT_ADDED;
+                        
+                        if(getAdminActivationParameter())
+                        {
+                            $message .= LANG_USER_EXT_ADMIN_CHECK;
+                        }
+                        
+                        if(getUserActivationParameter() && !isset($_POST['facebookid']))
+                        {
+                            $message .= LANG_USER_EXT_USER_CHECK;
+                        }
+                        
                         if(isset($_GET['d']))
                         {
-                            showMessage(LANG_USER_ADDED_TITLE,LANG_USER_ADDED,$_GET['d'],'Test');
+                            showMessage(LANG_USER_EXT_ADDED_TITLE,$message,$_GET['d'],LANG_USER_EXT_CONTINUE);
                         }
                         else
                         {
-                            showMessage(LANG_USER_ADDED_TITLE,LANG_USER_ADDED);
+                            showMessage(LANG_USER_EXT_ADDED_TITLE,$message,'/',LANG_USER_EXT_CONTINUE);
                         }
 		}
 }
