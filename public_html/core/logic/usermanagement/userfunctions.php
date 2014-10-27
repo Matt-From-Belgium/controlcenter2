@@ -202,7 +202,7 @@ function addUserEXT_FB($inputarray,$session)
         }   
 
                                     
-	###Het gaat om een extern gecre�erde gebruiker => nakijken of er activatie nodig is
+	/*###Het gaat om een extern gecre�erde gebruiker => nakijken of er activatie nodig is
 	if(getUserActivationParameter())
 	{
 		###er is wel gebruikersactivatie nodig => confirmationstatus is 0
@@ -212,8 +212,11 @@ function addUserEXT_FB($inputarray,$session)
 	{
 		###er is geen gebruikersactivatie nodig => confirmationstatus wordt 1
 		$newuser->setUserConfirmationStatus(1);
-	}
-	
+	}*/
+        
+        ###Geen gebruikersactivatie nodig want er is een FB-account gekoppeld
+        $newuser->setUserConfirmationStatus(1);
+        
 	if(getAdminActivationParameter())
 	{
 		###er is administrator toestemming nodig voor een account-> adminconfimationstatus is 0
@@ -246,27 +249,6 @@ function addUserEXT_FB($inputarray,$session)
             
 		$newuserid=dataaccess_Adduser($newuser,$fictionalpass);
 		
-		###Afhankelijk van de activatieprocedure die is ingesteld moet er een mail gestuurd worden naar de gebruiker.
-		if(getUserActivationParameter())
-		{
-			###Bevestiging van het mailadres door de gebruiker is nodig => mail naar de gebruiker versturen.
-			require_once $_SERVER['DOCUMENT_ROOT']."/core/email/email.php";
-			$activatiemail = new Email();
-			$activatiemail->setTo($newuser->getMailadress());
-			
-			$sitename = getSiteName();
-			
-			$activatiemail->setSubject(LANG_USER_SELF_ACTIVATION_WELCOMETO . "$sitename");
-			$activatiemail->setMessageAddin("/core/presentation/usermanagement/accounts/addins/useractivationmail.tpa");
-			$activatiemail->setVariable("sitename","$sitename");
-			
-			###De activatielink moet verwijzen naar het userid dat werd teruggegeven door dataaccess_adduser
-			#en naar het activatiescript op de server waarop Controlcenter2 draait.
-			$activatielink = "http://".$_SERVER['HTTP_HOST']."/core/presentation/usermanagement/accounts/activate.php?id=".$newuserid;
-			
-			$activatiemail->setVariable("activationlink",$activatielink);
-			$activatiemail->Send();
-		}
 	}
 
 	return $errormessages;
