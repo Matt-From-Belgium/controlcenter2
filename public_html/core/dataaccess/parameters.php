@@ -38,7 +38,7 @@ function dataaccess_GetParameter($searchstring)
 	return $gevondenparameter;
 }
 #Toevoegen van parameters
-function AddParameter($parameterobject)
+function dataaccess_AddParameter($parameterobject)
 {
 	#Eerst wordt gecontroleerd of $parameterobject wel degelijk van de klasse parameteris
 	if(is_a($parameterobject,"parameter"))
@@ -69,7 +69,7 @@ function AddParameter($parameterobject)
 }
 
 #Wijzigen van parameters
-function EditParameter($parameterobject)
+function dataaccess_EditParameter($parameterobject)
 {
 #Eerst moet gecheckt worden of $parameterobject wel degelijk van de klasse parameter is.
 	if(is_a($parameterobject,"parameter"))
@@ -82,7 +82,7 @@ function EditParameter($parameterobject)
 		$db = new dataconnection();
 		$db->setQuery($query);
 		
-		$db->setAttribute("name",$parameterobject->getname);
+		$db->setAttribute("name",$parameterobject->getname());
 		$db->setAttribute("value",$parameterobject->getValue());
 		$db->setAttribute("overridable",$parameterobject->getOverridable());
 		$db->setAttribute("parameterid",$parameterobject->getId());

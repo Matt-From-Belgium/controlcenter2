@@ -37,4 +37,7 @@ document.addEventListener('userLoggedIn',redirectAfterLogin,false);
 
 //wanneer de gebruiker inlogt moet het wachtwoord gehasht worden voor doorsturen
 document.getElementById('login').onsubmit=function(){hashLogin();};
+
+//Focus op username veld
+document.getElementById('u').focus();
 </script>

@@ -1,0 +1,17 @@
+<h1><!CC LANG [LINK_TO_SOCIAL_NETWORKS]></h1>
+<section class='block'>
+<h2><!CC LANG [LINK_TO_FACEBOOK_PAGE]></h2>
+<!CC LANG [LINK_FB_INFO]>
+<div id='linkbutton' class="block"><input type='button' value='<!CC LANG [LINK_FB_BUTTON]>' onClick='javascript:linkPage()'></div>
+<div id='linkform' class='block'>    
+    <div id='pageselector'></div>
+</div>
+<div id='confirmation'>
+    <div id='pageinfo'>
+        <img src='' id='pagelogo' name='pagelogo'>
+        <h2 id='pagename'></h2>
+    </div>
+<!CC LANG [LINK_FB_CONFIRM]>
+<p><input type='button' id='confirmbutton' value='<!CC LANG [LINK_FB_CONFIRM_BUTTON]>'>
+</div>
+</section>

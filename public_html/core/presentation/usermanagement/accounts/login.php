@@ -43,7 +43,7 @@ if((!isset($_POST['u']))&&(!isset($_POST['p']))&&(!isset($_POST['d'])))
     
         if(getFacebookLoginStatus())
         {
-            require_once $_SERVER['DOCUMENT_ROOT'].'/core/social/facebook/php/facebook.php';
+            /*require_once $_SERVER['DOCUMENT_ROOT'].'/core/social/facebook/php/facebook.php';
             
             ###Als Facebook login mogelijk is dan genereren we een login link 
             $fbscope = getFacebookScope();
@@ -74,7 +74,37 @@ if((!isset($_POST['u']))&&(!isset($_POST['p']))&&(!isset($_POST['d'])))
             $facebook = new Facebook($config);
 
             $fbloginlink = $facebook->getLoginUrl($params);
+            $html->setVariable('fbloginlink', $fbloginlink);*/
+            
+            ###Als Facebook login mogelijk is dan genereren we een login link 
+          
+            if(getSSLenabled())
+            {
+                $prefix = 'https://';
+            }
+            else
+            {
+                $prefix = 'http://';
+            }
+            
+            require_once $_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php';
+            
+            ###Door een Facebook bug encoderen we de bestemming zodat er geen / en = meer in komen.
+            $encodedURL = rtrim(strtr(base64_encode($_GET['d']), '+/', '-_'), '=');
+            
+            $redirect = $prefix.$_SERVER['HTTP_HOST'].'/core/logic/usermanagement/fblogincallback.php?d64='.$encodedURL;
+           
+            
+            $helper = new Facebook\FacebookRedirectLoginHelper($redirect, $appId = getFacebookAppID(), $appSecret = getFacebookSappId());
+            
+            ###We halen de gewenste scope op
+            $fbscope = getFacebookScope();
+            $fbscopeArray = explode(',', $fbscope);
+            
+            $fbloginlink = $helper->getLoginUrl($fbscopeArray);
+            
             $html->setVariable('fbloginlink', $fbloginlink);
+            
         }
         
         

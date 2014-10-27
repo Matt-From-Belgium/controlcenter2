@@ -166,7 +166,7 @@ function AddUserEXT($inputarray)
 	return $errormessages;
 }
 
-function addUserEXT_FB($inputarray)
+function addUserEXT_FB($inputarray,$session)
 {
     	##Deze functie handelt de externe aanmaak van een gebruikersaccount via Facebook af
 	require_once $_SERVER['DOCUMENT_ROOT']."/core/entity/user.php";
@@ -188,27 +188,21 @@ function addUserEXT_FB($inputarray)
         }
 	else
         {
-            ###Wel Facebook account, voornaam en achternaam uit profiel halen
-            #Voornaam en familienaam komen uit het facebookprofiel
-                            require_once($_SERVER['DOCUMENT_ROOT'].'/core/social/facebook/php/facebook.php');
-                            
-                            $fbappid = getFacebookAppID();
-                            $fbsappid = getFacebookSappId();
-                            
-                            $config = array();
-                            $config['appId']=$fbappid;
-                            $config['secret']=$fbsappid;
-                            $config['fileUpload']=false;
-                            
-                            $facebook = new Facebook($config);
-                            
-                            $profile=$facebook->api('/me','get');
-                            $newuser->setRealFirstname($profile['first_name']);
-                            $newuser->setRealname($profile['last_name']);
-        }
+           
+            
+            ###Facebookaccount, voornaam en achternaam uit profiel halen
+            ###We gebruiken de sessie die in de functie wordt doorgegeven
+                $user_profile = (new Facebook\FacebookRequest(
+                $session, 'GET', '/me'
+              ))->execute()->getGraphObject(Facebook\GraphUser::className());
+                
+                $newuser->setRealFirstname($user_profile->getFirstName());
+                $newuser->setRealname($user_profile->getLastName());
+                $newuser->setFacebookID($user_profile->getId());
+        }   
 
                                     
-	###Het gaat om een extern gecre�erde gebruiker => nakijken of er activatie nodig is
+	/*###Het gaat om een extern gecre�erde gebruiker => nakijken of er activatie nodig is
 	if(getUserActivationParameter())
 	{
 		###er is wel gebruikersactivatie nodig => confirmationstatus is 0
@@ -218,8 +212,11 @@ function addUserEXT_FB($inputarray)
 	{
 		###er is geen gebruikersactivatie nodig => confirmationstatus wordt 1
 		$newuser->setUserConfirmationStatus(1);
-	}
-	
+	}*/
+        
+        ###Geen gebruikersactivatie nodig want er is een FB-account gekoppeld
+        $newuser->setUserConfirmationStatus(1);
+        
 	if(getAdminActivationParameter())
 	{
 		###er is administrator toestemming nodig voor een account-> adminconfimationstatus is 0
@@ -252,27 +249,6 @@ function addUserEXT_FB($inputarray)
             
 		$newuserid=dataaccess_Adduser($newuser,$fictionalpass);
 		
-		###Afhankelijk van de activatieprocedure die is ingesteld moet er een mail gestuurd worden naar de gebruiker.
-		if(getUserActivationParameter())
-		{
-			###Bevestiging van het mailadres door de gebruiker is nodig => mail naar de gebruiker versturen.
-			require_once $_SERVER['DOCUMENT_ROOT']."/core/email/email.php";
-			$activatiemail = new Email();
-			$activatiemail->setTo($newuser->getMailadress());
-			
-			$sitename = getSiteName();
-			
-			$activatiemail->setSubject(LANG_USER_SELF_ACTIVATION_WELCOMETO . "$sitename");
-			$activatiemail->setMessageAddin("/core/presentation/usermanagement/accounts/addins/useractivationmail.tpa");
-			$activatiemail->setVariable("sitename","$sitename");
-			
-			###De activatielink moet verwijzen naar het userid dat werd teruggegeven door dataaccess_adduser
-			#en naar het activatiescript op de server waarop Controlcenter2 draait.
-			$activatielink = "http://".$_SERVER['HTTP_HOST']."/core/presentation/usermanagement/accounts/activate.php?id=".$newuserid;
-			
-			$activatiemail->setVariable("activationlink",$activatielink);
-			$activatiemail->Send();
-		}
 	}
 
 	return $errormessages;
@@ -555,24 +531,58 @@ function Login($username,$password,$d)
         }
 }
 
-function Login_FB()
+function Login_FB($session)
 {
 	require_once $_SERVER['DOCUMENT_ROOT']."/core/dataaccess/usermanagement/userfunctions.php";
-        require_once $_SERVER['DOCUMENT_ROOT']."/core/social/facebook/php/facebook.php";
+        require_once $_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php';
 	
-        ###Deze functie haalt het facebook ID van de ingelogde gebruiker op en kijkt of er een gebruikers
-        ###account aan gekoppeld is
-        ###Eerst kijken of er een Facebook sessie is
-        $config = array();
-
-        $config['appId'] = getFacebookAppID();
-        $config['secret'] = getFacebookSappId();
-
-        $facebook = new Facebook($config);
-
-        $fbUser = $facebook->getUser();
         
+        ###We kijken of we een geldige sessie hebben kunnen maken
+        if($session->validate(getFacebookAppID(), getFacebookSappId()))
+        {
+            
+            ###We hebben een geldige verbinding met het Facebook-platform
+            ###We halen gebruikersid op
+            $user_profile = (new Facebook\FacebookRequest($session, 'GET', '/me'))->execute()->getGraphObject(Facebook\GraphUser::className());
+            
+            $userid = $user_profile->getId();
+            
+            ###We gaan nu checken of het facebook id ergens voorkomt in onze databank
+            ###Eerst laten we de DataAccess layer controleren of de gegevens kloppen
+            $id=  dataaccess_checkUserFacebookId($userid);
+            
+            if(!empty($id))
+            {
+                ###De aangeleverde gegevens zijn correct
+		###We halen de gebruikersgegevens op in een userobject
+		$user = getUser($id);
+		
+                ###CONTROLE: Moet de useraccount nog geactiveerd worden door een administrator?
+                if($user->getAdminConfirmationStatus()==1)
+                {
+                        ###De gebruikersgegevens waren correct, en de account is volledig actief => de gebruiker mag ingelogd worden
+                        $_SESSION['currentuser'] = $user;
+                        ###We genereren de session hash om hijacking moeilijker te maken
+                        $hash = generateSessionHash();
+                        $_SESSION['loginstring']=$hash;
 
+                }
+                else
+                {
+                        ###De gebruiker heeft zijn account wel geactiveerd maar de admin moet nog zijn/haar toestemming geven
+                        ###Errorcode 2
+                        return '2';
+                }
+            }
+            else
+            {
+                ###de parameters zijn niet correct => return false
+                ###Errorcode 1: geen fb account gelinkt aan een gebruikersaccount
+		return '1';
+            }
+        }
+
+        /*
 	###Eerst laten we de DataAccess layer controleren of de gegevens kloppen
 	$id=  dataaccess_checkUserFacebookId($fbUser);
 	if(!empty($id))
@@ -608,6 +618,8 @@ function Login_FB()
                 ###Errorcode 1: geen fb account gelinkt aan een gebruikersaccount
 		return '1';
 	}
+         * 
+         */
 }
 
 function checkPermission($module,$permission,$returnBoolean=false)
