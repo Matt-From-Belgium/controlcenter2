@@ -1,6 +1,5 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'].'/core/logic/ajax/ajax.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/core/social/facebook/php/facebook.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/core/logic/parameters.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/core/logic/usermanagement/userfunctions.php';
 
@@ -10,15 +9,30 @@ function checkFBAccount()
     ###Eerst kijken we of er wel een ingelogde gebruiker is.
     if(!isset($_SESSION['currentuser']))
     {
+        ##Er is geen ingelogde gebruiker. We willen kijken of er een actieve FB sessie is en die
+        ##doorgeven aan logic layer om in te loggen
+        ##Wanneer de gebruiker specifiek kiest voor inloggen met facebook gebeurt dit via redirecthelper
+        ##zie fbLogincallback.php
+        ##Wanneer we via javascript willen gaan gebruiken we de sessie die via de SDK tot stand werd gebracht
+        require $_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php';
+        Facebook\FacebookSession::setDefaultApplication(getFacebookAppID(), getFacebookSappId());
+
+        $helper = new Facebook\FacebookJavaScriptLoginHelper();
+
+        ###We halen de javascript sessie op
+        $session = $helper->getSession();
+        
         ###Via de logic layer halen we de gebruikersgegevens op
         ###En als er een gebruikersaccount is koppelen we die aan $_SESSION['currentuser']
-        $errorcode = Login_FB();
+        $errorcode = Login_FB($session);
 
         if(isset($_SESSION['currentuser']))
         {
             $result = new ajaxResponse('ok');
 
-            ###Eerst kijken of er een Facebook sessie is
+            ###nalv update naar nieuwe API: geen idee waarom we hier nog eens
+            ###het facebook id ophalen, vervangen door userid.
+            /*###Eerst kijken of er een Facebook sessie is
             $config = array();
 
             $config['appId'] = getFacebookAppID();
@@ -33,9 +47,13 @@ function checkFBAccount()
             $row = array();
             $row['userId']=$fbUser;
 
-            $result->addData($row);
+            $result->addData($row);*/
 
-
+            $result->addField('userId');
+            
+            $row = array();
+            $row['userId']=$_SESSION['currentuser']->getId();
+            
             return $result->getXML();
         }
         else
@@ -61,15 +79,32 @@ function checkFBAccount()
             if(empty($userfbid))
             {
 
-               ###We halen het facebook ID op
+               /*###We halen het facebook ID op
                $config['appId'] = getFacebookAppID();
                $config['secret'] = getFacebookSappId();
                $facebook = new Facebook($config);
                $fbUser = $facebook->getUser();
-               
+               */
+                
+                require $_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php';
+                Facebook\FacebookSession::setDefaultApplication(getFacebookAppID(), getFacebookSappId());
+
+                $helper = new Facebook\FacebookJavaScriptLoginHelper();
+
+                ###We halen de javascript sessie op
+                $session = $helper->getSession();
+                
+                $user_profile = (new Facebook\FacebookRequest(
+                $session, 'GET', '/me'
+              ))->execute()->getGraphObject(Facebook\GraphUser::className());
+                
+                $fbUser=$user_profile->getId();
+                
                ###en we voegen het toe aan de gebruiker
                $editeduser = $_SESSION['currentuser'];
                $editeduser->setFacebookID($fbUser);
+                
+                
                
                ###En we schrijven de gewijzigde gebruiker naar de database
                $errormessages=editUserObject($editeduser);

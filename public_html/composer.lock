@@ -1,0 +1,113 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "bfefe3a8251e4632983ea478887ee20b",
+    "packages": [
+        {
+            "name": "facebook/php-sdk-v4",
+            "version": "4.0.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/facebook/facebook-php-sdk-v4.git",
+                "reference": "e2dc662c4ab4da680434b6b777d56461a9bd2563"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/facebook/facebook-php-sdk-v4/zipball/e2dc662c4ab4da680434b6b777d56461a9bd2563",
+                "reference": "e2dc662c4ab4da680434b6b777d56461a9bd2563",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "guzzlehttp/guzzle": "~4.0",
+                "mockery/mockery": "dev-master",
+                "phpunit/phpunit": "3.7.*"
+            },
+            "suggest": {
+                "guzzlehttp/guzzle": "Allows for implementation of the Guzzle HTTP client"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Facebook\\": "src/Facebook/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Facebook Platform"
+            ],
+            "authors": [
+                {
+                    "name": "Facebook",
+                    "homepage": "https://github.com/facebook/facebook-php-sdk-v4/contributors"
+                }
+            ],
+            "description": "Facebook SDK for PHP",
+            "homepage": "https://github.com/facebook/facebook-php-sdk-v4",
+            "keywords": [
+                "facebook",
+                "sdk"
+            ],
+            "time": "2014-08-25 18:58:37"
+        },
+        {
+            "name": "recaptcha-lib/recaptcha",
+            "version": "v0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/adrianorsouza/reCAPTCHA-lib.git",
+                "reference": "3de1b5e47905a835846d8073b9233ce1083a989b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/adrianorsouza/reCAPTCHA-lib/zipball/3de1b5e47905a835846d8073b9233ce1083a989b",
+                "reference": "3de1b5e47905a835846d8073b9233ce1083a989b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpdocumentor/phpdocumentor": "2.*",
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "ReCaptcha": "lib"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Adriano Rosa",
+                    "email": "dev@adrianorosa.com",
+                    "homepage": "http://adrianorosa.com"
+                }
+            ],
+            "description": "PHP Library for reCAPTCHA Google's API",
+            "homepage": "https://github.com/adrianorsouza/reCAPTCHA-lib",
+            "keywords": [
+                "captcha",
+                "recapcha-lib",
+                "recaptcha"
+            ],
+            "time": "2014-06-10 00:51:37"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "platform": [],
+    "platform-dev": []
+}

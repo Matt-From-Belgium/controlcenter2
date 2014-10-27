@@ -1,0 +1,8 @@
+<h1>Facebook DEBUG</h1>
+<script>
+    function alertMe()
+    {
+        alert('ok');
+    }
+</script>
+<a href='javascript:registerWithFacebook(function(){alertMe();},"publish_actions")'>Register</a>
