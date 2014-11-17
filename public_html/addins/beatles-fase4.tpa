@@ -1,0 +1,52 @@
+<section class="beatlesheader"><img src='/images/beatles/logo.png'></center></section>
+<section class="block">
+
+<img src='/images/beatles/lovebeatles.png' class='left'>In 1964 beleefden 'The Beatles' hun grote doorbraak. Ze werden de grondleggers van de hedendaagse popmuziek. Doe zelf de test: wedden dat u minstens één van hun nummers kan meeneuriën? En toch... zo heeft u hen nog nooit gehoord. Projectkoor CHANTage brengt u een mix van hun meest gekende nummers in een uniek arrangement. Wij verrassen u met nummers die u al jaren kent. 
+<p />Dit concert werd gedirigeerd door Geert De Deygere en begeleid op piano door Jürgen Degryse. Meer dan 1100 bezoekers woonden één van de concerten bij.
+ </section>
+<section class="block">
+    <h1>Foto's</h1>
+    <a id='foto'></a>
+    <div id='beatlesalbum'>
+    </div>
+    <script>
+        var test = new photoViewer('the beatles','beatlesalbum');
+    </script>
+</section>
+<section class='block'>
+    <a name='beatlescomment'></a>
+    <h1>Wat vond u er van?</h1>
+    Laat een berichtje achter met uw ervaringen
+    <center><div class="fb-comments" data-href="http://www.projectkoorchantage.be/beatles.php" data-width="1100" data-numposts="5" data-colorscheme="light"></div></center>
+</section>
+<section class='block'>
+<h1>Wat is jouw favoriete Beatles-hit?</h1>
+<a id='beatlesvote'></a>
+    <div id="top5Container">
+    <h2>De huidige top 5</h2>
+        <div id='top5'>
+        </div>
+    </div>
+    <script>refreshTop5();</script>
+    <!CC IFSET [votedcookieno]>
+    <div id="vote">
+        <h2>Maak je keuze</h2>
+        <input type='text' id='searchtext'  onkeyup="javascript:searchSongsWait(this)" onblur="javascript: hideSearchBox()" autocomplete="off"><br />
+        <div id='deelopfb'><input type='checkbox' onClick='enableShareBox(event)' id='shareOnFB' name='shareOnFB'>&nbsp;<img src='/images/fb_klein.png'>&nbsp;Deel mijn keuze op Facebook <br /></div>
+        <input type='submit' value='Stem!' onClick='javascript:beatlesVote()' class='voteDisabled' id='beatlesVote' name='beatlesVote' disabled><div id='loader'><img src='/images/ajax-loader.gif'></div>
+    </div>
+    <div id='afterVote'>
+        <h2>Bedankt voor je stem</h2>
+        We hebben je keuze geregistreerd.  Jammer genoeg kan je maar één keer stemmen. <p>CHANTage brengt op <b>26,27 en 28 september een Beatles-concert</b> dat je niet snel zal vergeten. Misschien staat jouw keuze ook op het programma. Hou dus een plaatsje vrij in je agenda!
+    </div>
+    <!CC END IFSET [votedcookieno]>
+    <!CC IFSET [votedcookie]>
+        <div id='afterVoteReload'>
+            <h2>Bedankt voor je stem</h2>
+            <h3>Jouw favoriete Beatles-hit: <!CC VAR [votedTitle]></h3>
+            We hebben je keuze geregistreerd.  Jammer genoeg kan je maar één keer stemmen. <p>CHANTage brengt op <b>26,27 en 28 september een Beatles-concert</b> dat je niet snel zal vergeten. Misschien staat jouw keuze ook op het programma. Hou dus een plaatsje vrij in je agenda!
+        </div>
+    <!CC END IFSET [votedcookie]>
+</section>
+
+

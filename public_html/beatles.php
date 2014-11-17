@@ -20,7 +20,7 @@ else {
     $html->loadAddin('/addins/beatles-fase2.tpa');
 }*/
 
-$html->loadAddin('/addins/beatles-fase3.tpa');
+$html->loadAddin('/addins/beatles-fase4.tpa');
 
 $html->loadScript('/modules/fotoalbum/presentation/showalbum.js');
 $html->loadScript('/scripts/beatles.final.js');
