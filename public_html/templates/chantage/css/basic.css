@@ -85,7 +85,36 @@ body {
         
     }
      
+#cookies {
+    
+    background-color: rgba(255,255,255,1);
+    
+    z-index: 1000;
+    width: 100%;
+    
+    
+    padding-left: 1em;
+    margin-bottom: 0em;
+    vertical-align:  middle;
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
+}
 
+#cookies input {
+    margin-left: 1em;
+    
+    background-color: #f1ae1e;
+    border-style: solid;
+    border-color: #666666;
+    vertical-align:  middle;
+}
+
+#cookies div {
+    margin-bottom: 0em;
+    text-align:  center;
+    font-weight:  bold;
+    vertical-align:  middle;
+}
 
 header{
     background-color: #323A45;

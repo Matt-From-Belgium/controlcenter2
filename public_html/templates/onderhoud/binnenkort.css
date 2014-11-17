@@ -65,3 +65,11 @@ h1 {
     margin-right: auto;
     text-align:  center;
 }
+
+#loginlink {
+    margin-top: 1em;
+}
+
+a {
+    color: #f1ae1e;
+}
