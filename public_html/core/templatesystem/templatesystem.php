@@ -1,6 +1,7 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT']."/core/entity/exception.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/core/logic/languages/languages.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/core/logic/usermanagement/userfunctions.php";
 
 ###Getlanguagefiles wordt buiten de klasse gezet om ervoor te zorgen dat de common functie showMessage() zijn werk kan doen.
 ###uiteindelijk moeten er toch altijd taalconstanten ingeladen worden als templatesystem wordt gebruikt. Daardoor maakt dit geen verschil.
@@ -20,39 +21,80 @@ class htmlpage
         private $scripts;
         private $stylesheets;
         private $customMeta;
-
+        private $maintenanceEnabled;
+        private $forEmail;
 	
 ###CONSTRUCTOR FUNCTIONALITEIT
-	public function __construct($alias)
+	public function __construct($alias,$forEmail=false)
 	{	
-			#Bij het uitvoeren van de constructor wordt een alias opgegeven. De aliases zijn in de databases gedefinieerd.
-			##STAP1: Nagaan of de alias bestaat en welke directory eraan gekoppeld is.
-			require_once $_SERVER['DOCUMENT_ROOT']."/core/templatesystem/templatelogic.php";
-			if($directory=AliasGetLinkeddir($alias))
-			{
-				$directory = $_SERVER['DOCUMENT_ROOT']."/templates/".$directory;
-			
-				#Nu moet de HTML van de templatefile worden opgehaald.
-				$this->html=gettemplatehtml($directory);
+                  ###Templatesystem R4: eerst kijken we of maintenancemode aan ligt
+                  $this->maintenanceEnabled = getMaintenanceEnabled();
+                  
+                  ###Templatsystem R4: als $forEmail=true dan worden een aantal acties niet uitgevoerd
+                  # - geen scripts
+                  # - geen facebookintegratie
+                  # - geen cookie melding
+                 $this->forEmail=$forEmail;
+                  
+                  if($this->maintenanceEnabled && !$this->forEmail)
+                  {
+                     ###Onderhoudsmodus is actief => we forceren $alias naar maintenance
+                     ###TENZIJ: we op de loginpagina zitten, want we willen bepaalde gebruikers wel toelaten tot de site
+                     ###zodat deze getest kan worden voordat ze terug in productie gaat
+                      
+                        if(!stripos($_SERVER['SCRIPT_FILENAME'], 'login.php'))
+                        {      
+                            ###we zitten niet op de login pagina
+                            ###We moeten dus de onderhoudspagina forceren
+                            ###Tenzij de gebruiker die ingelogd is de toegang login during interruption heeft
+                            if(!checkPermission(NULL, 'login during interruption', TRUE))
+                            {
+                                $alias = 'maintenance';
+                            }
+                            else
+                            {
+                                ###De gebruiker heeft wel toegang omdat hij/zij de toegang 'login during interruption' heeft
+                                $this->maintenanceEnabled=FALSE;
+                            }
+                        }
+                        else
+                        {
+                            ###We zijn wel in maintenance mode maar dit is login pagina
+                            $this->maintenanceEnabled=false;
+                        }
 
-				/*#De taalconstanten worden opgehaald				
-				$this->LoadLanguageFiles();	
-				*/
-                                
-                                /*De alias is verwerkt, nu moeten we kijken welke standaardwaarde $this->enableFacebookAPI moet krijgen*/
-                                 if(getFacebookLoginStatus())
-                                 {
-                                     $this->enableFacebookAPI=true;
-                                 }
-                                 else
-                                 {
-                                     $this->enableFacebookAPI=false;
-                                 }
-			}
-			else
-			{
-				throw new Exception("You tried to call an alias '$alias'. The request failed because the alias does not exist");
-			}
+                  }
+                            #Bij het uitvoeren van de constructor wordt een alias opgegeven. De aliases zijn in de databases gedefinieerd.
+                            ##STAP1: Nagaan of de alias bestaat en welke directory eraan gekoppeld is.
+                            require_once $_SERVER['DOCUMENT_ROOT']."/core/templatesystem/templatelogic.php";
+                            if($directory=AliasGetLinkeddir($alias))
+                            {
+                                    $directory = $_SERVER['DOCUMENT_ROOT']."/templates/".$directory;
+
+                                    #Nu moet de HTML van de templatefile worden opgehaald.
+                                    $this->html=gettemplatehtml($directory);
+
+
+
+                                    /*#De taalconstanten worden opgehaald				
+                                    $this->LoadLanguageFiles();	
+                                    */
+
+                                    /*De alias is verwerkt, nu moeten we kijken welke standaardwaarde $this->enableFacebookAPI moet krijgen*/
+                                     if(getFacebookLoadApiStatus())
+                                     {
+                                         $this->enableFacebookAPI=true;
+                                     }
+                                     else
+                                     {
+                                         $this->enableFacebookAPI=false;
+                                     }
+                            }
+                            else
+                            {
+                                    throw new Exception("You tried to call an alias '$alias'. The request failed because the alias does not exist");
+                            }
+                            
 	}
 	
 	private function LoadLanguageFiles()
@@ -149,22 +191,72 @@ class htmlpage
                 $patternhead = "/(?i)<\s*head\s*>/";
                 $html =  @preg_replace_callback($patternhead,array($this,'addMetaData'), $html, 1);
                  *                  */
-                
-                ###We vullen de head tag aan met javascripts en metadata
-                $patternhead = "/(?i)<\s*head\s*>/";
-                $html = @preg_replace_callback($patternhead,array($this,'appendHeadTag'), $html, 1);
-                
-                
-                ###Facebook integratie: Nu de HTML compleet is voegen we indien nodig de Facebook Javascript api toe
-                ###We doen dat net na de body tag. Maar... enkel wanneer $this->enableFacebookAPI = true (zie commentaar bovenaan)
-                if($this->enableFacebookAPI)
+
+               ###Is de gebruiker op de hoogte van het gebruik van cookies? Zo niet moet melding getoond worden
+               ###Aangezien hier potentieel een javascript geladen wordt moet deze boven de aanroeping van appendheadtag blijven 
+               ###TEMPLATESYSTEM R4: als forEmail geactiveerd is mogen geen meldingen voor cookies getoond worden
+                if((!isset($_COOKIE['cookies']))&&(!$this->forEmail))
                 {
-                    ###bugfix: rekening houden met mogelijke onLoad
+                    ###We laden de nodige javascripts
+                    $this->loadScript('/core/templatesystem/setcookies.js');
+                    ###BUGFIX: als cookies melding getoond wordt moet ajaxtransaction ook geladen worden
+                    $this->enableAjax();
+                    
+                    ###Er zijn 2 mogelijkheden om de cookies notificatie weer te geven
+                    #Als er een een tag <!CC cookies> is opgenomen wordt die tag vervangen door de notificatie
+                    #Als die er niet is wordt de notificatie ingevoegd na de head tag. Normaal zal het laatste systeem 
+                    #voor de meeste gevallen werken maar in geval van fixed layers kan het nodig zijn om
+                    #die custom tag te gebruiken.
+                    $patterncookiescustom = "/(?i)<\s*!CC\s*cookies\s*>/";
+                    
+                    ###We kijken eerst of de custom tag werd gebruikt
+                    if(preg_match($patterncookiescustom, $html)==1)
+                    {
+                        ###Er is een match
+                        $html=@preg_replace_callback($patterncookiescustom,array($this,'addCookiesNotification'), $html, 1);
+                    }
+                    else
+                    {
                     $patternbody = "/(?i)<\s*body\s*[a-z0-9=\"\']*\s*>/";
-                    $html =  @preg_replace_callback($patternbody,array($this,'addFacebookAPI'), $html, 1);
+                    $html =  @preg_replace_callback($patternbody,array($this,'addCookiesNotification'), $html, 1);
+                    
+                    
+                    }
                 }
 		
-		return $html;
+		
+                ###TEMPLATESYSTEM R4: facebookintegratie en scripts werken niet als forEmail actief is.
+                if(!$this->forEmail)
+                {
+                    
+                    ###Facebook integratie: Nu de HTML compleet is voegen we indien nodig de Facebook Javascript api toe
+                    ###We doen dat net na de body tag. Maar... enkel wanneer $this->enableFacebookAPI = true (zie commentaar bovenaan)
+                    if($this->enableFacebookAPI)
+                    {
+                        ###bugfix: rekening houden met mogelijke onLoad
+                        #$patternbody = "/(?i)<\s*body\s*[a-z0-9=\"\']*\s*>/";
+                        
+                        #Vanaf nu kan facebook api ingeladen worden via loadscripts
+                        $this->loadScript('/core/social/facebook/javascript/initFB.php');
+                        
+                        ##$html =  @preg_replace_callback($patternbody,array($this,'addFacebookAPI'), $html, 1);
+                    }
+                    
+                    ###Als CORE_FB_LOGIN_ENABLED gelijk is aan 1 dan moet ook ajaxtransaction overal ingeladen worden
+                    if(getFacebookLoginStatus())
+                    {
+                        $this->enableAjax();
+                    }
+                    
+                    ###We vullen de head tag aan met javascripts en metadata
+                    $patternhead = "/(?i)<\s*\/\s*head\s*>/";
+                    $html = @preg_replace_callback($patternhead,array($this,'appendHeadTag'), $html, 1);
+
+
+                }
+                
+                
+                return $html;
                  
                  
 	}
@@ -229,7 +321,7 @@ class htmlpage
         
         private function appendHeadTag($matches)
         {
-            $html = $matches[0];
+            
             
             ###javascripts toevoegen
             if(is_array($this->scripts))
@@ -289,7 +381,27 @@ class htmlpage
                     }
                 }
             
+            ###We plaatsen de eindtag terug
+            $html = $html.$matches[0];
+                
             return $html;
+        }
+        
+        private function addCookiesNotification($matches)
+        {
+            
+            
+            ###Body tag moet natuurlijk behouden blijven
+            $html = $matches[0];
+            $html = $html.'<div id="cookies">';
+            $html = $html.'<div>'.LANG_COOKIES_NOTIFICATION;
+            $html = $html.'<input type="button" value="'.LANG_COOKIES_SEND_BUTTON.'" onclick="javascript:setCookiesOk()">';
+            $html = $html.'</div></div>';
+            
+            
+            
+            return $html;
+            
         }
         
         private function addFacebookAPI($matches)
@@ -620,20 +732,76 @@ class htmlpage
         public function loadScript($location)
         {
             ###Hiermee kunnen javascripts per pagina geladen worden
-            $this->scripts[] = $location;
+
+                $this->scripts[] = $location;
+            
         }
         
-        public function loadCSS($location)
+        public function loadCSS($pc,$phone=NULL,$tablet=NULL)
         {
+            ###TEMPLATESYSTEM R3: je kan kiezen welk CSS script je wil laten
+            #op basis van het platform waarmee de pagina geopend wordt
+            #- enkel de locatie van het pc script moet opgegeven worden in dat geval
+            #wordt het gebruikt voor alle platformen
+            #-als phone is opgegeven wordt dat gebruikt voor telefoons en tablets tenzij tablet
+            #ook gedefinieerd is
+            $detection = new Mobile_Detect();
+            $platform = "pc";
+            
+            if($detection->isTablet())
+            {
+                $platform = 'tablet';
+            }
+            else
+            {
+                if($detection->isMobile())
+                {
+                    $platform = 'phone';
+                }
+            }
+            
+            if(empty($phone))
+            {
+                $phone= $pc;
+            }
+            if(empty($tablet))
+            {
+                $tablet=$phone;
+            }
+            
             ###Hiermee kunnen CSS scripts per pagina geladen worden
-            $this->stylesheets[]= $location;
+            $this->stylesheets[]= $$platform;
+        }
+        
+        ###Templatesystem R3: enableAjax laadt automatisch ajaxtransaction.js
+        #Je zou dit ook met loadScript kunnen doen. Het verschil is hier dat bij debug het niet-geobfusceerde script
+        #geladen wordt. In de andere gevallen wordt de versleutelde versie geladen
+        public function enableAjax()
+        {
+            if(getDebugMode())
+            {
+                $path = '/core/presentation/ajax/ajaxtransaction.code.js';
+            }
+            else
+            {
+                $path = '/core/presentation/ajax/ajaxtransaction.js';
+            }
+            
+            $this->loadScript($path);
         }
 	
 	public function PrintHTML()
 	{
 		###Deze functie geeft de HTML terug aan de browser
-		$this->html = $this->ParseTags($this->html);
-		
+
+                ###Deze functie zet alle logica in werking om tags te vervangen
+                ###Als maintenance mode actief is moet dit niet gebeuren
+                if(!$this->maintenanceEnabled)
+                {
+                    $this->html = $this->ParseTags($this->html);
+                }
+ 
+
 		echo $this->html;
 	}
 	
@@ -645,5 +813,22 @@ class htmlpage
 		$this->html = $this->ParseTags($this->html);
 		return $this->html;
 	}
+        
+        public function forceSSL()
+        {
+            ###Wanneer SSL integratie actief is zal met deze functie de gebruiker op https uitkomen
+            #Wanneer een gebruiker inlogt komt hij/zij zowieso op https uit. Dit is dus puur voor pagina's
+            #zonder actieve gebruiker moeten versleuteld worden
+            if(getSSLenabled())
+            {
+                if (!isset($_SERVER['HTTPS']) || !$_SERVER['HTTPS']) { // if request is not secure, redirect to secure url
+                $url = 'https://' . $_SERVER['HTTP_HOST']
+                                  . $_SERVER['REQUEST_URI'];
+
+                header('Location: ' . $url);
+                exit;
+                }
+            }
+        }
 }
 ?>

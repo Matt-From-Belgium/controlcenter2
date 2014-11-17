@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.8
+-- version 4.0.10deb1
 -- http://www.phpmyadmin.net
 --
--- Machine: localhost
--- Genereertijd: 04 mrt 2014 om 13:28
--- Serverversie: 5.1.67-rel14.3-log
--- PHP-versie: 5.3.17
+-- Host: localhost
+-- Generation Time: Aug 21, 2014 at 09:26 PM
+-- Server version: 5.5.38-0ubuntu0.14.04.1
+-- PHP Version: 5.5.9-1ubuntu4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,36 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Databank: `ccenter2_data`
+-- Database: `controlcenter`
 --
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `languages`
+-- Table structure for table `ajaxwhitelist`
+--
+
+CREATE TABLE IF NOT EXISTS `ajaxwhitelist` (
+  `id` int(6) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `file` varchar(500) NOT NULL,
+  `function` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `file` (`file`),
+  KEY `function` (`function`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `ajaxwhitelist`
+--
+
+INSERT INTO `ajaxwhitelist` (`id`, `file`, `function`) VALUES
+(000001, '/core/logic/usermanagement/fbLoginAjax.php', 'checkFBAccount'),
+(000002, '/core/templatesystem/templatelogic.php', 'setCookiesOk');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `languages`
 --
 
 CREATE TABLE IF NOT EXISTS `languages` (
@@ -34,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `languages` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- Gegevens worden uitgevoerd voor tabel `languages`
+-- Dumping data for table `languages`
 --
 
 INSERT INTO `languages` (`id`, `name`) VALUES
@@ -44,17 +67,30 @@ INSERT INTO `languages` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `modules`
+-- Table structure for table `login_attempts`
+--
+
+CREATE TABLE IF NOT EXISTS `login_attempts` (
+  `username` varchar(20) NOT NULL DEFAULT '',
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`username`,`time`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `modules`
 --
 
 CREATE TABLE IF NOT EXISTS `modules` (
   `id` int(2) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `name` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `name` (`name`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- Gegevens worden uitgevoerd voor tabel `modules`
+-- Dumping data for table `modules`
 --
 
 INSERT INTO `modules` (`id`, `name`) VALUES
@@ -63,7 +99,7 @@ INSERT INTO `modules` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `parameters`
+-- Table structure for table `parameters`
 --
 
 CREATE TABLE IF NOT EXISTS `parameters` (
@@ -72,40 +108,43 @@ CREATE TABLE IF NOT EXISTS `parameters` (
   `value` varchar(500) NOT NULL,
   `overridable` bit(1) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `search_by_name` (`name`(20))
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
+  UNIQUE KEY `search_by_name` (`name`(20)),
+  KEY `name` (`name`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
 
 --
--- Gegevens worden uitgevoerd voor tabel `parameters`
+-- Dumping data for table `parameters`
 --
 
 INSERT INTO `parameters` (`id`, `name`, `value`, `overridable`) VALUES
 (001, 'CORE_LANGUAGE', '1', b'1'),
 (002, 'CORE_USER_SELF_ACTIVATION', '1', b'0'),
-(003, 'CORE_USER_ADMIN_ACTIVATION', '1', b'0'),
+(003, 'CORE_USER_ADMIN_ACTIVATION', '0', b'0'),
 (004, 'CORE_USER_EXT_USERGROUP', '001', b'0'),
 (005, 'CORE_USER_EXT_REGISTRATION', '0', b'0'),
 (006, 'CORE_NOACCESS_URL', '', b'0'),
 (007, 'CORE_SERVER_MAILADRESS', 'noreply@dragoneyehosting.be', b'0'),
 (008, 'CORE_DEBUG_MODE', '0', b'0'),
-(009, 'CORE_DEBUG_MAIL', 'matthias.bauw@gmail.com', b'0'),
+(009, 'CORE_DEBUG_MAIL', 'matthiasba@linux.be', b'0'),
 (010, 'CORE_FB_LOGIN_ENABLED', '0', b'0'),
 (011, 'CORE_FB_APPID', '', b'0'),
 (012, 'CORE_FB_SAPPID', '', b'0'),
 (013, 'CORE_FB_SCOPE', 'email', b'0'),
-(014, 'CORE_SITE_NAME', 'testserver', b'0'),
+(014, 'CORE_SITE_NAME', 'CONTROLCENTER SERVER', b'0'),
 (015, 'CORE_FB_APP_NAMESPACE', '', b'0'),
 (016, 'SITE_META_TITLE', 'CONTROLCENTER SERVER', b'0'),
-(017, 'SITE_META_DESCRIPTION', 'Wij zijn een groep van enthousiaste zangers en zangeressen uit Diksmuide. Het koor pint zich niet vast op een genre maar probeert u telkens weer te verrassen. In december bracht CHANTage een kerstconcert in Woumen, voor 2014 staat er een Beatles-concert gepland.', b'0'),
+(017, 'SITE_META_DESCRIPTION', 'Controlcenter testserver', b'0'),
+(022, 'CORE_SSL_ENABLED', '0', b'0'),
 (018, 'SITE_META_IMAGE', '', b'0'),
 (019, 'SITE_META_URL', '', b'0'),
 (020, 'CORE_RECAPTCHA_PUBLIC', '6LdR-eYSAAAAAEboUatksFIHeb6m4CvmTT1-7_5p ', b'0'),
-(021, 'CORE_RECAPTCHA_PRIVATE', '6LdR-eYSAAAAAM2V3SNVOLmiFEQJOz6TrgWBNfu3 ', b'0');
+(021, 'CORE_RECAPTCHA_PRIVATE', '6LdR-eYSAAAAAM2V3SNVOLmiFEQJOz6TrgWBNfu3 ', b'0'),
+(023, 'CORE_MAINTENANCE_MODE', '1', b'0');
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `permissions`
+-- Table structure for table `permissions`
 --
 
 CREATE TABLE IF NOT EXISTS `permissions` (
@@ -116,7 +155,7 @@ CREATE TABLE IF NOT EXISTS `permissions` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
--- Gegevens worden uitgevoerd voor tabel `permissions`
+-- Dumping data for table `permissions`
 --
 
 INSERT INTO `permissions` (`id`, `module`, `name`) VALUES
@@ -129,30 +168,34 @@ INSERT INTO `permissions` (`id`, `module`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `templatealiases`
+-- Table structure for table `templatealiases`
 --
 
 CREATE TABLE IF NOT EXISTS `templatealiases` (
   `id` int(2) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
-  `directory` varchar(30) NOT NULL,
+  `pc_directory` varchar(30) NOT NULL,
+  `phone_directory` varchar(30) DEFAULT NULL,
+  `tablet_directory` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `search_by_name` (`name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+  UNIQUE KEY `search_by_name` (`name`),
+  KEY `name` (`name`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
--- Gegevens worden uitgevoerd voor tabel `templatealiases`
+-- Dumping data for table `templatealiases`
 --
 
-INSERT INTO `templatealiases` (`id`, `name`, `directory`) VALUES
-(01, 'frontend', 'alpha3'),
-(02, 'backend', 'alpha3'),
-(03, 'mail', 'mail');
+INSERT INTO `templatealiases` (`id`, `name`, `pc_directory`, `phone_directory`, `tablet_directory`) VALUES
+(01, 'frontend', 'alpha3', NULL, NULL),
+(02, 'backend', 'alpha3', NULL, NULL),
+(03, 'mail', 'mail', NULL, NULL),
+(04, 'maintenance', 'maintenance', NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `usergroupmembers`
+-- Table structure for table `usergroupmembers`
 --
 
 CREATE TABLE IF NOT EXISTS `usergroupmembers` (
@@ -162,7 +205,7 @@ CREATE TABLE IF NOT EXISTS `usergroupmembers` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Gegevens worden uitgevoerd voor tabel `usergroupmembers`
+-- Dumping data for table `usergroupmembers`
 --
 
 INSERT INTO `usergroupmembers` (`user`, `usergroup`) VALUES
@@ -171,7 +214,7 @@ INSERT INTO `usergroupmembers` (`user`, `usergroup`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `usergrouppermissions`
+-- Table structure for table `usergrouppermissions`
 --
 
 CREATE TABLE IF NOT EXISTS `usergrouppermissions` (
@@ -181,7 +224,7 @@ CREATE TABLE IF NOT EXISTS `usergrouppermissions` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Gegevens worden uitgevoerd voor tabel `usergrouppermissions`
+-- Dumping data for table `usergrouppermissions`
 --
 
 INSERT INTO `usergrouppermissions` (`usergroup`, `moduletask`) VALUES
@@ -194,7 +237,7 @@ INSERT INTO `usergrouppermissions` (`usergroup`, `moduletask`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `usergroups`
+-- Table structure for table `usergroups`
 --
 
 CREATE TABLE IF NOT EXISTS `usergroups` (
@@ -205,7 +248,7 @@ CREATE TABLE IF NOT EXISTS `usergroups` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- Gegevens worden uitgevoerd voor tabel `usergroups`
+-- Dumping data for table `usergroups`
 --
 
 INSERT INTO `usergroups` (`id`, `name`) VALUES
@@ -214,7 +257,7 @@ INSERT INTO `usergroups` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `userpermissions`
+-- Table structure for table `userpermissions`
 --
 
 CREATE TABLE IF NOT EXISTS `userpermissions` (
@@ -226,14 +269,15 @@ CREATE TABLE IF NOT EXISTS `userpermissions` (
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(6) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `username` varchar(20) NOT NULL,
   `facebookid` varchar(20) DEFAULT NULL,
-  `password` varchar(32) NOT NULL,
+  `password` varchar(128) NOT NULL,
+  `salt` varchar(128) NOT NULL,
   `passwordchangerequired` enum('1','0') NOT NULL DEFAULT '0',
   `userconfirmation` enum('1','0') NOT NULL DEFAULT '0',
   `adminconfirmation` enum('1','0') NOT NULL DEFAULT '0',
@@ -243,15 +287,16 @@ CREATE TABLE IF NOT EXISTS `users` (
   `website` varchar(50) DEFAULT NULL,
   `country` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `search_by_username` (`username`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=41 ;
+  UNIQUE KEY `search_by_username` (`username`),
+  KEY `username` (`username`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=76 ;
 
 --
--- Gegevens worden uitgevoerd voor tabel `users`
+-- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `facebookid`, `password`, `passwordchangerequired`, `userconfirmation`, `adminconfirmation`, `realname`, `realfirstname`, `mailadress`, `website`, `country`) VALUES
-(000001, 'Admin', '', '71ea9c396816dc0db6571445abe2842f', '0', '1', '1', 'Bauw', 'Matthias', 'matthias@ittakestwo.be', '', 'BE');
+INSERT INTO `users` (`id`, `username`, `facebookid`, `password`, `salt`, `passwordchangerequired`, `userconfirmation`, `adminconfirmation`, `realname`, `realfirstname`, `mailadress`, `website`, `country`) VALUES
+(000001, 'Matt', '', 'c469a4d67bcacc1f5e504f7ea5dbf9d01bd8f7474f150af51e55789fa46db6a663ec2c6863ba70bf8fd467fea9d902e5792f7dcc9f36d10d2580115f2a117e0d', 'a9ef9d9a4799b3d1e706e0a5d5a3637241bb7821252265f9f52889e95411d37b7f3f258b751512b35a78605a42d5743dfbb42f7871e25e0b04031d3cd2ab79ba', '', '1', '1', 'Bauw', 'Matthias', 'matthias.bauw@gmail.com', NULL, NULL);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -11,21 +11,21 @@ function dataaccess_AddUser($userobject,$password)
 	###Er wordt enkel een instantie van de klasse user als argument aanvaard.
 	if($userobject instanceof User)
 	{
+  
 		#Eerst moet de query gedefinieerd worden
-		$query = "INSERT INTO users (username,facebookid,password,passwordchangerequired,userconfirmation,adminconfirmation,realname,realfirstname,mailadress) VALUES ('@username','@facebookid','@password','@passwordchangerequired','@userconfirmation','@adminconfirmation','@realname','@realfirstname','@mailadress')";
-		
-		include $_SERVER['DOCUMENT_ROOT']."/core/pathtoconfig.php";
-		require_once $pathtoconfig."/salt.php";
-		
-		#De saltvariabele wordt toegevoegd aan het wachtwoord
-		$password = $salt.$password;
-		$password = md5($password);
+		$query = "INSERT INTO users (username,facebookid,password,salt,passwordchangerequired,userconfirmation,adminconfirmation,realname,realfirstname,mailadress) VALUES ('@username','@facebookid','@password','@salt','@passwordchangerequired','@userconfirmation','@adminconfirmation','@realname','@realfirstname','@mailadress')";
+
+                ###We genereren een userspecifiek salt
+                $usersalt = dataaccess_generateUserSalt();
+          
+		$password=encryptPWD($password,$usersalt);
 		
 		$db = new dataconnection;
 		$db->setQuery($query);
 		$db->setAttribute("username",$userobject->getUsername());
                 $db->setAttribute("facebookid",$userobject->getFacebookID());
 		$db->setAttribute("password",$password);
+                $db->setAttribute('salt', $usersalt);
 		$db->setAttribute("passwordchangerequired",$userobject->getPasswordchangeRequired());
 		$db->setAttribute("userconfirmation",$userobject->getUserConfirmationStatus());
 		$db->setAttribute("adminconfirmation",$userobject->getAdminConfirmationStatus());
@@ -62,6 +62,40 @@ function dataaccess_AddUser($userobject,$password)
 	{
 		throw new Exception("dataaccess_AddUser only accepts a userobject as argument");
 	}
+}
+
+function dataaccess_generateUserSalt()
+{
+    $usersalt=hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
+    return $usersalt;
+}
+
+function dataaccess_getUserSalt($userid)
+{
+    ###Hiermee halen we de userspecifieke salt op
+    #deze wordt gebruikt voor de encryptie van wachtwoorden
+    #als id -1 is dan moet een nieuwe has gemaakt worden
+    
+    
+        $db = new DataConnection();
+        $query = 'select users.salt from users where users.id=@id';
+
+        $userid = intval($userid);
+        $db->setQuery($query);
+        $db->setAttribute('id', $userid);
+
+        $db->ExecuteQuery();
+
+        if($db->GetNumRows()>0)
+        {
+            return $db->GetScalar();
+        }
+        else
+        {
+            return false;
+        }
+    
+    
 }
 
 function dataaccess_UserExists($user,$id)
@@ -359,7 +393,7 @@ function dataaccess_getUser($userid)
 
 			$result = $db->getResultArray();
 
-			if(is_array($result))
+			if($db->GetNumRows()>0)
 			{
 
 				foreach($result as $rownumber=>$rowvalue)
@@ -387,14 +421,12 @@ function dataaccess_EditUser($userobject,$password)
 	###eerst wordt gekekekn of $password een waarde bevat. Als dat niet het geval is dan wordt er niks aan
 	###het wachtwoord gewijzigd. Als er wel een waarde is wordt het wachtwoord gewijzigd.
 
+
+    
 	if(!empty($password))
 	{
-		include $_SERVER['DOCUMENT_ROOT']."/core/pathtoconfig.php";
-		require_once $pathtoconfig."/salt.php";
-		
-		#De saltvariabele wordt toegevoegd aan het wachtwoord
-		$password = $salt.$password;
-		$password = md5($password);
+                $usersalt = dataaccess_getUserSalt($userobject->getID());
+		$password=encryptPWD($password,$usersalt);
 		
 		##Het nieuwe wachtwoord wordt naar de database geschreven.
 		$db = new dataconnection;
@@ -495,11 +527,26 @@ function dataaccess_checkUserPassword($username,$password)
 	###Eerst nakijken of beide waarden werden opgegeven
 	if(isset($username) or isset($password))
 	{
-		###eerst moet er rekening gehouden worden met de saltvariabele die zich in de configuratie van de server
-		###bevindt
-		include $_SERVER['DOCUMENT_ROOT']."/core/pathtoconfig.php";
-		require_once $pathtoconfig."/salt.php";
-		$password = md5($salt.$password);
+                ###Om het ingevoerde wachtwoord te kunnen versleutelen moeten we de salt kennen
+                $requestSalt = new DataConnection();
+                $query = "SELECT users.id FROM users WHERE users.username='@username' LIMIT 1";
+                
+                $requestSalt->setQuery($query);
+                $requestSalt->setAttribute('username', $username);
+                $requestSalt->ExecuteQuery();
+                
+                if($requestSalt->GetNumRows()>0)
+                {
+                    $userid = $requestSalt->GetScalar();
+                }
+            
+                ###We halen de salt op
+                $usersalt = dataaccess_getUserSalt($userid);
+                
+		###We versleutelen het ingevoerde wachtwoord net zoals we het wachtwoord versleutelen bij
+                #creatie van gebruikers
+                $password = encryptPWD($password,$usersalt);
+                
 		###Opvragen van de gebruikers met gebruikersnaam $username en wachtwoord $password
 		$query = "SELECT users.id FROM users WHERE users.username='@username' AND users.password='@password'";
 		$db = new dataconnection();
@@ -679,35 +726,35 @@ function dataaccess_getPermissions()
 }
 
 function dataaccess_changePassword($userid,$newpassword)
-{
-	###De salt moet toegevoegd worden aan het nieuwe wachtwoord.
-	include $_SERVER['DOCUMENT_ROOT']."/core/pathtoconfig.php";
-	include $pathtoconfig."/salt.php";
-		
+{	
+        #we genereren een nieuwe usersalt
+        $usersalt = dataaccess_generateUserSalt();
+    
 	#De saltvariabele wordt toegevoegd aan het wachtwoord
-	$newpassword = $salt.$newpassword;
-	$newpassword = md5($newpassword);	
-	
+	$newpassword = encryptPWD($newpassword,$usersalt);
+       
 	###Het nieuwe wachtwoord wordt naar de database geschreven
-	$query = "UPDATE users SET users.password='@newpassword',users.passwordchangerequired=0 WHERE users.id='@userid'";
+	$query = "UPDATE users SET users.password='@newpassword',users.salt='@newsalt',users.passwordchangerequired=0 WHERE users.id='@userid'";
 	
 	$db = new dataconnection();
 	$db->setQuery($query);
 	$db->setAttribute("newpassword",$newpassword);
+        $db->setAttribute("newsalt", $usersalt);
 	$db->setAttribute("userid",$userid);
 	$db->executeQuery();
 }
 
-function dataaccess_FacebookIdUnique($id)
+function dataaccess_FacebookIdUnique($fbid,$id)
 {
     ###Deze functie gaat na of een facebook ID al voorkomt in de tabel users
     #Anders zouden er verschillende controlcenter accounts aan één profiel gekoppeld 
     #kunnen worden
     
-    $query= "SELECT users.id FROM users WHERE users.facebookid='@id'";
+    $query= "SELECT users.id FROM users WHERE users.facebookid='@fbid' AND users.id<>@id";
     
     $db = new DataConnection;
     $db->setQuery($query);
+    $db->setAttribute('fbid', $fbid);
     $db->setAttribute('id', $id);
     $db->ExecuteQuery();
     
@@ -719,5 +766,69 @@ function dataaccess_FacebookIdUnique($id)
     {
         return true;
     }
+}
+
+function dataaccess_registerLoginAttempt($username)
+{
+    $db = new DataConnection;
+    $query = "INSERT INTO login_attempts (username) VALUES ('@username')";
+    $db->setQuery($query);
+    $db->setAttribute('username', $username);
+    $db->ExecuteQuery();
+}
+
+function dataaccess_toomanyattempts($username)
+{
+    #Deze functie controleert of er niet teveel pogingen waren met deze gebruikersnaam
+    $db = new DataConnection;
+    $query = "select count(username) from login_attempts WHERE login_attempts.username='@username' AND login_attempts.time>@begintime";
+    $db->setQuery($query);
+    ###We kijken naar login pogingen in de laatste 2 uren
+    $begintime = new DateTime();
+    $twohours = new DateInterval('PT2H');
+    
+    $begintime->sub($twohours);
+    
+    ###We brengen het formaat naar hetzelfde als mysql
+    $begintime=date_format($begintime, 'Y-m-d H:i:s');
+    
+    $db->setAttribute('username', $username);
+    $db->setAttribute('begintime', $begintime);
+    $db->ExecuteQuery();
+    $amountofattempts= $db->GetScalar();
+    
+    if($amountofattempts>=3)
+    {
+        return FALSE;
+    }
+    else
+    {
+        return true;
+    }
+}
+
+function encryptPWD($password,$usersalt)
+{
+    ###Dit is geen databasefunctie maar omdat adduser en edituser dezelfde encryptie moeten gebruiken centraliseren we die hier
+    
+    		include $_SERVER['DOCUMENT_ROOT']."/core/pathtoconfig.php";
+                
+                ###Deze moet op include blijven staan! anders kan dit problemen geven als de salt in één call meerdere keren uitgevoerd wordt
+                #De salt wordt dan mogelijk meerdere keren gehasht
+                include $pathtoconfig."/salt.php";
+		
+		#De saltvariabele wordt toegevoegd aan het wachtwoord
+                #Het wachtwoord dat bij de server binnenkomt is gehasht.
+                #De salt wordt ook gehashed en de samenvoeging van beiden wordt nogmaals gehashed
+                $salt = hash('sha512', $salt);
+                
+                #We hashen de usersalt nog eens
+                $usersalt = hash('sha512',$usersalt);
+                
+		$password = $salt.$password.$usersalt;
+                
+		$password = hash('sha512',$password);
+                
+                return $password;
 }
 ?>

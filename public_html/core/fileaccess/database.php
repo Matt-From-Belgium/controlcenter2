@@ -5,13 +5,13 @@ Function GetDatabaseType()
 {
 	require_once $_SERVER['DOCUMENT_ROOT']."/core/entity/exception.php";
 	
-	require_once $_SERVER['DOCUMENT_ROOT']."/core/pathtoconfig.php";
-	
+	include $_SERVER['DOCUMENT_ROOT']."/core/pathtoconfig.php";
+        
 	$pathtoconfigfile = $pathtoconfig."/dbconfig.php";
 	
 	if(file_exists($pathtoconfigfile))
 	{
-	require $pathtoconfigfile;
+            require $pathtoconfigfile;
 	}
 	else
 	{

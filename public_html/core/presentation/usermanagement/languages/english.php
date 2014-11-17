@@ -36,6 +36,7 @@ define('LANG_ERROR_COUNTRY_EMPTY',"Please select a country");
 define('LANG_ERROR_PASSWORDMATCH',"Passwords don't match");
 define('LANG_ERROR_MAILADRESS_EXISTS',"There already is a user with that mailadress");
 define('LANG_ERROR_WRONGLOGIN',"Invalid username and/or password");
+define('LANG_ERROR_TOOMANYATTEMPTS', "Account blocked: too many attempts");
 define('LANG_ERROR_NEWPASSWORD_REQUIRED',"Your new password must differ from the previous one");
 define('LANG_ERROR_NEWPASS_EMPTY',"You must provide a new password");
 define('LANG_ERROR_PASSWORD_INCORRECT',"The current password you supplied is incorrect");
@@ -48,6 +49,11 @@ define('LANG_ERROR_EXTREG_DISABLED_MESSAGE',"It is not allowed to create an acco
 #OTHER MESSAGES
 define('LANG_USER_ADDED_TITLE',"User has been created");
 define('LANG_USER_ADDED',"The user has been succesfully added");
+define('LANG_USER_EXT_ADDED_TITLE',"Account created");
+define('LANG_USER_EXT_ADDED',"Your account has been created.");
+define('LANG_USER_EXT_ADMIN_CHECK','One of our administrators will now check your account an approve it.');
+define('LANG_USER_EXT_USER_CHECK','You have received an e-mail with some information about how to activate your account.');
+define('LANG_USER_EXT_CONTINUE','Continue');
 define('LANG_USER_EDITED_TITLE',"User has been edited");
 define('LANG_USER_EDITED',"The changes to this user have been successfully made");
 define('LANG_USERGROUP_ADDED_TITLE',"Usergroup Added");

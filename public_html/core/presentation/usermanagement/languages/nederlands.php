@@ -36,6 +36,7 @@ define('LANG_ERROR_COUNTRY_EMPTY',"Er moet een land geselecteerd worden");
 define('LANG_ERROR_PASSWORDMATCH',"De wachtwoorden komen niet overeen");
 define('LANG_ERROR_MAILADRESS_EXISTS',"Er is al een gebruiker met dit mailadres");
 define('LANG_ERROR_WRONGLOGIN',"Gebruikersnaam en/of wachtwoord ongeldig");
+define('LANG_ERROR_TOOMANYATTEMPTS', "Account geblokkeerd: teveel pogingen");
 define('LANG_ERROR_NOACCESS_HEADER',"Geen toegang");
 define('LANG_ERROR_NOACCESS',"U heeft geen toegang tot deze pagina. Als u zich afvraagt waarom raden wij u aan een administrator te contacteren.");
 define('LANG_ERROR_NEWPASSWORD_REQUIRED',"Uw nieuwe wachtwoord mag niet hetzelfde zijn als het oude wachtwoord.");
@@ -48,6 +49,11 @@ define('LANG_ERROR_EXTREG_DISABLED_MESSAGE',"Het is niet toegestaan zelf een acc
 #OTHER MESSAGES
 define('LANG_USER_ADDED_TITLE',"Gebruiker aangemaakt");
 define('LANG_USER_ADDED',"De gebruiker is toegevoegd.");
+define('LANG_USER_EXT_ADDED_TITLE',"Account aangemaakt");
+define('LANG_USER_EXT_ADDED',"Uw account is aangemaakt.");
+define('LANG_USER_EXT_ADMIN_CHECK','Een administrator zal uw account nakijken en goedkeuren.');
+define('LANG_USER_EXT_USER_CHECK','U heeft van ons een e-mail ontvangen met daarin de informatie die u nodig heeft om uw account te activeren.');
+define('LANG_USER_EXT_CONTINUE','ga verder');
 define('LANG_USER_EDITED_TITLE',"Gebruiker aangepast");
 define('LANG_USER_EDITED',"De gebruikersgegevens zijn aangepast.");
 define('LANG_USERGROUP_ADDED_TITLE',"Gebruikersgroep toegevoegd");
