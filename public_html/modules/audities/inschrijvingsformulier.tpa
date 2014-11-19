@@ -17,7 +17,10 @@ function submitform()
 </script>
 
 <h1>Gezocht: zangers/zangeressen</h1>
-<span class="nadruk">CHANTage is op zoek naar:
+<h2>Zin om met ons mee te zingen?</h2>
+<center><iframe width="640" height="360" src="//www.youtube.com/embed/nz46FnNUwzo?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe></center>
+
+<p><span class="nadruk">CHANTage is op zoek naar:
 <ul>
     <!--<li>één alt/mezzo (alt 1)</li>-->
     <li>twee tenoren</li>
@@ -43,6 +46,7 @@ We zetten de voornaamste elementen van ons concept op een rijtje:
 <form id="inschrijving" method="post" ENCODE="application/x-www-form-urlencoded">
 
 <h1>Auditiepakket aanvragen</h1>
+<p>Vul je gegevens in en we sturen je het auditiepakket op. Je kan dit materiaal vrijblijvend bekijken en daarna beslissen of je wil deelnemen aan de audities.
 <!CC IFSET [errors]>
 <div class='errors'>
 Helaas, niet alle velden werden correct ingevuld:

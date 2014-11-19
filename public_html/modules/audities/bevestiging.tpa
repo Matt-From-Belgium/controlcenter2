@@ -1,3 +1,34 @@
+<!-- Facebook Conversion Code for Ingeschreven voor auditie -->
+
+<script>(function() {
+
+var _fbq = window._fbq || (window._fbq = []);
+
+if (!_fbq.loaded) {
+
+var fbds = document.createElement('script');
+
+fbds.async = true;
+
+fbds.src = '//connect.facebook.net/en_US/fbds.js';
+
+var s = document.getElementsByTagName('script')[0];
+
+s.parentNode.insertBefore(fbds, s);
+
+_fbq.loaded = true;
+
+}
+
+})();
+
+window._fbq = window._fbq || [];
+
+window._fbq.push(['track', '6020248801734', {'value':'0.01','currency':'EUR'}]);
+
+</script>
+
+<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6020248801734&amp;cd[value]=0.01&amp;cd[currency]=EUR&amp;noscript=1" /></noscript>
 <h1>Aanvraag ontvangen</h1>
 Bedankt voor je aanvraag! Je ontvangt zo dadelijk een mail met jouw unieke link naar het auditiemateriaal.
 <p>Laat je vrienden weten dat je ervoor gaat: <div class="fb-share-button" data-href="http://www.projectkoorchantage.be/modules/audities/index.php" data-type="button_count"></div>
