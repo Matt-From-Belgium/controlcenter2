@@ -20,6 +20,7 @@ if(isset($_GET['id']))
         $html->loadScript('/modules/fotoalbum/presentation/showalbum.js');
         $html->setVariable('albumname', $album->getName());
         $html->setVariable('albumid', $album->getId());
+        $html->setVariable('albumHTML', $album->getDescription());
         $html->PrintHTML();
     }   
     else

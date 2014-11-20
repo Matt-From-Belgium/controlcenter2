@@ -656,3 +656,26 @@ function photoEditor()
                 
     };
 }
+
+function wijzigBeschrijving()
+{
+    document.getElementById('wijzigBeschrijvingStatus').innerHTML='Bezig met opslaan...';
+    
+    var descHTML = document.getElementById('descriptionfield').innerHTML;
+    var albumid = document.getElementById('album').value;
+    
+    var ajax = new ajaxTransaction;
+    ajax.destination='/modules/fotoalbum/logic/ajaxLogic.php';
+    ajax.phpfunction='albumBeschrijvingWijzigenAjax';
+    ajax.addData('id',albumid);
+    ajax.addData('nieuwebeschrijving',descHTML);
+    
+    ajax.onComplete = function() {
+        if(ajax.successIndicator)
+        {
+            document.getElementById('wijzigBeschrijvingStatus').innerHTML='Opgeslagen';
+        }
+    }
+    
+    ajax.ExecuteRequest();
+}

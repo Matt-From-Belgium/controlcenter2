@@ -1,0 +1,7 @@
+<h1>Fotoalbums</h1>
+Kies het fotoalbum dat je wil bekijken:
+<ul>
+<!CC LOOP [albums]>
+    <li><a href='<!CC LVAR [link]>'><h2><!CC LVAR [titel]></h2></a></li>
+<!CC END LOOP [albums]>
+</ul>

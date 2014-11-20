@@ -4,6 +4,7 @@ class fotoalbum
     ###privates
     private $id;
     private $name;
+    private $desriptionHTML;
     
     ###constructor
     function __construct($name,$id=-1) {
@@ -26,6 +27,16 @@ class fotoalbum
     function setName($name)
     {
         $this->name= strtolower($name);
+    }
+    
+    function getDescription()
+    {
+        return $this->desriptionHTML;
+    }
+    
+    function setDescription($html)
+    {
+        $this->desriptionHTML=$html;
     }
 }
 ?>

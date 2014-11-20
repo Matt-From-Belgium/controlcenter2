@@ -33,6 +33,12 @@ function addAlbum()
             ###Alles ok, album mag toegevoegd worden
             $newalbum = new fotoalbum($_POST['albumnaam']);
             
+            ###Als er een beschrijving is voor het album wordt dit ook toegevoegd
+            if(!empty($_POST['descriptionHTML']))
+            {
+                $newalbum->setDescription($_POST['descriptionHTML']);
+            }
+            
             $id=data_albumToevoegen($newalbum);
             
             $response = new ajaxResponse('ok');
@@ -47,6 +53,7 @@ function getAlbums()
         $response = new ajaxResponse('ok');
         $response->addField("id");
         $response->addField("name");
+        $response->addField('description');
 
         if(is_array($albumarray = data_getAlbums()))
         {        
@@ -55,6 +62,7 @@ function getAlbums()
                    $item = array();
                    $item['id'] = $fotoalbum->getID();
                    $item['name']= ucfirst($fotoalbum->getName());
+                   $item['description']=$fotoalbum->getDescription();
 
                    $response->addData($item);
             }    
@@ -63,6 +71,11 @@ function getAlbums()
         return $response->getXML();
     
       
+}
+
+function getAlbumObjects()
+{
+    return data_getAlbums();
 }
 
 function getAlbum($id)

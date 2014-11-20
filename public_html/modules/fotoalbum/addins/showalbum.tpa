@@ -1,0 +1,7 @@
+<h1><!CC VAR [albumtitel]></h1>
+<!CC VAR [description]><br /><br />
+<div id='album'>
+</div>
+<script>
+var albumViewer = new photoViewer(<!CC VAR [albumid]>,'album');
+</script>
