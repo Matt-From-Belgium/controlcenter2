@@ -45,13 +45,13 @@ class nieuwsbriefValidator
                     else
                     {
                         
-                        
-                        if($jaar>$huidigjaar)
+                        ###Controle uitgezet om nieuwsbrieven in het verleden te kunnen plaatsen
+                       /* if($jaar>$huidigjaar)
                         {
                         $newerror['field'] = "jaar";
 			$newerror['message'] = "Het jaar mag niet groter zijn dan het huidige jaar";
 			return $newerror;                           
-                        }
+                        }*/
                     }
                 }
 	}
