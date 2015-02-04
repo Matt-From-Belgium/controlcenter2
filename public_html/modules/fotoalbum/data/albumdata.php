@@ -59,7 +59,7 @@ function data_albumWijzigen(fotoalbum $album)
 
 function data_getAlbums()
 {
-    $query = "SELECT albums.id,albums.name,albums.description from albums";
+    $query = "SELECT albums.id,albums.name,albums.description from albums order by albums.id DESC";
     
     $db = new DataConnection;
     $db->setQuery($query);
