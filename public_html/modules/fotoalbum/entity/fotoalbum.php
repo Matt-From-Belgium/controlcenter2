@@ -21,7 +21,7 @@ class fotoalbum
     
     function getName()
     {
-        return $this->name;
+        return ucfirst($this->name);
     }
     
     function setName($name)
