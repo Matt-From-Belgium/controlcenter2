@@ -20,3 +20,8 @@ and open the template in the editor.
 #siteNews h1 {
     color: #FFFFFF;
 }
+
+.indexknopnaarbow {
+    width: 90%;
+    max-width: 1078px;
+}
