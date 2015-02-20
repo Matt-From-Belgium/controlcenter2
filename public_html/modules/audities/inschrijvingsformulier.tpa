@@ -1,3 +1,4 @@
+
 <div class="block">
 <script type='text/javascript'>
 var alreadyClicked = false;
@@ -18,7 +19,7 @@ function submitform()
 
 <h1>Gezocht: zangers/zangeressen</h1>
 <h2>Zin om met ons mee te zingen?</h2>
-<center><iframe width="640" height="360" src="//www.youtube.com/embed/nz46FnNUwzo?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe></center>
+<center><iframe width="640" height="360" src="//www.youtube.com/embed/nz46FnNUwzo?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>&nbsp;<iframe width="640" height="360" src="//www.youtube.com/embed/af2UhmsOdfE?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe></center>
 
 <p><span class="nadruk">CHANTage is op zoek naar:
 <ul>

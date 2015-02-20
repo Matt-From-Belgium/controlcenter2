@@ -5,6 +5,10 @@
 <p />Dit concert werd gedirigeerd door Geert De Deygere en begeleid op piano door Jürgen Degryse. Meer dan 1100 bezoekers woonden één van de concerten bij.
  </section>
 <section class="block">
+    <h1>Video</h1>
+    <center><iframe width="640" height="360" src="https://www.youtube.com/embed/nz46FnNUwzo?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>&nbsp;<iframe width="640" height="360" src="https://www.youtube.com/embed/Uu2ykm9hVH0?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe></center>
+</section>
+<section class="block">
     <h1>Foto's</h1>
     <a id='foto'></a>
     <div id='beatlesalbum'>

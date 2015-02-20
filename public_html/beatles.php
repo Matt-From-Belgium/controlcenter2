@@ -21,7 +21,7 @@ else {
 }*/
 
 $html->loadAddin('/addins/beatles-fase4.tpa');
-
+$html->loadCSS('/modules/fotoalbum/presentation/css/showphoto.css');
 $html->loadScript('/modules/fotoalbum/presentation/showalbum.js');
 $html->loadScript('/scripts/beatles.final.js');
 $html->loadScript('/core/presentation/usermanagement/accounts/fbRegister.final.js');

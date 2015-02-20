@@ -1,10 +1,29 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <!--FB remarketing-->
+        <script>(function() {
+          var _fbq = window._fbq || (window._fbq = []);
+          if (!_fbq.loaded) {
+            var fbds = document.createElement('script');
+            fbds.async = true;
+            fbds.src = '//connect.facebook.net/en_US/fbds.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(fbds, s);
+            _fbq.loaded = true;
+          }
+          _fbq.push(['addPixelId', '757161807700247']);
+        })();
+        window._fbq = window._fbq || [];
+        window._fbq.push(['track', 'PixelInitialized', {}]);
+        </script>
+        <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=757161807700247&amp;ev=PixelInitialized" /></noscript>
+        <!--end FB remarketing-->
+        
         <link rel="stylesheet" href="/templates/chantage/css/basic.css">
         <link rel="shortcut icon" href="/images/favicon.ico">
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="/modules/fotoalbum/presentation/css/showphoto.css">
+        
         <!--<link rel="stylesheet" href="/templates/chantage/css/mobile.css">-->
         <title>Projectkoor CHANTage</title>
         <script src='/core/presentation/ajax/ajaxtransaction.js'></script>
