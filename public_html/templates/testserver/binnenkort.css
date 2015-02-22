@@ -1,0 +1,75 @@
+/* 
+    Document   : binnenkort
+    Created on : 4-nov-2013, 22:01:59
+    Author     : matthiasba
+    Description:
+        Purpose of the stylesheet follows.
+*/
+@font-face {
+    font-family: 'bebas_neueregular';
+    src: url('/templates/chantage/css/fonts/bebas/BebasNeue-webfont.eot');
+    src: url('/templates/chantage/css/fonts/bebas/BebasNeue-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/templates/chantage/css/fonts/bebas/BebasNeue-webfont.woff') format('woff'),
+         url('/templates/chantage/css/fonts/bebas/BebasNeue-webfont.ttf') format('truetype'),
+         url('/templates/chantage/css/fonts/bebas/BebasNeue-webfont.svg#bebas_neueregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+    background-color: #333333;
+    color: #FFFFFF;
+    font-family: arial;
+    text-align: center;
+}
+
+
+
+#beeld {
+    display: block;
+    height: 35em;
+    background-color: #000000;
+    background-image: url('/templates/onderhoud/koorblur.jpg');
+    background-size: 100% auto;
+    
+}
+
+#line {
+    background-color:#f1ae1e;
+    height: 2.5em;
+}
+
+#message {
+    
+}
+
+#logo {
+    position: relative;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    top: -8em;
+}
+
+h1 {
+    display: block;
+    font-family: 'bebas_neueregular';
+    font-weight: normal;
+    color: #FFFFFF;
+    margin-top: 3em;
+    margin-left: auto;
+    margin-right: auto;
+    text-align:  center;
+}
+
+#loginlink {
+    margin-top: 1em;
+}
+
+a {
+    color: #f1ae1e;
+}
