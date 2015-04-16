@@ -841,6 +841,7 @@ function sec_session_start()
     
     ###bron http://www.wikihow.com/Create-a-Secure-Login-Script-in-PHP-and-MySQL
     $session_name = 'secure_session';   // Set a custom session name
+    $secure = null;
        
     if(getSSLenabled())
     {
