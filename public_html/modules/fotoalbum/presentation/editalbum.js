@@ -52,6 +52,9 @@ function processResponse(ajax,upload)
             //We passen de uploadMonitor aan
             upload.newId = ajax.result[0].id;
             upload.changeStatus('ok');
+            
+            //We laden de foto's in de editor opnieuw in
+            albumeditor.reloadAlbum();
         }
     else
         {
@@ -238,7 +241,7 @@ function saveDescription(formElement)
     
     ajax.onComplete= function(){changeDescriptionComplete(ajax);};
     ajax.ExecuteRequest();
-}*/
+}
 
 function changeDescriptionComplete(ajax,loadIndicator)
 {
@@ -250,7 +253,7 @@ function changeDescriptionComplete(ajax,loadIndicator)
     {
         loadIndicator.innerHTML = 'FOUT!';
     }
-}
+}*/
 
 
 
@@ -405,6 +408,10 @@ function albumEditor(albumid,previewElement)
  
     
     //public methods
+    this.reloadAlbum = function()
+    {
+        loadAlbum();
+    };
 }
 
 function deletePhoto(photo)
@@ -506,8 +513,12 @@ function photoEditor()
         descriptionSubmitButton.setAttribute('value','Opslaan');
         descriptionSubmitButton.style.display= 'inline-block';
         
+        var descriptionSaveStatus = document.createElement('span');
+        
 
         descriptionSubmitButton.onclick = function(){
+                descriptionSaveStatus.innerHTML='Opslaan...'
+                
                 var ajax = new ajaxTransaction();
     
                 ajax.addData('id',displayPhotoCollection[currentIndex].id);
@@ -518,14 +529,18 @@ function photoEditor()
                 ajax.phpfunction='changeDescription';
 
                 ajax.onComplete= function(){
-                    
+                    albumeditor.reloadAlbum();
+                    descriptionSaveStatus.innerHTML='Opgeslagen';
                 };
                 ajax.ExecuteRequest();
         };
         
+
+        
         descriptionFormTag.appendChild(descriptionTextBox);
         descriptionFormTag.appendChild(descriptionProgressDiv);
         descriptionFormTag.appendChild(descriptionSubmitButton);
+        descriptionFormTag.appendChild(descriptionSaveStatus);
         
         description.appendChild(descriptionFormTag);
        
@@ -580,7 +595,7 @@ function photoEditor()
             
     this.displayImage = function(photoIndex)
     {
-           
+           descriptionSaveStatus.innerHTML='';
            currentIndex = photoIndex;
 
            
@@ -657,7 +672,7 @@ function photoEditor()
     };
 }
 
-function wijzigBeschrijving()
+function wijzigAlbumBeschrijving()
 {
     document.getElementById('wijzigBeschrijvingStatus').innerHTML='Bezig met opslaan...';
     
@@ -675,7 +690,7 @@ function wijzigBeschrijving()
         {
             document.getElementById('wijzigBeschrijvingStatus').innerHTML='Opgeslagen';
         }
-    }
+    };
     
     ajax.ExecuteRequest();
 }
