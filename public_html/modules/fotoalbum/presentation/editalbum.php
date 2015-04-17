@@ -18,6 +18,9 @@ if(isset($_GET['id']))
         $html->loadScript('/core/presentation/ajax/ajaxtransaction.js');
         $html->loadScript('/modules/fotoalbum/presentation/editalbum.js');
         $html->loadScript('/modules/fotoalbum/presentation/showalbum.js');
+        $html->loadCSS('/modules/fotoalbum/presentation/css/fotoalbum.css');
+        $html->loadCSS('/modules/fotoalbum/presentation/css/showphoto.css');
+        $html->loadCSS('/modules/fotoalbum/presentation/css/editphoto.css');
         $html->setVariable('albumname', $album->getName());
         $html->setVariable('albumid', $album->getId());
         $html->setVariable('albumHTML', $album->getDescription());
