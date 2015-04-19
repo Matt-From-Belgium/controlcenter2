@@ -14,10 +14,12 @@
 </ul>
 </div>
 <!CC END IFSET [errors]>
-
+<!CC IFSET [fbintegration]>
+<a href='javascript:nieuwsbriefFB()'>Inloggen met Facebook</a>
+<!CC END IFSET [fbintegration]>
 <form method='post' action='/modules/nieuwsbrief/presentation/subscribe.php'>
-<br><label for='voornaam'>Voornaam:</label><input type='text' name='voornaam' value='<!CC VAR [voornaam]>'>
-<br><label for='familienaam'>Familienaam:</label><input type='text' name='familienaam' value='<!CC VAR [familienaam]>'>
-<br><label for='mailadres'>Mailadres:</label><input type='text' name='mailadres' value='<!CC VAR [mailadres]>'>
+<br><label for='voornaam'>Voornaam:</label><input type='text' id='voornaam' name='voornaam' value='<!CC VAR [voornaam]>'>
+<br><label for='familienaam'>Familienaam:</label><input type='text' id='familienaam' name='familienaam' value='<!CC VAR [familienaam]>'>
+<br><label for='mailadres'>Mailadres:</label><input type='text' id='mailadres' name='mailadres' value='<!CC VAR [mailadres]>'>
 <br><input type='submit' value='Inschrijven' name='submit'>
 </form>

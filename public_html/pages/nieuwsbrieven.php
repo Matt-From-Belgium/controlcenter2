@@ -8,7 +8,15 @@ $promotext = getNewsPromoText();
 
 $html = new htmlpage('frontend');
 $html->LoadAddin('/pages/addins/nieuwsbrieven.tpa');
+$html->loadScript('/modules/nieuwsbrief/scripts/facebook.js');
 $html->setVariable('promotext', $promotext);
+
+//Facebooklink enkel tonen wanneer integratie actief is
+if($html->getFacebookIntegration())
+{
+    $html->setVariable('fbintegration', true);
+}
+
 $html->PrintHTML();
 
 
