@@ -1,0 +1,347 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 8-sep-2014, 19:39:18
+    Author     : matthiasba
+*/
+
+@font-face
+{
+font-family: 'MyriadRegular';
+src: url('/templates/jestaatnietalleen/fonts/MyriadPro.woff');
+}
+
+body {
+    font-family: 'MyriadRegular';
+    color: #424242;
+    font-weight: 500;
+    font-size: 1.05em;
+    margin: 0em;
+    padding-left: 0em;
+
+}
+
+#cookies {
+    
+    background-color: rgba(255,255,255,1);
+    
+    z-index: 1000;
+    width: 100%;
+    
+    
+    padding-left: 1em;
+    margin-bottom: 0em;
+    
+}
+
+#cookies input {
+    margin-left: 1em;
+    margin-bottom: 0.5em;
+}
+
+#cookies div {
+    width: 80%;
+    margin-bottom: 0em;
+    text-align:  center;
+    font-weight:  bold;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#navbarcontainer {
+     position: fixed;
+     width: 100%;
+     top: 0em;
+}
+
+#navbar {
+    //position: fixed;
+    position: relative;
+    width: 100%;
+    background-color:  #615F61;
+    height: 1.5em;
+    font-size: 2em;
+    text-align: right;
+    background-color: #615F61;
+
+}
+
+#navbar a {
+    color: #FFFFFF;
+    text-decoration:  none;
+    margin-right: 0.5em;
+    height: 2em;
+}
+
+#navbar img {
+    float: left;
+    height: 2em;
+    margin-left:  0.1em;
+    margin-top: 0.1em;
+}
+
+h1 {
+    font-family: 'MyriadRegular';
+    color: #90CA77;
+    font-weight: 300;
+    font-size: 3em;
+    margin-bottom: 0.25em;
+}
+
+h2 {
+    font-family: 'MyriadRegular';
+    color: #45A9BA;
+    font-weight: 500;
+    font-size: 1.5em;
+    margin-bottom: 0.25em;  
+}
+
+li h2 {
+    margin-top: 0;
+    display: inline;
+}
+
+h3 {
+    font-size: 1em;
+    color: #615F61;
+}
+
+div {
+    margin-bottom: 0.5em;
+}
+
+.block {
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+*.nadruk {
+    color: #E09D38;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-family: 'MyriadRegular';
+    color: #90CA77;
+    font-weight: 300;
+    font-size: 2em;
+    margin-bottom: 0.25em;
+}
+
+h2 {
+    font-family: 'MyriadRegular';
+    color: #45A9BA;
+    font-weight: 500;
+    font-size: 1.5em;
+    margin-bottom: 0.25em;  
+}
+
+li h2 {
+    margin-top: 0;
+    display: inline;
+}
+
+h3 {
+    font-size: 1em;
+    color: #615F61;
+}
+
+#siteShell a, #siteShell a:visited {
+    color: #E09D38;
+    font-weight:  bold;
+}
+
+#siteShell a:hover {
+    color: #FC3333;
+}
+
+label
+{
+    display: inline-block;
+    font-weight: bold;
+    width: 8em;
+}
+
+input[type='text'], input[type='password']
+{
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 0.10em;
+    border-color: #615F61;
+    padding-left: 0.5em;
+    font-size: 1.1em;
+    margin-bottom: 0.2em;
+}
+
+input[type='text']:hover
+{
+    border-color: #E09D38;
+}
+
+input[type='text']:focus
+{
+    border-color: #9E3B33;
+    border-width: 0.10em;
+    
+}
+
+input[type='button'],input[type='submit'],select
+{
+    background-color:#90CA77;
+    border: solid;
+    border-color:#615F61;
+    border-width: 0.10em;
+    font-size: 1.05em;
+    margin-top: 0.5em;
+    
+    transition: background-color 0.2s;
+    -webkit-transition: background-color 0.2s; /* Safari */
+}
+
+input[type='button']:hover,input[type='submit']:hover,select:hover
+{
+    background-color:#E09D38;
+}
+
+input[type='button']:active,input[type='submit']:active, select:active
+{
+    background-color: #9E3B33;
+    color: #FFFFFF;
+    
+}
+
+.green
+{
+ background-color: #90CA77; 
+ margin: 0px;
+ padding: 0px;
+ width: 100%;
+ margin-top: 1em;
+ margin-left: -2em;
+ padding-left: 2em;
+}
+
+.green h1 {
+    color:#FFFFFF;
+}
+
+.green h2 {
+    color:#9E3B33;
+}
+
+.green label {
+    color: #FFFFFF;
+}
+
+.green input[type='button'],.green input[type='submit']
+{
+    background-color: #FFFFFF;
+    border: solid;
+    border-color:#615F61;
+    border-width: 0.10em;
+    font-size: 1.05em;
+    margin-top: 0.5em;
+    color: #000000;
+    transition: background-color 0.2s;
+    -webkit-transition: background-color 0.2s; /* Safari */
+}
+
+.green input[type='button']:hover ,.green input[type='submit']:hover 
+{
+    background-color: #E09D38;
+}
+
+.green .nadruk {
+    color: #424242;
+}
+
+#siteNews {
+    height: 20em;
+    background: url('/images/index-beeld.jpg');
+    background-size: cover;
+    background-color: #90CA77;
+    margin-left: -2em;
+    padding-left: 2em;
+    width: 100%;
+}
+
+.newsItem {
+    display: block;
+    width: 50%;
+    height: 100%;
+    padding-top: 6em;
+    margin-left: auto;
+    margin-right: auto;
+}
+.newsItem h1{
+    color: #615F61;
+    margin: 0px;
+    padding: 0px;
+    font-size: 2em;
+}
+
+#mobileMenu {
+    display: none;
+}
+
+.publicaties {
+    position: relative;
+    display: block;
+}
+
+.publicatie img {
+    float: left;
+    margin-right: 1.5em;
+    width: 9em;
+}
+
+
+
+.clearfix {
+    clear: both;
+}
+
+#navLinksContainer {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(119,119,119,0.7);
+}
+
+#navLinks {
+    display: block;
+    position:  relative;
+    background-color: #FFFFFF;
+    border-style: solid;
+    border-color: #000000;
+    border-width: 1px;
+    margin-top: 10em;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 5000;
+    padding-left: 0.5em;
+    width: 20em;
+}
+
+.navLink {
+    display: block;
+    font-size: 2em;
+    border-bottom: 1px #CCCCCC solid;
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+.navLink a {
+    color: #000000;
+    text-decoration: none;
+}
+
+#sitecontent {
+    padding-top: 2.5em;
+
+}

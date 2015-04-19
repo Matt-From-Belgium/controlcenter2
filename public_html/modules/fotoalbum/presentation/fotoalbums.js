@@ -1,6 +1,6 @@
 
 
-function addAlbum(albumNaam)
+function addAlbum(albumNaam,descriptionHTML)
 {
     //eventuele vorige foutboodschappen worden verwijderd
     errordiv.innerHTML = null;
@@ -13,6 +13,7 @@ function addAlbum(albumNaam)
     transactie.onComplete= function(){ addAlbumResponse(transactie);};
     
     transactie.addData('albumnaam',albumNaam);
+    transactie.addData('descriptionHTML',descriptionHTML);
     
     transactie.ExecuteRequest();
 }
@@ -24,6 +25,10 @@ function addAlbumResponse(transactie)
             //De bewerking is geslaagd
             //Nu moeten we het nieuwe album weergeven door de albums opnieuw in te laden
             getAlbums();
+            
+            //We wissen de velden van het formulier
+            document.getElementById('nieuwalbum').value=null;
+            document.getElementById('description').innerHTML=null;
         }
     else
         {

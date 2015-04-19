@@ -42,7 +42,9 @@ Alle javascript functionaliteit van de navigatie
                         /*Enkel wanneer de hoogte na scrollen nog groter is dan de viewport hoogte moet de 
                         * navigatie inklappen
                         */
-                        if(heightafterNavChange>viewPortHeight)
+                       
+                        /*BUGFIX: soms klapt navigatie direct in en uit => veiligheidsmarge*/
+                        if(heightafterNavChange>viewPortHeight+30)
                         {
                             navElement.className = 'navSmall';
                             siteShellElement.className= 'navSmall';

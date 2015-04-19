@@ -33,15 +33,17 @@ if((!isset($_POST['u']))&&(!isset($_POST['p']))&&(!isset($_POST['d'])))
 {
         ###Het script wordt rechtstreeks ingeladen => loginpagina weergeven.
         $html = new HTMLpage('frontend');
+        $html->forceSSL();
         $html->LoadAddin('/core/presentation/usermanagement/accounts/addins/login.tpa');
-
+        $html->loadScript('/core/logic/usermanagement/hash.final.js');
+        $html->loadScript('/core/logic/usermanagement/hashpwd.final.js');
     
         ###We geven login links voor sociale netwerken een lege waarde, worden later opgevuld;
         $fbloginlink = null;
     
         if(getFacebookLoginStatus())
         {
-            require_once $_SERVER['DOCUMENT_ROOT'].'/core/social/facebook/php/facebook.php';
+            /*require_once $_SERVER['DOCUMENT_ROOT'].'/core/social/facebook/php/facebook.php';
             
             ###Als Facebook login mogelijk is dan genereren we een login link 
             $fbscope = getFacebookScope();
@@ -52,7 +54,16 @@ if((!isset($_POST['u']))&&(!isset($_POST['p']))&&(!isset($_POST['d'])))
             
             ###Als er een bestemmingspagina werd meegegeven moet deze ook doorgegeven worden
             
-            $redirect = 'http://'.$_SERVER['HTTP_HOST'].'/core/logic/usermanagement/fblogincallback.php?d='.$_GET['d'];
+            if(getSSLenabled())
+            {
+                $prefix = 'https://';
+            }
+            else
+            {
+                $prefix = 'http://';
+            }
+            
+            $redirect = $prefix.$_SERVER['HTTP_HOST'].'/core/logic/usermanagement/fblogincallback.php?d='.$_GET['d'];
             
 
             $params = array(
@@ -63,7 +74,37 @@ if((!isset($_POST['u']))&&(!isset($_POST['p']))&&(!isset($_POST['d'])))
             $facebook = new Facebook($config);
 
             $fbloginlink = $facebook->getLoginUrl($params);
+            $html->setVariable('fbloginlink', $fbloginlink);*/
+            
+            ###Als Facebook login mogelijk is dan genereren we een login link 
+          
+            if(getSSLenabled())
+            {
+                $prefix = 'https://';
+            }
+            else
+            {
+                $prefix = 'http://';
+            }
+            
+            require_once $_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php';
+            
+            ###Door een Facebook bug encoderen we de bestemming zodat er geen / en = meer in komen.
+            $encodedURL = rtrim(strtr(base64_encode($_GET['d']), '+/', '-_'), '=');
+            
+            $redirect = $prefix.$_SERVER['HTTP_HOST'].'/core/logic/usermanagement/fblogincallback.php?d64='.$encodedURL;
+           
+            
+            $helper = new Facebook\FacebookRedirectLoginHelper($redirect, $appId = getFacebookAppID(), $appSecret = getFacebookSappId());
+            
+            ###We halen de gewenste scope op
+            $fbscope = getFacebookScope();
+            $fbscopeArray = explode(',', $fbscope);
+            
+            $fbloginlink = $helper->getLoginUrl($fbscopeArray);
+            
             $html->setVariable('fbloginlink', $fbloginlink);
+            
         }
         
         
@@ -86,8 +127,9 @@ if((!isset($_POST['u']))&&(!isset($_POST['p']))&&(!isset($_POST['d'])))
 }
 else
 {
+        $loginreturn=Login(strtolower($u),$p,$d);
 	###Er is logininformatie beschikbaar.
-	if(Login(strtolower($u),$p,$d))
+	if(!is_array($loginreturn))
 	{
 		###De loginprocedure is geslaagd, $_SESSION['currentuser'] is aangemaakt
 		header("Location: $d");
@@ -95,13 +137,16 @@ else
 	else
 	{
 		###De loginprocedure is niet geslaagd, de gebruiker wordt naar de loginpagina gebracht.
+                #De foutboodschap komt vanuit de logiclayer terug in een array.
 		$html = new HTMLpage('frontend');
+                $html->forceSSL();
 		$html->LoadAddin('/core/presentation/usermanagement/accounts/addins/login.tpa');
+                $html->loadScript('/core/logic/usermanagement/hash.final.js');
+                $html->loadScript('/core/logic/usermanagement/hashpwd.final.js');
 	
 		###De destination moet meegekopieerd worden zodat een gebruiker bij de 2e poging nog altijd doorgaat naar
-		###de bedoelde bestemmingspagina.
-		$errorlist[]['message'] = LANG_ERROR_WRONGLOGIN;
-		$html->setVariable("errorlist",$errorlist);
+		###de bedoelde bestemmingspagina
+		$html->setVariable("errorlist",$loginreturn);
 		$html->setVariable("d",$d);
 	
 		$html->printHTML();

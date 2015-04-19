@@ -2,13 +2,17 @@
 <h1>Beheer fotoalbums</h1>
 <table id="albums">
 </table>
+<div id='newalbum'>
 <h2>Voeg nieuw album toe</h2>
 <form method="post">
 <div id="errorlist"></div>
-<input type="text" name="nieuwalbum" id="nieuwalbum">
+<label for='nieuwablum'>Titel:</label><input type="text" name="nieuwalbum" id="nieuwalbum">
 <!-- OPGELET BUTTON TYPE!! EVENTUEEL NAAR SUBMIT VERANDEREN LATER!!!-->
-<input type="button" name="submit" value="Album aanmaken" onClick="javascript:addAlbum(document.getElementById('nieuwalbum').value)">
+
+<p>Beschrijving<div id='description' contenteditable='true'></div>
 <script>
 var errordiv = document.getElementById('errorlist');
 errordiv.innerHTML=null;
 </script>
+<input type="button" name="submit" value="Album aanmaken" onClick="javascript:addAlbum(document.getElementById('nieuwalbum').value,document.getElementById('description').innerHTML)">
+</div>

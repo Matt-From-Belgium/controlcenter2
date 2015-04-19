@@ -20,7 +20,8 @@ if(isset($_GET['id']))
     
         $html->setVariable('albumid', $id);
         $html->setVariable('albumtitel', $album->getName());
-        $html->loadCSS('/modules/fotoalbum/presentation/css/showphoto.css');
+        $html->setVariable('description', $album->getDescription());
+        $html->loadCSS('/modules/fotoalbum/presentation/css/showphoto.css','/modules/fotoalbum/presentation/css/showphoto-mobile.css');
     
         $html->PrintHTML();
     }

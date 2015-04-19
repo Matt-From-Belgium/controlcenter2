@@ -1,0 +1,64 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 22-aug-2014, 15:07:30
+    Author     : matthiasba
+*/
+
+@font-face
+{
+font-family: 'MyriadRegular';
+src: url('/templates/binnenkort/fonts/MyriadPro.woff');
+}
+
+body{
+    font-family: 'MyriadRegular';
+    font-weight: 300;
+    margin: 0px;
+    paddin: 0px;
+}
+
+html,body {
+    height: 100%;
+}
+
+h1 {
+    display: block;
+    margin: 0px;
+    color: #FFFFFF;
+    font-weight: 300;
+    padding-top: 5%;
+    text-align:  center;
+    padding-bottom: 1%;
+}
+
+#upperhalf {
+    position: relative;
+    display: block;
+    background-color: #424242;
+    height: 45%;
+}
+
+#upperhalf img {
+    display: block;
+    position: relative;
+    top: 40%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#bottomhalf {
+    height: 60%;
+    background-color: #90CA77;
+}
+
+#bottomhalf div {
+    text-align: center;
+    font-size: 1.2em;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <script>
+            var toggle = false;
+            
+            function toggleMenu()
+            {
+                
+                if(!toggle)
+                {
+                    document.getElementById('navLinksContainer').style.display='block';
+                    toggle=true;
+                }
+                else
+                {
+                    document.getElementById('navLinksContainer').style.display = 'none';
+                    toggle=false;
+                }
+            }
+
+                
+            
+        </script>
+        <link href="/templates/jestaatnietalleen-mobile/main.css" rel="stylesheet" type="text/css" />
+        <title>Je staat niet alleen! - informatiesite voor werknemers</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+    </head>
+    <body>
+        <div id='navbarcontainer'>
+            <!CC cookies>
+            <div id='navbar'>
+
+                <img src='/templates/jestaatnietalleen-mobile/logo-klein.png'>
+                <a href='javascript:toggleMenu()'>Menu</a>
+            </div>
+        </div>
+        <div id='navLinksContainer'>
+            <nav id='navLinks'>
+                        <span class='navLink'><a href='/index.php'>Startpagina</a></span>
+                        <span class='navLink'><a href='/pages/nieuwsbrieven.php'>Nieuwsbrieven</a></span>
+                        <span class='navLink'><a href='/modules/fotoalbum/presentation/showalbum.php'>Fotoalbums</a></span>
+                        <span class='navLink'><a href='/publicaties.php'>Publicaties</a></span>
+                        <span class='navLink'><a href='http://acv-brugge-oostende-westhoek.acv-online.be/Dienstverlening/ACVCentrales/Centrales.asp'>Centrales</a></span>
+                        <span class='navLink'><a href='/pages/contact.php'>Contact</a></span>       
+            </nav>
+        </div>
+        <div id='sitecontent'><PageContent></div>
+        <script>
+                    
+            document.getElementById('navLinksContainer').onclick = function(){
+                toggleMenu();
+            }
+        </script>
+    </body>
+    
+</html>

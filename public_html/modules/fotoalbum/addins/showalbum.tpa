@@ -1,6 +1,10 @@
 <h1><!CC VAR [albumtitel]></h1>
+<!CC VAR [description]><br /><br />
 <div id='album'>
 </div>
 <script>
 var albumViewer = new photoViewer(<!CC VAR [albumid]>,'album');
 </script>
+<div class='block'>
+    <h2><a href='/modules/fotoalbum/presentation/showalbum.php'>Terug naar overzicht</a></h2>
+</div>

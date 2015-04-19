@@ -9,11 +9,11 @@
 <!CC IFSET [fbloginlink]>
 <h3><a href='<!CC VAR [fbloginlink]>'>Login met je Facebook-account</a></h3>
 <!CC END IFSET [fbloginlink]>
-<form method="post">
+<form method="post" id='login' name='login'>
 
 <input type="hidden" name="d" value="<!CC VAR [d]>">
-<label for="u"><!CC LANG [LANG_USERNAME]></label><input type="text" name="u"><br />
-<label for="p"><!CC LANG [LANG_PASSWORD]></label><input type="password" name="p"><br />
+<label for="u"><!CC LANG [LANG_USERNAME]></label><input type="text" id='u' name="u"><br />
+<label for="p"><!CC LANG [LANG_PASSWORD]></label><input type="password" id='p' name="p"><br />
 <input type="submit" name="submit" value="<!CC LANG [LANG_LOGIN]>">
 </form>
 <script>
@@ -35,4 +35,9 @@ function redirectAfterLogin()
 //Wanneer de gebruiker met facebook ingelogd wordt moeten we de pagina opnieuw proberen te laden
 document.addEventListener('userLoggedIn',redirectAfterLogin,false);
 
+//wanneer de gebruiker inlogt moet het wachtwoord gehasht worden voor doorsturen
+document.getElementById('login').onsubmit=function(){hashLogin();};
+
+//Focus op username veld
+document.getElementById('u').focus();
 </script>

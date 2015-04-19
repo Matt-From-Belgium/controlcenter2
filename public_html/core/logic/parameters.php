@@ -158,6 +158,21 @@ function getFacebookLoginStatus()
     }
 }
 
+function getFacebookLoadApiStatus()
+{
+    ###Geeft aan of de API standaard moet ingeladen worden op alle pagina's
+    $fbapistatus = dataaccess_GetParameter('CORE_FB_LOAD_API');
+    
+    if($fbapistatus->getValue()==1)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 function getFacebookAppID()
 {
     ###Deze functie haalt de publieke facebook appid op
@@ -183,206 +198,6 @@ function getFacebookNameSpace()
     return $namespace->getValue();
 }
 
-function getFacebookJavaCode()
-{
-    $appid = getFacebookAppID();
-    
-    $desiredscope = getFacebookScope();
-    
-    $appnamespace = strtolower(getFacebookNameSpace());
-    
-    $code = "<div id=\"fb-root\"></div>
-        <script type='text/javascript' SRC='/core/presentation/ajax/ajaxtransaction.js'></script>
-        <script>
-           (function () {
-            function CustomEvent ( event, params ) {
-              params = params || { bubbles: false, cancelable: false, detail: undefined };
-              var evt = document.createEvent( 'CustomEvent' );
-              evt.initCustomEvent( event, params.bubbles, params.cancelable, params.detail );
-              return evt;
-             };
-
-            CustomEvent.prototype = window.CustomEvent.prototype;
-
-            window.CustomEvent = CustomEvent;
-          })();
-          
-
-          function facebookStatus(){
-            this.appNamespace = '$appnamespace';
-            this.sdkLoaded = false;
-            this.userID = null;
-            this.authStatus = false;
-            this.desiredScope = '$desiredscope';
-            this.grantedPermissions = null;
-          };
-        
-        
-        var facebookStatus = new facebookStatus();
-        
-        //We gaan de channelURL genereren
-        var hostname = window.location.hostname;
-        var channel = 'http://'+hostname+'/core/social/facebook/javascript/channel.html';
-        
-
-          window.fbAsyncInit = function() {
-            // init the FB JS SDK
-            FB.init({
-              appId      : '$appid',                        // App ID from the app dashboard
-              channelUrl : channel, // Channel file for x-domain comms
-              status     : true,                                 // Check Facebook Login status
-              cookie     : true,                                 //Share session with PHP
-              xfbml      : true                                  // Look for social plugins on the page
-            });
-            
-            // Additional initialization code such as adding Event Listeners goes here                 
-
-
-
-            refreshFacebookLoginStatus();
-
-
-          };
-          
-          function refreshFacebookLoginStatus()
-          {
-                var message = null;
-                var userID = null;
-
-                 FB.getLoginStatus(function(response){
-                    if(response.status === 'connected')
-                    {
-                        //Ingelogd + auth ok
-                        message = 'connected';
-                        userID = response.authResponse.userID;
-                        
-                        //Voor we het signaal geven dat de SDK geladen is vragen
-                        //we ook de permissions op
-                        FB.api('/me/permissions','get',function(response)
-                        {
-                           //We zetten het JSON object in response.data[0] om in een array
-                           var grantedPermissions = response.data[0];
-                           var grantedPermissionsArray = new Array();
-                           
-                           for(var key in grantedPermissions)
-                           {
-                               grantedPermissionsArray.push(key);
-                           }
-                           
-                           //We zijn, klaar.
-                           dispatchSdkLoadedEvent(message,userID,grantedPermissionsArray);
-                        });
-
-                        
-                    }
-                else if(response.status === 'not_authorized')
-                    {
-                        //Ingelogd maar geen auth
-                        message = 'not_authorized';
-                        dispatchSdkLoadedEvent(message,userID,null);
-                    }
-                else
-                    {
-                        //Niet ingelogd, we weten dus helemaal niks;
-                        //of... third party cookies disabled
-                        message = 'unknown';
-                        dispatchSdkLoadedEvent(message,userID,null);
-                    }
-                    
-                 
-            });
-          }
-
-          function dispatchSdkLoadedEvent(message,userID,grantedPermissions)
-          {
-            var fbSDKLoadedEvent = new CustomEvent('fbSDKLoaded',
-                         {
-                                 detail: {
-                                         status: message,
-                                         userID: userID,
-                                         grantedPermissions: grantedPermissions,
-                                 },
-                                 bubbles: true,
-                                 cancelable: true
-                         }
-                         );
-                
-                 document.getElementById('fb-root').dispatchEvent(fbSDKLoadedEvent);
-          }
-
-          //We linken hier een functie aan het fbSDKLoadedEvent zodat we
-          //facebookStatus kunnen invullen met de juiste waarden
-          document.addEventListener('fbSDKLoaded',saveFbParams,false);
-          
-          function saveFbParams(e)
-          {
-            facebookStatus.sdkLoaded = true;
-            facebookStatus.userID= e.detail.userID;
-            facebookStatus.authStatus = e.detail.status;
-            facebookStatus.grantedPermissions=e.detail.grantedPermissions;
-          }
-          
-          
-          
-            function checkFBAccount()
-            {
-                
-                //De functie wordt gestart wanneer de SDK geladen is
-                //Als de gebruiker niet verbonden is met Facebook heeft het geen zin om verder te zoeken
-                if((facebookStatus.authStatus==='connected'))
-                {
-                    var ajax = new ajaxTransaction();
-                    ajax.destination = '/core/logic/usermanagement/fbLoginAjax.php';
-                    ajax.phpfunction = 'checkFBAccount';
-
-                    ajax.onComplete = function(){
-                        if(ajax.successIndicator)
-                            {
-                                //alert(ajax.result[0].userId);
-                                
-                                //We lanceren een event zodat we de gewijzigde logintoestand kunnen opvangen
-                                        var userLoggedIn = new CustomEvent('userLoggedIn',
-                                        {
-                                                detail: {
-                                                        
-                                                },
-                                                bubbles: true,
-                                                cancelable: true
-                                        }
-                                        );
-                                document.getElementById('fb-root').dispatchEvent(userLoggedIn);
-                            }
-                            else{
-                                //Waarde 1 betekent dat er geen gebruiker gevonden is met dit facebookid
-                                //Waarde 2 betekent dat de account nog geactiveerd moet worden door de admin
-                                //Waarde 3 betekent dat er al een gebruiker ingelogd is
-                                //alert(ajax.errorList[0].value);
-                                
-                            }
-                    };
-
-                    ajax.ExecuteRequest();
-                }
-            }
-
-          // Load the SDK asynchronously
-          (function(d, s, id){
-             var js, fjs = d.getElementsByTagName(s)[0];
-             if (d.getElementById(id)) {return;}
-             js = d.createElement(s); js.id = id;
-             js.src = \"//connect.facebook.net/en_US/all.js\";
-             fjs.parentNode.insertBefore(js, fjs);
-           }(document, 'script', 'facebook-jssdk'));
-           
-           document.addEventListener('fbSDKLoaded',checkFBAccount,false);
-
-           
-
-        </script>";
-    
-    return $code;
-}
-
 function getFacebookScope()
 {
     $scope=dataaccess_GetParameter('CORE_FB_SCOPE');
@@ -400,5 +215,54 @@ function getFacebookScopeAjax()
     $result->addData($data);
     $result->getXML();
     
+}
+
+function getFacebookPageId()
+{
+    ###Geeft het paginaid terug van de FB pagina van de site
+    $result = dataaccess_GetParameter('CORE_FB_PAGEID');
+    return $result->getValue();
+}
+
+function getFacebookPageToken()
+{
+    ###Geeft de longterm page token terug van de FB pagina
+    $result = dataaccess_GetParameter('CORE_FB_PAGETOKEN');
+    return $result->getValue();
+}
+
+function setFacebookPageId($value)
+{
+    $result = dataaccess_GetParameter('CORE_FB_PAGEID');
+    $result->getValue($value);
+    dataaccess_EditParameter($result);
+}
+
+function setFacebookPageToken($value)
+{
+    $result = dataaccess_GetParameter('CORE_FB_PAGETOKEN');
+    $result->setValue($value);
+    dataaccess_EditParameter($result);
+}
+
+function getSSLenabled()
+{
+    $parameter = dataaccess_GetParameter('CORE_SSL_ENABLED');
+    return $parameter->getValue();
+}
+
+function getMaintenanceEnabled()
+{
+    ###Deze functie gaat na of de site in onderhoudsmodus staat
+    $parameter = dataaccess_GetParameter('CORE_MAINTENANCE_MODE');
+    
+    if($parameter->getValue()==1)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 ?>

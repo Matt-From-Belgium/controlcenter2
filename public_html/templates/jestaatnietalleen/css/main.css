@@ -22,8 +22,32 @@ body {
 
 }
 
+#cookies {
+    
+    background-color: rgba(255,255,255,1);
+    
+    z-index: 1000;
+    width: 100%;
+    
+    
+    padding-left: 1em;
+    margin-bottom: 0em;
+    
+}
+
+#cookies input {
+    margin-left: 1em;
+    margin-bottom: 0.5em;
+}
+
+#cookies div {
+    margin-bottom: 0em;
+    text-align:  center;
+    font-weight:  bold;
+}
+
 #siteShell.navBig {
-   padding-top: 15em;
+   padding-top: 17.7em;
    
    transition: padding-top ease-out 0.5s;
    -webkit-transition: padding-top ease-out 0.5s; /* Safari */
@@ -236,10 +260,9 @@ input[type='button']:active,input[type='submit']:active, select:active
 }
 
 .navBig #logo {
-    position: absolute;
+    position: relative;
     top: 1em;
     left: 0.4em;
-    
     transition: top 0.5s, opacity 1s;
     -webkit-transition: top 0.5s, opacity 1s;
 }
@@ -255,9 +278,10 @@ input[type='button']:active,input[type='submit']:active, select:active
 }
 
 .navSmall #logoSmall {
-    position: absolute;
+    position: relative;
     left: 0.4em;
-    top: 0.4em;
+    //top: 0.4em;
+    top: -2em;
     
    transition: top ease-out 0.5s;
     -webkit-transition: top ease-out 0.5s;
@@ -273,24 +297,26 @@ input[type='button']:active,input[type='submit']:active, select:active
 
 .navBig #navLinks {
     position: relative;
-    top: 7.2em;
-    left: 15em;
-    font-size: 1.7em;
+    top: 7.8em;
+    left: 15.5em;
+    font-size: 1.6em;
     margin: 0px;
     
     transition: top ease-out 0.5s;
     -webkit-transition: top ease-out 0.5s;
+    z-index: 1000;
 }
 
 .navSmall #navLinks {
     position: relative;
     top: 0.2em;
-    left: 15em;
-    font-size: 1.7em;
+    left: 15.5em;
+    font-size: 1.6em;
     margin: 0px;
     
     transition: top ease-out 0.5s;
     -webkit-transition: top ease-out 0.5s;
+    z-index: 1000;
 }
 
 #navLinks a {
@@ -319,6 +345,10 @@ input[type='button']:active,input[type='submit']:active, select:active
     margin-left: -2em;
     padding-left: 2em;
     width: 100%;
+}
+
+#siteNews:hover {
+    cursor:  pointer;
 }
 
 .newsItem {

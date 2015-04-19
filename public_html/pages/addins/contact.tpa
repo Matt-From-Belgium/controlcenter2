@@ -1,14 +1,16 @@
 <div class="block">
 <h1>Contact</h1>
-<h2>Via sociale netwerken</h2>
-<a href='#'><img src='/images/contact/facebook.png'></a>
-<a href='#'><img src='/images/contact/twitter.png'></a>
-<a href='#'><img src='/images/contact/gp.png'></a>
+<h2>Via Facebook</h2>
+<a href='https://www.facebook.com/pages/Je-staat-niet-alleen/544439868954542' target='_blank'><img src='/images/contact/facebook.png'></a>
+<!--<a href='#'><img src='/images/contact/twitter.png'></a>
+<a href='#'><img src='/images/contact/gp.png'></a>-->
 </h2>
 <br /><br />
 <h2>Via mail</h2>
 <a href='mailto:info@jestaatnietalleen.be'>info@jestaatnietalleen.be</a>
 <br /><br />
+<h2>KMO-foon</h2>
+tel: 059 342689
 <h2>Via de post</h2>
 jestaatnietalleen.be
 <br />Sporkijnstraat 10
