@@ -719,6 +719,11 @@ class htmlpage
             }
         }
         
+        public function getFacebookIntegration()
+        {
+            return $this->enableFacebookAPI;
+        }
+        
         public function addCustomMeta($property,$content)
         {
             ###Hiermee kunnen we zelf meta-tags toekennen aan de pagina
