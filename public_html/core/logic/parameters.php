@@ -234,7 +234,7 @@ function getFacebookPageToken()
 function setFacebookPageId($value)
 {
     $result = dataaccess_GetParameter('CORE_FB_PAGEID');
-    $result->getValue($value);
+    $result->setValue($value);
     dataaccess_EditParameter($result);
 }
 
