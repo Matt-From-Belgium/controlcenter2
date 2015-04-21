@@ -112,6 +112,14 @@ if(isset($_GET['key']) || is_array($errors))
 		
 		$html = new htmlpage('frontend');
 		$html->LoadAddin('/modules/nieuwsbrief/addins/confirm.tpa');
+                if(!isset($_GET['mail']))
+                {
+                    $html->setVariable('confirmtitle', 'Je bent er bijna...');
+                }
+                else
+                {
+                    $html->setVariable('confirmtitle', 'Abonnement wijzigen');
+                }
 		$html->setVariable("abonnementen",$abonnementenarray);
 		$html->setVariable("errors",$errors);
 		$html->setVariable("key",$abonnee->getKey());
