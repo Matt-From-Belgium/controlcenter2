@@ -43,6 +43,7 @@ foreach($teversturen as $nieuwsbrief)
                 $mail->setMessageAddin('/modules/nieuwsbrief/addins/nieuwsbriefmail.tpa');
                 $nieuwsbriefurl = 'http://www.jestaatnietalleen.be/modules/nieuwsbrief/nieuwsbrieven/'.$nieuwsbrief->getID().'.pdf';
                 $mail->setVariable('nieuwsbriefurl', $nieuwsbriefurl);
+                $mail->setVariable('voornaam', $abonnee->getVoornaam());
                 $mail->setVariable('key',$abonnee->getKey());
                 $mail->Send();
             }
