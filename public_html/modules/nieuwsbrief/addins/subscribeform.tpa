@@ -15,7 +15,7 @@
 </div>
 <!CC END IFSET [errors]>
 <!CC IFSET [fbintegration]>
-<a href='javascript:nieuwsbriefFB()'>Inloggen met Facebook</a>
+<a href='javascript:nieuwsbriefFB()'><img src='/modules/nieuwsbrief/presentation/fblogin.png'></a>
 <!CC END IFSET [fbintegration]>
 <form method='post' action='/modules/nieuwsbrief/presentation/subscribe.php'>
 <br><label for='voornaam'>Voornaam:</label><input type='text' id='voornaam' name='voornaam' value='<!CC VAR [voornaam]>'>
