@@ -4,5 +4,5 @@ Beste <!CC VAR [voornaam]>,
 <br />Er is een nieuwe nieuwsbrief beschikbaar, <a href='<!CC VAR [nieuwsbriefurl]>'>Bekijk deze nu door op deze link te klikken</a>
 <p>Met vriendelijke groeten,
 <p>Jestaatnietalleen.be
-<br /><br /><br /><FONT SIZE=2 WEIGHT="normal">Als u uw abonnement wil wijzigen kan dat <a href="http://www.jestaatnietalleen.be/modules/nieuwsbrief/presentation/confirm.php?key=<!CC VAR [key]>">hier</a>
+<br /><br /><br /><FONT SIZE=2 WEIGHT="normal">Als u uw abonnement wil wijzigen kan dat <a href="http://www.jestaatnietalleen.be/modules/nieuwsbrief/presentation/confirm.php?key=<!CC VAR [key]>&mail=1">hier</a>
 <br />Wenst u de nieuwsbrieven niet langer te ontvangen? Klik dan <a href="http://www.jestaatnietalleen.be/modules/nieuwsbrief/presentation/cancel.php?key=<!CC VAR [key]>">hier</a></font>
