@@ -54,10 +54,23 @@ function confirmAbonnee(abonnee $abonnee)
 {
 	data_confirmAbonnee($abonnee);
 	
+        $abonnementlist=$abonnee->getSubscriptions();
+        
+        $namestringlist = array();
+        
+        foreach($abonnementlist as $value)
+        {
+            $namestring['abonnementnaam']= $value->getNaam();
+            $namestringlist[] = $namestring;
+        }
+        
+        
+        
 	$bevestigingsmail = new email("mail");
-	$bevestigingsmail->setSubject("Aanmelding voltooid!");
+	$bevestigingsmail->setSubject("Uw abonnement is nu actief");
 	$bevestigingsmail->setTo($abonnee->getMailadres());
 	$bevestigingsmail->setMessageAddin("/modules/nieuwsbrief/addins/voltooidmail.tpa");
+        $bevestigingsmail->setVariable('abonnementnamen', $namestringlist);
 	$bevestigingsmail->Send();
 }
 

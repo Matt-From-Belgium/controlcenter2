@@ -1,3 +1,9 @@
 <h1>Klaar!</h1>
-Je hebt je succesvol ingeschreven voor onze nieuwsbrieven en je abonnement is nu actief. Je ontvangt vanaf nu de nieuwsbrieven van je keuze.
+Je hebt je succesvol ingeschreven voor onze nieuwsbrieven en je abonnement is nu actief. Je ontvangt vanaf nu de volgende nieuwsbrieven:
+<p>
+<!CC LOOP [abonnementnamen]>
+<li><!CC LVAR [abonnementnaam]></li>
+<!CC END LOOP [abonnementnamen]>
+<p>Van zodra een nieuwe nieuwsbrief beschikbaar is sturen wij je een bericht. In deze berichten vind je telkens een link waarmee je je abonnement kan aanpassen.
 <p>Tot binnenkort!
+<p>Jestaatnietalleen.be
