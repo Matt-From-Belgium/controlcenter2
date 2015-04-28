@@ -386,3 +386,8 @@ input[type='button']:active,input[type='submit']:active, select:active
 .clearfix {
     clear: both;
 }
+
+#footer {
+    color: #777777;
+    text-align:  center;
+}
