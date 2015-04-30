@@ -44,7 +44,7 @@
               status     : true,                                 // Check Facebook Login status
               cookie     : true,                                 //Share session with PHP
               xfbml      : true,                                  // Look for social plugins on the page
-              version    : 'v2.1'
+              version    : 'v2.3'
             });
             
             // Additional initialization code such as adding Event Listeners goes here                 

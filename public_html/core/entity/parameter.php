@@ -6,10 +6,11 @@ class parameter
 Private $id;
 Private $name;
 Private $value;
+Private $environmental;
 Private $overridable;
 
 #Constructor
-function __construct($id=-1)
+function __construct($id=-1,$environmental=false)
 {
 	#Enkel numerieke id's toegelaten.
 	if (is_numeric($id))
@@ -18,8 +19,17 @@ function __construct($id=-1)
 	}
 	else
 	{
-	throw new Exception("The id that was given is not numeric");
+            throw new Exception("The id that was given is not numeric");
 	}
+        
+        if(is_bool($environmental))
+        {
+            $this->environmental=$environmental;
+        }
+        else
+        {
+            throw new Exception("The environmental argument must be a boolean");
+        }
 }
 
 public function getId()
@@ -77,6 +87,13 @@ public function setOverridable($value)
 	{
 		throw new Exception("the overridable argument must be a boolean");
 	}
+}
+
+public function getEnvironmental()
+{
+    ###Deze parameter geeft aan of de parameter rechtstreeks in een template mag weergegeven worden
+    ###door gebruik van een custom tag
+    return $this->environmental;
 }
 }
 ?>

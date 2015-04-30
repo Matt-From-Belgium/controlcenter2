@@ -29,7 +29,14 @@ function redirectAfterLogin()
 {
     
     var destination = getParameterByName('d');
+    if(destination)
+    {
     window.location.assign(destination);
+    }
+    else
+    {
+    window.location.assign('/');
+    }
 }
 
 //Wanneer de gebruiker met facebook ingelogd wordt moeten we de pagina opnieuw proberen te laden

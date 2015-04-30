@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.10deb1
+-- version 4.1.8
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Aug 21, 2014 at 09:26 PM
--- Server version: 5.5.38-0ubuntu0.14.04.1
--- PHP Version: 5.5.9-1ubuntu4.3
+-- Machine: localhost
+-- Gegenereerd op: 28 apr 2015 om 13:36
+-- Serverversie: 5.5.40-36.1-log
+-- PHP-versie: 5.4.23
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `controlcenter`
+-- Databank: `ccenter2_data`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ajaxwhitelist`
+-- Tabelstructuur voor tabel `ajaxwhitelist`
 --
 
 CREATE TABLE IF NOT EXISTS `ajaxwhitelist` (
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `ajaxwhitelist` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
--- Dumping data for table `ajaxwhitelist`
+-- Gegevens worden geëxporteerd voor tabel `ajaxwhitelist`
 --
 
 INSERT INTO `ajaxwhitelist` (`id`, `file`, `function`) VALUES
@@ -46,7 +46,7 @@ INSERT INTO `ajaxwhitelist` (`id`, `file`, `function`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `languages`
+-- Tabelstructuur voor tabel `languages`
 --
 
 CREATE TABLE IF NOT EXISTS `languages` (
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `languages` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- Dumping data for table `languages`
+-- Gegevens worden geëxporteerd voor tabel `languages`
 --
 
 INSERT INTO `languages` (`id`, `name`) VALUES
@@ -67,7 +67,7 @@ INSERT INTO `languages` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `login_attempts`
+-- Tabelstructuur voor tabel `login_attempts`
 --
 
 CREATE TABLE IF NOT EXISTS `login_attempts` (
@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `login_attempts` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `modules`
+-- Tabelstructuur voor tabel `modules`
 --
 
 CREATE TABLE IF NOT EXISTS `modules` (
@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `modules` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- Dumping data for table `modules`
+-- Gegevens worden geëxporteerd voor tabel `modules`
 --
 
 INSERT INTO `modules` (`id`, `name`) VALUES
@@ -99,7 +99,7 @@ INSERT INTO `modules` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `parameters`
+-- Tabelstructuur voor tabel `parameters`
 --
 
 CREATE TABLE IF NOT EXISTS `parameters` (
@@ -110,10 +110,10 @@ CREATE TABLE IF NOT EXISTS `parameters` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `search_by_name` (`name`(20)),
   KEY `name` (`name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=25 ;
 
 --
--- Dumping data for table `parameters`
+-- Gegevens worden geëxporteerd voor tabel `parameters`
 --
 
 INSERT INTO `parameters` (`id`, `name`, `value`, `overridable`) VALUES
@@ -139,12 +139,13 @@ INSERT INTO `parameters` (`id`, `name`, `value`, `overridable`) VALUES
 (019, 'SITE_META_URL', '', b'0'),
 (020, 'CORE_RECAPTCHA_PUBLIC', '6LdR-eYSAAAAAEboUatksFIHeb6m4CvmTT1-7_5p ', b'0'),
 (021, 'CORE_RECAPTCHA_PRIVATE', '6LdR-eYSAAAAAM2V3SNVOLmiFEQJOz6TrgWBNfu3 ', b'0'),
-(023, 'CORE_MAINTENANCE_MODE', '1', b'0');
+(023, 'CORE_MAINTENANCE_MODE', '1', b'0'),
+(024, 'CORE_FB_LOAD_API', '0', b'0');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `permissions`
+-- Tabelstructuur voor tabel `permissions`
 --
 
 CREATE TABLE IF NOT EXISTS `permissions` (
@@ -155,7 +156,7 @@ CREATE TABLE IF NOT EXISTS `permissions` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
--- Dumping data for table `permissions`
+-- Gegevens worden geëxporteerd voor tabel `permissions`
 --
 
 INSERT INTO `permissions` (`id`, `module`, `name`) VALUES
@@ -168,7 +169,7 @@ INSERT INTO `permissions` (`id`, `module`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `templatealiases`
+-- Tabelstructuur voor tabel `templatealiases`
 --
 
 CREATE TABLE IF NOT EXISTS `templatealiases` (
@@ -183,7 +184,7 @@ CREATE TABLE IF NOT EXISTS `templatealiases` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
--- Dumping data for table `templatealiases`
+-- Gegevens worden geëxporteerd voor tabel `templatealiases`
 --
 
 INSERT INTO `templatealiases` (`id`, `name`, `pc_directory`, `phone_directory`, `tablet_directory`) VALUES
@@ -195,7 +196,7 @@ INSERT INTO `templatealiases` (`id`, `name`, `pc_directory`, `phone_directory`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usergroupmembers`
+-- Tabelstructuur voor tabel `usergroupmembers`
 --
 
 CREATE TABLE IF NOT EXISTS `usergroupmembers` (
@@ -205,7 +206,7 @@ CREATE TABLE IF NOT EXISTS `usergroupmembers` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `usergroupmembers`
+-- Gegevens worden geëxporteerd voor tabel `usergroupmembers`
 --
 
 INSERT INTO `usergroupmembers` (`user`, `usergroup`) VALUES
@@ -214,7 +215,7 @@ INSERT INTO `usergroupmembers` (`user`, `usergroup`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usergrouppermissions`
+-- Tabelstructuur voor tabel `usergrouppermissions`
 --
 
 CREATE TABLE IF NOT EXISTS `usergrouppermissions` (
@@ -224,7 +225,7 @@ CREATE TABLE IF NOT EXISTS `usergrouppermissions` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `usergrouppermissions`
+-- Gegevens worden geëxporteerd voor tabel `usergrouppermissions`
 --
 
 INSERT INTO `usergrouppermissions` (`usergroup`, `moduletask`) VALUES
@@ -237,7 +238,7 @@ INSERT INTO `usergrouppermissions` (`usergroup`, `moduletask`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usergroups`
+-- Tabelstructuur voor tabel `usergroups`
 --
 
 CREATE TABLE IF NOT EXISTS `usergroups` (
@@ -248,7 +249,7 @@ CREATE TABLE IF NOT EXISTS `usergroups` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- Dumping data for table `usergroups`
+-- Gegevens worden geëxporteerd voor tabel `usergroups`
 --
 
 INSERT INTO `usergroups` (`id`, `name`) VALUES
@@ -257,7 +258,7 @@ INSERT INTO `usergroups` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `userpermissions`
+-- Tabelstructuur voor tabel `userpermissions`
 --
 
 CREATE TABLE IF NOT EXISTS `userpermissions` (
@@ -269,7 +270,7 @@ CREATE TABLE IF NOT EXISTS `userpermissions` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Tabelstructuur voor tabel `users`
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
@@ -292,7 +293,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=76 ;
 
 --
--- Dumping data for table `users`
+-- Gegevens worden geëxporteerd voor tabel `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `facebookid`, `password`, `salt`, `passwordchangerequired`, `userconfirmation`, `adminconfirmation`, `realname`, `realfirstname`, `mailadress`, `website`, `country`) VALUES
