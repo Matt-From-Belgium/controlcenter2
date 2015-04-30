@@ -275,9 +275,10 @@ class htmlpage
 		#$matches[3] bevat de code tussen de tags
 		
 		$tagnaam = strtolower($matches[1]);
-		
+                
 		switch($tagnaam)
 		{
+                    
 			case "loop":
 			return $this->parseLoopR1($matches[2],$matches[3]);
 			break;
@@ -285,6 +286,10 @@ class htmlpage
 			case "ifset":
 			return $this->parseifset($matches[2],$matches[3]);
 			break;
+                    
+                        case "ifpermission":
+                        return $this->parseIfPermission($matches[2],$matches[3]);
+                        break;
 			
 			default:
 			throw new Exception("The custom tag $matches[1] does not exist (Second Parse)");
@@ -311,6 +316,11 @@ class htmlpage
 				
 				case "lang":
 				return $this->parseLanguageConstant($matches[2]);
+                                break;
+                                    
+                                case "env":
+                                return $this->parseEnv($matches[2]);
+                                break;
 				
 				return $matches[0];
 				
@@ -472,6 +482,38 @@ class htmlpage
 			throw new Exception("You tried to implement a language constant $constant wich is not defined. Check your languagefiles");
 		}
 	}
+        
+        private function parseEnv($parameter)
+        {
+            try
+            {
+                $foundparameter=dataaccess_GetParameter($parameter);
+                
+            }
+            catch(Exception $ex)
+            {
+                if(!getDebugMode())
+                {
+                    return '<!--Parameter could not be shown, exception:'.$ex->getMessage().'-->';
+                }
+                else
+                {
+                    return '<!--Parameter could not be shown-->';
+                }
+            }
+            
+            ###Als deze code uitgevoerd wordt is alles gelukt, nu moeten we nog bepalen of deze
+            ###parameter wel getoond mag worden
+            if($foundparameter->getEnvironmental())
+            {
+                return $foundparameter->getValue();
+            }
+            else
+            {
+                ###de waarde environmental staat op nul => deze mag niet getoond worden
+                return '<!-- The parameter '.$foundparameter->getName().' can not be used in templates-->';
+            }
+        }
 	
 	private function preparseLoop($matches)
 	{
@@ -678,6 +720,56 @@ class htmlpage
 			return false;
 		}
 	}
+        
+        private function parseIfPermission($permission,$code)
+        {
+            ###$permission moet de vorm module::permission hebben
+            ###We beginnen met de 2 delen van elkaar te scheiden
+            $permissionArray=explode('::',$permission);
+            
+            ###Nu zouden we 2 delen moeten hebben, anders heeft $permission niet de juiste vorn
+            if(count($permissionArray)==2)
+            {
+                ###We hebben de juiste vorm, we gaan na of er toegang is
+                try
+                {
+                    $result=checkPermission($permissionArray[0], $permissionArray[1], TRUE);
+                    
+                    if($result)
+                    {
+                        ###De toegang is ok => code mag in gevoegd worden
+                        return $code;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                    
+                    
+                } catch (Exception $ex) {
+                    if(getDebugMode())
+                    {
+                        return "<!-- module '$permissionArray[0]' and permission '$permissionArray[1]' combination not found -->";
+                    }
+                    else
+                    {
+                        return "<!-- ifPermission could not be processed-->";
+                    }
+                }
+            }
+            else
+            {
+                ###Niet de juiste vorm, we kunnen niet verder
+                if(getDebugMode())
+                {
+                    return "<!-- permission was not properly formatted-->";
+                }
+                else
+                {
+                    return "<!-- ifPermission could not be processed-->";
+                }
+            }
+        }
 	
 #PUBLIEKE FUNCTIES
 	public function setVariable($varname,$value)

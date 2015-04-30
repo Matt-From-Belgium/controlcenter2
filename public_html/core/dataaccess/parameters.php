@@ -6,7 +6,7 @@ require_once $_SERVER['DOCUMENT_ROOT']."/core/dataconnection/componentselector.p
 function dataaccess_GetParameter($searchstring)
 {
 	#opbouwen van de query
-	$query =  "SELECT parameters.id,parameters.name,parameters.value,parameters.overridable FROM parameters ";
+	$query =  "SELECT parameters.id,parameters.name,parameters.value,parameters.overridable,parameters.environmental FROM parameters ";
 	$query .= "WHERE parameters.name='@searchstring'";
 
 	#Uitvoeren van de query
@@ -20,13 +20,24 @@ function dataaccess_GetParameter($searchstring)
 		$results = $db->getResultArray();
 		foreach($results as $key=>$value)
 		{
-			list($id,$name,$value,$overridable)=$results[$key];
-				
+			list($id,$name,$value,$overridable,$environmental)=$results[$key];
+			
+                        if($environmental==1)
+                        {
+                            $environmental=true;
+                        }
+                        else
+                        {
+                            $environmental=false;
+                        }                        
+                        
 			#de gegevens worden in een object gegoten
-			$gevondenparameter = new parameter($id);
+			$gevondenparameter = new parameter($id,$environmental);
 			$gevondenparameter->setName($name);
 			$gevondenparameter->setValue($value);
 			$gevondenparameter->setOverridable($overridable);
+                        
+
 		}
 	}
 	else
@@ -37,6 +48,16 @@ function dataaccess_GetParameter($searchstring)
 	#er wordt een parameter-object teruggegeven.
 	return $gevondenparameter;
 }
+
+/*DEBUG
+$parameter = dataaccess_GetParameter('CORE_SERVER_MAILADRESS');
+
+if($parameter->getEnvironmental())
+{
+    echo 'ok';
+}*/
+
+
 #Toevoegen van parameters
 function dataaccess_AddParameter($parameterobject)
 {
