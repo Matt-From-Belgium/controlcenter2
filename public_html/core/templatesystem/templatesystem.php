@@ -311,6 +311,11 @@ class htmlpage
 				
 				case "lang":
 				return $this->parseLanguageConstant($matches[2]);
+                                break;
+                                    
+                                case "env":
+                                return $this->parseEnv($matches[2]);
+                                break;
 				
 				return $matches[0];
 				
@@ -472,6 +477,38 @@ class htmlpage
 			throw new Exception("You tried to implement a language constant $constant wich is not defined. Check your languagefiles");
 		}
 	}
+        
+        private function parseEnv($parameter)
+        {
+            try
+            {
+                $foundparameter=dataaccess_GetParameter($parameter);
+                
+            }
+            catch(Exception $ex)
+            {
+                if(!getDebugMode())
+                {
+                    return '<!--Parameter could not be shown, exception:'.$ex->getMessage().'-->';
+                }
+                else
+                {
+                    return '<!--Parameter could not be shown-->';
+                }
+            }
+            
+            ###Als deze code uitgevoerd wordt is alles gelukt, nu moeten we nog bepalen of deze
+            ###parameter wel getoond mag worden
+            if($foundparameter->getEnvironmental())
+            {
+                return $foundparameter->getValue();
+            }
+            else
+            {
+                ###de waarde environmental staat op nul => deze mag niet getoond worden
+                return '<!-- The parameter '.$foundparameter->getName().' can not be used in templates-->';
+            }
+        }
 	
 	private function preparseLoop($matches)
 	{
