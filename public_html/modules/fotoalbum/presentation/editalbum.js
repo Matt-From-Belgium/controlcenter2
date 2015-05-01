@@ -387,7 +387,11 @@ function albumEditor(albumid,previewElement)
                 editDescriptionButton.classList.add('editButtons');
                 editDescriptionButton.src='/modules/fotoalbum/presentation/assets/edit-icon.png';
                 
-                
+                /*starbutton moet ook 20x20 worden*/
+                var coverToggleButton = document.createElement('img');
+                coverToggleButton.classList.add('editButtons');
+                coverToggleButton.style.cursor = 'pointer';
+                coverToggleButton.src='/modules/fotoalbum/presentation/assets/star-grey.png';
                 
                 
                 editDescriptionButton.onclick = function(){
@@ -398,8 +402,9 @@ function albumEditor(albumid,previewElement)
             
             optionsDiv.classList.add('imageOptions');
             
+            optionsDiv.appendChild(coverToggleButton);
             optionsDiv.appendChild(editDescriptionButton);
-             optionsDiv.appendChild(deletePhotoButton);
+            optionsDiv.appendChild(deletePhotoButton);
             
             imageDiv.appendChild(optionsDiv);
             return imageDiv;
