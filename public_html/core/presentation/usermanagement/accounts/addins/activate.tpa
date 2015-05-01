@@ -1,9 +1,9 @@
 <h1><!CC LANG [LANG_USER_SELF_ACTIVATION_HEADER]></h1>
 <p><!CC LANG [LANG_USER_SELF_ACTIVATION_INFORMATION]></p>
 <h2><!CC LANG [LANG_USER_SELF_ACTIVATION_STEP1_HEADER]></h2>
-<p><form method="post">
+<p><form method="post" id='activationform' name='activationform'>
 <label><!CC LANG [LANG_USERNAME]></label><input type="text" name="username" /><br />
-<label><!CC LANG [LANG_PASSWORD]></label><input type="password" name="password" />
+<label><!CC LANG [LANG_PASSWORD]></label><input type="password" name="password" id="password" />
 <h2><!CC LANG [LANG_USER_SELF_ACTIVATION_STEP2_HEADER]></h2>
 <p><script>
 var RecaptchaOptions = {
@@ -25,3 +25,10 @@ var RecaptchaOptions = {
 <!CC VAR [captchacode]></p>
 <p><input type="submit" NAME="submit" value="<!CC LANG [LANG_USER_SELF_ACTIVATION_ACTIVATE]>">
 </form></p>
+<script>
+var form = document.getElementById('activationform');
+form.onsubmit=function(){
+    var password=document.getElementById('password').value;
+    document.getElementById('password').value= encryptPassword(password);
+};
+</script>

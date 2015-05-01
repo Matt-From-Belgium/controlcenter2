@@ -49,6 +49,11 @@ define('LANG_ERROR_EXTREG_DISABLED_MESSAGE',"It is not allowed to create an acco
 #OTHER MESSAGES
 define('LANG_USER_ADDED_TITLE',"User has been created");
 define('LANG_USER_ADDED',"The user has been succesfully added");
+define('LANG_USER_EXT_ADDED_TITLE',"Account created");
+define('LANG_USER_EXT_ADDED',"Your account has been created.");
+define('LANG_USER_EXT_ADMIN_CHECK','One of our administrators will now check your account an approve it.');
+define('LANG_USER_EXT_USER_CHECK','You have received an e-mail with some information about how to activate your account.');
+define('LANG_USER_EXT_CONTINUE','Continue');
 define('LANG_USER_EDITED_TITLE',"User has been edited");
 define('LANG_USER_EDITED',"The changes to this user have been successfully made");
 define('LANG_USERGROUP_ADDED_TITLE',"Usergroup Added");
