@@ -387,12 +387,24 @@ function albumEditor(albumid,previewElement)
                 editDescriptionButton.classList.add('editButtons');
                 editDescriptionButton.src='/modules/fotoalbum/presentation/assets/edit-icon.png';
                 
-                /*starbutton moet ook 20x20 worden*/
                 var coverToggleButton = document.createElement('img');
                 coverToggleButton.classList.add('editButtons');
                 coverToggleButton.style.cursor = 'pointer';
                 coverToggleButton.src='/modules/fotoalbum/presentation/assets/star-grey.png';
                 
+                coverToggleButton.onmouseover = function(){
+                  coverToggleButton.src='/modules/fotoalbum/presentation/assets/star-white.png';
+                };
+                
+                coverToggleButton.onmouseout = function(){
+                    coverToggleButton.src='/modules/fotoalbum/presentation/assets/star-grey.png';
+                };
+                
+                coverToggleButton.onclick = function(){
+                  //Deze foto werd gekozen als coverfoto
+                  coverToggleButton.src='/modules/fotoalbum/presentation/assets/star-yellow.png';
+                }
+                    
                 
                 editDescriptionButton.onclick = function(){
                     photoDisplay.setCollection(photoCollection);
