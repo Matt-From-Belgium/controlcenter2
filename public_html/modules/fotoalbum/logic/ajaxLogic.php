@@ -89,4 +89,29 @@ function albumBeschrijvingWijzigenAjax()
         return $response->getXML();
     }
 }
+
+function setCoverPhoto()
+{
+    checkpermission('fotoalbum','manage albums');
+    
+    if($_POST['albumid'] && $_POST['photoid'])
+    {
+            $albumid = intval($_POST['albumid']);
+            $photoid = intval($_POST['photoid']);
+            
+            $album = data_getAlbum($albumid);
+            $photo = data_getPhotoById($photoid);
+            
+            
+        
+            $response = new ajaxResponse('ok');
+            return $response->getXML();
+    }
+    else
+    {
+        $response = new ajaxResponse('error');
+        $response->addErrorMessage('nieuwebeschrijving', 'Er moet een album en foto gegeven worden');
+        return $response->getXML();
+    }
+}
 ?>

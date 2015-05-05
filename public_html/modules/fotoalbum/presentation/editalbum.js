@@ -261,6 +261,7 @@ function albumEditor(albumid,previewElement)
 {
     //private vars
     var photoCollection = null;
+    var albumid = albumid;
     
     //public vars
     
@@ -387,6 +388,12 @@ function albumEditor(albumid,previewElement)
                 editDescriptionButton.classList.add('editButtons');
                 editDescriptionButton.src='/modules/fotoalbum/presentation/assets/edit-icon.png';
                 
+                                
+                editDescriptionButton.onclick = function(){
+                    photoDisplay.setCollection(photoCollection);
+                    photoDisplay.displayImage(photoIndex);
+                };  
+                
                 var coverToggleButton = document.createElement('img');
                 coverToggleButton.classList.add('editButtons');
                 coverToggleButton.style.cursor = 'pointer';
@@ -404,14 +411,11 @@ function albumEditor(albumid,previewElement)
                 coverToggleButton.onclick = function(){
                   //Deze foto werd gekozen als coverfoto
                   alert(photoCollection[photoIndex].id);
+                  editCoverPhoto(albumid,photoCollection[photoIndex].id);
                   coverToggleButton.src='/modules/fotoalbum/presentation/assets/star-yellow.png';
                 }
                     
-                
-                editDescriptionButton.onclick = function(){
-                    photoDisplay.setCollection(photoCollection);
-                    photoDisplay.displayImage(photoIndex);
-                };    
+  
             
             
             optionsDiv.classList.add('imageOptions');
@@ -451,6 +455,26 @@ function deletePhoto(photo)
     };
     
     ajax.ExecuteRequest();
+}
+
+function editCoverPhoto(albumid,photoid)
+{
+        var ajax = new ajaxTransaction();
+        ajax.addData('albumid',albumid);
+        ajax.addData('photoid',photoid);
+
+        ajax.destination = '/modules/fotoalbum/logic/ajaxLogic.php';
+        ajax.phpfunction = 'setCoverPhoto';
+
+        ajax.onComplete = function() {
+            if(ajax.successIndicator)
+            {
+                alert('ok');
+            }
+
+        };
+
+        ajax.ExecuteRequest();
 }
 
 function photoEditor()
