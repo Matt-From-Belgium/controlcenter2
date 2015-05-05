@@ -360,7 +360,7 @@ function albumEditor(albumid,previewElement)
             
             var optionsDiv = document.createElement('div');
             
-                //Options div bevat 2 knoppen: verwijderen en aanpassen
+                //Options div bevat 3 knoppen: verwijderen en aanpassen en de ster om een cover te kiezen
                 var deletePhotoButton = document.createElement('img');
                 
                 deletePhotoButton.style.cursor = 'pointer';
@@ -400,8 +400,10 @@ function albumEditor(albumid,previewElement)
                     coverToggleButton.src='/modules/fotoalbum/presentation/assets/star-grey.png';
                 };
                 
+                
                 coverToggleButton.onclick = function(){
                   //Deze foto werd gekozen als coverfoto
+                  alert(photoCollection[photoIndex].id);
                   coverToggleButton.src='/modules/fotoalbum/presentation/assets/star-yellow.png';
                 }
                     

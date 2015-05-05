@@ -5,6 +5,8 @@ class fotoalbum
     private $id;
     private $name;
     private $desriptionHTML;
+    private $coverphotoid;
+    private $coverphoto;
     
     ###constructor
     function __construct($name,$id=-1) {
@@ -38,5 +40,18 @@ class fotoalbum
     {
         $this->desriptionHTML=$html;
     }
+    
+    function setCoverPhoto(photo $coverphoto)
+    {
+        $this->coverphotoid=$coverphoto->getId();
+        $this->coverphoto=$coverphoto;
+    }
+    
+    function getCoverPhotoId()
+    {
+        return $this->coverphotoid;
+    }
+    
+    
 }
 ?>
