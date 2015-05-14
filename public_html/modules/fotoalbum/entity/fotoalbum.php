@@ -9,9 +9,10 @@ class fotoalbum
     private $coverphoto;
     
     ###constructor
-    function __construct($name,$id=-1) {
+    function __construct($name,$id=-1,$cover=null) {
         $this->setName($name);
         $this->id=$id;
+        $this->coverphoto=$cover;
     }
     
     ###public methods

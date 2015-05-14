@@ -54,6 +54,7 @@ function getAlbums()
         $response->addField("id");
         $response->addField("name");
         $response->addField('description');
+        $response->addField('coverphoto');
 
         if(is_array($albumarray = data_getAlbums()))
         {        
@@ -63,6 +64,7 @@ function getAlbums()
                    $item['id'] = $fotoalbum->getID();
                    $item['name']= ucfirst($fotoalbum->getName());
                    $item['description']=$fotoalbum->getDescription();
+                   $item['coverphoto']=$fotoalbum->getCoverPhotoId();
 
                    $response->addData($item);
             }    

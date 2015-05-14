@@ -102,8 +102,9 @@ function setCoverPhoto()
             $album = data_getAlbum($albumid);
             $photo = data_getPhotoById($photoid);
             
+            $album->setCoverPhoto($photo);
+            data_albumWijzigen($album);
             
-        
             $response = new ajaxResponse('ok');
             return $response->getXML();
     }

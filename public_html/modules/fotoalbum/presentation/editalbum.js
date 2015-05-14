@@ -413,6 +413,10 @@ function albumEditor(albumid,previewElement)
                   alert(photoCollection[photoIndex].id);
                   editCoverPhoto(albumid,photoCollection[photoIndex].id);
                   coverToggleButton.src='/modules/fotoalbum/presentation/assets/star-yellow.png';
+                  
+                  /*//We halen de events er uit zodat de knop opgelicht blijft
+                  coverToggleButton.onmouseout=null;
+                  coverToggleButton.onmouseout=null;*/
                 }
                     
   
@@ -469,7 +473,8 @@ function editCoverPhoto(albumid,photoid)
         ajax.onComplete = function() {
             if(ajax.successIndicator)
             {
-                alert('ok');
+                //We herladen het album
+                albumeditor.reloadAlbum();
             }
 
         };
