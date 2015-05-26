@@ -279,6 +279,7 @@ function getAlbumCover($id)
     
     if($album->getCoverPhotoId())
     {
+        
         ###cover bestaat we halen de foto op
         $coverphoto=getPhotoById($album->getCoverPhotoId());
         return $coverphoto;

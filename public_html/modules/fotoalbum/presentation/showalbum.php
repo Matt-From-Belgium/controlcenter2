@@ -37,6 +37,7 @@ if(isset($_GET['id']))
  {
      $html = new htmlpage('frontend');
      $html->LoadAddin('/modules/fotoalbum/addins/albumlist.tpa');
+     $html->loadCSS('/modules/fotoalbum/presentation/css/showphoto.css','/modules/fotoalbum/presentation/css/showphoto-mobile.css');
      
      ###We halen de albums op en converteren de gegevens naar een array die met de loop gebruikt kan worden
      $albums = getAlbumObjects();
@@ -55,7 +56,7 @@ if(isset($_GET['id']))
      }
      
      $html->setVariable('albums', $albumarray);
-     print_r($albumarray);
+     
      
      $html->PrintHTML();
      

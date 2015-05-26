@@ -6,13 +6,12 @@ class fotoalbum
     private $name;
     private $desriptionHTML;
     private $coverphotoid;
-    private $coverphoto;
     
     ###constructor
     function __construct($name,$id=-1,$cover=null) {
         $this->setName($name);
         $this->id=$id;
-        $this->coverphoto=$cover;
+        $this->coverphotoid=$cover;
     }
     
     ###public methods
@@ -45,7 +44,6 @@ class fotoalbum
     function setCoverPhoto(photo $coverphoto)
     {
         $this->coverphotoid=$coverphoto->getId();
-        $this->coverphoto=$coverphoto;
     }
     
     function getCoverPhotoId()

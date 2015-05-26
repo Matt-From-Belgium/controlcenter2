@@ -119,3 +119,32 @@ body {
     margin-left: 0.05em;
     margin-right: 0.05em;
 }
+
+.albumcover {
+    background-color: #DDDDDD;
+    padding: 1em;
+    float: left;
+    border-radius: 1em;
+    margin-right: 0.5em;
+    margin-bottom: 0.5em;
+
+}
+
+.coverimg {
+    max-height: 10em;
+    overflow: hidden;
+}
+
+.albumcover img {
+    display: inline-block;
+
+    width: 15em;
+   
+}
+
+.albumcover h2 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    
+    
+}
