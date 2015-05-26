@@ -47,10 +47,15 @@ if(isset($_GET['id']))
          $newAlbum['titel']=$value->getName();
          $newAlbum['link']='/modules/fotoalbum/presentation/showalbum.php?id='.$value->getId();
          
+        ###coverphoto ophalen
+         $cover = getAlbumCover($value->getId());
+         $newAlbum['coverpath']='/modules/fotoalbum/photos/tn_'.$cover->getFilename();
+         
          $albumarray[] = $newAlbum;
      }
      
      $html->setVariable('albums', $albumarray);
+     print_r($albumarray);
      
      $html->PrintHTML();
      

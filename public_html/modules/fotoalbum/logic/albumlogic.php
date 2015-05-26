@@ -273,6 +273,25 @@ function getAlbumPhotos($id)
     }
 }
 
+function getAlbumCover($id)
+{
+    $album = getAlbum($id);
+    
+    if($album->getCoverPhotoId())
+    {
+        ###cover bestaat we halen de foto op
+        $coverphoto=getPhotoById($album->getCoverPhotoId());
+        return $coverphoto;
+    }
+    else
+    {
+        ###er is geen cover ingesteld => eerste foto
+        $photos = getAlbumPhotos($id);
+        $coverphoto = $photos[0];
+        return $coverphoto;    
+    }
+}
+
 function deletePhoto()
 {
     checkPermission('fotoalbum', 'manage albums');
