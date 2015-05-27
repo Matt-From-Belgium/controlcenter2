@@ -275,7 +275,7 @@ function getAlbumPhotos($id)
 
 function getAlbumCover($id)
 {
-    $album = getAlbum($id);
+    $album = getAlbum(intval($id));
     
     if($album->getCoverPhotoId())
     {

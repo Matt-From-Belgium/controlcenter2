@@ -262,6 +262,7 @@ function albumEditor(albumid,previewElement)
     //private vars
     var photoCollection = null;
     var albumid = albumid;
+    var coverid = null;
     
     //public vars
     
@@ -286,8 +287,12 @@ function albumEditor(albumid,previewElement)
             var loader = new albumLoader(albumid);
             loader.onComplete=function(){
             photoCollection = loader.photoCollection;
+            
+            coverid = loader.coverId;
+            
+            
             populateElement();
-        };
+             };
         
         loader.load();
         }
@@ -329,7 +334,6 @@ function albumEditor(albumid,previewElement)
         
         function createImage(photoIndex)
         {
-            
             //We creëren met deze functie een kant en klare div om te koppelen
             //aan het ogegeven HTML DOM element
             var imageDiv = document.createElement('div');
@@ -394,29 +398,41 @@ function albumEditor(albumid,previewElement)
                     photoDisplay.displayImage(photoIndex);
                 };  
                 
-                var coverToggleButton = document.createElement('img');
-                coverToggleButton.classList.add('editButtons');
-                coverToggleButton.style.cursor = 'pointer';
-                coverToggleButton.src='/modules/fotoalbum/presentation/assets/star-grey.png';
-                
-                coverToggleButton.onmouseover = function(){
-                  coverToggleButton.src='/modules/fotoalbum/presentation/assets/star-white.png';
-                };
-                
-                coverToggleButton.onmouseout = function(){
+                //Als het niet om de coverfoto gaat moeten we de optie geven om er een cover van te maken
+                if(coverid != photoCollection[photoIndex].id)
+                {
+                    var coverToggleButton = document.createElement('img');
+                    coverToggleButton.classList.add('editButtons');
+                    coverToggleButton.style.cursor = 'pointer';
                     coverToggleButton.src='/modules/fotoalbum/presentation/assets/star-grey.png';
-                };
+
+                    coverToggleButton.onmouseover = function(){
+                      coverToggleButton.src='/modules/fotoalbum/presentation/assets/star-white.png';
+                    };
+
+                    coverToggleButton.onmouseout = function(){
+                        coverToggleButton.src='/modules/fotoalbum/presentation/assets/star-grey.png';
+                    };
                 
                 
-                coverToggleButton.onclick = function(){
-                  //Deze foto werd gekozen als coverfoto
-                  alert(photoCollection[photoIndex].id);
-                  editCoverPhoto(albumid,photoCollection[photoIndex].id);
-                  coverToggleButton.src='/modules/fotoalbum/presentation/assets/star-yellow.png';
-                  
+                    coverToggleButton.onclick = function(){
+                      //Deze foto werd gekozen als coverfoto
+                      alert(photoCollection[photoIndex].id);
+                      editCoverPhoto(albumid,photoCollection[photoIndex].id);
+                      coverToggleButton.src='/modules/fotoalbum/presentation/assets/star-yellow.png';
+
+                    }
                   /*//We halen de events er uit zodat de knop opgelicht blijft
                   coverToggleButton.onmouseout=null;
                   coverToggleButton.onmouseout=null;*/
+                }
+                else
+                {
+                    var coverToggleButton = document.createElement('img');
+                    coverToggleButton.classList.add('editButtons');
+                    coverToggleButton.style.cursor = 'pointer';
+                    coverToggleButton.src='/modules/fotoalbum/presentation/assets/star-yellow.png';
+
                 }
                     
   

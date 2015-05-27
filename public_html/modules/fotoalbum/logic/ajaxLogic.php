@@ -115,4 +115,29 @@ function setCoverPhoto()
         return $response->getXML();
     }
 }
+
+function getCoverPhoto()
+{
+    $albumid = $_POST['albumid'];
+    
+    $response = new ajaxResponse('ok');
+    
+    $response->addField('coverphoto');
+    
+    $result= getAlbumCover($albumid)->getId();
+    
+    $resultvalue['coverphoto']=$result;
+    
+    
+    
+    
+    $response->addData($resultvalue);
+    
+    return $response->getXML();
+}
+
+/*DEBUG
+$_POST['albumid']=9;
+$result = getCoverPhoto();
+echo $result;*/
 ?>
