@@ -148,3 +148,7 @@ body {
     text-align: center;
     
 }
+
+.albumcover a {
+    text-decoration: none;
+}
