@@ -417,7 +417,6 @@ function albumEditor(albumid,previewElement)
                 
                     coverToggleButton.onclick = function(){
                       //Deze foto werd gekozen als coverfoto
-                      alert(photoCollection[photoIndex].id);
                       editCoverPhoto(albumid,photoCollection[photoIndex].id);
                       coverToggleButton.src='/modules/fotoalbum/presentation/assets/star-yellow.png';
 
