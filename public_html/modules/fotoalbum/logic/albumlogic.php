@@ -287,7 +287,7 @@ function getAlbumCover($id)
     else
     {
         ###er is geen cover ingesteld => eerste foto
-        $photos = getAlbumPhotos($id);
+        $photos = getAlbumPhotos(intval($id));
         $coverphoto = $photos[0];
         return $coverphoto;    
     }
