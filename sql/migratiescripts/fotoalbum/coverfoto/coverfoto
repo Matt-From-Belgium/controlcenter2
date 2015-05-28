@@ -1,0 +1,5 @@
+ALTER TABLE `albums` 
+ADD COLUMN `coverphoto` INT NULL AFTER `description`;
+
+INSERT INTO `ajaxwhitelist` (`file`, `function`) VALUES ('/modules/fotoalbum/logic/ajaxLogic.php', 'setCoverPhoto');
+INSERT INTO `ajaxwhitelist` (`file`, `function`) VALUES ('/modules/fotoalbum/logic/ajaxLogic.php', 'GetCoverPhoto');

@@ -261,6 +261,8 @@ function albumEditor(albumid,previewElement)
 {
     //private vars
     var photoCollection = null;
+    var albumid = albumid;
+    var coverid = null;
     
     //public vars
     
@@ -285,8 +287,12 @@ function albumEditor(albumid,previewElement)
             var loader = new albumLoader(albumid);
             loader.onComplete=function(){
             photoCollection = loader.photoCollection;
+            
+            coverid = loader.coverId;
+            
+            
             populateElement();
-        };
+             };
         
         loader.load();
         }
@@ -328,7 +334,6 @@ function albumEditor(albumid,previewElement)
         
         function createImage(photoIndex)
         {
-            
             //We creëren met deze functie een kant en klare div om te koppelen
             //aan het ogegeven HTML DOM element
             var imageDiv = document.createElement('div');
@@ -360,7 +365,7 @@ function albumEditor(albumid,previewElement)
             
             var optionsDiv = document.createElement('div');
             
-                //Options div bevat 2 knoppen: verwijderen en aanpassen
+                //Options div bevat 3 knoppen: verwijderen en aanpassen en de ster om een cover te kiezen
                 var deletePhotoButton = document.createElement('img');
                 
                 deletePhotoButton.style.cursor = 'pointer';
@@ -387,19 +392,56 @@ function albumEditor(albumid,previewElement)
                 editDescriptionButton.classList.add('editButtons');
                 editDescriptionButton.src='/modules/fotoalbum/presentation/assets/edit-icon.png';
                 
-                
-                
-                
+                                
                 editDescriptionButton.onclick = function(){
                     photoDisplay.setCollection(photoCollection);
                     photoDisplay.displayImage(photoIndex);
-                };    
+                };  
+                
+                //Als het niet om de coverfoto gaat moeten we de optie geven om er een cover van te maken
+                if(coverid != photoCollection[photoIndex].id)
+                {
+                    var coverToggleButton = document.createElement('img');
+                    coverToggleButton.classList.add('editButtons');
+                    coverToggleButton.style.cursor = 'pointer';
+                    coverToggleButton.src='/modules/fotoalbum/presentation/assets/star-grey.png';
+
+                    coverToggleButton.onmouseover = function(){
+                      coverToggleButton.src='/modules/fotoalbum/presentation/assets/star-white.png';
+                    };
+
+                    coverToggleButton.onmouseout = function(){
+                        coverToggleButton.src='/modules/fotoalbum/presentation/assets/star-grey.png';
+                    };
+                
+                
+                    coverToggleButton.onclick = function(){
+                      //Deze foto werd gekozen als coverfoto
+                      editCoverPhoto(albumid,photoCollection[photoIndex].id);
+                      coverToggleButton.src='/modules/fotoalbum/presentation/assets/star-yellow.png';
+
+                    }
+                  /*//We halen de events er uit zodat de knop opgelicht blijft
+                  coverToggleButton.onmouseout=null;
+                  coverToggleButton.onmouseout=null;*/
+                }
+                else
+                {
+                    var coverToggleButton = document.createElement('img');
+                    coverToggleButton.classList.add('editButtons');
+                    coverToggleButton.style.cursor = 'pointer';
+                    coverToggleButton.src='/modules/fotoalbum/presentation/assets/star-yellow.png';
+
+                }
+                    
+  
             
             
             optionsDiv.classList.add('imageOptions');
             
+            optionsDiv.appendChild(coverToggleButton);
             optionsDiv.appendChild(editDescriptionButton);
-             optionsDiv.appendChild(deletePhotoButton);
+            optionsDiv.appendChild(deletePhotoButton);
             
             imageDiv.appendChild(optionsDiv);
             return imageDiv;
@@ -432,6 +474,27 @@ function deletePhoto(photo)
     };
     
     ajax.ExecuteRequest();
+}
+
+function editCoverPhoto(albumid,photoid)
+{
+        var ajax = new ajaxTransaction();
+        ajax.addData('albumid',albumid);
+        ajax.addData('photoid',photoid);
+
+        ajax.destination = '/modules/fotoalbum/logic/ajaxLogic.php';
+        ajax.phpfunction = 'setCoverPhoto';
+
+        ajax.onComplete = function() {
+            if(ajax.successIndicator)
+            {
+                //We herladen het album
+                albumeditor.reloadAlbum();
+            }
+
+        };
+
+        ajax.ExecuteRequest();
 }
 
 function photoEditor()

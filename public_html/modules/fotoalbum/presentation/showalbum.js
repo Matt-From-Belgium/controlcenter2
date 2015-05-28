@@ -51,6 +51,7 @@ function albumLoader(id)
     //public vars
     this.onComplete=null;
     this.photoCollection = new Array();
+    this.coverId = null;
     
     //constructor
         //id is verplicht
@@ -69,51 +70,71 @@ function albumLoader(id)
             }
         else
             {
-                //Alles lijkt ok => albumgegevens ophalen
-                var ajax = new ajaxTransaction();
-                ajax.addData('albumid',id);
-                ajax.destination = '/modules/fotoalbum/logic/ajaxLogic.php';
-                ajax.phpfunction = 'GetAlbumPhotosAjax';
+                //Alles lijkt ok => albumCover ophalen
+                var ajaxCover = new ajaxTransaction();
+                ajaxCover.addData('albumid',id);
+                ajaxCover.destination = '/modules/fotoalbum/logic/ajaxLogic.php';
+                ajaxCover.phpfunction = 'GetCoverPhoto';
                 
-                ajax.onComplete = function(onCompleteFunction) 
+                ajaxCover.onComplete=function()
                 {
-                if(ajax.successIndicator)
+                    if(ajaxCover.successIndicator)
                     {
-                        var photoCollection= new Array();
-                        for(i=0;i<ajax.result.length;i++)
-                            {
-                                var newPhoto = new photo;
-                                newPhoto.setFilename(ajax.result[i].filename);
-                                newPhoto.id= ajax.result[i].id;
-                                newPhoto.description = ajax.result[i].description;
+                        that.coverId=ajaxCover.result[0].coverphoto;
+                        
+                        //Nu kunnen we de foto's ophalen
+                        var ajax = new ajaxTransaction();
+                        ajax.addData('albumid',id);
+                        ajax.destination = '/modules/fotoalbum/logic/ajaxLogic.php';
+                        ajax.phpfunction = 'GetAlbumPhotosAjax';
 
-                                
-                                photoCollection.push(newPhoto);
-                            }
-                            
-                        that.photoCollection = photoCollection;
-
-                        that.onComplete();
-              
-
-                    }
-                else
-                    {
-                        //Er is een error teruggekeerd. Mogelijk omdat het album geen fotos bevat
-                        var error = ajax.errorList[0];
-                        if(error.value === 'Dit album bevat nog geen fotos')
+                        ajax.onComplete = function(onCompleteFunction) 
                         {
-                            console.log('Album bevat geen fotos');
-                        }
-                        else
-                        {
-                            throw('serverfout');
-                        }
+                            if(ajax.successIndicator)
+                                {
+                                    var photoCollection= new Array();
+                                    for(i=0;i<ajax.result.length;i++)
+                                        {
+                                            var newPhoto = new photo;
+                                            newPhoto.setFilename(ajax.result[i].filename);
+                                            newPhoto.id= ajax.result[i].id;
+                                            newPhoto.description = ajax.result[i].description;
+
+
+                                            photoCollection.push(newPhoto);
+                                        }
+
+                                    that.photoCollection = photoCollection;
+
+                                    that.onComplete();
+
+
+                                }
+                            else
+                                {
+                                    //Er is een error teruggekeerd. Mogelijk omdat het album geen fotos bevat
+                                    var error = ajax.errorList[0];
+                                    if(error.value === 'Dit album bevat nog geen fotos')
+                                    {
+                                        console.log('Album bevat geen fotos');
+                                    }
+                                    else
+                                    {
+                                        throw('serverfout');
+                                    }
+                                }
+
+                         };
+
+                         ajax.ExecuteRequest();
+                        
                     }
+                    
+                };
                 
-                 };
-                 
-                 ajax.ExecuteRequest();
+                ajaxCover.ExecuteRequest();
+                
+                
             }
     
     
