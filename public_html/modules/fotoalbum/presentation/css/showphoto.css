@@ -121,14 +121,15 @@ body {
 }
 
 .albumcover {
+    display: inline-block;
     background-color: #DDDDDD;
     padding: 1em;
-    float: left;
+    
     border-radius: 1em;
     margin-right: 0.5em;
     margin-bottom: 0.5em;
     max-width: 15em;
-
+    vertical-align: top;
 }
 
 .coverimg {
