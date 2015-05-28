@@ -388,6 +388,10 @@ input[type='button']:active,input[type='submit']:active, select:active
 }
 
 #footer {
+    width: 100%;
+    padding-top: 2em;
+    display:  block;
     color: #777777;
     text-align:  center;
+    clear:  both;
 }

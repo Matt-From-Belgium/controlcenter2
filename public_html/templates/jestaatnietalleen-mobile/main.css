@@ -343,5 +343,5 @@ input[type='button']:active,input[type='submit']:active, select:active
 
 #sitecontent {
     padding-top: 2.5em;
-
+    padding-left: 0.5em;
 }
