@@ -82,57 +82,59 @@ function albumLoader(id)
                     {
                         that.coverId=ajaxCover.result[0].coverphoto;
                         
+                        //Nu kunnen we de foto's ophalen
+                        var ajax = new ajaxTransaction();
+                        ajax.addData('albumid',id);
+                        ajax.destination = '/modules/fotoalbum/logic/ajaxLogic.php';
+                        ajax.phpfunction = 'GetAlbumPhotosAjax';
+
+                        ajax.onComplete = function(onCompleteFunction) 
+                        {
+                            if(ajax.successIndicator)
+                                {
+                                    var photoCollection= new Array();
+                                    for(i=0;i<ajax.result.length;i++)
+                                        {
+                                            var newPhoto = new photo;
+                                            newPhoto.setFilename(ajax.result[i].filename);
+                                            newPhoto.id= ajax.result[i].id;
+                                            newPhoto.description = ajax.result[i].description;
+
+
+                                            photoCollection.push(newPhoto);
+                                        }
+
+                                    that.photoCollection = photoCollection;
+
+                                    that.onComplete();
+
+
+                                }
+                            else
+                                {
+                                    //Er is een error teruggekeerd. Mogelijk omdat het album geen fotos bevat
+                                    var error = ajax.errorList[0];
+                                    if(error.value === 'Dit album bevat nog geen fotos')
+                                    {
+                                        console.log('Album bevat geen fotos');
+                                    }
+                                    else
+                                    {
+                                        throw('serverfout');
+                                    }
+                                }
+
+                         };
+
+                         ajax.ExecuteRequest();
+                        
                     }
                     
                 };
                 
                 ajaxCover.ExecuteRequest();
                 
-                //Nu kunnen we de foto's ophalen
-                var ajax = new ajaxTransaction();
-                ajax.addData('albumid',id);
-                ajax.destination = '/modules/fotoalbum/logic/ajaxLogic.php';
-                ajax.phpfunction = 'GetAlbumPhotosAjax';
                 
-                ajax.onComplete = function(onCompleteFunction) 
-                {
-                if(ajax.successIndicator)
-                    {
-                        var photoCollection= new Array();
-                        for(i=0;i<ajax.result.length;i++)
-                            {
-                                var newPhoto = new photo;
-                                newPhoto.setFilename(ajax.result[i].filename);
-                                newPhoto.id= ajax.result[i].id;
-                                newPhoto.description = ajax.result[i].description;
-
-                                
-                                photoCollection.push(newPhoto);
-                            }
-                            
-                        that.photoCollection = photoCollection;
-
-                        that.onComplete();
-              
-
-                    }
-                else
-                    {
-                        //Er is een error teruggekeerd. Mogelijk omdat het album geen fotos bevat
-                        var error = ajax.errorList[0];
-                        if(error.value === 'Dit album bevat nog geen fotos')
-                        {
-                            console.log('Album bevat geen fotos');
-                        }
-                        else
-                        {
-                            throw('serverfout');
-                        }
-                    }
-                
-                 };
-                 
-                 ajax.ExecuteRequest();
             }
     
     
