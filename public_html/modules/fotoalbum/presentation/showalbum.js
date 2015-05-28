@@ -51,6 +51,7 @@ function albumLoader(id)
     //public vars
     this.onComplete=null;
     this.photoCollection = new Array();
+    this.coverId = null;
     
     //constructor
         //id is verplicht
@@ -69,7 +70,25 @@ function albumLoader(id)
             }
         else
             {
-                //Alles lijkt ok => albumgegevens ophalen
+                //Alles lijkt ok => albumCover ophalen
+                var ajaxCover = new ajaxTransaction();
+                ajaxCover.addData('albumid',id);
+                ajaxCover.destination = '/modules/fotoalbum/logic/ajaxLogic.php';
+                ajaxCover.phpfunction = 'GetCoverPhoto';
+                
+                ajaxCover.onComplete=function()
+                {
+                    if(ajaxCover.successIndicator)
+                    {
+                        that.coverId=ajaxCover.result[0].coverphoto;
+                        
+                    }
+                    
+                };
+                
+                ajaxCover.ExecuteRequest();
+                
+                //Nu kunnen we de foto's ophalen
                 var ajax = new ajaxTransaction();
                 ajax.addData('albumid',id);
                 ajax.destination = '/modules/fotoalbum/logic/ajaxLogic.php';

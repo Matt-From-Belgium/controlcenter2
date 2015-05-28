@@ -3,25 +3,29 @@ require_once $_SERVER['DOCUMENT_ROOT']."/core/templatesystem/templatesystem.php"
 require_once $_SERVER['DOCUMENT_ROOT']."/core/logic/usermanagement/userfunctions.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/core/logic/parameters.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/core/presentation/general/commonfunctions.php";
+require_once $_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php';
 
+use ReCaptcha\Captcha;
 ###Eerst wordt er nagegaan of het de eerste keer is dat de pagina wordt weergegeven.
 if(!isset($_POST['submit']))
 {
 	if(isset($_GET['id']))
 	{
+            
 	###Eerst worden de gegevens van de gebruiker opgehaald
-
+                        $captcha = new Captcha();
+                        $captcha->setPublicKey(getCaptchaPublicKey());
+                        
 			$user = getUser($_GET['id']);
 			$html = new htmlpage("frontend");
+                        $html->loadScript('/core/logic/usermanagement/hashpwd.js');
+                        $html->loadScript('/core/logic/usermanagement/hash.final.js');
 			$html->LoadAddin("/core/presentation/usermanagement/accounts/addins/activate.tpa");
 		
 			###De activatiepagina maakt gebruik van reCaptcha. De publieke sleutel moet worden
 			###ingelezen om de captcha correct te doen werken
-			$captchapublickey = getCaptchaPublicKey();
-		
-			###De recaptchabibliotheek wordt ingelezen
-			require_once $_SERVER['DOCUMENT_ROOT']."/core/captcha/recaptchalib.php";
-			$html->setVariable("captchacode",recaptcha_get_html($captchapublickey));
+			
+			$html->setVariable("captchacode",$captcha->displayHTML());
 			$html->setVariable("sitename",getSiteName());
 		
 			$html->PrintHTML();
@@ -37,12 +41,13 @@ else
 	###$_POST['submit'] heeft een waarde => er is data om te verwerken
 	
 	###Controle op de captcha
-		require_once $_SERVER['DOCUMENT_ROOT']."/core/captcha/recaptchalib.php";	
-		#De private sleutel wordt opgehaald om de controle mogelijk te maken
-		$captchaprivatekey = getCaptchaPrivateKey();
 		
-		$response = recaptcha_check_answer($captchaprivatekey,$_SERVER['REMOTE_ADDR'],$_POST['recaptcha_challenge_field'],$_POST['recaptcha_response_field']);
-		if($response->is_valid)
+		#De private sleutel wordt opgehaald om de controle mogelijk te maken
+		$captcha = new Captcha();
+                $captcha->setPrivateKey(getCaptchaPrivateKey());
+		
+		
+		if($captcha->isValid())
 		{
 			###De gebruiker heeft een correct antwoord gegeven op de captcha
 			###Controle of de gebruikersnaam en wachtwoord correct is
@@ -54,6 +59,7 @@ else
 
 			if(strtolower($user->getUsername()) == strtolower($_POST['username']))
 			{
+                                
 				if(checkUserPassword($_POST['username'],$_POST['password']))
 				{
 					
@@ -84,6 +90,10 @@ else
 						}
 					}
 				}
+                                else
+                                {
+                                    echo 'gebruikersnaam wachtwoord nt ok';
+                                }
 			}
 			else
 			{

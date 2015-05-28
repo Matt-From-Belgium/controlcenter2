@@ -2,6 +2,6 @@
 Kies het fotoalbum dat je wil bekijken:
 <ul>
 <!CC LOOP [albums]>
-    <li><a href='<!CC LVAR [link]>'><h2><!CC LVAR [titel]></h2></a></li>
+    <div class='albumcover'><a href='<!CC LVAR [link]>'><div class='coverimg'><img src='<!CC LVAR [coverpath]>'></div><h2><!CC LVAR [titel]></h2></a></div>
 <!CC END LOOP [albums]>
 </ul>

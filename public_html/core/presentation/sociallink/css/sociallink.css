@@ -1,0 +1,23 @@
+#pageselector div {
+    vertical-align: middle;
+    
+}
+
+#pageselector div:hover {
+    background-color: #EEEEEE;
+    cursor: pointer;
+}
+
+#confirmation {
+    display: none;
+}
+
+#pageinfo {
+    text-align: center;
+}
+
+#pageinfo {
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+}

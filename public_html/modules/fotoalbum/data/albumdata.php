@@ -45,7 +45,7 @@ function data_albumToevoegen(fotoalbum $album)
 
 function data_albumWijzigen(fotoalbum $album)
 {
-    $query = "UPDATE albums SET name='@name',description='@description' WHERE id=@id";
+    $query = "UPDATE albums SET name='@name',description='@description',coverphoto=@(i)coverphoto WHERE id=@id";
     
     $db = new DataConnection();
     $db->setQuery($query);
@@ -53,13 +53,14 @@ function data_albumWijzigen(fotoalbum $album)
     $db->setAttribute('name', $album->getName());
     $db->setAttribute('description', $album->getDescription());
     $db->setAttribute('id', $album->getId());
+    $db->setAttribute('coverphoto', $album->getCoverPhotoId());
     
     $db->ExecuteQuery();
 }
 
 function data_getAlbums()
 {
-    $query = "SELECT albums.id,albums.name,albums.description from albums order by albums.id DESC";
+    $query = "SELECT albums.id,albums.name,albums.description,albums.coverphoto from albums order by albums.id DESC";
     
     $db = new DataConnection;
     $db->setQuery($query);
@@ -73,7 +74,7 @@ function data_getAlbums()
         $result = $db->GetResultArray();
         foreach($result as $key=>$value)
         {
-            $newFotoalbum = new fotoalbum($value['name'], $value['id']);
+            $newFotoalbum = new fotoalbum($value['name'], $value['id'], $value['coverphoto']);
             $newFotoalbum->setDescription($value['description']);
             $albumarray[] = $newFotoalbum;
         }
@@ -90,7 +91,7 @@ function data_getAlbum($id)
 {
     if(is_int($id))
     {
-            $query = "SELECT albums.id,albums.name,albums.description from albums WHERE albums.id=@id";
+            $query = "SELECT albums.id,albums.name,albums.description,albums.coverphoto from albums WHERE albums.id=@id";
     
             $db = new DataConnection;
             $db->setQuery($query);
@@ -105,7 +106,7 @@ function data_getAlbum($id)
                 $resultarray = $db->GetResultArray();
                 $result = $resultarray[0];
                 
-                $fotoalbum = new fotoalbum($result['name'], $result['id']);
+                $fotoalbum = new fotoalbum($result['name'], $result['id'],$result['coverphoto']);
                 $fotoalbum->setDescription($result['description']);
 
                 return $fotoalbum;

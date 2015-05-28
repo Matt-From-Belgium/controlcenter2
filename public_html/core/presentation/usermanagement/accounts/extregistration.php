@@ -28,7 +28,24 @@ if(getSelfRegisterStatus())
                     }
                     else
                     {
-                        $errors = addUserEXT_FB($_POST);
+                        ###We gaan proberen om de account via facebook te creëren
+                        ###We hebben eerst een FB sessie nodig.
+                        ###Ofwel komt die uit javascript, ofwel is er een token meegeleverd vanuit redirect
+                        require $_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php';
+                        Facebook\FacebookSession::setDefaultApplication(getFacebookAppID(), getFacebookSappId());
+
+                        if(!isset($_GET['t']))
+                        {
+                            $helper = new Facebook\FacebookJavaScriptLoginHelper();
+
+                            ###We halen de javascript sessie op
+                            $session = $helper->getSession();
+                        }
+                        else {
+                            $session = new Facebook\FacebookSession($_GET['t']);
+                        }
+                        
+                        $errors = addUserEXT_FB($_POST,$session);
                     }
                     
 		}
@@ -37,20 +54,24 @@ if(getSelfRegisterStatus())
 		#wanneer er input met fouten is.
 		if((!isset($_POST['submit'])) or ((is_array($errors))))
 		{
-                        require_once $_SERVER['DOCUMENT_ROOT'].'/core/social/facebook/php/facebook.php';
                     
 			$html = new htmlpage("frontend");
 		
 			$html->setVariable("errorlist",$errors);
 
                         ###De variabele fbintegration zal ervoor zorgen dat de link voor facebooklogin zichtbaar is
-                        if(getFacebookLoginStatus())
+                        ###maar als $_GET['fb']=1 dan komt de gebruiker uit het inlogscherm en werd er al gekozen voor login met facebook
+                        ###We moeten de link dan niet nog eens tonen, dat schept verwarring
+                        if((getFacebookLoginStatus() && !isset($_GET['fb'])) )
                         {
                         $html->setVariable('fbintegration', true);
                         }             
 
+                        if(isset($_GET['t']) || isset($_POST['facebookid']))
+                        {
+                            $html->setVariable('serversideFB', 'trie');
+                        }
                         
-
                         $html->setVariable("userid",-1);
 			$html->setVariable("username",$_POST['username']);
 
@@ -93,7 +114,45 @@ if(getSelfRegisterStatus())
                         #Echter, manueel ingevulde waarden hebben voorrang
                         if(getFacebookLoginStatus() and (($_GET['fb']==1) or (isset($_POST['facebookid']))))
                         {
-                            $config = array();
+                            
+                            ###Als dit 2e invoer is zal er door de eerdere code al een facebooksessie zijn 
+                            
+                            
+                            require_once $_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php';
+                            Facebook\FacebookSession::setDefaultApplication(getFacebookAppID(), getFacebookSappId());
+                            
+                            
+                                if(isset($_GET['t']))
+                                {
+                                    $token = $_GET['t'];
+                                    $session = new Facebook\FacebookSession($token);
+                                }
+                                else
+                                {
+                                    /*$helper = new Facebook\FacebookJavaScriptLoginHelper();
+                                    $session = $helper->getSession();*/
+                                }
+                            
+                            
+                            $user_profile = (new Facebook\FacebookRequest($session, 'GET', '/me'))->execute()->getGraphObject(Facebook\GraphUser::className());
+                            
+                            if($user_profile)
+                            {
+                                $html->setVariable('facebookid',$user_profile->getId());
+                                $html->setVariable('firstname',$user_profile->getFirstName());
+                                $html->setVariable('lastname',$user_profile->getLastName());
+                                
+                                if(!isset($_POST['username']))
+                                {
+                                    $html->setVariable("username",$user_profile->getFirstName().' '.$user_profile->getLastName());
+                                }
+
+                                if(!isset($_POST['mail']))
+                                {
+                                   $html->setVariable('mail', $user_profile->getProperty('email'));
+                                }
+                            }
+                            /*$config = array();
 
                             $config['appId'] = getFacebookAppID();
                             $config['secret'] = getFacebookSappId();
@@ -119,7 +178,7 @@ if(getSelfRegisterStatus())
                                     }
                                     
                                     
-                            }
+                            }*/
                         }
                         
                         
@@ -133,11 +192,37 @@ if(getSelfRegisterStatus())
 		else
 		{
 			###De input was correct, er moet enkel een bevestigingspagina worden weergegeven.
-			$html = new htmlpage("backend");
+			/*$html = new htmlpage("backend");
 			$html->LoadAddin("/core/presentation/general/addins/message.tpa");
 			$html->setVariable("messagetitle",LANG_USER_ADDED_TITLE);
 			$html->setVariable("message",LANG_USER_ADDED);
 			$html->PrintHTML();
+                        */
+                    
+                        ###We moeten de gebruiker nu informeren of wat er verder moet gebeuren
+                        ###In een aantal gevallen moet de gebruiker zijn/haar account bevestigen
+                        ###In een aantal gevallen moet de admin goedkeuren.
+                    
+                        $message = LANG_USER_EXT_ADDED;
+                        
+                        if(getAdminActivationParameter())
+                        {
+                            $message .= LANG_USER_EXT_ADMIN_CHECK;
+                        }
+                        
+                        if(getUserActivationParameter() && !isset($_POST['facebookid']))
+                        {
+                            $message .= LANG_USER_EXT_USER_CHECK;
+                        }
+                        
+                        if(isset($_GET['d']))
+                        {
+                            showMessage(LANG_USER_EXT_ADDED_TITLE,$message,$_GET['d'],LANG_USER_EXT_CONTINUE);
+                        }
+                        else
+                        {
+                            showMessage(LANG_USER_EXT_ADDED_TITLE,$message,'/',LANG_USER_EXT_CONTINUE);
+                        }
 		}
 }
 else

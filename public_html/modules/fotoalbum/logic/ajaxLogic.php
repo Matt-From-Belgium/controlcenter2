@@ -89,4 +89,55 @@ function albumBeschrijvingWijzigenAjax()
         return $response->getXML();
     }
 }
+
+function setCoverPhoto()
+{
+    checkpermission('fotoalbum','manage albums');
+    
+    if($_POST['albumid'] && $_POST['photoid'])
+    {
+            $albumid = intval($_POST['albumid']);
+            $photoid = intval($_POST['photoid']);
+            
+            $album = data_getAlbum($albumid);
+            $photo = data_getPhotoById($photoid);
+            
+            $album->setCoverPhoto($photo);
+            data_albumWijzigen($album);
+            
+            $response = new ajaxResponse('ok');
+            return $response->getXML();
+    }
+    else
+    {
+        $response = new ajaxResponse('error');
+        $response->addErrorMessage('nieuwebeschrijving', 'Er moet een album en foto gegeven worden');
+        return $response->getXML();
+    }
+}
+
+function getCoverPhoto()
+{
+    $albumid = $_POST['albumid'];
+    
+    $response = new ajaxResponse('ok');
+    
+    $response->addField('coverphoto');
+    
+    $result= getAlbumCover($albumid)->getId();
+    
+    $resultvalue['coverphoto']=$result;
+    
+    
+    
+    
+    $response->addData($resultvalue);
+    
+    return $response->getXML();
+}
+
+/*DEBUG
+$_POST['albumid']=9;
+$result = getCoverPhoto();
+echo $result;*/
 ?>
