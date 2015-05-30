@@ -9,6 +9,7 @@ Daarom zochten wij een mogelijkheid om u te voorzien van alle informatie met bet
 <div class="block">
 Het enige wat u nodig heeft is een mailadres en een applicatie om PDF-bestanden te openen op het toestel waarmee u de nieuwsbrieven wenst te lezen.
 </div>
+<div class="block"><a href='#nieuwsbriefformulier'>Klik hier om in te schrijven</a></div>
 <h2>Welke informatie vind ik in zo'n nieuwsbrief?</h2>
 <div id='nieuwsbriefpreview'><a href='http://www.jestaatnietalleen.be/modules/nieuwsbrief/nieuwsbrieven/13.pdf' target='_blank'><img src='/images/nieuwsbriefvb.png'></a></div>
 <h3>Actualiteit</h3>
@@ -28,7 +29,8 @@ Niet brandend actueel, maar wel belangrijk om weten. Wanneer kunt u tijdkrediet 
 Bekijk de vorige nieuwsbrieven <a href='/modules/nieuwsbrief/presentation/shownieuwsbrieven.php'>hier</a>
 </div>
 <div class='green'>
-<!CC addin '/modules/nieuwsbrief/addins/subscribeform.tpa'>
+<a name='nieuwsbriefformulier'></a>
+    <!CC addin '/modules/nieuwsbrief/addins/subscribeform.tpa'>
 </div>
 </div>
 
