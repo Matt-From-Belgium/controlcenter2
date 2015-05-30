@@ -271,10 +271,12 @@ function data_getnieuwsbrievenVoorAbonnement(abonnement $abonnement)
     return $result;
 }  
 
-function data_getNieuwsbrieven()
+function data_getNieuwsbrieven($limit=10)
 {
  ###Deze functie haalt alle nieuwsbrieven op en giet deze in nieuwsbriefobjecten
- $query = "SELECT nieuwsbrieven.id,nieuwsbrieven.maand,nieuwsbrieven.jaar,nieuwsbrieven.titel,nieuwsbrieven.verstuurd FROM nieuwsbrieven";
+ ###Standaard worden de laatste 10 getoond, maar door $limit te definiëren kan dat aangepast worden
+    
+ $query = "SELECT nieuwsbrieven.id,nieuwsbrieven.maand,nieuwsbrieven.jaar,nieuwsbrieven.titel,nieuwsbrieven.verstuurd FROM nieuwsbrieven ORDER BY nieuwsbrieven.id DESC LIMIT 10";
  
  $db= new DataConnection();
  $db->setQuery($query);
