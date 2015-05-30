@@ -80,6 +80,7 @@ h1 {
     font-weight: 300;
     font-size: 3em;
     margin-bottom: 0.25em;
+    clear: both;
 }
 
 h2 {
@@ -88,6 +89,7 @@ h2 {
     font-weight: 500;
     font-size: 1.5em;
     margin-bottom: 0.25em;  
+    clear: both;
 }
 
 li h2 {
@@ -173,6 +175,7 @@ input[type='button']:active,input[type='submit']:active, select:active
  margin-top: 1em;
  margin-left: -2em;
  padding-left: 2em;
+ clear: both;
 }
 
 .green h1 {
