@@ -52,6 +52,9 @@ function processResponse(ajax,upload)
             //We passen de uploadMonitor aan
             upload.newId = ajax.result[0].id;
             upload.changeStatus('ok');
+            
+            //We laden de foto's in de editor opnieuw in
+            albumeditor.reloadAlbum();
         }
     else
         {
@@ -238,7 +241,7 @@ function saveDescription(formElement)
     
     ajax.onComplete= function(){changeDescriptionComplete(ajax);};
     ajax.ExecuteRequest();
-}*/
+}
 
 function changeDescriptionComplete(ajax,loadIndicator)
 {
@@ -250,7 +253,7 @@ function changeDescriptionComplete(ajax,loadIndicator)
     {
         loadIndicator.innerHTML = 'FOUT!';
     }
-}
+}*/
 
 
 
@@ -258,6 +261,8 @@ function albumEditor(albumid,previewElement)
 {
     //private vars
     var photoCollection = null;
+    var albumid = albumid;
+    var coverid = null;
     
     //public vars
     
@@ -282,8 +287,12 @@ function albumEditor(albumid,previewElement)
             var loader = new albumLoader(albumid);
             loader.onComplete=function(){
             photoCollection = loader.photoCollection;
+            
+            coverid = loader.coverId;
+            
+            
             populateElement();
-        };
+             };
         
         loader.load();
         }
@@ -325,7 +334,6 @@ function albumEditor(albumid,previewElement)
         
         function createImage(photoIndex)
         {
-            
             //We creëren met deze functie een kant en klare div om te koppelen
             //aan het ogegeven HTML DOM element
             var imageDiv = document.createElement('div');
@@ -357,7 +365,7 @@ function albumEditor(albumid,previewElement)
             
             var optionsDiv = document.createElement('div');
             
-                //Options div bevat 2 knoppen: verwijderen en aanpassen
+                //Options div bevat 3 knoppen: verwijderen en aanpassen en de ster om een cover te kiezen
                 var deletePhotoButton = document.createElement('img');
                 
                 deletePhotoButton.style.cursor = 'pointer';
@@ -384,19 +392,56 @@ function albumEditor(albumid,previewElement)
                 editDescriptionButton.classList.add('editButtons');
                 editDescriptionButton.src='/modules/fotoalbum/presentation/assets/edit-icon.png';
                 
-                
-                
-                
+                                
                 editDescriptionButton.onclick = function(){
                     photoDisplay.setCollection(photoCollection);
                     photoDisplay.displayImage(photoIndex);
-                };    
+                };  
+                
+                //Als het niet om de coverfoto gaat moeten we de optie geven om er een cover van te maken
+                if(coverid != photoCollection[photoIndex].id)
+                {
+                    var coverToggleButton = document.createElement('img');
+                    coverToggleButton.classList.add('editButtons');
+                    coverToggleButton.style.cursor = 'pointer';
+                    coverToggleButton.src='/modules/fotoalbum/presentation/assets/star-grey.png';
+
+                    coverToggleButton.onmouseover = function(){
+                      coverToggleButton.src='/modules/fotoalbum/presentation/assets/star-white.png';
+                    };
+
+                    coverToggleButton.onmouseout = function(){
+                        coverToggleButton.src='/modules/fotoalbum/presentation/assets/star-grey.png';
+                    };
+                
+                
+                    coverToggleButton.onclick = function(){
+                      //Deze foto werd gekozen als coverfoto
+                      editCoverPhoto(albumid,photoCollection[photoIndex].id);
+                      coverToggleButton.src='/modules/fotoalbum/presentation/assets/star-yellow.png';
+
+                    }
+                  /*//We halen de events er uit zodat de knop opgelicht blijft
+                  coverToggleButton.onmouseout=null;
+                  coverToggleButton.onmouseout=null;*/
+                }
+                else
+                {
+                    var coverToggleButton = document.createElement('img');
+                    coverToggleButton.classList.add('editButtons');
+                    coverToggleButton.style.cursor = 'pointer';
+                    coverToggleButton.src='/modules/fotoalbum/presentation/assets/star-yellow.png';
+
+                }
+                    
+  
             
             
             optionsDiv.classList.add('imageOptions');
             
+            optionsDiv.appendChild(coverToggleButton);
             optionsDiv.appendChild(editDescriptionButton);
-             optionsDiv.appendChild(deletePhotoButton);
+            optionsDiv.appendChild(deletePhotoButton);
             
             imageDiv.appendChild(optionsDiv);
             return imageDiv;
@@ -405,6 +450,10 @@ function albumEditor(albumid,previewElement)
  
     
     //public methods
+    this.reloadAlbum = function()
+    {
+        loadAlbum();
+    };
 }
 
 function deletePhoto(photo)
@@ -425,6 +474,27 @@ function deletePhoto(photo)
     };
     
     ajax.ExecuteRequest();
+}
+
+function editCoverPhoto(albumid,photoid)
+{
+        var ajax = new ajaxTransaction();
+        ajax.addData('albumid',albumid);
+        ajax.addData('photoid',photoid);
+
+        ajax.destination = '/modules/fotoalbum/logic/ajaxLogic.php';
+        ajax.phpfunction = 'setCoverPhoto';
+
+        ajax.onComplete = function() {
+            if(ajax.successIndicator)
+            {
+                //We herladen het album
+                albumeditor.reloadAlbum();
+            }
+
+        };
+
+        ajax.ExecuteRequest();
 }
 
 function photoEditor()
@@ -506,8 +576,12 @@ function photoEditor()
         descriptionSubmitButton.setAttribute('value','Opslaan');
         descriptionSubmitButton.style.display= 'inline-block';
         
+        var descriptionSaveStatus = document.createElement('span');
+        
 
         descriptionSubmitButton.onclick = function(){
+                descriptionSaveStatus.innerHTML='Opslaan...'
+                
                 var ajax = new ajaxTransaction();
     
                 ajax.addData('id',displayPhotoCollection[currentIndex].id);
@@ -518,14 +592,18 @@ function photoEditor()
                 ajax.phpfunction='changeDescription';
 
                 ajax.onComplete= function(){
-                    
+                    albumeditor.reloadAlbum();
+                    descriptionSaveStatus.innerHTML='Opgeslagen';
                 };
                 ajax.ExecuteRequest();
         };
         
+
+        
         descriptionFormTag.appendChild(descriptionTextBox);
         descriptionFormTag.appendChild(descriptionProgressDiv);
         descriptionFormTag.appendChild(descriptionSubmitButton);
+        descriptionFormTag.appendChild(descriptionSaveStatus);
         
         description.appendChild(descriptionFormTag);
        
@@ -580,7 +658,7 @@ function photoEditor()
             
     this.displayImage = function(photoIndex)
     {
-           
+           descriptionSaveStatus.innerHTML='';
            currentIndex = photoIndex;
 
            
@@ -657,7 +735,7 @@ function photoEditor()
     };
 }
 
-function wijzigBeschrijving()
+function wijzigAlbumBeschrijving()
 {
     document.getElementById('wijzigBeschrijvingStatus').innerHTML='Bezig met opslaan...';
     
@@ -675,7 +753,7 @@ function wijzigBeschrijving()
         {
             document.getElementById('wijzigBeschrijvingStatus').innerHTML='Opgeslagen';
         }
-    }
+    };
     
     ajax.ExecuteRequest();
 }
