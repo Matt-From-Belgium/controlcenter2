@@ -275,7 +275,21 @@ function getAlbumPhotos($id)
 
 function getAlbumCover($id)
 {
-    $album = getAlbum(intval($id));
+    if(is_numeric($id))
+    {
+        $albumid= intval($id);
+    }
+    else 
+    {
+        ###Het id is geen integer maar mogelijk wel een albumnaam
+        ###We proberen het id van het album op te zoeken
+        
+        $album = data_getAlbumByName(strtolower($id));
+        $albumid = intval($album->getId());
+        
+    }
+    
+    $album = getAlbum($albumid);
     
     if($album->getCoverPhotoId())
     {
