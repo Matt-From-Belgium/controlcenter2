@@ -1,6 +1,32 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <script>
+            window.onscroll=function(){
+                var logoContainer=document.getElementById('logo');
+                var header = document.getElementById('header-content');
+
+                
+                if(window.pageYOffset>0)
+                {
+                    
+                    logoContainer.classList.add('logoNaScroll');
+                    header.classList.add('headerNaScroll');
+                    header.classList.remove('headerVoorScroll');
+                    
+
+                }
+                else
+                {
+                    logoContainer.classList.remove('logoNaScroll');
+                    header.classList.remove('headerNaScroll');
+                    header.classList.add('headerVoorScroll');
+                    
+
+                }
+                
+            };
+        </script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <!--FB remarketing-->
         <script>(function() {
@@ -78,8 +104,9 @@
         
     </head>
     <body>
-        <header>
-            <section id="header-content">
+        <header class='voorScroll'>
+        <section id="header-container">
+            <section id="header-content" class='headerVoorScroll'>
                 <section id="header-left">
                 Projectkoor CHANTage - info@projectkoorchantage.be
                 </section>
@@ -89,9 +116,10 @@
                     <a href='https://plus.google.com/u/0/b/106001403918641667283/106001403918641667283/posts'><img src='/templates/chantage-v2/assets/gplus-logo.png'></a>
                 </section>
             </section>
+        </section>
             <section id="central-image-content">
                 <nav>
-                    <div id="logo"><img src="/templates/chantage-v2/assets/chantage-klein.png"></div>
+                    <div id="logo" class='logoVoorScroll'><img src="/templates/chantage-v2/assets/chantage-klein.png"></div>
                     <form>
                         <select onchange="changePage(this);">
                             <option value="/index.php">Ga naar een andere pagina</option>

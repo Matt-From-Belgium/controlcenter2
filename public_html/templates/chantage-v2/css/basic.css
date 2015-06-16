@@ -117,11 +117,23 @@ body {
 }
 
 header{
-    background-color: #323A45;
+    position: fixed;
+    top: 0em;
+    width: 100%;
+    
     font-family: 'Open Sans';
     color: #FFFFFF;
     font-size: 0.7em;
+    z-index: 5000;
 }
+
+
+
+    header #header-container
+    {
+        background-color: #323A45;
+        width: 100%;
+    }
 
     header #header-content{
         width: 80%;
@@ -131,36 +143,45 @@ header{
         height: 2em;
         padding-top: 0.8em;
     }
+      
+        header #header-content.headerVoorScroll{
+            height: 2em;
+            padding-top: 0.8em;
+
+        }
         
-        header #header-left {
+         header #header-content.headerNaScroll {
+            height: 0em;
+            padding-top: 0.0em;  
+            transition: height 0.5s, padding-top 0.5s;
+            transition-timing-function: ease-out;
+        }
+    
+        .headerVoorScroll #header-left {
             float: left;
         }
         
-        header #header-right {
+        .headerNaScroll #header-left {
+            display:none;
+        }
+        
+        .headerVoorScroll #header-right {
             float: right;
+        }
+        
+        .headerNaScroll #header-right {
+            display: none;
         }
         
             #header-right img {
                 margin-left: 10px;
             }
             
-            
-
-#central-image {
- height: 35.5em;
- background: #000000;
- background-image: url('../assets/chantagefoto.png');
- background-repeat: no-repeat;
- background-position: top center;
- //background-size: auto 100%;
- background-size: cover;
- 
-}
-
     #central-image-content{
-       background-color: rgba(107,91,75,0.9);
+       background-color: rgba(107,91,75,0.95);
        height: 3em;
        font-size: 1.4em;
+       
     }
 
         nav {
@@ -172,10 +193,44 @@ header{
            height: 100%;
 
         }
+
+#central-image {
+ position: relative;
+ top: -0.0em;
+ height: 35.5em;
+ background: #000000;
+ background-image: url('../assets/chantagefoto.png');
+ background-repeat: no-repeat;
+ background-position: top center;
+ //background-size: auto 100%;
+ background-size: cover;
+ 
+}
+
+    
         
             #logo {
                 position: absolute;
-                padding-top: 2.1em;
+
+
+            }
+            
+            .logoVoorScroll img {
+                position: relative;
+                top: 0em;
+                width: 10em;
+                transition: width 0.5s, padding-top 0.5s, top 0.5s;
+                transition-timing-function: ease-out;
+                padding-top: 1.1em;
+            }
+            
+            .logoNaScroll img {
+                position: relative;
+                width: 7em;
+                top: -0.5em;
+                padding-top: 1.1em;
+                transition: width 0.5s, padding-top 0.5s, top 0.5s;
+                transition-timing-function: ease-out;
             }
             
             #central-image-content select {
@@ -234,7 +289,7 @@ header{
 
 #diagonal-shell {
     position: relative;
-    top: -5em;
+    top: -4em;
     
     height: 8em;
     width: 100%;
@@ -248,7 +303,7 @@ header{
           -webkit-transform: rotate(-2deg); 
           transform: rotate(-2deg); 
           position: relative;
-          top: 2.8em;
+          top: 1.8em;
     }
 
 
