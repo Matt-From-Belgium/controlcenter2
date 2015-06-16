@@ -160,6 +160,7 @@ header{
     #central-image-content{
        background-color: rgba(107,91,75,0.9);
        height: 3em;
+       font-size: 1.4em;
     }
 
         nav {
