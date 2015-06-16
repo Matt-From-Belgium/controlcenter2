@@ -80,8 +80,11 @@ function albumLoader(id)
                 {
                     if(ajaxCover.successIndicator)
                     {
-                        that.coverId=ajaxCover.result[0].coverphoto;
-                        
+                        if(ajaxCover.result)
+                        {
+                            that.coverId=ajaxCover.result[0].coverphoto;
+                        }
+                    
                         //Nu kunnen we de foto's ophalen
                         var ajax = new ajaxTransaction();
                         ajax.addData('albumid',id);
