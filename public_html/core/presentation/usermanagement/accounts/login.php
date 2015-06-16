@@ -89,11 +89,19 @@ if((!isset($_POST['u']))&&(!isset($_POST['p']))&&(!isset($_POST['d'])))
             
             require_once $_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php';
             
-            ###Door een Facebook bug encoderen we de bestemming zodat er geen / en = meer in komen.
-            $encodedURL = rtrim(strtr(base64_encode($_GET['d']), '+/', '-_'), '=');
-            
-            $redirect = $prefix.$_SERVER['HTTP_HOST'].'/core/logic/usermanagement/fblogincallback.php?d64='.$encodedURL;
-           
+            ###BUGFIX d64 moet enkel toegevoegd worden als er een redirect parameter is
+            if(!empty($_GET['d']))
+            {
+                ###Door een Facebook bug encoderen we de bestemming zodat er geen / en = meer in komen.
+                $encodedURL = rtrim(strtr(base64_encode($_GET['d']), '+/', '-_'), '=');
+
+                $redirect = $prefix.$_SERVER['HTTP_HOST'].'/core/logic/usermanagement/fblogincallback.php?d64='.$encodedURL;
+            }
+            else
+            {
+                ###Er is geen redirect opgegeven
+                $redirect = $prefix.$_SERVER['HTTP_HOST'].'/core/logic/usermanagement/fblogincallback.php';
+            }
             
             $helper = new Facebook\FacebookRedirectLoginHelper($redirect, $appId = getFacebookAppID(), $appSecret = getFacebookSappId());
             

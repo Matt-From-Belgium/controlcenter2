@@ -26,10 +26,19 @@
                 $prefix = 'http://';
             }
     
-            
-    $redirect = $prefix.$_SERVER['HTTP_HOST'].'/core/logic/usermanagement/fblogincallback.php?d64='.  $_GET['d64'];
+    ##BUGFIX: als d64 niet meegeleverd was in de redirect_uri mag hij er hier ook niet bij staan want 
+    #$redirect moet gelijk zijn aan de $redirect dat we doorgaven in login.php
+    if(!empty($_GET['d64']))
+    {
+        $redirect = $prefix.$_SERVER['HTTP_HOST'].'/core/logic/usermanagement/fblogincallback.php?d64='.  $_GET['d64'];
+        $decodedurl = base64_decode(str_pad(strtr($_GET['d64'], '-_', '+/'), strlen($_GET['d64']) % 4, '=', STR_PAD_RIGHT));
+    }
+    else
+    {
+        $redirect = $prefix.$_SERVER['HTTP_HOST'].'/core/logic/usermanagement/fblogincallback.php';
+    }
     
-    $decodedurl = base64_decode(str_pad(strtr($_GET['d64'], '-_', '+/'), strlen($_GET['d64']) % 4, '=', STR_PAD_RIGHT));
+    
     
     $helper = new Facebook\FacebookRedirectLoginHelper($redirect, $appId = getFacebookAppID(), $appSecret = getFacebookSappId());
     
@@ -68,7 +77,15 @@
                             if(getSelfRegisterStatus())
                             {
                                 ###De gebruiker mag zichzelf registreren
-                                $location = '/core/presentation/usermanagement/accounts/extregistration.php?fb=1&d='.$decodedurl.'&t='.$fbSession->getAccessToken();
+                                if(isset($decodedurl))
+                                {
+                                    $location = '/core/presentation/usermanagement/accounts/extregistration.php?fb=1&d='.$decodedurl.'&t='.$fbSession->getAccessToken();
+                                }
+                                else
+                                {
+                                    $location = '/core/presentation/usermanagement/accounts/extregistration.php?fb=1&t='.$fbSession->getAccessToken();
+                                }
+                                
                                 header('location: '.$location);
                             }
                             else {
