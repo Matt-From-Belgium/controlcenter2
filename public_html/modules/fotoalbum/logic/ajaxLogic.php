@@ -124,14 +124,15 @@ function getCoverPhoto()
     
     $response->addField('coverphoto');
     
-    $result= getAlbumCover($albumid)->getId();
-    
-    $resultvalue['coverphoto']=$result;
+    $albumcoverObject = getAlbumCover($albumid);
     
     
-    
-    
-    $response->addData($resultvalue);
+    if(!empty($albumcoverObject))
+    {
+        $result= getAlbumCover($albumid)->getId();
+        $resultvalue['coverphoto']=$result;
+        $response->addData($resultvalue);
+    }
     
     return $response->getXML();
 }
