@@ -5,8 +5,10 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/core/entity/exception.php';
 ###Eerst wordt nagekeken of er een $_POST['postcode'] is
 if(isset($_POST['postcode']))
 {
+        $_POST['postcode']=$_POST['postcode'].'%';
+    
 	$db= new dataconnection();
-	$query = "SELECT id,postcode,gemeente from postcodes WHERE postcodes.postcode LIKE '@invoer%'";
+	$query = "SELECT id,postcode,gemeente from postcodes WHERE postcodes.postcode LIKE '@invoer'";
 	$db->setQuery($query);
 	
 	$db->setAttribute("invoer",$_POST['postcode']);

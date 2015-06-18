@@ -1,35 +1,9 @@
+<section class="block">
+<h1>Vorige concerten</h1>
+Sinds de oprichting van het koor konden we al duizenden bezoekers begroeten op één van onze concerten. Foto's en video's van deze concerten vind je hier:
+</section>
+<section class="block">
+<br /><a href='beatles.php'><h2>2014 - The Beatles</h2></a>
+<br /><a href='kerstconcert.php'><h2>2013 - Kerstconcert</h2></a>
 
-<div id='leftcol'>
-            <div class="block">
-                <h1>Projectkoor CHANTage</h1>
-                <img src="/images/index/koor.png">
-                <p>Eind 2012 besloten een aantal enthousiastelingen dat het tijd was voor een nieuwe uitdaging. Begin 2013 werden audities georganiseerd voor een nieuw projectkoor. Uit meer dan 100 kandidaten werden 26 zangers geselecteerd om het nieuwe koor op te starten. Ondertussen zijn we heel wat verder en heeft CHANTage haar eerste concert achter de rug. Het kerstconcert werd uitgevoerd in december 2013 en werd zéér positief onthaald. Momenteel lopen de concerten voor ons tweede project 'The Beatles' en zijn we bezig met de voorbereidingen voor het derde project 'Luminous Night Of The Soul'.</p>
-                
-            </div>
-            <div class="block" id="indexbanner">
-                <h1>Ons volgend project</h1>
-                    <img src='/images/index/indexbanner.png'>
-<h2>Luminous Night Of The Soul</h2>
-<h3>16 en 17 oktober 2015</h3>
-Noteer alvast 16 en 17 oktober in uw agenda want dan brengen wij voor u modern klassieke muziek onder de noemer ‘Luminous night of the soul’. 
-<p>De muziek staat, zoals de titel van het concert al doet vermoeden, in het teken van ‘donker en licht’. We laten ons voor de eerste keer begeleiden door een strijkkwartet en nodigen ook instrumentale solisten uit, waaronder bijvoorbeeld hoboïst Bram Nolf die het hoboconcerto in re-klein van Marcello zal interpreteren en zich hierbij laat begeleiden door ons koor.
-<p>Misschien doen ook volgende nummers bij u al een lichtje branden: Dark night of the soul van Ola Gjeilo, Five Hebrew Love songs van Eric Whitacre, Gabriel’s oboe uit de film ‘The Mission’ en Nimrod uit Enigma variaties van Edward Elgar. Mocht het lichtje nog niet branden, geen nood, wij helpen u volgend jaar graag uit het donker en laten u het licht maar al te graag zien en vooral horen. 
-<p>Tot in oktober 2015... tussen ‘donker en licht’. 
-            </div>
-</div>
-<div id='rightcol'>
-            <div  id="index-sponsors" class="block">
-                <h2>Met de steun van:</h2>
-                <a href='http://www.nationale-loterij.be/' target='_blank'><img src='/templates/chantage/assets/sponsor-lotto.png'></a>
-                <a href='http://www.goudengids.be/debofisc-cva-zarren-8610/' target='_blank'><img src='/templates/chantage/assets/sponsors/advertentie-debofisc-wit.png'></a>
-                <a href='http://www.automobilia.be/' target='_blank'><img src='/templates/chantage/assets/sponsors/Automobilia.png'></a>
-                <a href='http://www.sym3.be/sym3.aspx' target='_blank'><img src='/templates/chantage/assets/sponsors/sym3.png'></a>
-                <a href='http://www.danbredint.be/' target='_blank'><img src='/templates/chantage/assets/sponsors/danbred.png'></a>
-                <a href='http://www.goudengids.be/el-florido-zarren-8610/' target='_blank'><img src='/templates/chantage/assets/sponsors/elflorido.png'></a>
-                <a href='http://www.diseno.be/' target='_blank'><img src='/templates/chantage/assets/sponsors/diseno.png'></a>
-                <a href='http://www.lartduvin.be/nl' target='_blank'><img src='/templates/chantage/assets/sponsors/lartduvin.png'></a>
-                <a href='http://tuinendewyse.be/' target='_blank'><img src='/templates/chantage/assets/sponsors/logo-tuinendewyse.png'></a>
-                <a href='http://www.mariaterengelen.be/' target='_blank'><img src='/templates/chantage/assets/sponsors/maria-ter-engelen.png'></a>
-                
-            </div>
-</div>
+</section>
