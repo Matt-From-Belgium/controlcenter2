@@ -1,31 +1,37 @@
 <link rel="stylesheet" href="/extracss/sponsors.css">
 <section class='block'>
     <h1>Sponsors</h1>
+<div class='block'>Zonder de steun van deze bedrijven zouden de projecten van Projectkoor CHANTage onmogelijk zijn. We zijn deze bedrijven heel erg dankbaar voor hun steun en hun vertrouwen.</div>
 <div class="blocksponsors">    
-                <a href='http://www.nationale-loterij.be/NL/Spelen_en_Winnen/Krasspelen/WinForLife/' target='_blank'><img src='/templates/chantage-beatles/assets/sponsor-winforlife.png'></a>
+                <a href='http://www.diksmuide.be' target='_blank'><img src='/images/sponsors/diksmuide.png'></a>
+                <a href='http://koorenstemwestvlaanderen.be/' target='_blank'><img src='/images/sponsors/kswvl.jpg'></a>
                 <a href='http://www.goudengids.be/debofisc-cva-zarren-8610/' target='_blank'><img src='/templates/chantage/assets/sponsors/advertentie-debofisc-wit.png'></a>
                 <a href='http://www.automobilia.be/' target='_blank'><img src='/templates/chantage/assets/sponsors/Automobilia.png'></a>
                 <a href='http://www.sym3.be' target='_blank'><img src='/templates/chantage/assets/sponsors/sym3.png'></a>
+                <a href='http://www.qsani.be' target='_blank'><img src='/images/sponsors/qsani.png'></a>
+                <a href='http://www.metanox.be' target='_blank'><img src='/images/sponsors/metanox.jpg'></a>
                 <a href='http://www.fabrieksverkoopdiksmuide.be/' target='_blank'><img src='/images/sponsors/coupe.png'></a>    
-                <br/><a href='http://www.danbredint.be/' target='_blank'><img src='/templates/chantage/assets/sponsors/danbred.png'></a>
+                <a href='http://www.danbredint.be/' target='_blank'><img src='/templates/chantage/assets/sponsors/danbred.png'></a>
                 <a href='http://www.diseno.be/' target='_blank'><img src='/templates/chantage/assets/sponsors/diseno.png'></a>
                 <a href='http://www.lartduvin.be/nl' target='_blank'><img src='/templates/chantage/assets/sponsors/lartduvin.png'></a>                
                 <a href='http://www.mariaterengelen.be/' target='_blank'><img src='/templates/chantage/assets/sponsors/maria-ter-engelen.png'></a>
-                <a href='http://crelan.be/nl/ag-woumen'><img src='/images/sponsors/crelan.png'></a>
+                <a href='http://crelan.be/nl/ag-woumen' target='_blank'><img src='/images/sponsors/crelan.png'></a>
+                <a href='http://www.epc-plus.be/' target='_blank'><img src='/images/sponsors/epc.jpg'></a>
+                <a href='http://www.ishtar.be' target='_blank'><img src='/images/sponsors/ishtar.jpg'></a>
                 
 </div>
 <div class="blocksponsors">
-    <a href='http://tuinendewyse.be/' target='_blank'><img src='/images/sponsors/dewyse.png'></a>
+    
     <a href='http://collegediksmuide.be/' target='_blank'><img src='/images/sponsors/college.png'></a>
-    <a href='http://vtidiksmuide.be/' target='_blank'><img src='/images/sponsors/vti.png'></a>
-    <a href='http://www.cornelis-bvba.be/' target='_blank'><img src='/images/sponsors/cornelis.png'></a>
+    
+    
     <a href='http://www.kantoorvv.be/nl/index.php' target='_blank'><img src='/images/sponsors/venv.png'></a>
     <a href='http://www.vinckier-nv.be/en/' target='_blank'><img src='/images/sponsors/vinckier.png'></a>
-    <a href='http://www.qsani.be' target='_blank'><img src='/images/sponsors/qsani.png'></a>
+    <a href='http://www.thea-milieuadvies.be/'><img src='/images/sponsors/thea.jpg'></a>
     <a href='http://www.logghe-geert.be/' target='_blank'><img src='/images/sponsors/logghe.png'></a>    
-    <a href='http://www.diksmuide.be' target='_blank'><img src='/images/sponsors/diksmuide.png'></a>
+    <a href='http://www.kbcagent.be/verzekeringendeltour' target='_blank'><img src='/images/sponsors/kbcdeltour.png'></a>
     <a href='http://www.dezwarte.be' target='_blank'><img src='/images/sponsors/dezwarte.png'></a>
-    <a href='http://www.handelsgids.be/diksmuide/jaecques-rudi/' target='_blank'><img src='/templates/chantage-beatles/assets/sponsor-jaecques.png'></a>
+    
     
 </div>
 </section>

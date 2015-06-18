@@ -18,3 +18,9 @@ img {
 .blocksponsors {
    margin-bottom: 3em;
 }
+
+.blocksponsors img {
+    margin-right: 1em;
+    margin-bottom: 1em;
+
+}
