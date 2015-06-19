@@ -1,0 +1,44 @@
+#bovenste2rijen {
+    position: relative;
+    top: 1em;
+    
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    text-align:  center;
+    z-index: 2;
+}
+
+    #bovenste2rijen img {
+      height: 50em;
+
+    }
+
+#luminouslogo {
+    position: relative;
+    top: -33em;
+    text-align: center;
+    width: 100%;
+    
+    z-index: 1;
+    margin-bottom: -33em;
+}
+
+    #luminouslogo img {
+        height: 35em;
+    }
+    
+
+#luminous-content {
+    color: #EEEEEE;
+    position: relative;
+    top: -2em;
+    margin-left: auto;
+    
+    font-size: 1.2em;
+    
+    width: 50em;
+    height: 100%;
+    margin-right: auto;
+    
+}
