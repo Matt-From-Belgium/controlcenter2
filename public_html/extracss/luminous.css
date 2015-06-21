@@ -1,3 +1,8 @@
+.block {
+    color: #DDDDDD;
+    font-size: 1em;
+}
+
 #bovenste2rijen {
     position: relative;
     top: 1em;
@@ -30,7 +35,7 @@
     
 
 #luminous-content {
-    color: #EEEEEE;
+    
     position: relative;
     top: -2em;
     margin-left: auto;
@@ -42,3 +47,46 @@
     margin-right: auto;
     
 }
+
+#ondersterijen {
+    position: relative;
+    top: -3em;
+    width: 100%;
+    text-align:  center;
+    margin-bottom: -2em;
+}
+
+    #ondersterijen img {
+        height: 25em;
+    }
+
+    #waarwanneer {
+        width: 23em;
+    }
+    
+    #tickets {
+        float: right;
+        width: 23em;
+    }
+    
+    #bestelknop {
+        background-color: #6B5B4B;
+        border-radius: 30px;
+        padding: 0.5em;
+        text-align:  center;
+    }
+
+    #bestelknop:hover {
+        background-color: #FFFFFF;
+    }
+    
+        #bestelknop h2 {
+            margin: 0em;
+            color: #000000;
+        }
+
+        #bestelknop h1 {
+            margin: 0em;
+            color: #F1AE1E;
+            font-weight: bolder;
+        }
