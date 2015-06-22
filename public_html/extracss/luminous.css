@@ -45,6 +45,7 @@
     width: 50em;
     height: 100%;
     margin-right: auto;
+    z-index: 2;
     
 }
 
@@ -54,6 +55,7 @@
     width: 100%;
     text-align:  center;
     margin-bottom: -2em;
+    z-index: 1;
 }
 
     #ondersterijen img {
@@ -89,4 +91,8 @@
             margin: 0em;
             color: #F1AE1E;
             font-weight: bolder;
+        }
+        
+        #bestelknop a {
+            text-decoration: none;
         }
