@@ -918,3 +918,8 @@ input[type='radio'] {
 #inviteButtonMobile {
     display: none;
 }
+
+.spotlight {
+    
+    color: #f1ae1e;
+}

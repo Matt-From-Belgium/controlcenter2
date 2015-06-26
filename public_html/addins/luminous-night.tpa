@@ -9,10 +9,23 @@
     
     <div class='block'>
     <h1>De muziek</h1>
+
     <p>Deze keer kiest Projectkoor CHANTage ervoor om zich, naast de piano-begeleiding, te omringen door <a href='http://www.muziekcentrum.be/identity.php?ID=135809' target='_blank'>Bram Nolf</a> (solo-althoboïst van het Nationaal Orkest van België) en een professioneel strijkkwartet. Ze hebben zich geëngageerd om deze concerten extra glas te geven. 
     <p>Schrikt de term klassieke muziek u af? Helemaal niet nodig! We kiezen bewust voor toegankelijke muziekstukken die de herfst even zullen doen vergeten.
     <p>Een voorsmaakje:
-    <p><iframe src="https://embed.spotify.com/?uri=spotify:user:116755476:playlist:2OiusIqd7vrtouNyimI1OH&theme=white" width="500" height="380" frameborder="0" allowtransparency="true"></iframe>
+    <!--<p><iframe src="https://embed.spotify.com/?uri=spotify:user:116755476:playlist:2OiusIqd7vrtouNyimI1OH&theme=white" width="500" height="380" frameborder="0" allowtransparency="true"></iframe>-->
+        <ul id='audioList'>
+            <li><h3>Serenity</h3>
+                <audio controls id='Serenity'>
+                  <source src='/music/serenity.mp3' type='audio/mpeg'>
+                </audio>
+            </li>
+            <li><h3>Dark Night of The Soul</h3>
+                <audio controls id='darkNight'>
+                <source src='/music/dark.mp3' type='audio/mpeg'>
+            </audio>
+            </li>
+
     </div>
 
     <div class='block'>
@@ -53,4 +66,8 @@
         <img src='/images/luminous/2ondersterijen.png'>
     </div>
 
-<script>window.setInterval(function(){updateTicketTimer();},1000);</script>
+<script>window.setInterval(function(){updateTicketTimer();},1000);
+
+var serenityPlayer = document.getElementById('Serenity');
+serenityPlayer.play();
+</script>

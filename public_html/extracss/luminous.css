@@ -96,3 +96,7 @@
         #bestelknop a {
             text-decoration: none;
         }
+        
+        #audioList {
+            list-style: none;
+        }
