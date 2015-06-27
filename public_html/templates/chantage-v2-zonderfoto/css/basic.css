@@ -81,7 +81,7 @@ body {
         font-weight: normal;
         font-style: normal;
         color: #555555;
-    
+        
     background-color: #19171c;
         
     }
@@ -334,16 +334,16 @@ header{
 #content {
     position: relative;
     
-    margin-top: 0em;
+    margin-top: -2.5em;
     
 }
 
     #content-box{
         /*height: 72em;*/
-        width: 100%;
+        width: 80%;
         min-width: 1200px;
-        margin-left: 0;
-        margin-right: 0;
+        margin-left: auto;
+        margin-right: auto;
         
         
     }
@@ -539,14 +539,72 @@ img.right {
     display: block;
     clear: both;
     background-color: #DDDDDD;
-    height: 5em;
+    /*height: 5em;*/
     border-top: 1px solid;
     border-color: #BBBBBB;
-    
+    vertical-align: top;
 }
 
     .sponsor {
+        display: inline-block;
+        width: 200px;
+        vertical-align: top;
         
+        margin-left: 0.5em;
+        margin-right: 0.5em;
+        
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+        padding-top: 0.5em;
+        
+        position: relative;
+        top: 0em;
+        
+        transition: top 0.5s, background-color 0.5s;
+        transition-timing-function: ease-out;
+        
+        z-index:5;
+    }
+        
+        .sponsor img {
+            break-after: always;
+        }
+        
+        .sponsor .sponsortext {
+            
+            height: 0px;
+            overflow: hidden;
+            
+            /*transition: height 0.5s;
+             transition-timing-function: ease-out;*/
+        }
+        
+    .sponsor:hover {
+
+        position: relative;
+        top: -16em;
+        vertical-align: top;
+        
+        background-color: #FFFFFF;
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+        border-style: solid;
+        border-width: 1px;
+        border-color: #BBBBBB;
+        
+        transition: top 0.5s, background-color 0.5s;
+        transition-timing-function: ease-out;
+        
+        margin-bottom: -16em;
+    }
+    
+    .sponsor:hover .sponsortext {
+        height: 16em;
+        
+        
+        
+        transition: height 0.5s;
+        transition-timing-function: ease-out;
     }
 
 /*TICKETSERVER*/
@@ -862,4 +920,9 @@ input[type='radio'] {
 
 #inviteButtonMobile {
     display: none;
+}
+
+.spotlight {
+    
+    color: #f1ae1e;
 }
