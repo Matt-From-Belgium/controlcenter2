@@ -196,3 +196,8 @@ body {
     .YTVideo{
         max-width: 100%;
     }
+    
+    .beatlesheader {
+    width: 100%;
+    text-align: center;
+}

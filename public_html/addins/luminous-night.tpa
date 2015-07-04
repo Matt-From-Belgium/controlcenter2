@@ -10,7 +10,7 @@
     <div class='block'>
     <h1>De muziek</h1>
 
-    <p>Deze keer kiest Projectkoor CHANTage ervoor om zich, naast de piano-begeleiding, te omringen door <a href='http://www.muziekcentrum.be/identity.php?ID=135809' target='_blank'>Bram Nolf</a> (solo-althoboïst van het Nationaal Orkest van België) en een professioneel strijkkwartet. Ze hebben zich geëngageerd om deze concerten extra glas te geven. 
+    <p>Deze keer kiest Projectkoor CHANTage ervoor om zich, naast de piano-begeleiding, te omringen door <a href='http://www.muziekcentrum.be/identity.php?ID=135809' target='_blank'>Bram Nolf</a> (solo-althoboïst van het Nationaal Orkest van België) en een professioneel strijkkwartet. Ze hebben zich geëngageerd om deze concerten extra glans te geven. 
     <p>Schrikt de term klassieke muziek u af? Helemaal niet nodig! We kiezen bewust voor toegankelijke muziekstukken die de herfst even zullen doen vergeten.
     <p>Een voorsmaakje:
     <!--<p><iframe src="https://embed.spotify.com/?uri=spotify:user:116755476:playlist:2OiusIqd7vrtouNyimI1OH&theme=white" width="500" height="380" frameborder="0" allowtransparency="true"></iframe>-->
@@ -42,15 +42,15 @@
         </div>
         <div id='tickets' class='block'>
             <h2>Tickets bestellen</h2>
-            De ticketverkoop start op 15 juli 2015 om 9u. Er zijn in totaal 1000 tickets beschikbaar. 
+            De ticketverkoop start op zaterdag 11 juli 2015 om 9u. Er zijn in totaal 1000 tickets beschikbaar. 
             <p>Bestel zo snel mogelijk uw kaarten want om praktische redenen zijn er dit keer minder tickets beschikbaar dan bij de vorige concertreeks
             <p>Je kan je tickets <b>online bestellen</b> of <b>telefonisch op het nummer 0495 23 11 69</b>. Telefonische reservaties kunnen enkel gebeuren tussen 9 en 18u. U wordt geholpen door Vanessa van Lartduvin
-            <a href='/modules/ticketserver/bestel.php'>
+            
                 <div id='bestelknop'>
                     <h2>ticketverkoop start binnen </h2>
                     <h1 id='tickettimer'></h1>
                 </div>
-            </a>
+            
         </div>
     </div>
     <div class='block'>

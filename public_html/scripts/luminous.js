@@ -6,7 +6,7 @@
 
 function updateTicketTimer()
 {
-    var endDate = new Date(2015, 6, 15, 9);
+    var endDate = new Date(2015, 6, 11, 9);
     //var endDate = new Date(2014,2,14,7,46);
     
     
