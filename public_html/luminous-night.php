@@ -1,8 +1,9 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'].'/core/templatesystem/templatesystem.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/modules/ticketserver/reservatielogic.php';
 
 $html = new htmlpage('minimalistic');
-$html->LoadAddin('/addins/luminous-night.tpa');
+
 
 $fbAppId = getFacebookAppID();
 $fbNameSpace = getFacebookNameSpace();
@@ -18,6 +19,16 @@ $html->loadCSS('/modules/fotoalbum/presentation/css/showphoto.css');
 $html->loadCSS('/extracss/luminous.css');
 $html->loadScript('/modules/fotoalbum/presentation/showalbum.js');
 $html->loadScript(('/scripts/luminous.js'));
+
+if(getTicketSaleStarted())
+{
+    $html->LoadAddin('/addins/luminous-night_ticketverkoop_gestart.tpa');
+}
+else
+{
+    $html->LoadAddin('/addins/luminous-night.tpa');
+}
+
 
 $html->PrintHTML();
 ?>
