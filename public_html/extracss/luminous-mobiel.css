@@ -4,10 +4,11 @@ body {
 
 .block {
     color: #DDDDDD;
-    font-size: 1em;
+    width: 80%;
 }
 
 #bovenste2rijen {
+    display: none;
     position: relative;
     top: 2.3em;
     
@@ -25,7 +26,7 @@ body {
 
 #luminouslogo {
     position: relative;
-    top: -33em;
+    top: 0em;
     text-align: center;
     width: 100%;
     
@@ -41,21 +42,21 @@ body {
 #luminous-content {
     
     position: relative;
-    top: -1.3em;
-    margin-left: auto;
+    top: 25em;
+
     
-    font-size: 1.2em;
     
-    width: 50em;
-    height: 100%;
-    margin-right: auto;
+    
+    width: 100%;
+    
+    
     z-index: 2;
     
 }
 
 #ondersterijen {
     position: relative;
-    top: -3em;
+    top: 5em;
     width: 100%;
     text-align:  center;
     margin-bottom: -2em;
@@ -63,27 +64,39 @@ body {
 }
 
     #ondersterijen img {
-        height: 25em;
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
     }
 
-    #waarwanneer {
-        width: 23em;
-    }
-    
-    #tickets {
-        float: right;
-        width: 23em;
-    }
-    
+
     #bestelknop {
         background-color: #6B5B4B;
         border-radius: 30px;
         padding: 0.5em;
         text-align:  center;
+        width: 80%;
+    }
+    
+    #waarwanneer {
+        float: none;
+        font-size: 1em;
+        width: 100%;
+    }
+    
+        #waarwanneer img {
+           width: 80%;
+        }
+    
+    #tickets {
+        float: none;
+        width: 100%;
+        font-size: 1em;
     }
 
     #bestelknop:hover {
         background-color: #FFFFFF;
+
     }
     
         #bestelknop h2 {

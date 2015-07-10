@@ -15,8 +15,8 @@ $html->addCustomMeta('og:image', 'http://www.projectkoorchantage.be/images/lumin
 $html->addCustomMeta('og:description',"Projectoor CHANTage neemt u mee van donker naar licht. Het filmisch aandoend programma bevat werk van gevestigde waarden uit de klassieke muziek. Tijdens dit sfeervolle concert zullen wij de herst even verjagen...");
 
 
-$html->loadCSS('/modules/fotoalbum/presentation/css/showphoto.css');
-$html->loadCSS('/extracss/luminous.css');
+$html->loadCSS('/modules/fotoalbum/presentation/css/showphoto.css','/modules/fotoalbum/presentation/css/showphoto-mobile.css');
+$html->loadCSS('/extracss/luminous.css','/extracss/luminous-mobiel.css');
 $html->loadScript('/modules/fotoalbum/presentation/showalbum.js');
 $html->loadScript(('/scripts/luminous.js'));
 

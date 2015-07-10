@@ -39,6 +39,7 @@ body {
     padding: 0em;
     margin: 0em;
     width: 100%;
+    
 }
 
 #topBar {
@@ -51,7 +52,7 @@ body {
 
 #blueBar {
      background-color: #323A45;
-    height: 3em;   
+    height: 8em;   
     z-index: 1;
     border-bottom: 0.5em;
     border-top: 0em;
@@ -64,7 +65,7 @@ body {
 }
 
     #blueBar img {
-        height: 5em;
+        height: 10em;
         padding-left: 0.5em;
         padding-top: 0.5em;
         z-index: 2;
@@ -73,13 +74,13 @@ body {
     
     #blueBar #menuButton {
         
-        font-size: 2.5em;
+        font-size: 6em;
         color: #FFFFFF;
         float: right;
         font-family: 'denseregular';
         letter-spacing: 2px;
         margin-top: 0.20em;
-
+        margin-right: 0.3em;
         
     }
    
@@ -89,12 +90,12 @@ body {
     right: 0em;
     background-color: rgba(107, 91, 75, 0.90);
     width: 70%;
-    max-width: 30em;
+    max-width: 50em;
     height: 100%;
     z-index: 9;
     padding-left: 1em;
     /*padding-top: 4em;*/
-    top: -120%;
+    top: -200%;
     
     transition: top 0.5s;
     transition-timing-function: ease-out;
@@ -107,7 +108,8 @@ body {
 }
 
     #navMenu h1 {
-        margin-top: 4em;
+        margin-top: 2em;
+        font-size: 5em;
         font-family: 'denseregular';
         color: #F1AE1E;
     }
@@ -120,7 +122,7 @@ body {
     }
     
         #navLinks .link {
-            font-size: 2em;
+            font-size: 5em;
             border-top: 1px solid #323A45;
             border-bottom: 1px solid #323A45;
             border-left: 0.1em solid #F1AE1E;
@@ -136,7 +138,7 @@ body {
         }
 
 #content {
-    padding-top: 5em;
+    padding-top: 9em;
 }
 
 .block {
@@ -152,7 +154,7 @@ body {
         
         width: 90%;
         margin-left: 1em;
-        font-size: 1.2em;
+        font-size: 3em;
     }
     
     h1 {
@@ -193,11 +195,14 @@ body {
         max-width: 80%;
     }
     
-    .YTVideo{
-        max-width: 100%;
-    }
     
     .beatlesheader {
-    width: 100%;
-    text-align: center;
-}
+        width: 100%;
+        text-align: center;
+    
+   
+    }
+    
+    .beatlesheader img {
+        width: 70%;
+    }
