@@ -343,7 +343,7 @@ input[type='button']:active,input[type='submit']:active, select:active
 
 #siteNews {
     height: 20em;
-    background: url('/images/index-beeld.jpg');
+    background: url('/images/enquetebanner.png');
     background-size: cover;
     background-color: #90CA77;
     margin-left: -2em;
