@@ -8,8 +8,8 @@ $_DATABASE['type'] = "MySQL";
 
 ###CONNECTION DATA
 $_DATABASE['host'] = "localhost";
-$_DATABASE['database'] = "chantage";
+$_DATABASE['database'] = "gollum";
 
-$_DATABASE['user'] = "root";
-$_DATABASE['password'] = "nmcrCAbs321";
+$_DATABASE['user'] = "gollum";
+$_DATABASE['password'] = "pjmzbCGfYYLwdByB";
 ?>

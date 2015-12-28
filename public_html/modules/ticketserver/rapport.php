@@ -67,7 +67,7 @@ foreach($result as $value)
 
 
 ###Overzicht genereren van definitieve reservaties
-$queryDefinitieveReservaties = "select tickets.id,voorstellingen.datumtijd,tickets.naam,tickets.voornaam,tickets.aantal,tickets.mail from tickets left join voorstellingen ON tickets.voorstelling = voorstellingen.id where tickets.status='Definitief' order by tickets.voorstelling";
+$queryDefinitieveReservaties = "select tickets.id,voorstellingen.datumtijd,tickets.naam,tickets.voornaam,tickets.aantal,tickets.mail from tickets left join voorstellingen ON tickets.voorstelling = voorstellingen.id where tickets.status='Definitief' order by tickets.voorstelling,tickets.id";
 $db->setQuery($queryDefinitieveReservaties);
 $db->ExecuteQuery();
 

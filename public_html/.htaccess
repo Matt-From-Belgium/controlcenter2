@@ -1,1 +1,1 @@
-php_value auto_prepend_file "/wwwroot/controlcenter/public_html/core/common/errorhandler.php"
+php_value auto_prepend_file "/wwwroot/chantage/public_html/core/common/errorhandler.php"
