@@ -8,7 +8,7 @@ function dataaccess_checkWhiteList($file,$function)
     #enkel bestands- en functiecombinaties op die lijst kunnen gebruikt worden bij het javascript
     
     $db = new DataConnection();
-    $query='SELECT id from ajaxwhitelist WHERE file="@(s)filename" and function="@function"';
+    $query='SELECT id from ajaxwhitelist WHERE file="@filename" and function="@function"';
     
     $db->setQuery($query);
     $db->setAttribute('filename',strtolower($file));
