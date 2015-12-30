@@ -3,56 +3,14 @@
 <div id='luminous-content'>
     <div class='block'>
     <h1>Tijd voor iets anders!</h1>
-    Het concept van Projectkoor CHANTage bestaat erin om zoveel mogelijk verschillende genres aan bod te laten komen tijdens de verschillende concertreeksen. En ook dit keer houden we ons aan deze traditie. Na het kerstconcert en onze Beatles-concertreeks is het nu opnieuw tijd voor iets anders..
-    <p>We nemen u mee van donker naar licht. Het filmisch aandoend programma bevat werk van gevestigde waarden uit de klassieke muziek zoals Edward Elgar. Uit de modern-klassieke muziek brengen we onder andere werk van Ola Gjeilo, maar ook voor arrangementen van eigen bodem wordt graag tijd gemaakt.
-    </div>
+    Het concept van Projectkoor CHANTage bestaat erin om zoveel mogelijk verschillende genres aan bod te laten komen tijdens de verschillende concertreeksen. En ook dit keer houden we ons aan deze traditie. Na het kerstconcert en onze Beatles-concertreeks gingen wij dus opnieuw een andere richting uit..
+    <p>Eind 2015 namen we nemen u mee van donker naar licht. Het filmisch aandoend programma bestond uit werk werk van gevestigde waarden uit de klassieke muziek zoals Edward Elgar. Uit de modern-klassieke muziek brachten we onder andere werk van Ola Gjeilo.
+    <p>Voor de gelegenheid liet CHANTage zich omringen door een professioneel strijkerskwartet, een pianist en solo-althoboist van het Koninklijk Filharmonisch Orkest van Vlaanderen <a href='http://www.muziekcentrum.be/identity.php?ID=135182'>Piet Van Bockstal</a>
+    <p>Meer dan 800 mensen woonden deze 2 unieke concerten bij, en uw reacties waren fantastisch.
+</div>
+
     
-    <div class='block'>
-    <h1>De muziek</h1>
-
-    <p>Deze keer kiest Projectkoor CHANTage ervoor om zich, naast de piano-begeleiding, te omringen door <a href='http://www.muziekcentrum.be/identity.php?ID=135182' target='_blank'>Piet Van Bockstal</a> (solo-althoboïst van het Koninklijk Filharmonisch Orkest van Vlaanderen) en een professioneel strijkkwartet. Ze hebben zich geëngageerd om deze concerten extra glans te geven. 
-    <p>Schrikt de term klassieke muziek u af? Helemaal niet nodig! We kiezen bewust voor toegankelijke muziekstukken die de herfst even zullen doen vergeten.
-    <p>Een voorsmaakje:
-    <!--<p><iframe src="https://embed.spotify.com/?uri=spotify:user:116755476:playlist:2OiusIqd7vrtouNyimI1OH&theme=white" width="500" height="380" frameborder="0" allowtransparency="true"></iframe>-->
-        <ul id='audioList'>
-            <li><h3>Serenity</h3>
-                <audio controls id='Serenity'>
-                  <source src='/music/serenity.mp3' type='audio/mpeg'>
-                </audio>
-            </li>
-            <li><h3>Dark Night of The Soul</h3>
-                <audio controls id='darkNight'>
-                <source src='/music/dark.mp3' type='audio/mpeg'>
-            </audio>
-            </li>
-
-    </div>
-
-    <div class='block'>
-    <h1>Praktische info</h1>
-        <div id='waarwanneer' class='block'>
-            <h2>Waar & wanneer</h2>
-            <img src='/images/luminous/kerk.png'>
-            <p>De concerten gaan door in de <b> Sint-Niklaaskerk in Diksmuide</b> op volgende data:
-                <ul>
-                    <li>Vrijdag <b>16 oktober '15</b> om 20u</li>
-                    <li>Zaterdag <b>17 oktober '15</b> om 20u</li>
-                </ul>
-            U parkeert het best op de grote markt om vandaar naar de kerk te wandelen.
-        </div>
-        <div id='tickets' class='block'>
-            <h2>Tickets bestellen</h2>
-            De ticketverkoop start op zaterdag 11 juli 2015 om 9u. Er zijn in totaal 1000 tickets beschikbaar. 
-            <p>Bestel zo snel mogelijk uw kaarten want om praktische redenen zijn er dit keer minder tickets beschikbaar dan bij de vorige concertreeks
-            <p>Je kan je tickets telefonisch bestellen op het nummer <b>0495 23 11 69</b>. Telefonische reservaties kunnen enkel gebeuren tussen 9 en 18u. U wordt geholpen door Vanessa van Lartduvin
-            
-                <a><div id='bestelknop'>
-                    <h2>De ticketverkoop is gestart </h2>
-                    <h1 id='tickettimer'>Bel 0495 23 11 69</h1>
-                </div></a>
-            
-        </div>
-    </div>
+   
     <div class='block'>
         <h1>Foto's</h1>
         <div class='block' id='repetitiefotos'></div>
