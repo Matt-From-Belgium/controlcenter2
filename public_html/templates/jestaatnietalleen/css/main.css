@@ -343,11 +343,10 @@ input[type='button']:active,input[type='submit']:active, select:active
 
 #siteNews {
     height: 20em;
-    background: url('/images/enquetebanner.png');
     background-size: cover;
     background-color: #90CA77;
     margin-left: -2em;
-    
+    background: url('/images/index-beeld.jpg');    
     
     width: 105%;
 }
@@ -358,12 +357,11 @@ input[type='button']:active,input[type='submit']:active, select:active
 
 .newsItem {
     display: block;
-    width: 100%;
+    width: 50%;
     height: 100%;
-    padding-top: 0em;
-    margin-left: 0px;
-    margin-right: 0px;
-    overflow: hidden;
+    padding-top: 6em;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .newsItem h1{
