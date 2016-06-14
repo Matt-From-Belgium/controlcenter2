@@ -781,7 +781,7 @@ function dataaccess_toomanyattempts($username)
 {
     #Deze functie controleert of er niet teveel pogingen waren met deze gebruikersnaam
     $db = new DataConnection;
-    $query = "select count(username) from login_attempts WHERE login_attempts.username='@username' AND login_attempts.time>@begintime";
+    $query = "select count(username) from login_attempts WHERE login_attempts.username='@username' AND login_attempts.time>'@begintime'";
     $db->setQuery($query);
     ###We kijken naar login pogingen in de laatste 2 uren
     $begintime = new DateTime();
