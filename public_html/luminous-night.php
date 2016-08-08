@@ -20,14 +20,9 @@ $html->loadCSS('/extracss/luminous.css','/extracss/luminous-mobiel.css');
 $html->loadScript('/modules/fotoalbum/presentation/showalbum.js');
 $html->loadScript(('/scripts/luminous.js'));
 
-if(getTicketSaleStarted())
-{
+
     $html->LoadAddin('/addins/luminous-night_ticketverkoop_gestart.tpa');
-}
-else
-{
-    $html->LoadAddin('/addins/luminous-night.tpa');
-}
+
 
 
 $html->PrintHTML();
