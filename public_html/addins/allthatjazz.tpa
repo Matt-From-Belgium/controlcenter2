@@ -28,19 +28,19 @@
         <div id='waarwanneer' class='block'>
             <h2>Waar & wanneer</h2>
             <img src='/images/kruispunt.png'>
-            <p>De concerten gaan door in de <b> Cultuurcentrum <a href='http://www.cckruispunt.be/'>Het Kruispunt</a></b> op volgende data:
+            <p>De concerten gaan door in <b> Cultuurcentrum <a href='http://www.cckruispunt.be/'>Het Kruispunt</a></b> op volgende data:
                 <ul>
                     <li>Vrijdag <b>14 oktober '16</b> om 20u</li>
                     <li>Zaterdag <b>15 oktober '16</b> om 20u</li>
                     <li>Zondag <b>16 oktober '16</b> om 18u</li>
                 </ul>
-            U parkeert het best op de grote markt om vandaar naar de kerk te wandelen.
+            U parkeert het best op de grote markt om vandaar naar Het Kruispunt te wandelen.
         </div>
         <div id='tickets' class='block'>
             <h2>Tickets bestellen</h2>
             De ticketverkoop is gestart! Er zijn in totaal 900 tickets beschikbaar. 
             <p>Bestel zo snel mogelijk uw kaarten want om praktische redenen zijn er dit keer minder tickets beschikbaar dan bij de vorige concertreeks
-            <p>Tickets kunt u <b><a href='/modules/ticketserver/bestel.php'> online bestellen</b> of <b>telefonisch op het nummer 0495 23 11 69</b>. Telefonische reservaties kunnen enkel gebeuren tussen 9 en 18u. U wordt geholpen door Vanessa van Lartduvin
+            <p>Tickets kunt u <b><a href='/modules/ticketserver/bestel.php'> online bestellen</b></a> of <b>telefonisch op het nummer 0495 23 11 69</b>. Telefonische reservaties kunnen enkel gebeuren tussen 9 en 18u. U wordt geholpen door Vanessa van Lartduvin
             
                 <a href='/modules/ticketserver/bestel.php'><div id='bestelknop'>
                     <h2>De ticketverkoop is gestart </h2>
